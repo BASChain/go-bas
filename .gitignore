@@ -8,6 +8,7 @@
 *.sol
 *.abi
 .idea
+*.sh
 
 # Test binary, built with `go test -c`
 *.test
