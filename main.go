@@ -1,10 +1,8 @@
 package main
 
-import "github.com/BASChain/go-bas/Bas_Ethereum"
+import "github.com/BASChain/go-bas/DataSync"
 
 func main()  {
-	Bas_Ethereum.RecoverBasAsset();
-	//data,_:=Bas_Ethereum.QueryDomain("root1")
-	//print(data.AName)
-	Bas_Ethereum.QueryEvent()
+
+	DataSync.LoopOverMintAsset()
 }
