@@ -28,7 +28,7 @@ var (
 )
 
 // BasAssetABI is the input ABI used to generate the binding from.
-const BasAssetABI = "[{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"getRootRechargeInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"clearRecord\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isOpen\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cusPrice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"takeoverRoot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isRoot\",\"type\":\"bool\"}],\"name\":\"recharge\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalDomainSize\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"DnsDetailsByHash\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"bytes4\",\"name\":\"ipv4\",\"type\":\"bytes4\"},{\"internalType\":\"bytes16\",\"name\":\"ipv6\",\"type\":\"bytes16\"},{\"internalType\":\"string\",\"name\":\"bcAddr\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"opData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"aName\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"openCustomedPrice\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"idx\",\"type\":\"uint256\"}],\"name\":\"getMayAssetIndexOf\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"aName\",\"type\":\"string\"}],\"name\":\"setAlias\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"EXTEND_LEN\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes4\",\"name\":\"ipv4\",\"type\":\"bytes4\"},{\"internalType\":\"bytes16\",\"name\":\"ipv6\",\"type\":\"bytes16\"}],\"name\":\"setIP\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ContractOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"approve\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"BADDRESS_LEN\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"DnsDetailsByIndex\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"bytes4\",\"name\":\"ipv4\",\"type\":\"bytes4\"},{\"internalType\":\"bytes16\",\"name\":\"ipv6\",\"type\":\"bytes16\"},{\"internalType\":\"string\",\"name\":\"bcAddr\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"opData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"aName\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"bcAddress\",\"type\":\"string\"}],\"name\":\"setBCAddress\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bool\",\"name\":\"isRoot\",\"type\":\"bool\"}],\"name\":\"isExpired\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"getRootSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"transfer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"GetExpire\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"revoke\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes4\",\"name\":\"ipv4\",\"type\":\"bytes4\"},{\"internalType\":\"bytes16\",\"name\":\"ipv6\",\"type\":\"bytes16\"},{\"internalType\":\"string\",\"name\":\"bcAddress\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"opData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"aName\",\"type\":\"string\"}],\"name\":\"setRecord\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"myAssetCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"opData\",\"type\":\"bytes\"}],\"name\":\"setOpData\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferContractOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"transferFrom\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"getSubRechargeInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOANN\",\"type\":\"address\"}],\"name\":\"setOANN\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"Hash\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"closeCustomedPrice\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"idx\",\"type\":\"uint256\"}],\"name\":\"getDomainOfIndex\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"sHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sname\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"rHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"mintSubAsset\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"closeToPublic\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"sHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"takeoverSubName\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"Alias_LEN\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"openToPublic\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isOpen\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cusPrice\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isAType\",\"type\":\"bool\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"mintRootAsset\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"}],\"name\":\"MintAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"TakeoverAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"duration\",\"type\":\"uint256\"}],\"name\":\"RechargeAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"DNSRecordChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"DNSRecordRemove\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"RootAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"RootChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"SubAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"SubChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"AssertTransfer\",\"type\":\"event\"}]"
+const BasAssetABI = "[{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"clearRecord\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isOpen\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cusPrice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"takeoverRoot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isRoot\",\"type\":\"bool\"}],\"name\":\"recharge\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalDomainSize\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"DnsDetailsByHash\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"bytes4\",\"name\":\"ipv4\",\"type\":\"bytes4\"},{\"internalType\":\"bytes16\",\"name\":\"ipv6\",\"type\":\"bytes16\"},{\"internalType\":\"string\",\"name\":\"bcAddr\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"opData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"aName\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"openCustomedPrice\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"idx\",\"type\":\"uint256\"}],\"name\":\"getMayAssetIndexOf\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"aName\",\"type\":\"string\"}],\"name\":\"setAlias\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"EXTEND_LEN\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes4\",\"name\":\"ipv4\",\"type\":\"bytes4\"},{\"internalType\":\"bytes16\",\"name\":\"ipv6\",\"type\":\"bytes16\"}],\"name\":\"setIP\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"lastOwnerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ContractOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"approve\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"BADDRESS_LEN\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"AssetDetailsByHash\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isRoot\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"r_openToPublic\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"r_isCustomed\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"r_isPureA\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"r_customPrice\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"s_rootHash\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"isExpired\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"bcAddress\",\"type\":\"string\"}],\"name\":\"setBCAddress\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"transfer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"GetExpire\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"currentOwnerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"revoke\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes4\",\"name\":\"ipv4\",\"type\":\"bytes4\"},{\"internalType\":\"bytes16\",\"name\":\"ipv6\",\"type\":\"bytes16\"},{\"internalType\":\"string\",\"name\":\"bcAddress\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"opData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"aName\",\"type\":\"string\"}],\"name\":\"setRecord\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"myAssetCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"opData\",\"type\":\"bytes\"}],\"name\":\"setOpData\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferContractOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"transferFrom\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOANN\",\"type\":\"address\"}],\"name\":\"setOANN\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"Hash\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"closeCustomedPrice\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"idx\",\"type\":\"uint256\"}],\"name\":\"getDomainOfIndex\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"sHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sname\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"rHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"mintSubAsset\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"closeToPublic\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"sHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"takeoverSubName\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"Alias_LEN\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"openToPublic\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isOpen\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cusPrice\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isAType\",\"type\":\"bool\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"mintRootAsset\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"}],\"name\":\"MintAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"TakeoverAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"duration\",\"type\":\"uint256\"}],\"name\":\"RechargeAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"DNSRecordChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"DNSRecordRemove\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"RootAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"RootChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"SubAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"SubChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"AssertTransfer\",\"type\":\"event\"}]"
 
 // BasAsset is an auto generated Go binding around an Ethereum contract.
 type BasAsset struct {
@@ -198,6 +198,70 @@ func (_BasAsset *BasAssetCallerSession) AliasLEN() (*big.Int, error) {
 	return _BasAsset.Contract.AliasLEN(&_BasAsset.CallOpts)
 }
 
+// AssetDetailsByHash is a free data retrieval call binding the contract method 0x6cdb220f.
+//
+// Solidity: function AssetDetailsByHash(bytes32 nameHash) constant returns(bytes name, uint256 expire, address owner, bool isRoot, bool r_openToPublic, bool r_isCustomed, bool r_isPureA, uint256 r_customPrice, bytes32 s_rootHash)
+func (_BasAsset *BasAssetCaller) AssetDetailsByHash(opts *bind.CallOpts, nameHash [32]byte) (struct {
+	Name          []byte
+	Expire        *big.Int
+	Owner         common.Address
+	IsRoot        bool
+	ROpenToPublic bool
+	RIsCustomed   bool
+	RIsPureA      bool
+	RCustomPrice  *big.Int
+	SRootHash     [32]byte
+}, error) {
+	ret := new(struct {
+		Name          []byte
+		Expire        *big.Int
+		Owner         common.Address
+		IsRoot        bool
+		ROpenToPublic bool
+		RIsCustomed   bool
+		RIsPureA      bool
+		RCustomPrice  *big.Int
+		SRootHash     [32]byte
+	})
+	out := ret
+	err := _BasAsset.contract.Call(opts, out, "AssetDetailsByHash", nameHash)
+	return *ret, err
+}
+
+// AssetDetailsByHash is a free data retrieval call binding the contract method 0x6cdb220f.
+//
+// Solidity: function AssetDetailsByHash(bytes32 nameHash) constant returns(bytes name, uint256 expire, address owner, bool isRoot, bool r_openToPublic, bool r_isCustomed, bool r_isPureA, uint256 r_customPrice, bytes32 s_rootHash)
+func (_BasAsset *BasAssetSession) AssetDetailsByHash(nameHash [32]byte) (struct {
+	Name          []byte
+	Expire        *big.Int
+	Owner         common.Address
+	IsRoot        bool
+	ROpenToPublic bool
+	RIsCustomed   bool
+	RIsPureA      bool
+	RCustomPrice  *big.Int
+	SRootHash     [32]byte
+}, error) {
+	return _BasAsset.Contract.AssetDetailsByHash(&_BasAsset.CallOpts, nameHash)
+}
+
+// AssetDetailsByHash is a free data retrieval call binding the contract method 0x6cdb220f.
+//
+// Solidity: function AssetDetailsByHash(bytes32 nameHash) constant returns(bytes name, uint256 expire, address owner, bool isRoot, bool r_openToPublic, bool r_isCustomed, bool r_isPureA, uint256 r_customPrice, bytes32 s_rootHash)
+func (_BasAsset *BasAssetCallerSession) AssetDetailsByHash(nameHash [32]byte) (struct {
+	Name          []byte
+	Expire        *big.Int
+	Owner         common.Address
+	IsRoot        bool
+	ROpenToPublic bool
+	RIsCustomed   bool
+	RIsPureA      bool
+	RCustomPrice  *big.Int
+	SRootHash     [32]byte
+}, error) {
+	return _BasAsset.Contract.AssetDetailsByHash(&_BasAsset.CallOpts, nameHash)
+}
+
 // BADDRESSLEN is a free data retrieval call binding the contract method 0x5ce6f0a4.
 //
 // Solidity: function BADDRESS_LEN() constant returns(uint256)
@@ -252,26 +316,22 @@ func (_BasAsset *BasAssetCallerSession) ContractOwner() (common.Address, error) 
 
 // DnsDetailsByHash is a free data retrieval call binding the contract method 0x39a9a72e.
 //
-// Solidity: function DnsDetailsByHash(bytes32 nameHash) constant returns(bytes name, uint256 expire, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName, address owner)
+// Solidity: function DnsDetailsByHash(bytes32 nameHash) constant returns(bytes name, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName)
 func (_BasAsset *BasAssetCaller) DnsDetailsByHash(opts *bind.CallOpts, nameHash [32]byte) (struct {
 	Name   []byte
-	Expire *big.Int
 	Ipv4   [4]byte
 	Ipv6   [16]byte
 	BcAddr string
 	OpData []byte
 	AName  string
-	Owner  common.Address
 }, error) {
 	ret := new(struct {
 		Name   []byte
-		Expire *big.Int
 		Ipv4   [4]byte
 		Ipv6   [16]byte
 		BcAddr string
 		OpData []byte
 		AName  string
-		Owner  common.Address
 	})
 	out := ret
 	err := _BasAsset.contract.Call(opts, out, "DnsDetailsByHash", nameHash)
@@ -280,94 +340,30 @@ func (_BasAsset *BasAssetCaller) DnsDetailsByHash(opts *bind.CallOpts, nameHash 
 
 // DnsDetailsByHash is a free data retrieval call binding the contract method 0x39a9a72e.
 //
-// Solidity: function DnsDetailsByHash(bytes32 nameHash) constant returns(bytes name, uint256 expire, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName, address owner)
+// Solidity: function DnsDetailsByHash(bytes32 nameHash) constant returns(bytes name, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName)
 func (_BasAsset *BasAssetSession) DnsDetailsByHash(nameHash [32]byte) (struct {
 	Name   []byte
-	Expire *big.Int
 	Ipv4   [4]byte
 	Ipv6   [16]byte
 	BcAddr string
 	OpData []byte
 	AName  string
-	Owner  common.Address
 }, error) {
 	return _BasAsset.Contract.DnsDetailsByHash(&_BasAsset.CallOpts, nameHash)
 }
 
 // DnsDetailsByHash is a free data retrieval call binding the contract method 0x39a9a72e.
 //
-// Solidity: function DnsDetailsByHash(bytes32 nameHash) constant returns(bytes name, uint256 expire, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName, address owner)
+// Solidity: function DnsDetailsByHash(bytes32 nameHash) constant returns(bytes name, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName)
 func (_BasAsset *BasAssetCallerSession) DnsDetailsByHash(nameHash [32]byte) (struct {
 	Name   []byte
-	Expire *big.Int
 	Ipv4   [4]byte
 	Ipv6   [16]byte
 	BcAddr string
 	OpData []byte
 	AName  string
-	Owner  common.Address
 }, error) {
 	return _BasAsset.Contract.DnsDetailsByHash(&_BasAsset.CallOpts, nameHash)
-}
-
-// DnsDetailsByIndex is a free data retrieval call binding the contract method 0x6ad1fb6a.
-//
-// Solidity: function DnsDetailsByIndex(uint256 index) constant returns(bytes name, uint256 expire, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName, address owner)
-func (_BasAsset *BasAssetCaller) DnsDetailsByIndex(opts *bind.CallOpts, index *big.Int) (struct {
-	Name   []byte
-	Expire *big.Int
-	Ipv4   [4]byte
-	Ipv6   [16]byte
-	BcAddr string
-	OpData []byte
-	AName  string
-	Owner  common.Address
-}, error) {
-	ret := new(struct {
-		Name   []byte
-		Expire *big.Int
-		Ipv4   [4]byte
-		Ipv6   [16]byte
-		BcAddr string
-		OpData []byte
-		AName  string
-		Owner  common.Address
-	})
-	out := ret
-	err := _BasAsset.contract.Call(opts, out, "DnsDetailsByIndex", index)
-	return *ret, err
-}
-
-// DnsDetailsByIndex is a free data retrieval call binding the contract method 0x6ad1fb6a.
-//
-// Solidity: function DnsDetailsByIndex(uint256 index) constant returns(bytes name, uint256 expire, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName, address owner)
-func (_BasAsset *BasAssetSession) DnsDetailsByIndex(index *big.Int) (struct {
-	Name   []byte
-	Expire *big.Int
-	Ipv4   [4]byte
-	Ipv6   [16]byte
-	BcAddr string
-	OpData []byte
-	AName  string
-	Owner  common.Address
-}, error) {
-	return _BasAsset.Contract.DnsDetailsByIndex(&_BasAsset.CallOpts, index)
-}
-
-// DnsDetailsByIndex is a free data retrieval call binding the contract method 0x6ad1fb6a.
-//
-// Solidity: function DnsDetailsByIndex(uint256 index) constant returns(bytes name, uint256 expire, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName, address owner)
-func (_BasAsset *BasAssetCallerSession) DnsDetailsByIndex(index *big.Int) (struct {
-	Name   []byte
-	Expire *big.Int
-	Ipv4   [4]byte
-	Ipv6   [16]byte
-	BcAddr string
-	OpData []byte
-	AName  string
-	Owner  common.Address
-}, error) {
-	return _BasAsset.Contract.DnsDetailsByIndex(&_BasAsset.CallOpts, index)
 }
 
 // EXTENDLEN is a free data retrieval call binding the contract method 0x4b50acc8.
@@ -478,6 +474,32 @@ func (_BasAsset *BasAssetCallerSession) Allowance(owner common.Address, nameHash
 	return _BasAsset.Contract.Allowance(&_BasAsset.CallOpts, owner, nameHash)
 }
 
+// CurrentOwnerOf is a free data retrieval call binding the contract method 0x85cf9d31.
+//
+// Solidity: function currentOwnerOf(bytes32 nameHash) constant returns(address)
+func (_BasAsset *BasAssetCaller) CurrentOwnerOf(opts *bind.CallOpts, nameHash [32]byte) (common.Address, error) {
+	var (
+		ret0 = new(common.Address)
+	)
+	out := ret0
+	err := _BasAsset.contract.Call(opts, out, "currentOwnerOf", nameHash)
+	return *ret0, err
+}
+
+// CurrentOwnerOf is a free data retrieval call binding the contract method 0x85cf9d31.
+//
+// Solidity: function currentOwnerOf(bytes32 nameHash) constant returns(address)
+func (_BasAsset *BasAssetSession) CurrentOwnerOf(nameHash [32]byte) (common.Address, error) {
+	return _BasAsset.Contract.CurrentOwnerOf(&_BasAsset.CallOpts, nameHash)
+}
+
+// CurrentOwnerOf is a free data retrieval call binding the contract method 0x85cf9d31.
+//
+// Solidity: function currentOwnerOf(bytes32 nameHash) constant returns(address)
+func (_BasAsset *BasAssetCallerSession) CurrentOwnerOf(nameHash [32]byte) (common.Address, error) {
+	return _BasAsset.Contract.CurrentOwnerOf(&_BasAsset.CallOpts, nameHash)
+}
+
 // GetDomainOfIndex is a free data retrieval call binding the contract method 0xc5efdc3d.
 //
 // Solidity: function getDomainOfIndex(uint256 idx) constant returns(bytes32)
@@ -530,122 +552,56 @@ func (_BasAsset *BasAssetCallerSession) GetMayAssetIndexOf(idx *big.Int) ([32]by
 	return _BasAsset.Contract.GetMayAssetIndexOf(&_BasAsset.CallOpts, idx)
 }
 
-// GetRootRechargeInfo is a free data retrieval call binding the contract method 0x04607bb4.
+// IsExpired is a free data retrieval call binding the contract method 0x6db2feb2.
 //
-// Solidity: function getRootRechargeInfo(bytes32 hash) constant returns(uint256, bool)
-func (_BasAsset *BasAssetCaller) GetRootRechargeInfo(opts *bind.CallOpts, hash [32]byte) (*big.Int, bool, error) {
-	var (
-		ret0 = new(*big.Int)
-		ret1 = new(bool)
-	)
-	out := &[]interface{}{
-		ret0,
-		ret1,
-	}
-	err := _BasAsset.contract.Call(opts, out, "getRootRechargeInfo", hash)
-	return *ret0, *ret1, err
-}
-
-// GetRootRechargeInfo is a free data retrieval call binding the contract method 0x04607bb4.
-//
-// Solidity: function getRootRechargeInfo(bytes32 hash) constant returns(uint256, bool)
-func (_BasAsset *BasAssetSession) GetRootRechargeInfo(hash [32]byte) (*big.Int, bool, error) {
-	return _BasAsset.Contract.GetRootRechargeInfo(&_BasAsset.CallOpts, hash)
-}
-
-// GetRootRechargeInfo is a free data retrieval call binding the contract method 0x04607bb4.
-//
-// Solidity: function getRootRechargeInfo(bytes32 hash) constant returns(uint256, bool)
-func (_BasAsset *BasAssetCallerSession) GetRootRechargeInfo(hash [32]byte) (*big.Int, bool, error) {
-	return _BasAsset.Contract.GetRootRechargeInfo(&_BasAsset.CallOpts, hash)
-}
-
-// GetRootSetting is a free data retrieval call binding the contract method 0x7a6bbd99.
-//
-// Solidity: function getRootSetting(bytes32 rootHash) constant returns(uint256, bool, bool)
-func (_BasAsset *BasAssetCaller) GetRootSetting(opts *bind.CallOpts, rootHash [32]byte) (*big.Int, bool, bool, error) {
-	var (
-		ret0 = new(*big.Int)
-		ret1 = new(bool)
-		ret2 = new(bool)
-	)
-	out := &[]interface{}{
-		ret0,
-		ret1,
-		ret2,
-	}
-	err := _BasAsset.contract.Call(opts, out, "getRootSetting", rootHash)
-	return *ret0, *ret1, *ret2, err
-}
-
-// GetRootSetting is a free data retrieval call binding the contract method 0x7a6bbd99.
-//
-// Solidity: function getRootSetting(bytes32 rootHash) constant returns(uint256, bool, bool)
-func (_BasAsset *BasAssetSession) GetRootSetting(rootHash [32]byte) (*big.Int, bool, bool, error) {
-	return _BasAsset.Contract.GetRootSetting(&_BasAsset.CallOpts, rootHash)
-}
-
-// GetRootSetting is a free data retrieval call binding the contract method 0x7a6bbd99.
-//
-// Solidity: function getRootSetting(bytes32 rootHash) constant returns(uint256, bool, bool)
-func (_BasAsset *BasAssetCallerSession) GetRootSetting(rootHash [32]byte) (*big.Int, bool, bool, error) {
-	return _BasAsset.Contract.GetRootSetting(&_BasAsset.CallOpts, rootHash)
-}
-
-// GetSubRechargeInfo is a free data retrieval call binding the contract method 0xbbe472b8.
-//
-// Solidity: function getSubRechargeInfo(bytes32 hash) constant returns(uint256, bytes32)
-func (_BasAsset *BasAssetCaller) GetSubRechargeInfo(opts *bind.CallOpts, hash [32]byte) (*big.Int, [32]byte, error) {
-	var (
-		ret0 = new(*big.Int)
-		ret1 = new([32]byte)
-	)
-	out := &[]interface{}{
-		ret0,
-		ret1,
-	}
-	err := _BasAsset.contract.Call(opts, out, "getSubRechargeInfo", hash)
-	return *ret0, *ret1, err
-}
-
-// GetSubRechargeInfo is a free data retrieval call binding the contract method 0xbbe472b8.
-//
-// Solidity: function getSubRechargeInfo(bytes32 hash) constant returns(uint256, bytes32)
-func (_BasAsset *BasAssetSession) GetSubRechargeInfo(hash [32]byte) (*big.Int, [32]byte, error) {
-	return _BasAsset.Contract.GetSubRechargeInfo(&_BasAsset.CallOpts, hash)
-}
-
-// GetSubRechargeInfo is a free data retrieval call binding the contract method 0xbbe472b8.
-//
-// Solidity: function getSubRechargeInfo(bytes32 hash) constant returns(uint256, bytes32)
-func (_BasAsset *BasAssetCallerSession) GetSubRechargeInfo(hash [32]byte) (*big.Int, [32]byte, error) {
-	return _BasAsset.Contract.GetSubRechargeInfo(&_BasAsset.CallOpts, hash)
-}
-
-// IsExpired is a free data retrieval call binding the contract method 0x73d5b5cd.
-//
-// Solidity: function isExpired(bytes32 nameHash, bool isRoot) constant returns(bool)
-func (_BasAsset *BasAssetCaller) IsExpired(opts *bind.CallOpts, nameHash [32]byte, isRoot bool) (bool, error) {
+// Solidity: function isExpired(bytes32 nameHash) constant returns(bool)
+func (_BasAsset *BasAssetCaller) IsExpired(opts *bind.CallOpts, nameHash [32]byte) (bool, error) {
 	var (
 		ret0 = new(bool)
 	)
 	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "isExpired", nameHash, isRoot)
+	err := _BasAsset.contract.Call(opts, out, "isExpired", nameHash)
 	return *ret0, err
 }
 
-// IsExpired is a free data retrieval call binding the contract method 0x73d5b5cd.
+// IsExpired is a free data retrieval call binding the contract method 0x6db2feb2.
 //
-// Solidity: function isExpired(bytes32 nameHash, bool isRoot) constant returns(bool)
-func (_BasAsset *BasAssetSession) IsExpired(nameHash [32]byte, isRoot bool) (bool, error) {
-	return _BasAsset.Contract.IsExpired(&_BasAsset.CallOpts, nameHash, isRoot)
+// Solidity: function isExpired(bytes32 nameHash) constant returns(bool)
+func (_BasAsset *BasAssetSession) IsExpired(nameHash [32]byte) (bool, error) {
+	return _BasAsset.Contract.IsExpired(&_BasAsset.CallOpts, nameHash)
 }
 
-// IsExpired is a free data retrieval call binding the contract method 0x73d5b5cd.
+// IsExpired is a free data retrieval call binding the contract method 0x6db2feb2.
 //
-// Solidity: function isExpired(bytes32 nameHash, bool isRoot) constant returns(bool)
-func (_BasAsset *BasAssetCallerSession) IsExpired(nameHash [32]byte, isRoot bool) (bool, error) {
-	return _BasAsset.Contract.IsExpired(&_BasAsset.CallOpts, nameHash, isRoot)
+// Solidity: function isExpired(bytes32 nameHash) constant returns(bool)
+func (_BasAsset *BasAssetCallerSession) IsExpired(nameHash [32]byte) (bool, error) {
+	return _BasAsset.Contract.IsExpired(&_BasAsset.CallOpts, nameHash)
+}
+
+// LastOwnerOf is a free data retrieval call binding the contract method 0x5a0e698f.
+//
+// Solidity: function lastOwnerOf(bytes32 nameHash) constant returns(address)
+func (_BasAsset *BasAssetCaller) LastOwnerOf(opts *bind.CallOpts, nameHash [32]byte) (common.Address, error) {
+	var (
+		ret0 = new(common.Address)
+	)
+	out := ret0
+	err := _BasAsset.contract.Call(opts, out, "lastOwnerOf", nameHash)
+	return *ret0, err
+}
+
+// LastOwnerOf is a free data retrieval call binding the contract method 0x5a0e698f.
+//
+// Solidity: function lastOwnerOf(bytes32 nameHash) constant returns(address)
+func (_BasAsset *BasAssetSession) LastOwnerOf(nameHash [32]byte) (common.Address, error) {
+	return _BasAsset.Contract.LastOwnerOf(&_BasAsset.CallOpts, nameHash)
+}
+
+// LastOwnerOf is a free data retrieval call binding the contract method 0x5a0e698f.
+//
+// Solidity: function lastOwnerOf(bytes32 nameHash) constant returns(address)
+func (_BasAsset *BasAssetCallerSession) LastOwnerOf(nameHash [32]byte) (common.Address, error) {
+	return _BasAsset.Contract.LastOwnerOf(&_BasAsset.CallOpts, nameHash)
 }
 
 // MyAssetCount is a free data retrieval call binding the contract method 0x96c9de20.
@@ -672,32 +628,6 @@ func (_BasAsset *BasAssetSession) MyAssetCount(owner common.Address) (*big.Int, 
 // Solidity: function myAssetCount(address owner) constant returns(uint256)
 func (_BasAsset *BasAssetCallerSession) MyAssetCount(owner common.Address) (*big.Int, error) {
 	return _BasAsset.Contract.MyAssetCount(&_BasAsset.CallOpts, owner)
-}
-
-// OwnerOf is a free data retrieval call binding the contract method 0x7dd56411.
-//
-// Solidity: function ownerOf(bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetCaller) OwnerOf(opts *bind.CallOpts, nameHash [32]byte) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "ownerOf", nameHash)
-	return *ret0, err
-}
-
-// OwnerOf is a free data retrieval call binding the contract method 0x7dd56411.
-//
-// Solidity: function ownerOf(bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetSession) OwnerOf(nameHash [32]byte) (common.Address, error) {
-	return _BasAsset.Contract.OwnerOf(&_BasAsset.CallOpts, nameHash)
-}
-
-// OwnerOf is a free data retrieval call binding the contract method 0x7dd56411.
-//
-// Solidity: function ownerOf(bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetCallerSession) OwnerOf(nameHash [32]byte) (common.Address, error) {
-	return _BasAsset.Contract.OwnerOf(&_BasAsset.CallOpts, nameHash)
 }
 
 // TotalDomainSize is a free data retrieval call binding the contract method 0x24ea2e6b.

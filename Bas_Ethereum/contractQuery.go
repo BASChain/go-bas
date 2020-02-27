@@ -1,9 +1,10 @@
 package Bas_Ethereum
 
 import (
-	"github.com/ethereum/go-ethereum/common"
+	"fmt"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	solsha3 "github.com/miguelmota/go-solidity-sha3"
-	"math/big"
+	"golang.org/x/net/context"
 )
 
 
@@ -18,16 +19,28 @@ func Hash(key string) [32]byte{
 
 type  DNSRecord struct {
 	Name   []byte
-	Expire *big.Int
 	Ipv4   [4]byte
 	Ipv6   [16]byte
 	BcAddr string
 	OpData []byte
 	AName  string
-	Owner  common.Address
 }
 
 func QueryDomain(key string)  (DNSRecord,error) {
 	return Asset.DnsDetailsByHash(nil, Hash(key))
 }
 
+
+func QueryEvent(){
+	var opts  = bind.FilterOpts{
+		Start:0,
+		End:nil,
+		Context:context.Background(),
+	}
+	it,err:=Asset.FilterMintAsset(&opts)
+	if err==nil{
+		for it.Next() {
+			fmt.Print(string(it.Event.Name),"\n")
+		}
+	}
+}
