@@ -13,7 +13,7 @@ func fillWaitQueue(){
 	var waitGroup sync.WaitGroup
 	waitGroup.Add(1)
 
-	go loopOverMintAsset(&waitGroup,opts)
+	go loopOverMintAsset(&waitGroup,opts,handleMintAsset)
 
 
 	waitGroup.Wait()
@@ -26,12 +26,13 @@ func syncDataByHandleQueue(){
 	var waitGroup sync.WaitGroup
 	waitGroup.Add(1)
 
-	go loopOverQueueAsset(&waitGroup)
+	go loopOverQueueAsset(&waitGroup,handleAssetUpdate)
 	waitGroup.Wait()
 
+
+	//test code
 	for key,value:=range Records {
-		fmt.Print("domian : " +key + ":\n")
-		fmt.Println(string(value.asset.Name),value.asset.Owner.String())
+		fmt.Println(key,value.asset.Owner.String())
 	}
 
 }
