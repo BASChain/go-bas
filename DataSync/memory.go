@@ -5,15 +5,12 @@ import (
 )
 
 
-var (
-lastSavingPoint *uint64
-
-)
+var lastSavingPoint = uint64(0)
 
 var Records = make(map[string]DomainRecord)
 
 type  DomainRecord struct{
-	Bas_Ethereum.DNSRecord
-	Bas_Ethereum.AssetRecord
+	dns *Bas_Ethereum.DNSRecord
+	asset *Bas_Ethereum.AssetRecord
 }
 

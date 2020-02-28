@@ -5,6 +5,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/op/go-logging"
+	"golang.org/x/net/context"
 )
 var logger, _ = logging.GetLogger("Bas_Ethereum")
 
@@ -13,8 +14,8 @@ var (
 
 	BASTokenAddress = "0xb9291744e91fAd68060D7Cbfc702f13F64E6E7C5"
 	BASMinerAddress = "0x3C81935818a7C8e08372C3aE457AD5F8719B9901"
-	BASAssetAddress = "0xFD2d0B61f1d956CFC69b73c60F7647f3a1b9500D"
-	BASOANNAddress = "0xCf1FFcFB1A6e1ADfde8bBd7B59636D5cB4080355"
+	BASAssetAddress = "0xa4EF38F89ea0f9aC37D4C515B983A7aCeb3980B1"
+	BASOANNAddress = "0xbfa8f1A14c2F58855a1A643d56a71022FAa50438"
 
 	conn *ethclient.Client
 
@@ -42,6 +43,16 @@ func getConn() *ethclient.Client {
 			conn = c
 			return conn
 		}
+	}
+}
+
+func GetLastBlockNumber() uint64{
+	b,e:=getConn().BlockByNumber(context.Background(),nil)
+	if e==nil{
+		return  b.NumberU64()
+	}else {
+		logger.Error("can't get last block",e)
+		return 0
 	}
 }
 
