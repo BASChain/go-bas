@@ -10,11 +10,18 @@ import (
 func fillWaitQueue(){
 	lastBlockNumber := Bas_Ethereum.GetLastBlockNumber()
 	opts := getLoopOpts(lastSavingPoint,&lastBlockNumber)
+
+	//base data should be queried first
+	loopOverMintAsset(opts,handleMintAsset)
+
 	var waitGroup sync.WaitGroup
-	waitGroup.Add(1)
+	waitGroup.Add(5)
 
-	go loopOverMintAsset(&waitGroup,opts,handleMintAsset)
-
+	go loopOverTakeoverAsset(&waitGroup,opts,handleTakeoverAsset)
+	go loopOverRechargeAsset(&waitGroup,opts,handleRechargeAsset)
+	go loopOverRootChanged(&waitGroup,opts, handleRootChanged)
+	go loopOverDNSRecordChange(&waitGroup,opts,handleDNSRecordChange)
+	go loopOverDNSRecordRemove(&waitGroup,opts,handleDNSRecordRemove)
 
 	waitGroup.Wait()
 
@@ -24,15 +31,24 @@ func fillWaitQueue(){
 
 func syncDataByHandleQueue(){
 	var waitGroup sync.WaitGroup
-	waitGroup.Add(1)
+	waitGroup.Add(2)
 
 	go loopOverQueueAsset(&waitGroup,handleAssetUpdate)
+	go loopOverQueueDNS(&waitGroup, handleDNSUpdate)
+
 	waitGroup.Wait()
 
+	clearQueryAsset()
+	clearQueueDns()
 
 	//test code
-	for key,value:=range Records {
-		fmt.Println(key,value.asset.Owner.String())
+	for _,value:=range Records {
+		fmt.Print(string(value.asset.Name),value.asset.Owner.String())
+		if value.dns!=nil{
+			fmt.Println(value.dns.Ipv4)
+		}else{
+			fmt.Println("")
+		}
 	}
 
 }

@@ -1,15 +1,31 @@
 package DataSync
 
-import "sync"
-import "github.com/deckarep/golang-set"
+import (
+	"github.com/BASChain/go-bas/Bas_Ethereum"
+)
+
+var queueAsset []Bas_Ethereum.Hash
+var queueDns []Bas_Ethereum.Hash
 
 
-var lockQueueAsset = &sync.RWMutex{}
+func insertQueueAsset(key Bas_Ethereum.Hash){
+	if !exists(queueAsset,key) {
+		queueAsset = append(queueAsset, key)
+	}
+}
 
-var queueAsset = mapset.NewSet()
 
-func insertWaitQueueAsset(key string){
-	lockQueueAsset.Lock()
-	defer lockQueueAsset.Unlock()
-	queueAsset.Add(key)
+func clearQueryAsset(){
+	queueAsset = []Bas_Ethereum.Hash{}
+}
+
+func insertQueueDns(key Bas_Ethereum.Hash){
+	if !exists(queueDns,key){
+		queueDns = append(queueDns, key)
+	}
+
+}
+
+func clearQueueDns(){
+	queueDns = []Bas_Ethereum.Hash{}
 }

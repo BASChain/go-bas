@@ -6,8 +6,9 @@ import (
 	"math/big"
 )
 
+type Hash [32]byte
 
-func Hash(key string) [32]byte{
+func GetHash(key string) [32]byte{
 	hash := solsha3.SoliditySHA3(solsha3.String(key))
 	var ret [32]byte
 	for i:=0;i<32;i++ {
@@ -37,11 +38,11 @@ type AssetRecord struct{
 	SRootHash     [32]byte
 }
 
-func QueryDNSInfo(key string)  (DNSRecord,error) {
-	return BasAsset().DnsDetailsByHash(nil, Hash(key))
+func QueryDNSInfo(key Hash)  (DNSRecord,error) {
+	return BasAsset().DnsDetailsByHash(nil, key)
 }
 
-func QueryAssetInfo(key string) (AssetRecord,error) {
-	return BasAsset().AssetDetailsByHash(nil,Hash(key))
+func QueryAssetInfo(key Hash) (AssetRecord,error) {
+	return BasAsset().AssetDetailsByHash(nil, key)
 }
 
