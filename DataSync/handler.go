@@ -12,6 +12,7 @@ import (
 var logger, _ = logging.GetLogger("DataSync")
 
 type EventHandler func(iterator interface{})
+type updateHandler func(key interface{})
 
 type EventIterator interface {
 	Next() bool
@@ -32,6 +33,14 @@ func getLoopOpts(s uint64, e *uint64)  *bind.FilterOpts{
 	return opts
 }
 
+func getWatchOpts(s uint64) *bind.WatchOpts{
+	var opts = &bind.WatchOpts{
+		Start:   &s,
+		Context: context.Background(),
+	}
+	return opts
+}
+
 //////////////////////////////////////////////////////////
 //               BasAsset.sol                          //
 ////////////////////////////////////////////////////////
@@ -41,9 +50,45 @@ func handleMintAsset(iterator interface{}){
 	insertQueueAsset(Bas_Ethereum.GetHash(string(it.Event.Name)))
 }
 
+func watchMintAsset(opts *bind.WatchOpts){
+	logs := make(chan *Contract.BasAssetMintAsset)
+	sub,err:=Bas_Ethereum.BasAsset().WatchMintAsset(opts,logs)
+	if err==nil{
+		for {
+			select {
+			case err:=<-sub.Err():
+				logger.Error("subscript MintAsset runtime error",err)
+			case log:= <-logs:
+				handleAssetUpdate(Bas_Ethereum.GetHash(string(log.Name)))
+				lastSavingPoint = log.Raw.BlockNumber
+			}
+		}
+	}else{
+		logger.Error("subscript MintAsset failed " ,err)
+	}
+}
+
 func handleTakeoverAsset(iterator interface{}){
 	it:=iterator.(*Contract.BasAssetTakeoverAssetIterator)
 	insertQueueAsset(it.Event.Hash)
+}
+
+func watchTakeoverAsset(opts *bind.WatchOpts){
+	logs:= make(chan *Contract.BasAssetTakeoverAsset)
+	sub,err := Bas_Ethereum.BasAsset().WatchTakeoverAsset(opts,logs)
+	if err==nil{
+		for {
+			select {
+			case err:=<-sub.Err():
+				logger.Error("subscript Takeover runtime error",err)
+			case log:=<-logs:
+				handleAssetUpdate(log.Hash)
+				lastSavingPoint = log.Raw.BlockNumber
+			}
+		}
+	}else{
+		logger.Error("subscript Takeover failed " ,err)
+	}
 }
 
 func handleRechargeAsset(iterator interface{}){
@@ -51,20 +96,103 @@ func handleRechargeAsset(iterator interface{}){
 	insertQueueAsset(it.Event.Hash)
 }
 
+func watchRechargeAsset(opts *bind.WatchOpts){
+	logs := make(chan *Contract.BasAssetRechargeAsset)
+	sub,err:=Bas_Ethereum.BasAsset().WatchRechargeAsset(opts,logs)
+	if err==nil{
+		for {
+			select {
+			case err:=<-sub.Err():
+				logger.Error("subscript Recharge asset runtime error",err)
+			case log:= <-logs:
+				handleAssetUpdate(log.Hash)
+				lastSavingPoint = log.Raw.BlockNumber
+			}
+		}
+	}else{
+		logger.Error("subscript Recharge asset failed " ,err)
+	}
+}
+
 func handleRootChanged(iterator interface{}){
 	it:=iterator.(*Contract.BasAssetRootChangedIterator)
 	insertQueueAsset(it.Event.NameHash)
 }
+
+func watchRootChanged(opts *bind.WatchOpts){
+	logs := make(chan *Contract.BasAssetRootChanged)
+	sub,err:=Bas_Ethereum.BasAsset().WatchRootChanged(opts,logs)
+	if err==nil{
+		for {
+			select {
+			case err:=<-sub.Err():
+				logger.Error("subscript root changed runtime error",err)
+			case log:= <-logs:
+				handleAssetUpdate(log.NameHash)
+				lastSavingPoint = log.Raw.BlockNumber
+			}
+		}
+	}else{
+		logger.Error("subscript watch root changed failed " ,err)
+	}
+}
+
 
 func handleDNSRecordChange(iterator interface{}){
 	it:=iterator.(*Contract.BasAssetDNSRecordChangeIterator)
 	insertQueueDns(it.Event.NameHash)
 }
 
+func watchDNSRecordChange(opts *bind.WatchOpts){
+	logs :=make(chan *Contract.BasAssetDNSRecordChange)
+	sub,err:=Bas_Ethereum.BasAsset().WatchDNSRecordChange(opts,logs)
+	if err==nil{
+		for {
+			select {
+			case err:=<-sub.Err():
+				logger.Error("subscript DNSRecord changed runtime error",err)
+			case log:= <-logs:
+				handleDNSUpdate(log.NameHash)
+				lastSavingPoint = log.Raw.BlockNumber
+			}
+		}
+	}else{
+		logger.Error("subscript DNSRecord change failed " ,err)
+	}
+}
+
 func handleDNSRecordRemove(iterator interface{})  {
 	it:=iterator.(*Contract.BasAssetDNSRecordRemoveIterator)
 	insertQueueDns(it.Event.NameHash)
 }
+
+func watchDNSRecordRemove(opts *bind.WatchOpts){
+	logs :=make(chan *Contract.BasAssetDNSRecordRemove)
+	sub,err:=Bas_Ethereum.BasAsset().WatchDNSRecordRemove(opts,logs)
+	if err==nil{
+		for {
+			select {
+			case err:=<-sub.Err():
+				logger.Error("subscript DNSRecord remove runtime error",err)
+			case log:= <-logs:
+				handleDNSUpdate(log.NameHash)
+				lastSavingPoint = log.Raw.BlockNumber
+			}
+		}
+	}else{
+		logger.Error("subscript DNSRecord remove failed " ,err)
+	}
+}
+
+
+func handleAssetUpdate(key interface{}){
+	updateAsset(key.(Bas_Ethereum.Hash))
+}
+
+func handleDNSUpdate(key interface{}){
+	updateDNS(key.(Bas_Ethereum.Hash))
+}
+
 
 func loopOverMintAsset(opts *bind.FilterOpts, handler EventHandler){
 	it,err:=Bas_Ethereum.BasAsset().FilterMintAsset(opts)
@@ -74,6 +202,7 @@ func loopOverMintAsset(opts *bind.FilterOpts, handler EventHandler){
 		logger.Error("loop over mint asset err :" , err)
 	}
 }
+
 
 func loopOverTakeoverAsset(waitGroup *sync.WaitGroup,opts *bind.FilterOpts, handler EventHandler){
 	it,err:=Bas_Ethereum.BasAsset().FilterTakeoverAsset(opts)

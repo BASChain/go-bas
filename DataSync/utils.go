@@ -13,7 +13,7 @@ func deleteFromStringList(list []Bas_Ethereum.Hash, key Bas_Ethereum.Hash) []Bas
 
 func exists(list []Bas_Ethereum.Hash, key Bas_Ethereum.Hash) bool {
 	for _,k :=range list{
-		if (k==key){
+		if k==key {
 			return true
 		}
 	}

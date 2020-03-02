@@ -8,7 +8,7 @@ import (
 
 type Hash [32]byte
 
-func GetHash(key string) [32]byte{
+func GetHash(key string) Hash{
 	hash := solsha3.SoliditySHA3(solsha3.String(key))
 	var ret [32]byte
 	for i:=0;i<32;i++ {

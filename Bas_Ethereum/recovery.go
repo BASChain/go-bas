@@ -10,7 +10,7 @@ import (
 var logger, _ = logging.GetLogger("Bas_Ethereum")
 
 var (
-	AccessPoint = "https://ropsten.infura.io/v3/8b8db3cca50a4fcf97173b7619b1c4c3"
+	AccessPoint = "wss://ropsten.infura.io/ws/v3/8b8db3cca50a4fcf97173b7619b1c4c3"
 
 	BASTokenAddress = "0xb9291744e91fAd68060D7Cbfc702f13F64E6E7C5"
 	BASMinerAddress = "0x3C81935818a7C8e08372C3aE457AD5F8719B9901"

@@ -3,12 +3,10 @@ package DataSync
 import (
 	"fmt"
 	"github.com/BASChain/go-bas/Bas_Ethereum"
-	"strconv"
 	"sync"
 )
 
-func fillWaitQueue(){
-	lastBlockNumber := Bas_Ethereum.GetLastBlockNumber()
+func fillWaitQueue(lastBlockNumber uint64){
 	opts := getLoopOpts(lastSavingPoint,&lastBlockNumber)
 
 	//base data should be queried first
@@ -25,8 +23,7 @@ func fillWaitQueue(){
 
 	waitGroup.Wait()
 
-	lastSavingPoint = lastBlockNumber
-	logger.Info("Collected waitQueue to block number: " + strconv.FormatUint(lastSavingPoint, 10))
+
 }
 
 func syncDataByHandleQueue(){
@@ -50,10 +47,26 @@ func syncDataByHandleQueue(){
 			fmt.Println("")
 		}
 	}
+}
 
+func watch(lastBlockNumber uint64){
+	opts := getWatchOpts(lastBlockNumber)
+	go watchMintAsset(opts)
+	go watchTakeoverAsset(opts)
+	go watchRechargeAsset(opts)
+	go watchRootChanged(opts)
+	go watchDNSRecordChange(opts)
+	go watchDNSRecordRemove(opts)
 }
 
 func Sync(){
-	fillWaitQueue()
+	lastBlockNumber := Bas_Ethereum.GetLastBlockNumber()
+
+	fillWaitQueue(lastBlockNumber)
 	syncDataByHandleQueue()
+	lastSavingPoint = lastBlockNumber
+
+	watch(lastBlockNumber)
+
+
 }
