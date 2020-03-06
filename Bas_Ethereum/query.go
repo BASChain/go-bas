@@ -6,7 +6,7 @@ import (
 	"math/big"
 )
 
-type Hash [32]byte
+type Hash [32]uint8
 
 func GetHash(key string) Hash{
 	hash := solsha3.SoliditySHA3(solsha3.String(key))
