@@ -19,6 +19,10 @@ type  DomainRecord struct{
 	asset *Bas_Ethereum.AssetRecord
 }
 
+func SetLastSavingPoint(bn uint64){
+	lastSavingPoint = bn;
+}
+
 func MemLock()  {
 	lock.Lock()
 }

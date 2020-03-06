@@ -56,8 +56,9 @@ func watchMintAsset(opts *bind.WatchOpts){
 	if err==nil{
 		for {
 			select {
-			case err:=<-sub.Err():
-				logger.Error("subscript MintAsset runtime error",err)
+			case e :=<-sub.Err():
+				logger.Error("subscript MintAsset runtime error", e)
+				return
 			case log:= <-logs:
 				handleAssetUpdate(Bas_Ethereum.GetHash(string(log.Name)))
 				lastSavingPoint = log.Raw.BlockNumber
@@ -81,6 +82,7 @@ func watchTakeoverAsset(opts *bind.WatchOpts){
 			select {
 			case err:=<-sub.Err():
 				logger.Error("subscript Takeover runtime error",err)
+				return
 			case log:=<-logs:
 				handleAssetUpdate(log.Hash)
 				lastSavingPoint = log.Raw.BlockNumber
@@ -104,6 +106,7 @@ func watchRechargeAsset(opts *bind.WatchOpts){
 			select {
 			case err:=<-sub.Err():
 				logger.Error("subscript Recharge asset runtime error",err)
+				return
 			case log:= <-logs:
 				handleAssetUpdate(log.Hash)
 				lastSavingPoint = log.Raw.BlockNumber
@@ -127,6 +130,7 @@ func watchRootChanged(opts *bind.WatchOpts){
 			select {
 			case err:=<-sub.Err():
 				logger.Error("subscript root changed runtime error",err)
+				return
 			case log:= <-logs:
 				handleAssetUpdate(log.NameHash)
 				lastSavingPoint = log.Raw.BlockNumber
@@ -151,6 +155,7 @@ func watchDNSRecordChange(opts *bind.WatchOpts){
 			select {
 			case err:=<-sub.Err():
 				logger.Error("subscript DNSRecord changed runtime error",err)
+				return
 			case log:= <-logs:
 				handleDNSUpdate(log.NameHash)
 				lastSavingPoint = log.Raw.BlockNumber
@@ -174,6 +179,7 @@ func watchDNSRecordRemove(opts *bind.WatchOpts){
 			select {
 			case err:=<-sub.Err():
 				logger.Error("subscript DNSRecord remove runtime error",err)
+				return
 			case log:= <-logs:
 				handleDNSUpdate(log.NameHash)
 				lastSavingPoint = log.Raw.BlockNumber
