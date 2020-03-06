@@ -19,7 +19,35 @@ type  DomainRecord struct{
 	asset *Bas_Ethereum.AssetRecord
 }
 
+func MemLock()  {
+	lock.Lock()
+}
 
+func MemUnlock()  {
+	lock.Unlock()
+}
+
+func (dr *DomainRecord)GetName() string  {
+	if dr.asset == nil{
+		return ""
+	}
+	return string(dr.asset.Name)
+}
+
+func (dr *DomainRecord)GetExpire() int64  {
+	if dr.asset == nil{
+		return 0
+	}
+
+	return dr.asset.Expire.Int64()
+}
+
+func (dr *DomainRecord)GetOpenStatus() bool  {
+	if dr.asset == nil{
+		return false
+	}
+	return dr.asset.ROpenToPublic
+}
 
 func updateAsset(hash Bas_Ethereum.Hash){
 	lock.Lock()
