@@ -1,7 +1,6 @@
 package DataSync
 
 import (
-	"fmt"
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/event"
 	"sync"
@@ -31,30 +30,13 @@ func syncDataByHandleQueue(){
 	var waitGroup sync.WaitGroup
 	waitGroup.Add(2)
 
-	go loopOverQueueAsset(&waitGroup,handleAssetUpdate)
-	go loopOverQueueDNS(&waitGroup, handleDNSUpdate)
+	go loopOverQueueAsset(&waitGroup)
+	go loopOverQueueDNS(&waitGroup)
 
 	waitGroup.Wait()
 
 	clearQueryAsset()
 	clearQueueDns()
-
-	//test code
-	//for _,value:=range Records {
-	//	fmt.Print(string(value.asset.Name),value.asset.Owner.String())
-	//	if value.dns!=nil{
-	//		fmt.Println(value.dns.Ipv4)
-	//	}else{
-	//		fmt.Println("")
-	//	}
-	//}
-
-	a,e:=Bas_Ethereum.QueryAssetInfo(Bas_Ethereum.GetHash("root1"))
-	if e==nil {
-		fmt.Println("test query normal : ", string(a.Name))
-	}else{
-		fmt.Println("test query failed : ",e)
-	}
 
 }
 

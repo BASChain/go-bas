@@ -35,20 +35,20 @@ func clearQueueDns(){
 
 
 
-func loopOverQueueAsset(waitGroup *sync.WaitGroup, handle updateHandler){
+func loopOverQueueAsset(waitGroup *sync.WaitGroup){
 	queryAssetLock.Lock()
 	defer queryAssetLock.Unlock()
 	for _,s:= range queueAsset {
-		handle(s)
+		updateAsset(s)
 	}
 	waitGroup.Done()
 }
 
-func loopOverQueueDNS(waitGroup *sync.WaitGroup, handle updateHandler){
+func loopOverQueueDNS(waitGroup *sync.WaitGroup){
 	queryDNSLock.Lock()
 	defer queryDNSLock.Unlock()
 	for _,s:=range queueDns {
-		handle(s)
+		updateDNS(s)
 	}
 	waitGroup.Done()
 }
