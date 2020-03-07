@@ -4,6 +4,7 @@ import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/event"
 	"github.com/op/go-logging"
 	"golang.org/x/net/context"
 	"sync"
@@ -50,10 +51,13 @@ func handleMintAsset(iterator interface{}){
 	insertQueueAsset(Bas_Ethereum.GetHash(string(it.Event.Name)))
 }
 
-func watchMintAsset(opts *bind.WatchOpts){
+func watchMintAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasAssetMintAsset)
 	sub,err:=Bas_Ethereum.BasAsset().WatchMintAsset(opts,logs)
+	defer wg.Done()
 	if err==nil{
+		logger.Info("watching mint asset")
+		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
@@ -62,6 +66,7 @@ func watchMintAsset(opts *bind.WatchOpts){
 			case log:= <-logs:
 				handleAssetUpdate(Bas_Ethereum.GetHash(string(log.Name)))
 				lastSavingPoint = log.Raw.BlockNumber
+				logger.Info("detected event mint asset : ",string(log.Name))
 			}
 		}
 	}else{
@@ -74,10 +79,13 @@ func handleTakeoverAsset(iterator interface{}){
 	insertQueueAsset(it.Event.Hash)
 }
 
-func watchTakeoverAsset(opts *bind.WatchOpts){
+func watchTakeoverAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs:= make(chan *Contract.BasAssetTakeoverAsset)
 	sub,err := Bas_Ethereum.BasAsset().WatchTakeoverAsset(opts,logs)
+	defer wg.Done()
 	if err==nil{
+		logger.Info("watching takeover asset")
+		*subs = append(*subs, sub)
 		for {
 			select {
 			case err:=<-sub.Err():
@@ -86,6 +94,7 @@ func watchTakeoverAsset(opts *bind.WatchOpts){
 			case log:=<-logs:
 				handleAssetUpdate(log.Hash)
 				lastSavingPoint = log.Raw.BlockNumber
+				logger.Info("detected event takeover asset : ", log.Hash)
 			}
 		}
 	}else{
@@ -98,10 +107,13 @@ func handleRechargeAsset(iterator interface{}){
 	insertQueueAsset(it.Event.Hash)
 }
 
-func watchRechargeAsset(opts *bind.WatchOpts){
+func watchRechargeAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasAssetRechargeAsset)
 	sub,err:=Bas_Ethereum.BasAsset().WatchRechargeAsset(opts,logs)
+	defer wg.Done()
 	if err==nil{
+		logger.Info("watching recharge asset")
+		*subs = append(*subs, sub)
 		for {
 			select {
 			case err:=<-sub.Err():
@@ -110,6 +122,7 @@ func watchRechargeAsset(opts *bind.WatchOpts){
 			case log:= <-logs:
 				handleAssetUpdate(log.Hash)
 				lastSavingPoint = log.Raw.BlockNumber
+				logger.Info("detected event recharge asset : ", log.Hash)
 			}
 		}
 	}else{
@@ -122,10 +135,13 @@ func handleRootChanged(iterator interface{}){
 	insertQueueAsset(it.Event.NameHash)
 }
 
-func watchRootChanged(opts *bind.WatchOpts){
+func watchRootChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasAssetRootChanged)
 	sub,err:=Bas_Ethereum.BasAsset().WatchRootChanged(opts,logs)
+	defer wg.Done()
 	if err==nil{
+		logger.Info("watching root changed")
+		*subs = append(*subs, sub)
 		for {
 			select {
 			case err:=<-sub.Err():
@@ -134,6 +150,7 @@ func watchRootChanged(opts *bind.WatchOpts){
 			case log:= <-logs:
 				handleAssetUpdate(log.NameHash)
 				lastSavingPoint = log.Raw.BlockNumber
+				logger.Info("detected event root changed : ", log.NameHash)
 			}
 		}
 	}else{
@@ -147,10 +164,13 @@ func handleDNSRecordChange(iterator interface{}){
 	insertQueueDns(it.Event.NameHash)
 }
 
-func watchDNSRecordChange(opts *bind.WatchOpts){
+func watchDNSRecordChange(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs :=make(chan *Contract.BasAssetDNSRecordChange)
 	sub,err:=Bas_Ethereum.BasAsset().WatchDNSRecordChange(opts,logs)
+	defer wg.Done()
 	if err==nil{
+		logger.Info("watching dns record change")
+		*subs = append(*subs, sub)
 		for {
 			select {
 			case err:=<-sub.Err():
@@ -159,6 +179,7 @@ func watchDNSRecordChange(opts *bind.WatchOpts){
 			case log:= <-logs:
 				handleDNSUpdate(log.NameHash)
 				lastSavingPoint = log.Raw.BlockNumber
+				logger.Info("detected event dns changed : ", log.NameHash)
 			}
 		}
 	}else{
@@ -171,10 +192,13 @@ func handleDNSRecordRemove(iterator interface{})  {
 	insertQueueDns(it.Event.NameHash)
 }
 
-func watchDNSRecordRemove(opts *bind.WatchOpts){
+func watchDNSRecordRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs :=make(chan *Contract.BasAssetDNSRecordRemove)
 	sub,err:=Bas_Ethereum.BasAsset().WatchDNSRecordRemove(opts,logs)
+	defer wg.Done()
 	if err==nil{
+		logger.Info("watching dns record remove")
+		*subs = append(*subs, sub)
 		for {
 			select {
 			case err:=<-sub.Err():
@@ -183,6 +207,7 @@ func watchDNSRecordRemove(opts *bind.WatchOpts){
 			case log:= <-logs:
 				handleDNSUpdate(log.NameHash)
 				lastSavingPoint = log.Raw.BlockNumber
+				logger.Info("detected event dns remove : ", log.NameHash)
 			}
 		}
 	}else{

@@ -41,9 +41,16 @@ func getConn() *ethclient.Client {
 			return nil;
 		}else{
 			conn = c
+			logger.Info("conn is ready",conn)
 			return conn
 		}
 	}
+}
+
+func ResetConn(){
+	conn.Close()
+	conn = nil
+	getConn()
 }
 
 func GetLastBlockNumber() uint64{
