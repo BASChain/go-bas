@@ -90,7 +90,7 @@ func unSubscriptAll(){
 func ReSync(){
 	logger.Info("ReSyncing")
 	unSubscriptAll()
-	Bas_Ethereum.ResetConn()
+	Bas_Ethereum.ResetConnAndContracts()
 	Sync()
 }
 

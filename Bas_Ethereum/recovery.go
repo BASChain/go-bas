@@ -47,9 +47,13 @@ func getConn() *ethclient.Client {
 	}
 }
 
-func ResetConn(){
+func ResetConnAndContracts(){
 	conn.Close()
 	conn = nil
+	token = nil
+	miner = nil
+	asset = nil
+	oann = nil
 	getConn()
 }
 

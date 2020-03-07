@@ -1,8 +1,15 @@
 package main
 
-import "github.com/BASChain/go-bas/DataSync"
+import "github.com/BASChain/go-bas/Bas_Ethereum"
 
 func main()  {
 
-	DataSync.Sync();
+	testResetConn()
+	//DataSync.Sync();
+}
+
+func testResetConn(){
+	Bas_Ethereum.BasAsset()
+	Bas_Ethereum.ResetConnAndContracts()
+	Bas_Ethereum.BasAsset()
 }
