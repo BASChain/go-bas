@@ -39,7 +39,7 @@ func loopOverQueueAsset(waitGroup *sync.WaitGroup){
 	queryAssetLock.Lock()
 	defer queryAssetLock.Unlock()
 	for _,s:= range queueAsset {
-		updateAsset(s)
+		updateAsset(s,0)
 	}
 	waitGroup.Done()
 }
@@ -48,7 +48,7 @@ func loopOverQueueDNS(waitGroup *sync.WaitGroup){
 	queryDNSLock.Lock()
 	defer queryDNSLock.Unlock()
 	for _,s:=range queueDns {
-		updateDNS(s)
+		updateDNS(s,0)
 	}
 	waitGroup.Done()
 }
