@@ -48,7 +48,7 @@ func watch(lastBlockNumber uint64){
 	opts := getWatchOpts(lastBlockNumber)
 	subs = []event.Subscription{}
 
-	waitGroup.Add(6)
+	waitGroup.Add(7)
 
 	go watchMintAsset(opts,&subs,&waitGroup)
 	go watchTakeoverAsset(opts,&subs,&waitGroup)
@@ -56,6 +56,7 @@ func watch(lastBlockNumber uint64){
 	go watchRootChanged(opts,&subs,&waitGroup)
 	go watchDNSRecordChange(opts,&subs,&waitGroup)
 	go watchDNSRecordRemove(opts,&subs,&waitGroup)
+	go watchAssertTransfer(opts,&subs,&waitGroup)
 
 	waitGroup.Wait()
 

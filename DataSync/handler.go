@@ -217,6 +217,29 @@ func watchDNSRecordRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sy
 	}
 }
 
+func watchAssertTransfer(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs :=make(chan *Contract.BasAssetAssertTransfer)
+	sub,err:=Bas_Ethereum.BasAsset().WatchAssertTransfer(opts,logs)
+	defer wg.Done()
+	if err==nil{
+		logger.Info("watching asset transfer")
+		*subs = append(*subs, sub)
+		for {
+			select {
+			case err:=<-sub.Err():
+				logger.Error("subscript asset transfer runtime error",err)
+				return
+			case log:= <-logs:
+				lastSavingPoint = log.Raw.BlockNumber
+				updateAsset(log.NameHash,lastSavingPoint)
+				logger.Info("detected asset transfer : ", log.NameHash)
+			}
+		}
+	}else{
+		logger.Error("subscript asset transfer failed " ,err)
+	}
+}
+
 func loopOverMintAsset(opts *bind.FilterOpts, handler EventHandler){
 	it,err:=Bas_Ethereum.BasAsset().FilterMintAsset(opts)
 	if err==nil{
