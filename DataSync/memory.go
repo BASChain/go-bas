@@ -4,6 +4,7 @@ import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"sync"
+	"encoding/binary"
 )
 
 
@@ -20,7 +21,7 @@ type  DomainRecord struct{
 }
 
 func SetLastSavingPoint(bn uint64){
-	lastSavingPoint = bn;
+	lastSavingPoint = bn
 }
 
 func MemLock()  {
@@ -30,6 +31,27 @@ func MemLock()  {
 func MemUnlock()  {
 	lock.Unlock()
 }
+
+func (dr *DomainRecord)GetIPv4() uint32  {
+	if dr.dns == nil{
+		return 0
+	}
+
+	return binary.BigEndian.Uint32(dr.dns.Ipv4[:])
+}
+
+func (dr *DomainRecord)GetIPv4Addr() [4]byte  {
+	if dr.dns == nil{
+		return [4]byte{}
+	}
+
+	return dr.dns.Ipv4
+}
+
+func (dr *DomainRecord)GetBCAddr() string {
+	return ""
+}
+
 
 func (dr *DomainRecord)GetName() string  {
 	if dr.asset == nil{
