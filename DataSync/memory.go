@@ -5,6 +5,7 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 	"sync"
 	"encoding/binary"
+	"time"
 )
 
 
@@ -75,15 +76,19 @@ func (dr *DomainRecord)GetOpenStatus() bool  {
 	return dr.asset.ROpenToPublic
 }
 
-func updateAsset(hash Bas_Ethereum.Hash){
-	lock.Lock()
-	defer lock.Unlock()
-	record,err:=Bas_Ethereum.QueryAssetInfo(hash)
+func updateAsset(hash Bas_Ethereum.Hash,blockNumber uint64){
+	record,err:=Bas_Ethereum.QueryAssetInfo(hash,blockNumber)
 	if err!=nil{
-		logger.Error("query asset error : " , err )
+		logger.Error("query asset error : " , err , "retry in 30 seconds")
+		time.Sleep(time.Duration(30)*time.Second)
+		updateAsset(hash,blockNumber)
 		return
 	}
+	//test
+	logger.Info("result from record is : ",string(record.Name))
 	// not exist
+	lock.Lock()
+	defer lock.Unlock()
 	if Records[hash].asset==nil {
 		rcd := DomainRecord{
 			asset: &record,
@@ -105,14 +110,16 @@ func updateAsset(hash Bas_Ethereum.Hash){
 	}
 }
 
-func updateDNS(hash Bas_Ethereum.Hash){
-	lock.Lock()
-	defer lock.Unlock()
-	record,err:=Bas_Ethereum.QueryDNSInfo(hash)
+func updateDNS(hash Bas_Ethereum.Hash,blockNumber uint64){
+	record,err:=Bas_Ethereum.QueryDNSInfo(hash,blockNumber)
 	if err!=nil{
-		logger.Error("query dns error : " , err )
+		logger.Error("query dns error : " , err , "retry in 30 seconds")
+		time.Sleep(time.Duration(30)*time.Second)
+		updateDNS(hash,blockNumber)
 		return
 	}
+	lock.Lock()
+	defer lock.Unlock()
 	Records[hash] = DomainRecord{
 		dns:   &record,
 		asset: Records[hash].asset,

@@ -63,9 +63,12 @@ func watchMintAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wai
 				logger.Error("subscript MintAsset runtime error", e)
 				return
 			case log:= <-logs:
-				updateAsset(Bas_Ethereum.GetHash(string(log.Name)))
 				lastSavingPoint = log.Raw.BlockNumber
-				logger.Info("detected event mint asset : ",string(Records[Bas_Ethereum.GetHash(string(log.Name))].asset.Name))
+				updateAsset(Bas_Ethereum.GetHash(string(log.Name)),lastSavingPoint)
+				logger.Info("pre detected string: ",string(log.Name))
+				logger.Info("detected event mint asset : ",
+					string(Records[Bas_Ethereum.GetHash(string(log.Name))].asset.Name),
+					)
 			}
 		}
 	}else{
@@ -91,8 +94,8 @@ func watchTakeoverAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync
 				logger.Error("subscript Takeover runtime error",err)
 				return
 			case log:=<-logs:
-				updateAsset(log.Hash)
 				lastSavingPoint = log.Raw.BlockNumber
+				updateAsset(log.Hash,lastSavingPoint)
 				logger.Info("detected event takeover asset : ", log.Hash)
 			}
 		}
@@ -119,8 +122,8 @@ func watchRechargeAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync
 				logger.Error("subscript Recharge asset runtime error",err)
 				return
 			case log:= <-logs:
-				updateAsset(log.Hash)
 				lastSavingPoint = log.Raw.BlockNumber
+				updateAsset(log.Hash,lastSavingPoint)
 				logger.Info("detected event recharge asset : ", log.Hash)
 			}
 		}
@@ -147,8 +150,8 @@ func watchRootChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.W
 				logger.Error("subscript root changed runtime error",err)
 				return
 			case log:= <-logs:
-				updateAsset(log.NameHash)
 				lastSavingPoint = log.Raw.BlockNumber
+				updateAsset(log.NameHash,lastSavingPoint)
 				logger.Info("detected event root changed : ", log.NameHash)
 			}
 		}
@@ -176,8 +179,8 @@ func watchDNSRecordChange(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sy
 				logger.Error("subscript DNSRecord changed runtime error",err)
 				return
 			case log:= <-logs:
-				updateDNS(log.NameHash)
 				lastSavingPoint = log.Raw.BlockNumber
+				updateDNS(log.NameHash,lastSavingPoint)
 				logger.Info("detected event dns changed : ", log.NameHash)
 			}
 		}
@@ -204,8 +207,8 @@ func watchDNSRecordRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sy
 				logger.Error("subscript DNSRecord remove runtime error",err)
 				return
 			case log:= <-logs:
-				updateDNS(log.NameHash)
 				lastSavingPoint = log.Raw.BlockNumber
+				updateDNS(log.NameHash,lastSavingPoint)
 				logger.Info("detected event dns remove : ", log.NameHash)
 			}
 		}

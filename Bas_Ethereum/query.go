@@ -1,6 +1,7 @@
 package Bas_Ethereum
 
 import (
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	solsha3 "github.com/miguelmota/go-solidity-sha3"
 	"math/big"
@@ -38,11 +39,23 @@ type AssetRecord struct{
 	SRootHash     [32]byte
 }
 
-func QueryDNSInfo(key Hash)  (DNSRecord,error) {
-	return BasAsset().DnsDetailsByHash(nil, key)
+func QueryDNSInfo(key Hash,blockNumber uint64)  (DNSRecord,error) {
+	var opts = new(bind.CallOpts)
+	if blockNumber == 0 {
+		opts = nil
+	}else{
+		opts.BlockNumber = new(big.Int).SetUint64(blockNumber)
+	}
+	return BasAsset().DnsDetailsByHash(opts, key)
 }
 
-func QueryAssetInfo(key Hash) (AssetRecord,error) {
-	return BasAsset().AssetDetailsByHash(nil, key)
+func QueryAssetInfo(key Hash,blockNumber uint64) (AssetRecord,error) {
+	var opts = new(bind.CallOpts)
+	if blockNumber == 0 {
+		opts = nil
+	}else{
+		opts.BlockNumber = new(big.Int).SetUint64(blockNumber)
+	}
+	return BasAsset().AssetDetailsByHash(opts, key)
 }
 
