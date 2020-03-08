@@ -65,7 +65,7 @@ func watchMintAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wai
 			case log:= <-logs:
 				updateAsset(Bas_Ethereum.GetHash(string(log.Name)))
 				lastSavingPoint = log.Raw.BlockNumber
-				logger.Info("detected event mint asset : ",string(log.Name))
+				logger.Info("detected event mint asset : ",string(Records[Bas_Ethereum.GetHash(string(log.Name))].asset.Name))
 			}
 		}
 	}else{
