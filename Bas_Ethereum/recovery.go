@@ -12,10 +12,10 @@ var logger, _ = logging.GetLogger("Bas_Ethereum")
 var (
 	AccessPoint = "wss://ropsten.infura.io/ws/v3/8b8db3cca50a4fcf97173b7619b1c4c3"
 
-	BASTokenAddress = "0xb9291744e91fAd68060D7Cbfc702f13F64E6E7C5"
-	BASMinerAddress = "0x3C81935818a7C8e08372C3aE457AD5F8719B9901"
-	BASAssetAddress = "0xCDF7A205DE6f35b60a540dE5B9ebF419c2303e61"
-	BASOANNAddress = "0x53CAb752Fd2c5570CBb3F013Ea034d2AC45Dc6C7"
+	BASTokenAddress = "0x9d0314f9Bacd569DCB22276867AAEeE1C8A87614"
+	BASMinerAddress = "0x4074594618FFe52Ca9ab03cc01314b1f7893da9D"
+	BASAssetAddress = "0x5346aDb387D87009C133c4773deD55Bbc47A595B"
+	BASOANNAddress = "0x0282C762a66D3BFfbD2E2c6bEe6C56eAfA847453"
 
 	conn *ethclient.Client
 
