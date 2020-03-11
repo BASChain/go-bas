@@ -17,8 +17,22 @@ import (
 
 var logger, _ = logging.GetLogger("Transactions")
 
-func SendFreeEth(key *keystore.Key,toAddress common.Address,amount int64) {
+func CheckBalance(key *keystore.Key) *big.Int{
+	account := GetPublicAddressFromKeyStore(key)
+	balance, err := Bas_Ethereum.GetConn().BalanceAt(context.Background(), account, nil)
+	if err != nil {
+		logger.Error("check balance failed",err)
+	}
+	return  balance
+}
 
+func GetPublicAddressFromKeyStore(key *keystore.Key) common.Address {
+	publicKey := key.PrivateKey.Public()
+	publicKeyECDSA, _ := publicKey.(*ecdsa.PublicKey)
+	return  crypto.PubkeyToAddress(*publicKeyECDSA)
+}
+
+func SendFreeEth(key *keystore.Key,toAddress common.Address,amount int64) {
 	publicKey := key.PrivateKey.Public()
 	publicKeyECDSA, ok := publicKey.(*ecdsa.PublicKey)
 	if !ok {
