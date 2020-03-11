@@ -31,7 +31,7 @@ func resetAccessPoint(entrance string) {
 	AccessPoint = entrance
 }
 
-func getConn() *ethclient.Client {
+func GetConn() *ethclient.Client {
 	if conn!=nil{
 		return conn
 	}else{
@@ -54,11 +54,11 @@ func ResetConnAndContracts(){
 	miner = nil
 	asset = nil
 	oann = nil
-	getConn()
+	GetConn()
 }
 
 func GetLastBlockNumber() uint64{
-	b,e:=getConn().BlockByNumber(context.Background(),nil)
+	b,e:= GetConn().BlockByNumber(context.Background(),nil)
 	if e==nil{
 		return  b.NumberU64()
 	}else {
@@ -69,7 +69,7 @@ func GetLastBlockNumber() uint64{
 
 func BasToken() *Contract.BasToken{
 	if token==nil{
-		if t,err:=Contract.NewBasToken(common.HexToAddress(BASTokenAddress),getConn());err==nil{
+		if t,err:=Contract.NewBasToken(common.HexToAddress(BASTokenAddress), GetConn());err==nil{
 			token = t
 		}else{
 			logger.Error("can't recover BasToken",err)
@@ -81,7 +81,7 @@ func BasToken() *Contract.BasToken{
 
 func BasMiner() *Contract.BasMiner{
 	if miner==nil{
-		if m,err:=Contract.NewBasMiner(common.HexToAddress(BASMinerAddress),getConn());err==nil{
+		if m,err:=Contract.NewBasMiner(common.HexToAddress(BASMinerAddress), GetConn());err==nil{
 			miner = m
 		}else{
 			logger.Error("can't recover Miner",err)
@@ -92,7 +92,7 @@ func BasMiner() *Contract.BasMiner{
 
 func BasAsset() *Contract.BasAsset{
 	if asset==nil{
-		if a,err:=Contract.NewBasAsset(common.HexToAddress(BASAssetAddress),getConn());err==nil{
+		if a,err:=Contract.NewBasAsset(common.HexToAddress(BASAssetAddress), GetConn());err==nil{
 			asset = a
 		}else{
 			logger.Error("can't recover Asset",err)
@@ -103,7 +103,7 @@ func BasAsset() *Contract.BasAsset{
 
 func BasOANN() *Contract.BasOANN{
 	if oann==nil{
-		if o,err:=Contract.NewBasOANN(common.HexToAddress(BASOANNAddress),getConn());err==nil{
+		if o,err:=Contract.NewBasOANN(common.HexToAddress(BASOANNAddress), GetConn());err==nil{
 			oann = o
 		}else{
 			logger.Error("can't recover OANN",err)
