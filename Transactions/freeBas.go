@@ -25,13 +25,15 @@ func SendFreeBas(key *keystore.Key,addr common.Address){
 		return
 	}
 	opts:=bind.NewKeyedTransactor(key.PrivateKey)
-	tx,err2:=Bas_Ethereum.BasToken().Transfer(opts,addr,amount)
-	if err2!=nil{
-		logger.Error("send BAS error : ",err2)
+	tx,err:=Bas_Ethereum.BasToken().Transfer(opts,addr,amount)
+	if err!=nil{
+		logger.Error("send BAS error : ",err)
+		return
 	}
-	receipt, err3 := bind.WaitMined(context.Background(), Bas_Ethereum.GetConn(), tx)
-	if err3!=nil{
-		logger.Error("mine send BAS error : ", err3)
+	receipt, err := bind.WaitMined(context.Background(), Bas_Ethereum.GetConn(), tx)
+	if err!=nil{
+		logger.Error("mine send BAS error : ", err)
+		return
 	}else{
 		logger.Info("send free bas to : ",addr.String()," on block : ",receipt.BlockNumber.String())
 	}
