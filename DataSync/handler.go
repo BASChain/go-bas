@@ -96,7 +96,8 @@ func watchTakeoverAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync
 			case log:=<-logs:
 				lastSavingPoint = log.Raw.BlockNumber
 				updateAsset(log.Hash,lastSavingPoint)
-				logger.Info("detected event takeover asset : ", log.Hash)
+				logger.Info("detected event takeover asset : ")
+				showMemeory(log.Hash)
 			}
 		}
 	}else{
@@ -124,7 +125,8 @@ func watchRechargeAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync
 			case log:= <-logs:
 				lastSavingPoint = log.Raw.BlockNumber
 				updateAsset(log.Hash,lastSavingPoint)
-				logger.Info("detected event recharge asset : ", log.Hash)
+				logger.Info("detected event recharge asset : ")
+				showMemeory(log.Hash)
 			}
 		}
 	}else{
@@ -152,7 +154,8 @@ func watchRootChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.W
 			case log:= <-logs:
 				lastSavingPoint = log.Raw.BlockNumber
 				updateAsset(log.NameHash,lastSavingPoint)
-				logger.Info("detected event root changed : ", log.NameHash)
+				logger.Info("detected event root changed : ")
+				showMemeory(log.NameHash)
 			}
 		}
 	}else{
@@ -181,7 +184,8 @@ func watchDNSRecordChange(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sy
 			case log:= <-logs:
 				lastSavingPoint = log.Raw.BlockNumber
 				updateDNS(log.NameHash,lastSavingPoint)
-				logger.Info("detected event dns changed : ", log.NameHash)
+				logger.Info("detected event dns changed : ")
+				showMemeory(log.NameHash)
 			}
 		}
 	}else{
@@ -209,7 +213,8 @@ func watchDNSRecordRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sy
 			case log:= <-logs:
 				lastSavingPoint = log.Raw.BlockNumber
 				updateDNS(log.NameHash,lastSavingPoint)
-				logger.Info("detected event dns remove : ", log.NameHash)
+				logger.Info("detected event dns remove : ")
+				showMemeory(log.NameHash)
 			}
 		}
 	}else{
@@ -232,7 +237,8 @@ func watchAssertTransfer(opts *bind.WatchOpts,subs *[]event.Subscription,wg *syn
 			case log:= <-logs:
 				lastSavingPoint = log.Raw.BlockNumber
 				updateAsset(log.NameHash,lastSavingPoint)
-				logger.Info("detected asset transfer : ", log.NameHash)
+				logger.Info("detected asset transfer : ")
+				showMemeory(log.NameHash)
 			}
 		}
 	}else{

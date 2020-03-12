@@ -3,7 +3,6 @@ package Transactions
 import (
 	"context"
 	"crypto/ecdsa"
-	"fmt"
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/accounts/keystore"
@@ -78,11 +77,9 @@ func SendFreeEth(key *keystore.Key,toAddress common.Address,amount int64) {
 	receipt, err := bind.WaitMined(context.Background(),Bas_Ethereum.GetConn(),signedTx)
 
 	if err != nil {
-		logger.Error("send free bas error :", err)
+		logger.Error("send free eth error :", err)
 		return
 	}else{
-		fmt.Println("send free bas to : ",toAddress.String()," on block : ",receipt.BlockNumber.String())
+		logger.Info("send free eth to : ",toAddress.String()," on block : ",receipt.BlockNumber.String())
 	}
-
-	fmt.Printf("tx sent: %s", signedTx.Hash().Hex())
 }

@@ -1,10 +1,13 @@
 package DataSync
 
 import (
+	"encoding/hex"
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/event"
 	"sync"
 )
+
+
 
 func fillWaitQueue(lastBlockNumber uint64){
 	opts := getLoopOpts(lastSavingPoint,&lastBlockNumber)
@@ -23,7 +26,6 @@ func fillWaitQueue(lastBlockNumber uint64){
 
 	waitGroup.Wait()
 
-
 }
 
 func syncDataByHandleQueue(){
@@ -38,6 +40,16 @@ func syncDataByHandleQueue(){
 	clearQueryAsset()
 	clearQueueDns()
 
+	ShowCachedNames()
+
+}
+
+func ShowCachedNames(){
+	if DebugFlag{
+		for k,v := range Records{
+			logger.Info(string(v.asset.Name), "0x"+hex.EncodeToString(k[:]))
+		}
+	}
 }
 
 var subs []event.Subscription
