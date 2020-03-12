@@ -10,8 +10,13 @@ import (
 var logger, _ = logging.GetLogger("Bas_Ethereum")
 
 var (
-	AccessPoint = "ws://75.135.96.248:3334"
-	//AccessPoint = "wss://ropsten.infura.io/ws/v3/8b8db3cca50a4fcf97173b7619b1c4c3"
+
+	AccessPoints = []string{
+		"wss://ropsten.infura.io/v3/ws/831ab04fa4964991b5fba5c52106d7b0",
+		"wss://ropsten.infura.io/ws/v3/8b8db3cca50a4fcf97173b7619b1c4c3",
+		"ws://75.135.96.248:3334",
+	}
+
 
 	BASTokenAddress = "0x9d0314f9Bacd569DCB22276867AAEeE1C8A87614"
 	BASMinerAddress = "0x4074594618FFe52Ca9ab03cc01314b1f7893da9D"
@@ -30,24 +35,34 @@ var (
 
 
 
-func resetAccessPoint(entrance string) {
-	AccessPoint = entrance
+func RestoreConnectionManually(entrance string) {
+	c, err := ethclient.Dial(entrance)
+	if err!=nil{
+		logger.Error("can't connect to ethereum")
+	}else{
+		conn = c
+		logger.Info("conn is ready")
+	}
 }
 
 func GetConn() *ethclient.Client {
 	if conn!=nil{
 		return conn
 	}else{
-		c, err := ethclient.Dial(AccessPoint)
-		if err!=nil{
-			logger.Error("can't get access to ethereum",err)
-			return nil;
-		}else{
-			conn = c
-			logger.Info("conn is ready",conn)
-			return conn
+		for _,s := range AccessPoints{
+			c, err := ethclient.Dial(s)
+			if err!=nil{
+				logger.Error("can't get access through : " ,s)
+				continue
+			}else{
+				conn = c
+				logger.Info("conn is ready")
+				return conn
+			}
 		}
 	}
+	logger.Fatal("can't get access to ethereum through any points")
+	return nil
 }
 
 func ResetConnAndContracts(){
