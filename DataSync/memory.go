@@ -1,12 +1,14 @@
 package DataSync
 
 import (
+	"encoding/hex"
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"sync"
 	"time"
 )
 
+var DebugFlag = true
 
 var lastSavingPoint = uint64(0)
 
@@ -18,6 +20,12 @@ var Assets = make(map[common.Address][]Bas_Ethereum.Hash)
 type  DomainRecord struct{
 	dns *Bas_Ethereum.DNSRecord
 	asset *Bas_Ethereum.AssetRecord
+}
+
+func showMemeory(hash Bas_Ethereum.Hash){
+	if DebugFlag{
+		logger.Info(string(Records[hash].asset.Name),"0x"+hex.EncodeToString(hash[:]))
+	}
 }
 
 func SetLastSavingPoint(bn uint64){
@@ -62,9 +70,6 @@ func updateAsset(hash Bas_Ethereum.Hash,blockNumber uint64){
 		updateAsset(hash,blockNumber)
 		return
 	}
-	//test
-	logger.Info("result from record is : ",string(record.Name))
-	// not exist
 	lock.Lock()
 	defer lock.Unlock()
 	if Records[hash].asset==nil {
