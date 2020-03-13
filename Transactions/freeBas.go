@@ -14,18 +14,10 @@ func CheckIfApplied(addr common.Address) (bool,error){
 }
 
 
-func GetFreeBasAmount() (*big.Int,error){
-	return Bas_Ethereum.FreeBas().Amount(nil)
-}
-
-func SendFreeBas(key *keystore.Key,addr common.Address){
-	amount,err:=GetFreeBasAmount()
-	if err!=nil{
-		logger.Error("can't get Free Bas Amount", err)
-		return
-	}
+func SendFreeBasByContract(key *keystore.Key,addr common.Address,amount int64){
 	opts:=bind.NewKeyedTransactor(key.PrivateKey)
-	tx,err:=Bas_Ethereum.BasToken().Transfer(opts,addr,amount)
+	value := big.NewInt(amount) // in wei (1 eth) := big.NewInt(amount) // in wei (1 eth)
+	tx,err:=Bas_Ethereum.FreeBas().SendTokenByContract(opts,addr,value)
 	if err!=nil{
 		logger.Error("send BAS error : ",err)
 		return

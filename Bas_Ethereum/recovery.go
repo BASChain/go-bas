@@ -12,17 +12,17 @@ var logger, _ = logging.GetLogger("Bas_Ethereum")
 var (
 
 	AccessPoints = []string{
-		"wss://ropsten.infura.io/v3/ws/831ab04fa4964991b5fba5c52106d7b0",
+		"wss://ropsten.infura.io/ws/v3/831ab04fa4964991b5fba5c52106d7b0",
 		"wss://ropsten.infura.io/ws/v3/8b8db3cca50a4fcf97173b7619b1c4c3",
 		"ws://75.135.96.248:3334",
 	}
 
 
-	BASTokenAddress = "0x9d0314f9Bacd569DCB22276867AAEeE1C8A87614"
-	BASMinerAddress = "0x4074594618FFe52Ca9ab03cc01314b1f7893da9D"
-	BASAssetAddress = "0x5346aDb387D87009C133c4773deD55Bbc47A595B"
-	BASOANNAddress = "0x0282C762a66D3BFfbD2E2c6bEe6C56eAfA847453"
-	GetFreeBASAddress = "0xB81C82C83A2265D0C9BD8795E6211c8B05A1AE1E"
+	BASTokenAddress    = "0x9d0314f9Bacd569DCB22276867AAEeE1C8A87614"
+	BASMinerAddress    = "0x4074594618FFe52Ca9ab03cc01314b1f7893da9D"
+	BASAssetAddress    = "0x5346aDb387D87009C133c4773deD55Bbc47A595B"
+	BASOANNAddress     = "0x0282C762a66D3BFfbD2E2c6bEe6C56eAfA847453"
+	SendFreeBASAddress = "0x6B80cA84B64e2Fd7957138eA7480FB4E775b997F"
 
 	conn *ethclient.Client
 
@@ -30,7 +30,7 @@ var (
 	miner *Contract.BasMiner
 	asset *Contract.BasAsset
 	oann  *Contract.BasOANN
-	free  *Contract.GetFreeBas
+	free  *Contract.SendFreeBas
 )
 
 
@@ -130,12 +130,12 @@ func BasOANN() *Contract.BasOANN{
 	return oann
 }
 
-func FreeBas() *Contract.GetFreeBas{
+func FreeBas() *Contract.SendFreeBas{
 	if free==nil{
-		if o,err:=Contract.NewGetFreeBas(common.HexToAddress(GetFreeBASAddress),GetConn());err==nil{
+		if o,err:=Contract.NewSendFreeBas(common.HexToAddress(SendFreeBASAddress),GetConn());err==nil{
 			free = o
 		}else{
-			logger.Error("can't recover GetFreeBas", err)
+			logger.Error("can't recover Send Free Bas", err)
 		}
 	}
 	return free
