@@ -31,7 +31,7 @@ func GetPublicAddressFromKeyStore(key *keystore.Key) common.Address {
 	return  crypto.PubkeyToAddress(*publicKeyECDSA)
 }
 
-func SendFreeEth(key *keystore.Key,toAddress common.Address,amount int64) {
+func SendFreeEth(key *keystore.Key,toAddress common.Address,amount *big.Int) {
 	publicKey := key.PrivateKey.Public()
 	publicKeyECDSA, ok := publicKey.(*ecdsa.PublicKey)
 	if !ok {
@@ -46,7 +46,6 @@ func SendFreeEth(key *keystore.Key,toAddress common.Address,amount int64) {
 		return
 	}
 
-	value := big.NewInt(amount) // in wei (1 eth)
 	gasLimit := uint64(21000)                // in units
 	gasPrice, err := Bas_Ethereum.GetConn().SuggestGasPrice(context.Background())
 	if err != nil {
@@ -55,7 +54,7 @@ func SendFreeEth(key *keystore.Key,toAddress common.Address,amount int64) {
 	}
 
 	var data []byte
-	tx := types.NewTransaction(nonce, toAddress, value, gasLimit, gasPrice, data)
+	tx := types.NewTransaction(nonce, toAddress, amount, gasLimit, gasPrice, data)
 
 	chainID, err := Bas_Ethereum.GetConn().NetworkID(context.Background())
 	if err != nil {
