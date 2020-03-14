@@ -84,6 +84,53 @@ func (dr *DomainRecord)GetOpenStatus() bool  {
 	return dr.asset.ROpenToPublic
 }
 
+func (dr *DomainRecord)GetOwner() string  {
+	if dr.asset == nil{
+		return ""
+	}
+	return  dr.asset.Owner.String()
+
+}
+
+func (dr *DomainRecord)GetIsRoot() bool  {
+	if dr.asset == nil{
+		return  false
+	}
+	return dr.asset.IsRoot
+}
+
+func (dr *DomainRecord)GetIsCustomed() bool  {
+	if dr.asset == nil{
+		return  false
+	}
+	return dr.asset.RIsCustomed
+}
+
+func (dr *DomainRecord)GetIsPureA() bool  {
+	if dr.asset == nil{
+		return  false
+	}
+	return dr.asset.RIsPureA
+}
+
+func (dr *DomainRecord)GetCustomedPrice() string  {
+	if dr.asset == nil{
+		return  ""
+	}
+
+	price := dr.asset.RCustomPrice
+
+	return price.String()
+}
+
+func (dr *DomainRecord)GetParentHash() Bas_Ethereum.Hash  {
+	if dr.asset == nil{
+		return Bas_Ethereum.Hash{}
+	}
+
+	return dr.asset.SRootHash
+}
+
 func updateAsset(hash Bas_Ethereum.Hash,blockNumber uint64){
 	record,err:=Bas_Ethereum.QueryAssetInfo(hash,blockNumber)
 	if err!=nil{
