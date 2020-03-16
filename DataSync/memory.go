@@ -5,6 +5,7 @@ import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"sync"
+	"encoding/binary"
 	"time"
 )
 
@@ -29,7 +30,7 @@ func showMemeory(hash Bas_Ethereum.Hash){
 }
 
 func SetLastSavingPoint(bn uint64){
-	lastSavingPoint = bn;
+	lastSavingPoint = bn
 }
 
 func MemLock()  {
@@ -39,6 +40,27 @@ func MemLock()  {
 func MemUnlock()  {
 	lock.Unlock()
 }
+
+func (dr *DomainRecord)GetIPv4() uint32  {
+	if dr.dns == nil{
+		return 0
+	}
+
+	return binary.BigEndian.Uint32(dr.dns.Ipv4[:])
+}
+
+func (dr *DomainRecord)GetIPv4Addr() [4]byte  {
+	if dr.dns == nil{
+		return [4]byte{}
+	}
+
+	return dr.dns.Ipv4
+}
+
+func (dr *DomainRecord)GetBCAddr() string {
+	return ""
+}
+
 
 func (dr *DomainRecord)GetName() string  {
 	if dr.asset == nil{
@@ -60,6 +82,53 @@ func (dr *DomainRecord)GetOpenStatus() bool  {
 		return false
 	}
 	return dr.asset.ROpenToPublic
+}
+
+func (dr *DomainRecord)GetOwner() string  {
+	if dr.asset == nil{
+		return ""
+	}
+	return  dr.asset.Owner.String()
+
+}
+
+func (dr *DomainRecord)GetIsRoot() bool  {
+	if dr.asset == nil{
+		return  false
+	}
+	return dr.asset.IsRoot
+}
+
+func (dr *DomainRecord)GetIsCustomed() bool  {
+	if dr.asset == nil{
+		return  false
+	}
+	return dr.asset.RIsCustomed
+}
+
+func (dr *DomainRecord)GetIsPureA() bool  {
+	if dr.asset == nil{
+		return  false
+	}
+	return dr.asset.RIsPureA
+}
+
+func (dr *DomainRecord)GetCustomedPrice() string  {
+	if dr.asset == nil{
+		return  ""
+	}
+
+	price := dr.asset.RCustomPrice
+
+	return price.String()
+}
+
+func (dr *DomainRecord)GetParentHash() Bas_Ethereum.Hash  {
+	if dr.asset == nil{
+		return Bas_Ethereum.Hash{}
+	}
+
+	return dr.asset.SRootHash
 }
 
 func updateAsset(hash Bas_Ethereum.Hash,blockNumber uint64){
