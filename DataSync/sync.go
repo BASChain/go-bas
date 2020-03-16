@@ -1,7 +1,6 @@
 package DataSync
 
 import (
-	"encoding/hex"
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/event"
 	"sync"
@@ -46,8 +45,8 @@ func syncDataByHandleQueue(){
 
 func ShowCachedNames(){
 	if DebugFlag{
-		for k,v := range Records{
-			logger.Info(string(v.asset.Name), "0x"+hex.EncodeToString(k[:]))
+		for _,v := range Records{
+			logger.Info(string(v.asset.Name), v.asset.Owner.String())
 		}
 	}
 }

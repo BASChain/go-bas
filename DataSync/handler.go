@@ -67,7 +67,7 @@ func watchMintAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wai
 				updateAsset(Bas_Ethereum.GetHash(string(log.Name)),lastSavingPoint)
 				logger.Info("pre detected string: ",string(log.Name))
 				logger.Info("detected event mint asset : ",
-					string(Records[Bas_Ethereum.GetHash(string(log.Name))].asset.Name),
+					string(Records[Bas_Ethereum.GetHash(string(log.Name))].asset.Owner.String()),
 					)
 			}
 		}
