@@ -11,6 +11,8 @@ import (
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/op/go-logging"
 	"math/big"
+	"errors"
+	"github.com/BASChain/go-bas-dns-server/dns/mem"
 )
 
 
@@ -31,26 +33,26 @@ func GetPublicAddressFromKeyStore(key *keystore.Key) common.Address {
 	return  crypto.PubkeyToAddress(*publicKeyECDSA)
 }
 
-func SendFreeEth(key *keystore.Key,toAddress common.Address,amount *big.Int) {
+func SendFreeEth(key *keystore.Key,toAddress common.Address,amount *big.Int) error {
 	publicKey := key.PrivateKey.Public()
 	publicKeyECDSA, ok := publicKey.(*ecdsa.PublicKey)
 	if !ok {
 		logger.Error("error casting public key to ECDSA")
-		return
+		return errors.New("error casting public key to ECDSA")
 	}
 
 	fromAddress := crypto.PubkeyToAddress(*publicKeyECDSA)
 	nonce, err := Bas_Ethereum.GetConn().PendingNonceAt(context.Background(), fromAddress)
 	if err != nil {
 		logger.Error("send free eth, create none error : ",err)
-		return
+		return err
 	}
 
 	gasLimit := uint64(21000)                // in units
 	gasPrice, err := Bas_Ethereum.GetConn().SuggestGasPrice(context.Background())
 	if err != nil {
 		logger.Error("get gasPrice error : ", err)
-		return
+		return err
 	}
 
 	var data []byte
@@ -59,13 +61,13 @@ func SendFreeEth(key *keystore.Key,toAddress common.Address,amount *big.Int) {
 	chainID, err := Bas_Ethereum.GetConn().NetworkID(context.Background())
 	if err != nil {
 		logger.Error("get chainId error : ", err)
-		return
+		return err
 	}
 
 	signedTx, err := types.SignTx(tx, types.NewEIP155Signer(chainID), key.PrivateKey)
 	if err != nil {
 		logger.Error("sign transaction error : ",err)
-		return
+		return err
 	}
 
 	err = Bas_Ethereum.GetConn().SendTransaction(context.Background(), signedTx)
@@ -77,8 +79,21 @@ func SendFreeEth(key *keystore.Key,toAddress common.Address,amount *big.Int) {
 
 	if err != nil {
 		logger.Error("send free eth error :", err)
-		return
+		return err
 	}else{
 		logger.Info("send free eth to : ",toAddress.String()," on block : ",receipt.BlockNumber.String())
 	}
+
+	return nil
+}
+
+func SendFreeEthWrapper(key *keystore.Key,toAddress common.Address,amount *big.Int)  {
+	mem.Update(toAddress,mem.ETH,mem.WAITING)
+	go func() {
+		if err:=SendFreeEth(key,toAddress,amount);err!=nil{
+			mem.Update(toAddress,mem.ETH,mem.FAILURE)
+		}else{
+			mem.Update(toAddress,mem.ETH,mem.SUCCESS)
+		}
+	}()
 }
