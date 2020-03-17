@@ -7,6 +7,7 @@ import (
 	"sync"
 	"encoding/binary"
 	"time"
+	"net"
 )
 
 var DebugFlag = true
@@ -49,6 +50,20 @@ func (dr *DomainRecord)GetIPv4() uint32  {
 	return binary.BigEndian.Uint32(dr.dns.Ipv4[:])
 }
 
+func (dr *DomainRecord)GetIPv4Str() string  {
+	if dr.dns == nil{
+		return ""
+	}
+
+	if dr.GetIPv4() == 0{
+		return ""
+	}
+
+	ip:=net.IPv4(dr.dns.Ipv4[0],dr.dns.Ipv4[1],dr.dns.Ipv4[2],dr.dns.Ipv4[3])
+
+	return ip.String()
+}
+
 func (dr *DomainRecord)GetIPv4Addr() [4]byte  {
 	if dr.dns == nil{
 		return [4]byte{}
@@ -58,15 +73,56 @@ func (dr *DomainRecord)GetIPv4Addr() [4]byte  {
 }
 
 func (dr *DomainRecord)GetBCAddr() string {
-	return ""
+	if dr.dns == nil{
+		return ""
+	}
+	return dr.dns.BcAddr
+}
+
+func (dr *DomainRecord)GetIpv6Str() string  {
+	if dr.dns == nil{
+		return ""
+	}
+	ip:=net.IPv6zero
+
+	for i,b:=range dr.dns.Ipv6[:]{
+		ip[i] = b
+	}
+
+	s := ip.String()
+	if s == "::"{
+		return ""
+	}else{
+		return s
+	}
+}
+
+func (dr *DomainRecord)GetAliasName() string  {
+	if dr.dns == nil{
+		return ""
+	}
+	return dr.dns.AName
+}
+
+func (dr *DomainRecord)GetExtraInfo() string  {
+	if dr.dns == nil{
+		return ""
+	}
+
+	return string(dr.dns.OpData)
 }
 
 
 func (dr *DomainRecord)GetName() string  {
 	if dr.asset == nil{
-		return ""
+		if dr.dns == nil{
+			return ""
+		}else{
+			return string(dr.dns.Name)
+		}
+	}else{
+		return string(dr.asset.Name)
 	}
-	return string(dr.asset.Name)
 }
 
 func (dr *DomainRecord)GetExpire() int64  {
@@ -91,6 +147,15 @@ func (dr *DomainRecord)GetOwner() string  {
 	return  dr.asset.Owner.String()
 
 }
+
+func (dr *DomainRecord)GetOwnerOrig() *common.Address {
+	if dr.asset == nil{
+		return nil
+	}
+
+	return &dr.asset.Owner
+}
+
 
 func (dr *DomainRecord)GetIsRoot() bool  {
 	if dr.asset == nil{
