@@ -6,7 +6,6 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/op/go-logging"
-	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -37,14 +36,26 @@ func PrivateKeyRecover(keyFile string, pass string)[]*keystore.Key{
 	keys:= ReadTextByline(keyFile)
 	var keyList  []*keystore.Key
 	for i:=0;i<len(keys);i++{
-		json, err := ioutil.ReadAll(strings.NewReader(keys[i]))
-		if err != nil {
-			return nil
+		key, err := keystore.DecryptKey([]byte(keys[i]), pass)
+		if err == nil{
+			keyList = append(keyList, key)
 		}
-		key, err := keystore.DecryptKey(json, pass)
-		keyList = append(keyList, key)
 	}
 	return keyList
+}
+
+func PrivateKeyRecoverByBytes(privData []byte,pass string) []*keystore.Key {
+	keys := strings.Split(string(privData),"\n")
+
+	var keyList  []*keystore.Key
+	for i:=0;i<len(keys);i++{
+		key, err := keystore.DecryptKey([]byte(keys[i]), pass)
+		if err == nil{
+			keyList = append(keyList, key)
+		}
+	}
+	return keyList
+
 }
 
 
@@ -65,3 +76,5 @@ func ReadTextByline(filePath string) []string {
 	}
 	return keys
 }
+
+
