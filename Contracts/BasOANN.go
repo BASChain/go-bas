@@ -28,7 +28,7 @@ var (
 )
 
 // BasOANNABI is the input ABI used to generate the binding from.
-const BasOANNABI = "[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newA\",\"type\":\"address\"}],\"name\":\"changeAsset\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"d\",\"type\":\"uint8\"}],\"name\":\"validDuration\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"asset\",\"outputs\":[{\"internalType\":\"contractBasAsset\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"openCustomedPrice\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"rName\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sName\",\"type\":\"bytes\"},{\"internalType\":\"uint8\",\"name\":\"durationInYear\",\"type\":\"uint8\"}],\"name\":\"evalueSubPrice\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isValid\",\"type\":\"bool\"},{\"internalType\":\"address\",\"name\":\"rootOwner\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"MAX_DAYS_REG\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"accountant\",\"outputs\":[{\"internalType\":\"contractBasMiner\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"MAX_YEAR_REG\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"CUSTOMED_PRICE_GAS\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ContractOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newT\",\"type\":\"address\"}],\"name\":\"changeToken\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"durationInYear\",\"type\":\"uint8\"}],\"name\":\"rechargeSub\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"isOpen\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cusPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"durationInYear\",\"type\":\"uint8\"}],\"name\":\"registerRoot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"AROOT_GAS\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint8\",\"name\":\"durationInYear\",\"type\":\"uint8\"}],\"name\":\"rechargeRoot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newGas\",\"type\":\"uint256\"}],\"name\":\"setARootGas\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newGas\",\"type\":\"uint256\"}],\"name\":\"setBRootGas\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferContractOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint8\",\"name\":\"durationInYear\",\"type\":\"uint8\"}],\"name\":\"evalueRootPrice\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isValid\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isARoot\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"rName\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sName\",\"type\":\"bytes\"},{\"internalType\":\"uint8\",\"name\":\"durationInYear\",\"type\":\"uint8\"}],\"name\":\"registerSub\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"SUB_GAS\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newM\",\"type\":\"address\"}],\"name\":\"changeAccountant\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"contractERC20\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"BROOT_GAS\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"t\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"m\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"a\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]"
+const BasOANNABI = "[{\"constant\":false,\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"len\",\"type\":\"uint8\"}],\"name\":\"setRareTypeLength\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"_a_changeAdmin\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"y\",\"type\":\"uint8\"}],\"name\":\"validDuration\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newGas\",\"type\":\"uint256\"}],\"name\":\"setCustomedPriceGas\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes4\",\"name\":\"ipv4\",\"type\":\"bytes4\"},{\"internalType\":\"bytes16\",\"name\":\"ipv6\",\"type\":\"bytes16\"},{\"internalType\":\"bytes\",\"name\":\"bca\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"opData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"aliasName\",\"type\":\"string\"}],\"name\":\"setRecord\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"openCustomedPrice\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"rName\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sName\",\"type\":\"bytes\"},{\"internalType\":\"uint8\",\"name\":\"durationInYear\",\"type\":\"uint8\"}],\"name\":\"evalueSubPrice\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"totalName\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"},{\"internalType\":\"bool\",\"name\":\"isValid\",\"type\":\"bool\"},{\"internalType\":\"address\",\"name\":\"rootOwner\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"exist\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"CUSTOMED_PRICE_GAS\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"contractCaller\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"year\",\"type\":\"uint256\"}],\"name\":\"setMaxYear\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"MAX_YEAR\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"isOpen\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cusPrice\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"durationInYear\",\"type\":\"uint8\"}],\"name\":\"registerRoot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"conAddr\",\"type\":\"address\"}],\"name\":\"_a_changeContract\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"AROOT_GAS\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newGas\",\"type\":\"uint256\"}],\"name\":\"setARootGas\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newGas\",\"type\":\"uint256\"}],\"name\":\"setBRootGas\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"checkAssociatedContractAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"BasToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"BasOwnership\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"BasAsset\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"BasDNS\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"BasMiner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"BasRule\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"RARE_TYPE_LENGTH\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"newGas\",\"type\":\"uint256\"}],\"name\":\"setSubGas\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"uint8\",\"name\":\"durationInYear\",\"type\":\"uint8\"}],\"name\":\"recharge\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"closeCustomedPrice\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"closeToPublic\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint8\",\"name\":\"durationInYear\",\"type\":\"uint8\"}],\"name\":\"evalueRootPrice\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bool\",\"name\":\"isValid\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"exist\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"openToPublic\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"rName\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"sName\",\"type\":\"bytes\"},{\"internalType\":\"uint8\",\"name\":\"durationInYear\",\"type\":\"uint8\"}],\"name\":\"registerSub\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"SUB_GAS\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"BROOT_GAS\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_t\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_o\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_a\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_d\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_m\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_r\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"payer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"option\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"Paid\",\"type\":\"event\"}]"
 
 // BasOANN is an auto generated Go binding around an Ethereum contract.
 type BasOANN struct {
@@ -250,82 +250,56 @@ func (_BasOANN *BasOANNCallerSession) CUSTOMEDPRICEGAS() (*big.Int, error) {
 	return _BasOANN.Contract.CUSTOMEDPRICEGAS(&_BasOANN.CallOpts)
 }
 
-// ContractOwner is a free data retrieval call binding the contract method 0x5a63fbc9.
+// MAXYEAR is a free data retrieval call binding the contract method 0x61c9511e.
 //
-// Solidity: function ContractOwner() constant returns(address)
-func (_BasOANN *BasOANNCaller) ContractOwner(opts *bind.CallOpts) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _BasOANN.contract.Call(opts, out, "ContractOwner")
-	return *ret0, err
-}
-
-// ContractOwner is a free data retrieval call binding the contract method 0x5a63fbc9.
-//
-// Solidity: function ContractOwner() constant returns(address)
-func (_BasOANN *BasOANNSession) ContractOwner() (common.Address, error) {
-	return _BasOANN.Contract.ContractOwner(&_BasOANN.CallOpts)
-}
-
-// ContractOwner is a free data retrieval call binding the contract method 0x5a63fbc9.
-//
-// Solidity: function ContractOwner() constant returns(address)
-func (_BasOANN *BasOANNCallerSession) ContractOwner() (common.Address, error) {
-	return _BasOANN.Contract.ContractOwner(&_BasOANN.CallOpts)
-}
-
-// MAXDAYSREG is a free data retrieval call binding the contract method 0x46a01a1a.
-//
-// Solidity: function MAX_DAYS_REG() constant returns(uint256)
-func (_BasOANN *BasOANNCaller) MAXDAYSREG(opts *bind.CallOpts) (*big.Int, error) {
+// Solidity: function MAX_YEAR() constant returns(uint256)
+func (_BasOANN *BasOANNCaller) MAXYEAR(opts *bind.CallOpts) (*big.Int, error) {
 	var (
 		ret0 = new(*big.Int)
 	)
 	out := ret0
-	err := _BasOANN.contract.Call(opts, out, "MAX_DAYS_REG")
+	err := _BasOANN.contract.Call(opts, out, "MAX_YEAR")
 	return *ret0, err
 }
 
-// MAXDAYSREG is a free data retrieval call binding the contract method 0x46a01a1a.
+// MAXYEAR is a free data retrieval call binding the contract method 0x61c9511e.
 //
-// Solidity: function MAX_DAYS_REG() constant returns(uint256)
-func (_BasOANN *BasOANNSession) MAXDAYSREG() (*big.Int, error) {
-	return _BasOANN.Contract.MAXDAYSREG(&_BasOANN.CallOpts)
+// Solidity: function MAX_YEAR() constant returns(uint256)
+func (_BasOANN *BasOANNSession) MAXYEAR() (*big.Int, error) {
+	return _BasOANN.Contract.MAXYEAR(&_BasOANN.CallOpts)
 }
 
-// MAXDAYSREG is a free data retrieval call binding the contract method 0x46a01a1a.
+// MAXYEAR is a free data retrieval call binding the contract method 0x61c9511e.
 //
-// Solidity: function MAX_DAYS_REG() constant returns(uint256)
-func (_BasOANN *BasOANNCallerSession) MAXDAYSREG() (*big.Int, error) {
-	return _BasOANN.Contract.MAXDAYSREG(&_BasOANN.CallOpts)
+// Solidity: function MAX_YEAR() constant returns(uint256)
+func (_BasOANN *BasOANNCallerSession) MAXYEAR() (*big.Int, error) {
+	return _BasOANN.Contract.MAXYEAR(&_BasOANN.CallOpts)
 }
 
-// MAXYEARREG is a free data retrieval call binding the contract method 0x5286fed7.
+// RARETYPELENGTH is a free data retrieval call binding the contract method 0xa59ea829.
 //
-// Solidity: function MAX_YEAR_REG() constant returns(uint256)
-func (_BasOANN *BasOANNCaller) MAXYEARREG(opts *bind.CallOpts) (*big.Int, error) {
+// Solidity: function RARE_TYPE_LENGTH() constant returns(uint256)
+func (_BasOANN *BasOANNCaller) RARETYPELENGTH(opts *bind.CallOpts) (*big.Int, error) {
 	var (
 		ret0 = new(*big.Int)
 	)
 	out := ret0
-	err := _BasOANN.contract.Call(opts, out, "MAX_YEAR_REG")
+	err := _BasOANN.contract.Call(opts, out, "RARE_TYPE_LENGTH")
 	return *ret0, err
 }
 
-// MAXYEARREG is a free data retrieval call binding the contract method 0x5286fed7.
+// RARETYPELENGTH is a free data retrieval call binding the contract method 0xa59ea829.
 //
-// Solidity: function MAX_YEAR_REG() constant returns(uint256)
-func (_BasOANN *BasOANNSession) MAXYEARREG() (*big.Int, error) {
-	return _BasOANN.Contract.MAXYEARREG(&_BasOANN.CallOpts)
+// Solidity: function RARE_TYPE_LENGTH() constant returns(uint256)
+func (_BasOANN *BasOANNSession) RARETYPELENGTH() (*big.Int, error) {
+	return _BasOANN.Contract.RARETYPELENGTH(&_BasOANN.CallOpts)
 }
 
-// MAXYEARREG is a free data retrieval call binding the contract method 0x5286fed7.
+// RARETYPELENGTH is a free data retrieval call binding the contract method 0xa59ea829.
 //
-// Solidity: function MAX_YEAR_REG() constant returns(uint256)
-func (_BasOANN *BasOANNCallerSession) MAXYEARREG() (*big.Int, error) {
-	return _BasOANN.Contract.MAXYEARREG(&_BasOANN.CallOpts)
+// Solidity: function RARE_TYPE_LENGTH() constant returns(uint256)
+func (_BasOANN *BasOANNCallerSession) RARETYPELENGTH() (*big.Int, error) {
+	return _BasOANN.Contract.RARETYPELENGTH(&_BasOANN.CallOpts)
 }
 
 // SUBGAS is a free data retrieval call binding the contract method 0xfa1826bb.
@@ -354,70 +328,124 @@ func (_BasOANN *BasOANNCallerSession) SUBGAS() (*big.Int, error) {
 	return _BasOANN.Contract.SUBGAS(&_BasOANN.CallOpts)
 }
 
-// Accountant is a free data retrieval call binding the contract method 0x4fb3ccc5.
+// Admin is a free data retrieval call binding the contract method 0xf851a440.
 //
-// Solidity: function accountant() constant returns(address)
-func (_BasOANN *BasOANNCaller) Accountant(opts *bind.CallOpts) (common.Address, error) {
+// Solidity: function admin() constant returns(address)
+func (_BasOANN *BasOANNCaller) Admin(opts *bind.CallOpts) (common.Address, error) {
 	var (
 		ret0 = new(common.Address)
 	)
 	out := ret0
-	err := _BasOANN.contract.Call(opts, out, "accountant")
+	err := _BasOANN.contract.Call(opts, out, "admin")
 	return *ret0, err
 }
 
-// Accountant is a free data retrieval call binding the contract method 0x4fb3ccc5.
+// Admin is a free data retrieval call binding the contract method 0xf851a440.
 //
-// Solidity: function accountant() constant returns(address)
-func (_BasOANN *BasOANNSession) Accountant() (common.Address, error) {
-	return _BasOANN.Contract.Accountant(&_BasOANN.CallOpts)
+// Solidity: function admin() constant returns(address)
+func (_BasOANN *BasOANNSession) Admin() (common.Address, error) {
+	return _BasOANN.Contract.Admin(&_BasOANN.CallOpts)
 }
 
-// Accountant is a free data retrieval call binding the contract method 0x4fb3ccc5.
+// Admin is a free data retrieval call binding the contract method 0xf851a440.
 //
-// Solidity: function accountant() constant returns(address)
-func (_BasOANN *BasOANNCallerSession) Accountant() (common.Address, error) {
-	return _BasOANN.Contract.Accountant(&_BasOANN.CallOpts)
+// Solidity: function admin() constant returns(address)
+func (_BasOANN *BasOANNCallerSession) Admin() (common.Address, error) {
+	return _BasOANN.Contract.Admin(&_BasOANN.CallOpts)
 }
 
-// Asset is a free data retrieval call binding the contract method 0x38d52e0f.
+// CheckAssociatedContractAddress is a free data retrieval call binding the contract method 0xa3e0c839.
 //
-// Solidity: function asset() constant returns(address)
-func (_BasOANN *BasOANNCaller) Asset(opts *bind.CallOpts) (common.Address, error) {
+// Solidity: function checkAssociatedContractAddress() constant returns(address BasToken, address BasOwnership, address BasAsset, address BasDNS, address BasMiner, address BasRule)
+func (_BasOANN *BasOANNCaller) CheckAssociatedContractAddress(opts *bind.CallOpts) (struct {
+	BasToken     common.Address
+	BasOwnership common.Address
+	BasAsset     common.Address
+	BasDNS       common.Address
+	BasMiner     common.Address
+	BasRule      common.Address
+}, error) {
+	ret := new(struct {
+		BasToken     common.Address
+		BasOwnership common.Address
+		BasAsset     common.Address
+		BasDNS       common.Address
+		BasMiner     common.Address
+		BasRule      common.Address
+	})
+	out := ret
+	err := _BasOANN.contract.Call(opts, out, "checkAssociatedContractAddress")
+	return *ret, err
+}
+
+// CheckAssociatedContractAddress is a free data retrieval call binding the contract method 0xa3e0c839.
+//
+// Solidity: function checkAssociatedContractAddress() constant returns(address BasToken, address BasOwnership, address BasAsset, address BasDNS, address BasMiner, address BasRule)
+func (_BasOANN *BasOANNSession) CheckAssociatedContractAddress() (struct {
+	BasToken     common.Address
+	BasOwnership common.Address
+	BasAsset     common.Address
+	BasDNS       common.Address
+	BasMiner     common.Address
+	BasRule      common.Address
+}, error) {
+	return _BasOANN.Contract.CheckAssociatedContractAddress(&_BasOANN.CallOpts)
+}
+
+// CheckAssociatedContractAddress is a free data retrieval call binding the contract method 0xa3e0c839.
+//
+// Solidity: function checkAssociatedContractAddress() constant returns(address BasToken, address BasOwnership, address BasAsset, address BasDNS, address BasMiner, address BasRule)
+func (_BasOANN *BasOANNCallerSession) CheckAssociatedContractAddress() (struct {
+	BasToken     common.Address
+	BasOwnership common.Address
+	BasAsset     common.Address
+	BasDNS       common.Address
+	BasMiner     common.Address
+	BasRule      common.Address
+}, error) {
+	return _BasOANN.Contract.CheckAssociatedContractAddress(&_BasOANN.CallOpts)
+}
+
+// ContractCaller is a free data retrieval call binding the contract method 0x54cf428a.
+//
+// Solidity: function contractCaller() constant returns(address)
+func (_BasOANN *BasOANNCaller) ContractCaller(opts *bind.CallOpts) (common.Address, error) {
 	var (
 		ret0 = new(common.Address)
 	)
 	out := ret0
-	err := _BasOANN.contract.Call(opts, out, "asset")
+	err := _BasOANN.contract.Call(opts, out, "contractCaller")
 	return *ret0, err
 }
 
-// Asset is a free data retrieval call binding the contract method 0x38d52e0f.
+// ContractCaller is a free data retrieval call binding the contract method 0x54cf428a.
 //
-// Solidity: function asset() constant returns(address)
-func (_BasOANN *BasOANNSession) Asset() (common.Address, error) {
-	return _BasOANN.Contract.Asset(&_BasOANN.CallOpts)
+// Solidity: function contractCaller() constant returns(address)
+func (_BasOANN *BasOANNSession) ContractCaller() (common.Address, error) {
+	return _BasOANN.Contract.ContractCaller(&_BasOANN.CallOpts)
 }
 
-// Asset is a free data retrieval call binding the contract method 0x38d52e0f.
+// ContractCaller is a free data retrieval call binding the contract method 0x54cf428a.
 //
-// Solidity: function asset() constant returns(address)
-func (_BasOANN *BasOANNCallerSession) Asset() (common.Address, error) {
-	return _BasOANN.Contract.Asset(&_BasOANN.CallOpts)
+// Solidity: function contractCaller() constant returns(address)
+func (_BasOANN *BasOANNCallerSession) ContractCaller() (common.Address, error) {
+	return _BasOANN.Contract.ContractCaller(&_BasOANN.CallOpts)
 }
 
 // EvalueRootPrice is a free data retrieval call binding the contract method 0xe4ede0c5.
 //
-// Solidity: function evalueRootPrice(bytes name, bool isCustomed, uint8 durationInYear) constant returns(bool isValid, bool isARoot, uint256 cost)
+// Solidity: function evalueRootPrice(bytes name, bool isCustomed, uint8 durationInYear) constant returns(bytes32 nameHash, bool isValid, uint256 cost, bool exist)
 func (_BasOANN *BasOANNCaller) EvalueRootPrice(opts *bind.CallOpts, name []byte, isCustomed bool, durationInYear uint8) (struct {
-	IsValid bool
-	IsARoot bool
-	Cost    *big.Int
+	NameHash [32]byte
+	IsValid  bool
+	Cost     *big.Int
+	Exist    bool
 }, error) {
 	ret := new(struct {
-		IsValid bool
-		IsARoot bool
-		Cost    *big.Int
+		NameHash [32]byte
+		IsValid  bool
+		Cost     *big.Int
+		Exist    bool
 	})
 	out := ret
 	err := _BasOANN.contract.Call(opts, out, "evalueRootPrice", name, isCustomed, durationInYear)
@@ -426,40 +454,50 @@ func (_BasOANN *BasOANNCaller) EvalueRootPrice(opts *bind.CallOpts, name []byte,
 
 // EvalueRootPrice is a free data retrieval call binding the contract method 0xe4ede0c5.
 //
-// Solidity: function evalueRootPrice(bytes name, bool isCustomed, uint8 durationInYear) constant returns(bool isValid, bool isARoot, uint256 cost)
+// Solidity: function evalueRootPrice(bytes name, bool isCustomed, uint8 durationInYear) constant returns(bytes32 nameHash, bool isValid, uint256 cost, bool exist)
 func (_BasOANN *BasOANNSession) EvalueRootPrice(name []byte, isCustomed bool, durationInYear uint8) (struct {
-	IsValid bool
-	IsARoot bool
-	Cost    *big.Int
+	NameHash [32]byte
+	IsValid  bool
+	Cost     *big.Int
+	Exist    bool
 }, error) {
 	return _BasOANN.Contract.EvalueRootPrice(&_BasOANN.CallOpts, name, isCustomed, durationInYear)
 }
 
 // EvalueRootPrice is a free data retrieval call binding the contract method 0xe4ede0c5.
 //
-// Solidity: function evalueRootPrice(bytes name, bool isCustomed, uint8 durationInYear) constant returns(bool isValid, bool isARoot, uint256 cost)
+// Solidity: function evalueRootPrice(bytes name, bool isCustomed, uint8 durationInYear) constant returns(bytes32 nameHash, bool isValid, uint256 cost, bool exist)
 func (_BasOANN *BasOANNCallerSession) EvalueRootPrice(name []byte, isCustomed bool, durationInYear uint8) (struct {
-	IsValid bool
-	IsARoot bool
-	Cost    *big.Int
+	NameHash [32]byte
+	IsValid  bool
+	Cost     *big.Int
+	Exist    bool
 }, error) {
 	return _BasOANN.Contract.EvalueRootPrice(&_BasOANN.CallOpts, name, isCustomed, durationInYear)
 }
 
 // EvalueSubPrice is a free data retrieval call binding the contract method 0x413e637d.
 //
-// Solidity: function evalueSubPrice(bytes rName, bytes sName, uint8 durationInYear) constant returns(bool isValid, address rootOwner, bool isCustomed, uint256 cost)
+// Solidity: function evalueSubPrice(bytes rName, bytes sName, uint8 durationInYear) constant returns(bytes32 nameHash, bytes totalName, bytes32 rootHash, bool isValid, address rootOwner, bool isCustomed, uint256 cost, bool exist)
 func (_BasOANN *BasOANNCaller) EvalueSubPrice(opts *bind.CallOpts, rName []byte, sName []byte, durationInYear uint8) (struct {
+	NameHash   [32]byte
+	TotalName  []byte
+	RootHash   [32]byte
 	IsValid    bool
 	RootOwner  common.Address
 	IsCustomed bool
 	Cost       *big.Int
+	Exist      bool
 }, error) {
 	ret := new(struct {
+		NameHash   [32]byte
+		TotalName  []byte
+		RootHash   [32]byte
 		IsValid    bool
 		RootOwner  common.Address
 		IsCustomed bool
 		Cost       *big.Int
+		Exist      bool
 	})
 	out := ret
 	err := _BasOANN.contract.Call(opts, out, "evalueSubPrice", rName, sName, durationInYear)
@@ -468,204 +506,207 @@ func (_BasOANN *BasOANNCaller) EvalueSubPrice(opts *bind.CallOpts, rName []byte,
 
 // EvalueSubPrice is a free data retrieval call binding the contract method 0x413e637d.
 //
-// Solidity: function evalueSubPrice(bytes rName, bytes sName, uint8 durationInYear) constant returns(bool isValid, address rootOwner, bool isCustomed, uint256 cost)
+// Solidity: function evalueSubPrice(bytes rName, bytes sName, uint8 durationInYear) constant returns(bytes32 nameHash, bytes totalName, bytes32 rootHash, bool isValid, address rootOwner, bool isCustomed, uint256 cost, bool exist)
 func (_BasOANN *BasOANNSession) EvalueSubPrice(rName []byte, sName []byte, durationInYear uint8) (struct {
+	NameHash   [32]byte
+	TotalName  []byte
+	RootHash   [32]byte
 	IsValid    bool
 	RootOwner  common.Address
 	IsCustomed bool
 	Cost       *big.Int
+	Exist      bool
 }, error) {
 	return _BasOANN.Contract.EvalueSubPrice(&_BasOANN.CallOpts, rName, sName, durationInYear)
 }
 
 // EvalueSubPrice is a free data retrieval call binding the contract method 0x413e637d.
 //
-// Solidity: function evalueSubPrice(bytes rName, bytes sName, uint8 durationInYear) constant returns(bool isValid, address rootOwner, bool isCustomed, uint256 cost)
+// Solidity: function evalueSubPrice(bytes rName, bytes sName, uint8 durationInYear) constant returns(bytes32 nameHash, bytes totalName, bytes32 rootHash, bool isValid, address rootOwner, bool isCustomed, uint256 cost, bool exist)
 func (_BasOANN *BasOANNCallerSession) EvalueSubPrice(rName []byte, sName []byte, durationInYear uint8) (struct {
+	NameHash   [32]byte
+	TotalName  []byte
+	RootHash   [32]byte
 	IsValid    bool
 	RootOwner  common.Address
 	IsCustomed bool
 	Cost       *big.Int
+	Exist      bool
 }, error) {
 	return _BasOANN.Contract.EvalueSubPrice(&_BasOANN.CallOpts, rName, sName, durationInYear)
 }
 
-// Token is a free data retrieval call binding the contract method 0xfc0c546a.
-//
-// Solidity: function token() constant returns(address)
-func (_BasOANN *BasOANNCaller) Token(opts *bind.CallOpts) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _BasOANN.contract.Call(opts, out, "token")
-	return *ret0, err
-}
-
-// Token is a free data retrieval call binding the contract method 0xfc0c546a.
-//
-// Solidity: function token() constant returns(address)
-func (_BasOANN *BasOANNSession) Token() (common.Address, error) {
-	return _BasOANN.Contract.Token(&_BasOANN.CallOpts)
-}
-
-// Token is a free data retrieval call binding the contract method 0xfc0c546a.
-//
-// Solidity: function token() constant returns(address)
-func (_BasOANN *BasOANNCallerSession) Token() (common.Address, error) {
-	return _BasOANN.Contract.Token(&_BasOANN.CallOpts)
-}
-
 // ValidDuration is a free data retrieval call binding the contract method 0x2b1e49e4.
 //
-// Solidity: function validDuration(uint8 d) constant returns(bool)
-func (_BasOANN *BasOANNCaller) ValidDuration(opts *bind.CallOpts, d uint8) (bool, error) {
+// Solidity: function validDuration(uint8 y) constant returns(bool)
+func (_BasOANN *BasOANNCaller) ValidDuration(opts *bind.CallOpts, y uint8) (bool, error) {
 	var (
 		ret0 = new(bool)
 	)
 	out := ret0
-	err := _BasOANN.contract.Call(opts, out, "validDuration", d)
+	err := _BasOANN.contract.Call(opts, out, "validDuration", y)
 	return *ret0, err
 }
 
 // ValidDuration is a free data retrieval call binding the contract method 0x2b1e49e4.
 //
-// Solidity: function validDuration(uint8 d) constant returns(bool)
-func (_BasOANN *BasOANNSession) ValidDuration(d uint8) (bool, error) {
-	return _BasOANN.Contract.ValidDuration(&_BasOANN.CallOpts, d)
+// Solidity: function validDuration(uint8 y) constant returns(bool)
+func (_BasOANN *BasOANNSession) ValidDuration(y uint8) (bool, error) {
+	return _BasOANN.Contract.ValidDuration(&_BasOANN.CallOpts, y)
 }
 
 // ValidDuration is a free data retrieval call binding the contract method 0x2b1e49e4.
 //
-// Solidity: function validDuration(uint8 d) constant returns(bool)
-func (_BasOANN *BasOANNCallerSession) ValidDuration(d uint8) (bool, error) {
-	return _BasOANN.Contract.ValidDuration(&_BasOANN.CallOpts, d)
+// Solidity: function validDuration(uint8 y) constant returns(bool)
+func (_BasOANN *BasOANNCallerSession) ValidDuration(y uint8) (bool, error) {
+	return _BasOANN.Contract.ValidDuration(&_BasOANN.CallOpts, y)
 }
 
-// ChangeAccountant is a paid mutator transaction binding the contract method 0xfad68b30.
+// AChangeAdmin is a paid mutator transaction binding the contract method 0x1062f6cc.
 //
-// Solidity: function changeAccountant(address newM) returns()
-func (_BasOANN *BasOANNTransactor) ChangeAccountant(opts *bind.TransactOpts, newM common.Address) (*types.Transaction, error) {
-	return _BasOANN.contract.Transact(opts, "changeAccountant", newM)
+// Solidity: function _a_changeAdmin(address newOwner) returns()
+func (_BasOANN *BasOANNTransactor) AChangeAdmin(opts *bind.TransactOpts, newOwner common.Address) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "_a_changeAdmin", newOwner)
 }
 
-// ChangeAccountant is a paid mutator transaction binding the contract method 0xfad68b30.
+// AChangeAdmin is a paid mutator transaction binding the contract method 0x1062f6cc.
 //
-// Solidity: function changeAccountant(address newM) returns()
-func (_BasOANN *BasOANNSession) ChangeAccountant(newM common.Address) (*types.Transaction, error) {
-	return _BasOANN.Contract.ChangeAccountant(&_BasOANN.TransactOpts, newM)
+// Solidity: function _a_changeAdmin(address newOwner) returns()
+func (_BasOANN *BasOANNSession) AChangeAdmin(newOwner common.Address) (*types.Transaction, error) {
+	return _BasOANN.Contract.AChangeAdmin(&_BasOANN.TransactOpts, newOwner)
 }
 
-// ChangeAccountant is a paid mutator transaction binding the contract method 0xfad68b30.
+// AChangeAdmin is a paid mutator transaction binding the contract method 0x1062f6cc.
 //
-// Solidity: function changeAccountant(address newM) returns()
-func (_BasOANN *BasOANNTransactorSession) ChangeAccountant(newM common.Address) (*types.Transaction, error) {
-	return _BasOANN.Contract.ChangeAccountant(&_BasOANN.TransactOpts, newM)
+// Solidity: function _a_changeAdmin(address newOwner) returns()
+func (_BasOANN *BasOANNTransactorSession) AChangeAdmin(newOwner common.Address) (*types.Transaction, error) {
+	return _BasOANN.Contract.AChangeAdmin(&_BasOANN.TransactOpts, newOwner)
 }
 
-// ChangeAsset is a paid mutator transaction binding the contract method 0x10bbb707.
+// AChangeContract is a paid mutator transaction binding the contract method 0x733c1950.
 //
-// Solidity: function changeAsset(address newA) returns()
-func (_BasOANN *BasOANNTransactor) ChangeAsset(opts *bind.TransactOpts, newA common.Address) (*types.Transaction, error) {
-	return _BasOANN.contract.Transact(opts, "changeAsset", newA)
+// Solidity: function _a_changeContract(address conAddr) returns()
+func (_BasOANN *BasOANNTransactor) AChangeContract(opts *bind.TransactOpts, conAddr common.Address) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "_a_changeContract", conAddr)
 }
 
-// ChangeAsset is a paid mutator transaction binding the contract method 0x10bbb707.
+// AChangeContract is a paid mutator transaction binding the contract method 0x733c1950.
 //
-// Solidity: function changeAsset(address newA) returns()
-func (_BasOANN *BasOANNSession) ChangeAsset(newA common.Address) (*types.Transaction, error) {
-	return _BasOANN.Contract.ChangeAsset(&_BasOANN.TransactOpts, newA)
+// Solidity: function _a_changeContract(address conAddr) returns()
+func (_BasOANN *BasOANNSession) AChangeContract(conAddr common.Address) (*types.Transaction, error) {
+	return _BasOANN.Contract.AChangeContract(&_BasOANN.TransactOpts, conAddr)
 }
 
-// ChangeAsset is a paid mutator transaction binding the contract method 0x10bbb707.
+// AChangeContract is a paid mutator transaction binding the contract method 0x733c1950.
 //
-// Solidity: function changeAsset(address newA) returns()
-func (_BasOANN *BasOANNTransactorSession) ChangeAsset(newA common.Address) (*types.Transaction, error) {
-	return _BasOANN.Contract.ChangeAsset(&_BasOANN.TransactOpts, newA)
+// Solidity: function _a_changeContract(address conAddr) returns()
+func (_BasOANN *BasOANNTransactorSession) AChangeContract(conAddr common.Address) (*types.Transaction, error) {
+	return _BasOANN.Contract.AChangeContract(&_BasOANN.TransactOpts, conAddr)
 }
 
-// ChangeToken is a paid mutator transaction binding the contract method 0x66829b16.
+// CloseCustomedPrice is a paid mutator transaction binding the contract method 0xc0bd516d.
 //
-// Solidity: function changeToken(address newT) returns()
-func (_BasOANN *BasOANNTransactor) ChangeToken(opts *bind.TransactOpts, newT common.Address) (*types.Transaction, error) {
-	return _BasOANN.contract.Transact(opts, "changeToken", newT)
+// Solidity: function closeCustomedPrice(bytes32 nameHash) returns()
+func (_BasOANN *BasOANNTransactor) CloseCustomedPrice(opts *bind.TransactOpts, nameHash [32]byte) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "closeCustomedPrice", nameHash)
 }
 
-// ChangeToken is a paid mutator transaction binding the contract method 0x66829b16.
+// CloseCustomedPrice is a paid mutator transaction binding the contract method 0xc0bd516d.
 //
-// Solidity: function changeToken(address newT) returns()
-func (_BasOANN *BasOANNSession) ChangeToken(newT common.Address) (*types.Transaction, error) {
-	return _BasOANN.Contract.ChangeToken(&_BasOANN.TransactOpts, newT)
+// Solidity: function closeCustomedPrice(bytes32 nameHash) returns()
+func (_BasOANN *BasOANNSession) CloseCustomedPrice(nameHash [32]byte) (*types.Transaction, error) {
+	return _BasOANN.Contract.CloseCustomedPrice(&_BasOANN.TransactOpts, nameHash)
 }
 
-// ChangeToken is a paid mutator transaction binding the contract method 0x66829b16.
+// CloseCustomedPrice is a paid mutator transaction binding the contract method 0xc0bd516d.
 //
-// Solidity: function changeToken(address newT) returns()
-func (_BasOANN *BasOANNTransactorSession) ChangeToken(newT common.Address) (*types.Transaction, error) {
-	return _BasOANN.Contract.ChangeToken(&_BasOANN.TransactOpts, newT)
+// Solidity: function closeCustomedPrice(bytes32 nameHash) returns()
+func (_BasOANN *BasOANNTransactorSession) CloseCustomedPrice(nameHash [32]byte) (*types.Transaction, error) {
+	return _BasOANN.Contract.CloseCustomedPrice(&_BasOANN.TransactOpts, nameHash)
+}
+
+// CloseToPublic is a paid mutator transaction binding the contract method 0xd0f0b43d.
+//
+// Solidity: function closeToPublic(bytes32 nameHash) returns()
+func (_BasOANN *BasOANNTransactor) CloseToPublic(opts *bind.TransactOpts, nameHash [32]byte) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "closeToPublic", nameHash)
+}
+
+// CloseToPublic is a paid mutator transaction binding the contract method 0xd0f0b43d.
+//
+// Solidity: function closeToPublic(bytes32 nameHash) returns()
+func (_BasOANN *BasOANNSession) CloseToPublic(nameHash [32]byte) (*types.Transaction, error) {
+	return _BasOANN.Contract.CloseToPublic(&_BasOANN.TransactOpts, nameHash)
+}
+
+// CloseToPublic is a paid mutator transaction binding the contract method 0xd0f0b43d.
+//
+// Solidity: function closeToPublic(bytes32 nameHash) returns()
+func (_BasOANN *BasOANNTransactorSession) CloseToPublic(nameHash [32]byte) (*types.Transaction, error) {
+	return _BasOANN.Contract.CloseToPublic(&_BasOANN.TransactOpts, nameHash)
 }
 
 // OpenCustomedPrice is a paid mutator transaction binding the contract method 0x3d04f2fb.
 //
-// Solidity: function openCustomedPrice(bytes32 rootHash, uint256 price) returns()
-func (_BasOANN *BasOANNTransactor) OpenCustomedPrice(opts *bind.TransactOpts, rootHash [32]byte, price *big.Int) (*types.Transaction, error) {
-	return _BasOANN.contract.Transact(opts, "openCustomedPrice", rootHash, price)
+// Solidity: function openCustomedPrice(bytes32 nameHash, uint256 price) returns()
+func (_BasOANN *BasOANNTransactor) OpenCustomedPrice(opts *bind.TransactOpts, nameHash [32]byte, price *big.Int) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "openCustomedPrice", nameHash, price)
 }
 
 // OpenCustomedPrice is a paid mutator transaction binding the contract method 0x3d04f2fb.
 //
-// Solidity: function openCustomedPrice(bytes32 rootHash, uint256 price) returns()
-func (_BasOANN *BasOANNSession) OpenCustomedPrice(rootHash [32]byte, price *big.Int) (*types.Transaction, error) {
-	return _BasOANN.Contract.OpenCustomedPrice(&_BasOANN.TransactOpts, rootHash, price)
+// Solidity: function openCustomedPrice(bytes32 nameHash, uint256 price) returns()
+func (_BasOANN *BasOANNSession) OpenCustomedPrice(nameHash [32]byte, price *big.Int) (*types.Transaction, error) {
+	return _BasOANN.Contract.OpenCustomedPrice(&_BasOANN.TransactOpts, nameHash, price)
 }
 
 // OpenCustomedPrice is a paid mutator transaction binding the contract method 0x3d04f2fb.
 //
-// Solidity: function openCustomedPrice(bytes32 rootHash, uint256 price) returns()
-func (_BasOANN *BasOANNTransactorSession) OpenCustomedPrice(rootHash [32]byte, price *big.Int) (*types.Transaction, error) {
-	return _BasOANN.Contract.OpenCustomedPrice(&_BasOANN.TransactOpts, rootHash, price)
+// Solidity: function openCustomedPrice(bytes32 nameHash, uint256 price) returns()
+func (_BasOANN *BasOANNTransactorSession) OpenCustomedPrice(nameHash [32]byte, price *big.Int) (*types.Transaction, error) {
+	return _BasOANN.Contract.OpenCustomedPrice(&_BasOANN.TransactOpts, nameHash, price)
 }
 
-// RechargeRoot is a paid mutator transaction binding the contract method 0x79607e1f.
+// OpenToPublic is a paid mutator transaction binding the contract method 0xed26e5ae.
 //
-// Solidity: function rechargeRoot(bytes32 nameHash, uint8 durationInYear) returns()
-func (_BasOANN *BasOANNTransactor) RechargeRoot(opts *bind.TransactOpts, nameHash [32]byte, durationInYear uint8) (*types.Transaction, error) {
-	return _BasOANN.contract.Transact(opts, "rechargeRoot", nameHash, durationInYear)
+// Solidity: function openToPublic(bytes32 nameHash) returns()
+func (_BasOANN *BasOANNTransactor) OpenToPublic(opts *bind.TransactOpts, nameHash [32]byte) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "openToPublic", nameHash)
 }
 
-// RechargeRoot is a paid mutator transaction binding the contract method 0x79607e1f.
+// OpenToPublic is a paid mutator transaction binding the contract method 0xed26e5ae.
 //
-// Solidity: function rechargeRoot(bytes32 nameHash, uint8 durationInYear) returns()
-func (_BasOANN *BasOANNSession) RechargeRoot(nameHash [32]byte, durationInYear uint8) (*types.Transaction, error) {
-	return _BasOANN.Contract.RechargeRoot(&_BasOANN.TransactOpts, nameHash, durationInYear)
+// Solidity: function openToPublic(bytes32 nameHash) returns()
+func (_BasOANN *BasOANNSession) OpenToPublic(nameHash [32]byte) (*types.Transaction, error) {
+	return _BasOANN.Contract.OpenToPublic(&_BasOANN.TransactOpts, nameHash)
 }
 
-// RechargeRoot is a paid mutator transaction binding the contract method 0x79607e1f.
+// OpenToPublic is a paid mutator transaction binding the contract method 0xed26e5ae.
 //
-// Solidity: function rechargeRoot(bytes32 nameHash, uint8 durationInYear) returns()
-func (_BasOANN *BasOANNTransactorSession) RechargeRoot(nameHash [32]byte, durationInYear uint8) (*types.Transaction, error) {
-	return _BasOANN.Contract.RechargeRoot(&_BasOANN.TransactOpts, nameHash, durationInYear)
+// Solidity: function openToPublic(bytes32 nameHash) returns()
+func (_BasOANN *BasOANNTransactorSession) OpenToPublic(nameHash [32]byte) (*types.Transaction, error) {
+	return _BasOANN.Contract.OpenToPublic(&_BasOANN.TransactOpts, nameHash)
 }
 
-// RechargeSub is a paid mutator transaction binding the contract method 0x6f6c774a.
+// Recharge is a paid mutator transaction binding the contract method 0xb84f5f20.
 //
-// Solidity: function rechargeSub(bytes32 nameHash, uint8 durationInYear) returns()
-func (_BasOANN *BasOANNTransactor) RechargeSub(opts *bind.TransactOpts, nameHash [32]byte, durationInYear uint8) (*types.Transaction, error) {
-	return _BasOANN.contract.Transact(opts, "rechargeSub", nameHash, durationInYear)
+// Solidity: function recharge(bytes name, uint8 durationInYear) returns()
+func (_BasOANN *BasOANNTransactor) Recharge(opts *bind.TransactOpts, name []byte, durationInYear uint8) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "recharge", name, durationInYear)
 }
 
-// RechargeSub is a paid mutator transaction binding the contract method 0x6f6c774a.
+// Recharge is a paid mutator transaction binding the contract method 0xb84f5f20.
 //
-// Solidity: function rechargeSub(bytes32 nameHash, uint8 durationInYear) returns()
-func (_BasOANN *BasOANNSession) RechargeSub(nameHash [32]byte, durationInYear uint8) (*types.Transaction, error) {
-	return _BasOANN.Contract.RechargeSub(&_BasOANN.TransactOpts, nameHash, durationInYear)
+// Solidity: function recharge(bytes name, uint8 durationInYear) returns()
+func (_BasOANN *BasOANNSession) Recharge(name []byte, durationInYear uint8) (*types.Transaction, error) {
+	return _BasOANN.Contract.Recharge(&_BasOANN.TransactOpts, name, durationInYear)
 }
 
-// RechargeSub is a paid mutator transaction binding the contract method 0x6f6c774a.
+// Recharge is a paid mutator transaction binding the contract method 0xb84f5f20.
 //
-// Solidity: function rechargeSub(bytes32 nameHash, uint8 durationInYear) returns()
-func (_BasOANN *BasOANNTransactorSession) RechargeSub(nameHash [32]byte, durationInYear uint8) (*types.Transaction, error) {
-	return _BasOANN.Contract.RechargeSub(&_BasOANN.TransactOpts, nameHash, durationInYear)
+// Solidity: function recharge(bytes name, uint8 durationInYear) returns()
+func (_BasOANN *BasOANNTransactorSession) Recharge(name []byte, durationInYear uint8) (*types.Transaction, error) {
+	return _BasOANN.Contract.Recharge(&_BasOANN.TransactOpts, name, durationInYear)
 }
 
 // RegisterRoot is a paid mutator transaction binding the contract method 0x70a1495c.
@@ -752,23 +793,243 @@ func (_BasOANN *BasOANNTransactorSession) SetBRootGas(newGas *big.Int) (*types.T
 	return _BasOANN.Contract.SetBRootGas(&_BasOANN.TransactOpts, newGas)
 }
 
-// TransferContractOwnership is a paid mutator transaction binding the contract method 0xa843c51f.
+// SetCustomedPriceGas is a paid mutator transaction binding the contract method 0x30ffb316.
 //
-// Solidity: function transferContractOwnership(address newOwner) returns()
-func (_BasOANN *BasOANNTransactor) TransferContractOwnership(opts *bind.TransactOpts, newOwner common.Address) (*types.Transaction, error) {
-	return _BasOANN.contract.Transact(opts, "transferContractOwnership", newOwner)
+// Solidity: function setCustomedPriceGas(uint256 newGas) returns()
+func (_BasOANN *BasOANNTransactor) SetCustomedPriceGas(opts *bind.TransactOpts, newGas *big.Int) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "setCustomedPriceGas", newGas)
 }
 
-// TransferContractOwnership is a paid mutator transaction binding the contract method 0xa843c51f.
+// SetCustomedPriceGas is a paid mutator transaction binding the contract method 0x30ffb316.
 //
-// Solidity: function transferContractOwnership(address newOwner) returns()
-func (_BasOANN *BasOANNSession) TransferContractOwnership(newOwner common.Address) (*types.Transaction, error) {
-	return _BasOANN.Contract.TransferContractOwnership(&_BasOANN.TransactOpts, newOwner)
+// Solidity: function setCustomedPriceGas(uint256 newGas) returns()
+func (_BasOANN *BasOANNSession) SetCustomedPriceGas(newGas *big.Int) (*types.Transaction, error) {
+	return _BasOANN.Contract.SetCustomedPriceGas(&_BasOANN.TransactOpts, newGas)
 }
 
-// TransferContractOwnership is a paid mutator transaction binding the contract method 0xa843c51f.
+// SetCustomedPriceGas is a paid mutator transaction binding the contract method 0x30ffb316.
 //
-// Solidity: function transferContractOwnership(address newOwner) returns()
-func (_BasOANN *BasOANNTransactorSession) TransferContractOwnership(newOwner common.Address) (*types.Transaction, error) {
-	return _BasOANN.Contract.TransferContractOwnership(&_BasOANN.TransactOpts, newOwner)
+// Solidity: function setCustomedPriceGas(uint256 newGas) returns()
+func (_BasOANN *BasOANNTransactorSession) SetCustomedPriceGas(newGas *big.Int) (*types.Transaction, error) {
+	return _BasOANN.Contract.SetCustomedPriceGas(&_BasOANN.TransactOpts, newGas)
+}
+
+// SetMaxYear is a paid mutator transaction binding the contract method 0x6000e099.
+//
+// Solidity: function setMaxYear(uint256 year) returns()
+func (_BasOANN *BasOANNTransactor) SetMaxYear(opts *bind.TransactOpts, year *big.Int) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "setMaxYear", year)
+}
+
+// SetMaxYear is a paid mutator transaction binding the contract method 0x6000e099.
+//
+// Solidity: function setMaxYear(uint256 year) returns()
+func (_BasOANN *BasOANNSession) SetMaxYear(year *big.Int) (*types.Transaction, error) {
+	return _BasOANN.Contract.SetMaxYear(&_BasOANN.TransactOpts, year)
+}
+
+// SetMaxYear is a paid mutator transaction binding the contract method 0x6000e099.
+//
+// Solidity: function setMaxYear(uint256 year) returns()
+func (_BasOANN *BasOANNTransactorSession) SetMaxYear(year *big.Int) (*types.Transaction, error) {
+	return _BasOANN.Contract.SetMaxYear(&_BasOANN.TransactOpts, year)
+}
+
+// SetRareTypeLength is a paid mutator transaction binding the contract method 0x05790fd1.
+//
+// Solidity: function setRareTypeLength(uint8 len) returns()
+func (_BasOANN *BasOANNTransactor) SetRareTypeLength(opts *bind.TransactOpts, len uint8) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "setRareTypeLength", len)
+}
+
+// SetRareTypeLength is a paid mutator transaction binding the contract method 0x05790fd1.
+//
+// Solidity: function setRareTypeLength(uint8 len) returns()
+func (_BasOANN *BasOANNSession) SetRareTypeLength(len uint8) (*types.Transaction, error) {
+	return _BasOANN.Contract.SetRareTypeLength(&_BasOANN.TransactOpts, len)
+}
+
+// SetRareTypeLength is a paid mutator transaction binding the contract method 0x05790fd1.
+//
+// Solidity: function setRareTypeLength(uint8 len) returns()
+func (_BasOANN *BasOANNTransactorSession) SetRareTypeLength(len uint8) (*types.Transaction, error) {
+	return _BasOANN.Contract.SetRareTypeLength(&_BasOANN.TransactOpts, len)
+}
+
+// SetRecord is a paid mutator transaction binding the contract method 0x3834ae56.
+//
+// Solidity: function setRecord(bytes32 nameHash, bytes4 ipv4, bytes16 ipv6, bytes bca, bytes opData, string aliasName) returns()
+func (_BasOANN *BasOANNTransactor) SetRecord(opts *bind.TransactOpts, nameHash [32]byte, ipv4 [4]byte, ipv6 [16]byte, bca []byte, opData []byte, aliasName string) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "setRecord", nameHash, ipv4, ipv6, bca, opData, aliasName)
+}
+
+// SetRecord is a paid mutator transaction binding the contract method 0x3834ae56.
+//
+// Solidity: function setRecord(bytes32 nameHash, bytes4 ipv4, bytes16 ipv6, bytes bca, bytes opData, string aliasName) returns()
+func (_BasOANN *BasOANNSession) SetRecord(nameHash [32]byte, ipv4 [4]byte, ipv6 [16]byte, bca []byte, opData []byte, aliasName string) (*types.Transaction, error) {
+	return _BasOANN.Contract.SetRecord(&_BasOANN.TransactOpts, nameHash, ipv4, ipv6, bca, opData, aliasName)
+}
+
+// SetRecord is a paid mutator transaction binding the contract method 0x3834ae56.
+//
+// Solidity: function setRecord(bytes32 nameHash, bytes4 ipv4, bytes16 ipv6, bytes bca, bytes opData, string aliasName) returns()
+func (_BasOANN *BasOANNTransactorSession) SetRecord(nameHash [32]byte, ipv4 [4]byte, ipv6 [16]byte, bca []byte, opData []byte, aliasName string) (*types.Transaction, error) {
+	return _BasOANN.Contract.SetRecord(&_BasOANN.TransactOpts, nameHash, ipv4, ipv6, bca, opData, aliasName)
+}
+
+// SetSubGas is a paid mutator transaction binding the contract method 0xa7a6907b.
+//
+// Solidity: function setSubGas(uint256 newGas) returns()
+func (_BasOANN *BasOANNTransactor) SetSubGas(opts *bind.TransactOpts, newGas *big.Int) (*types.Transaction, error) {
+	return _BasOANN.contract.Transact(opts, "setSubGas", newGas)
+}
+
+// SetSubGas is a paid mutator transaction binding the contract method 0xa7a6907b.
+//
+// Solidity: function setSubGas(uint256 newGas) returns()
+func (_BasOANN *BasOANNSession) SetSubGas(newGas *big.Int) (*types.Transaction, error) {
+	return _BasOANN.Contract.SetSubGas(&_BasOANN.TransactOpts, newGas)
+}
+
+// SetSubGas is a paid mutator transaction binding the contract method 0xa7a6907b.
+//
+// Solidity: function setSubGas(uint256 newGas) returns()
+func (_BasOANN *BasOANNTransactorSession) SetSubGas(newGas *big.Int) (*types.Transaction, error) {
+	return _BasOANN.Contract.SetSubGas(&_BasOANN.TransactOpts, newGas)
+}
+
+// BasOANNPaidIterator is returned from FilterPaid and is used to iterate over the raw logs and unpacked data for Paid events raised by the BasOANN contract.
+type BasOANNPaidIterator struct {
+	Event *BasOANNPaid // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BasOANNPaidIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BasOANNPaid)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BasOANNPaid)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BasOANNPaidIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BasOANNPaidIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BasOANNPaid represents a Paid event raised by the BasOANN contract.
+type BasOANNPaid struct {
+	Payer  common.Address
+	Name   []byte
+	Option string
+	Amount *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterPaid is a free log retrieval operation binding the contract event 0x6a6b5d53d5a52b3e062c7acfa65003e51072e45029558311e0cff6219afa2351.
+//
+// Solidity: event Paid(address payer, bytes name, string option, uint256 amount)
+func (_BasOANN *BasOANNFilterer) FilterPaid(opts *bind.FilterOpts) (*BasOANNPaidIterator, error) {
+
+	logs, sub, err := _BasOANN.contract.FilterLogs(opts, "Paid")
+	if err != nil {
+		return nil, err
+	}
+	return &BasOANNPaidIterator{contract: _BasOANN.contract, event: "Paid", logs: logs, sub: sub}, nil
+}
+
+// WatchPaid is a free log subscription operation binding the contract event 0x6a6b5d53d5a52b3e062c7acfa65003e51072e45029558311e0cff6219afa2351.
+//
+// Solidity: event Paid(address payer, bytes name, string option, uint256 amount)
+func (_BasOANN *BasOANNFilterer) WatchPaid(opts *bind.WatchOpts, sink chan<- *BasOANNPaid) (event.Subscription, error) {
+
+	logs, sub, err := _BasOANN.contract.WatchLogs(opts, "Paid")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BasOANNPaid)
+				if err := _BasOANN.contract.UnpackLog(event, "Paid", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParsePaid is a log parse operation binding the contract event 0x6a6b5d53d5a52b3e062c7acfa65003e51072e45029558311e0cff6219afa2351.
+//
+// Solidity: event Paid(address payer, bytes name, string option, uint256 amount)
+func (_BasOANN *BasOANNFilterer) ParsePaid(log types.Log) (*BasOANNPaid, error) {
+	event := new(BasOANNPaid)
+	if err := _BasOANN.contract.UnpackLog(event, "Paid", log); err != nil {
+		return nil, err
+	}
+	return event, nil
 }

@@ -10,18 +10,19 @@ import (
 
 func fillWaitQueue(lastBlockNumber uint64){
 	opts := getLoopOpts(lastSavingPoint,&lastBlockNumber)
-
-	//base data should be queried first
-	loopOverMintAsset(opts,handleMintAsset)
-
 	var waitGroup sync.WaitGroup
-	waitGroup.Add(5)
+	waitGroup.Add(10)
 
-	go loopOverTakeoverAsset(&waitGroup,opts,handleTakeoverAsset)
-	go loopOverRechargeAsset(&waitGroup,opts,handleRechargeAsset)
-	go loopOverRootChanged(&waitGroup,opts, handleRootChanged)
-	go loopOverDNSRecordChange(&waitGroup,opts,handleDNSRecordChange)
-	go loopOverDNSRecordRemove(&waitGroup,opts,handleDNSRecordRemove)
+	go loopOverRootChanged(opts,&waitGroup)
+	go loopOverSubChanged(opts,&waitGroup)
+	go loopOverDNSChanged(opts,&waitGroup)
+	go loopOverAdd(opts,&waitGroup)
+	go loopOverUpdate(opts,&waitGroup)
+	go loopOverTakeover(opts,&waitGroup)
+	go loopOverTransfer(opts,&waitGroup)
+	go loopOverTransferFrom(opts,&waitGroup)
+	go loopOverRemove(opts,&waitGroup)
+	go loopOverPaid(opts,&waitGroup)
 
 	waitGroup.Wait()
 
@@ -29,24 +30,27 @@ func fillWaitQueue(lastBlockNumber uint64){
 
 func syncDataByHandleQueue(){
 	var waitGroup sync.WaitGroup
-	waitGroup.Add(2)
+	waitGroup.Add(4)
 
-	go loopOverQueueAsset(&waitGroup)
-	go loopOverQueueDNS(&waitGroup)
+	go loopOverQueueOwnership(&waitGroup)
+	go loopOverQueueRoot(&waitGroup)
+	go loopOverQueueSub(&waitGroup)
+	go loopOverQueueDns(&waitGroup)
 
 	waitGroup.Wait()
 
-	clearQueryAsset()
-	clearQueueDns()
+	clearQuery(queueOwnership)
+	clearQuery(queueRoot)
+	clearQuery(queueSub)
+	clearQuery(queueDns)
 
 	ShowCachedNames()
-
 }
 
 func ShowCachedNames(){
 	if DebugFlag{
 		for _,v := range Records{
-			logger.Info(string(v.asset.Name), v.asset.Owner.String())
+			logger.Info(string(v.Name), v.Owner.String())
 		}
 	}
 }
@@ -59,15 +63,18 @@ func watch(lastBlockNumber uint64){
 	opts := getWatchOpts(lastBlockNumber)
 	subs = []event.Subscription{}
 
-	waitGroup.Add(7)
+	waitGroup.Add(10)
 
-	go watchMintAsset(opts,&subs,&waitGroup)
-	go watchTakeoverAsset(opts,&subs,&waitGroup)
-	go watchRechargeAsset(opts,&subs,&waitGroup)
 	go watchRootChanged(opts,&subs,&waitGroup)
-	go watchDNSRecordChange(opts,&subs,&waitGroup)
-	go watchDNSRecordRemove(opts,&subs,&waitGroup)
-	go watchAssertTransfer(opts,&subs,&waitGroup)
+	go watchSubChanged(opts,&subs,&waitGroup)
+	go watchDNSChanged(opts,&subs,&waitGroup)
+	go watchAdd(opts,&subs,&waitGroup)
+	go watchUpdate(opts,&subs,&waitGroup)
+	go watchTakeover(opts,&subs,&waitGroup)
+	go watchTransfer(opts,&subs,&waitGroup)
+	go watchTransferFrom(opts,&subs,&waitGroup)
+	go watchRemove(opts,&subs,&waitGroup)
+	go watchPaid(opts,&subs,&waitGroup)
 
 	waitGroup.Wait()
 

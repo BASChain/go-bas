@@ -3,6 +3,7 @@ package Transactions
 import (
 	"context"
 	"crypto/ecdsa"
+	"github.com/BASChain/go-bas-dns-server/dns/mem"
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/accounts/keystore"
@@ -12,7 +13,6 @@ import (
 	"github.com/op/go-logging"
 	"math/big"
 	"errors"
-	"github.com/BASChain/go-bas-dns-server/dns/mem"
 )
 
 

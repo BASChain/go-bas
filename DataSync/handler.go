@@ -18,12 +18,6 @@ type EventIterator interface {
 	Next() bool
 }
 
-func LoopEvent(it EventIterator, handle EventHandler){
-	for it.Next() {
-		handle(it)
-	}
-}
-
 func getLoopOpts(s uint64, e *uint64)  *bind.FilterOpts{
 	var opts  = &bind.FilterOpts{
 		Start:s,
@@ -41,102 +35,16 @@ func getWatchOpts(s uint64) *bind.WatchOpts{
 	return opts
 }
 
-//////////////////////////////////////////////////////////
-//               BasAsset.sol                          //
-////////////////////////////////////////////////////////
-
-func handleMintAsset(iterator interface{}){
-	it:=iterator.(*Contract.BasAssetMintAssetIterator)
-	insertQueueAsset(Bas_Ethereum.GetHash(string(it.Event.Name)))
-}
-
-func watchMintAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
-	logs := make(chan *Contract.BasAssetMintAsset)
-	sub,err:=Bas_Ethereum.BasAsset().WatchMintAsset(opts,logs)
+func loopOverRootChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
+	it,err:=Bas_Ethereum.BasAsset().FilterRootChanged(opts)
 	if err==nil{
-		logger.Info("watching mint asset")
-		*subs = append(*subs, sub)
-		for {
-			select {
-			case e :=<-sub.Err():
-				logger.Error("subscript MintAsset runtime error", e)
-				return
-			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateAsset(Bas_Ethereum.GetHash(string(log.Name)),lastSavingPoint)
-				logger.Info("pre detected string: ",string(log.Name))
-				logger.Info("detected event mint asset : ",
-					string(Records[Bas_Ethereum.GetHash(string(log.Name))].asset.Owner.String()),
-					)
-			}
+		for it.Next() {
+			insertQueue(it.Event.NameHash,queueRoot)
 		}
 	}else{
-		logger.Error("subscript MintAsset failed " ,err)
+		logger.Error("loop over root changed err :" , err)
 	}
-}
-
-func handleTakeoverAsset(iterator interface{}){
-	it:=iterator.(*Contract.BasAssetTakeoverAssetIterator)
-	insertQueueAsset(it.Event.Hash)
-}
-
-func watchTakeoverAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
-	logs:= make(chan *Contract.BasAssetTakeoverAsset)
-	sub,err := Bas_Ethereum.BasAsset().WatchTakeoverAsset(opts,logs)
-	defer wg.Done()
-	if err==nil{
-		logger.Info("watching takeover asset")
-		*subs = append(*subs, sub)
-		for {
-			select {
-			case err:=<-sub.Err():
-				logger.Error("subscript Takeover runtime error",err)
-				return
-			case log:=<-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateAsset(log.Hash,lastSavingPoint)
-				logger.Info("detected event takeover asset : ")
-				showMemeory(log.Hash)
-			}
-		}
-	}else{
-		logger.Error("subscript Takeover failed " ,err)
-	}
-}
-
-func handleRechargeAsset(iterator interface{}){
-	it:=iterator.(*Contract.BasAssetRechargeAssetIterator)
-	insertQueueAsset(it.Event.Hash)
-}
-
-func watchRechargeAsset(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
-	logs := make(chan *Contract.BasAssetRechargeAsset)
-	sub,err:=Bas_Ethereum.BasAsset().WatchRechargeAsset(opts,logs)
-	defer wg.Done()
-	if err==nil{
-		logger.Info("watching recharge asset")
-		*subs = append(*subs, sub)
-		for {
-			select {
-			case err:=<-sub.Err():
-				logger.Error("subscript Recharge asset runtime error",err)
-				return
-			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateAsset(log.Hash,lastSavingPoint)
-				logger.Info("detected event recharge asset : ")
-				showMemeory(log.Hash)
-			}
-		}
-	}else{
-		logger.Error("subscript Recharge asset failed " ,err)
-	}
-}
-
-func handleRootChanged(iterator interface{}){
-	it:=iterator.(*Contract.BasAssetRootChangedIterator)
-	insertQueueAsset(it.Event.NameHash)
 }
 
 func watchRootChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
@@ -148,160 +56,361 @@ func watchRootChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.W
 		*subs = append(*subs, sub)
 		for {
 			select {
-			case err:=<-sub.Err():
-				logger.Error("subscript root changed runtime error",err)
+			case e :=<-sub.Err():
+				logger.Error("subscript root changed runtime error", e)
 				return
 			case log:= <-logs:
 				lastSavingPoint = log.Raw.BlockNumber
-				updateAsset(log.NameHash,lastSavingPoint)
-				logger.Info("detected event root changed : ")
-				showMemeory(log.NameHash)
+				updateByQueryRoot(log.NameHash,lastSavingPoint)
+				logger.Info("detected root changed : ",
+					string(Records[log.NameHash].Name),
+				)
 			}
 		}
 	}else{
-		logger.Error("subscript watch root changed failed " ,err)
+		logger.Error("subscript root changed failed " ,err)
 	}
 }
 
-
-func handleDNSRecordChange(iterator interface{}){
-	it:=iterator.(*Contract.BasAssetDNSRecordChangeIterator)
-	insertQueueDns(it.Event.NameHash)
+func loopOverSubChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
+	defer wg.Done()
+	it,err:=Bas_Ethereum.BasAsset().FilterSubChanged(opts)
+	if err==nil{
+		for it.Next() {
+			insertQueue(it.Event.NameHash,queueSub)
+		}
+	}else{
+		logger.Error("loop over sub changed err :" , err)
+	}
 }
 
-func watchDNSRecordChange(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
-	logs :=make(chan *Contract.BasAssetDNSRecordChange)
-	sub,err:=Bas_Ethereum.BasAsset().WatchDNSRecordChange(opts,logs)
+func watchSubChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs := make(chan *Contract.BasAssetSubChanged)
+	sub,err:=Bas_Ethereum.BasAsset().WatchSubChanged(opts,logs)
 	defer wg.Done()
 	if err==nil{
-		logger.Info("watching dns record change")
+		logger.Info("watching sub changed")
 		*subs = append(*subs, sub)
 		for {
 			select {
-			case err:=<-sub.Err():
-				logger.Error("subscript DNSRecord changed runtime error",err)
+			case e :=<-sub.Err():
+				logger.Error("subscript sub changed runtime error", e)
 				return
 			case log:= <-logs:
 				lastSavingPoint = log.Raw.BlockNumber
-				updateDNS(log.NameHash,lastSavingPoint)
-				logger.Info("detected event dns changed : ")
-				showMemeory(log.NameHash)
+				updateByQuerySub(log.NameHash,lastSavingPoint)
+				logger.Info("detected sub changed : ",
+					string(Records[log.NameHash].Name),
+				)
 			}
 		}
 	}else{
-		logger.Error("subscript DNSRecord change failed " ,err)
+		logger.Error("subscript root changed failed " ,err)
 	}
 }
 
-func handleDNSRecordRemove(iterator interface{})  {
-	it:=iterator.(*Contract.BasAssetDNSRecordRemoveIterator)
-	insertQueueDns(it.Event.NameHash)
+func loopOverDNSChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
+	defer wg.Done()
+	it,err:=Bas_Ethereum.BasDNS().FilterDNSChanged(opts)
+	if err==nil{
+		for it.Next() {
+			insertQueue(it.Event.NameHash,queueDns)
+		}
+	}else{
+		logger.Error("loop over dns changed err :" , err)
+	}
 }
 
-func watchDNSRecordRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
-	logs :=make(chan *Contract.BasAssetDNSRecordRemove)
-	sub,err:=Bas_Ethereum.BasAsset().WatchDNSRecordRemove(opts,logs)
+func watchDNSChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs := make(chan *Contract.BasDNSDNSChanged)
+	sub,err:=Bas_Ethereum.BasDNS().WatchDNSChanged(opts,logs)
 	defer wg.Done()
 	if err==nil{
-		logger.Info("watching dns record remove")
+		logger.Info("watching dns changed")
 		*subs = append(*subs, sub)
 		for {
 			select {
-			case err:=<-sub.Err():
-				logger.Error("subscript DNSRecord remove runtime error",err)
+			case e :=<-sub.Err():
+				logger.Error("subscript dns changed runtime error", e)
 				return
 			case log:= <-logs:
 				lastSavingPoint = log.Raw.BlockNumber
-				updateDNS(log.NameHash,lastSavingPoint)
-				logger.Info("detected event dns remove : ")
-				showMemeory(log.NameHash)
+				updateByQueryDNS(log.NameHash,lastSavingPoint)
+				logger.Info("detected dns changed : ",
+					string(Records[log.NameHash].Name),
+				)
 			}
 		}
 	}else{
-		logger.Error("subscript DNSRecord remove failed " ,err)
+		logger.Error("subscript root changed failed " ,err)
 	}
 }
 
-func watchAssertTransfer(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
-	logs :=make(chan *Contract.BasAssetAssertTransfer)
-	sub,err:=Bas_Ethereum.BasAsset().WatchAssertTransfer(opts,logs)
+func loopOverAdd(opts *bind.FilterOpts,wg *sync.WaitGroup){
+	defer wg.Done()
+	it,err:=Bas_Ethereum.BasOwnership().FilterAdd(opts)
+	if err==nil{
+		for it.Next() {
+			insertQueue(it.Event.NameHash,queueOwnership)
+		}
+	}else{
+		logger.Error("loop over add err :" , err)
+	}
+}
+
+func watchAdd(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs := make(chan *Contract.BasOwnershipAdd)
+	sub,err:=Bas_Ethereum.BasOwnership().WatchAdd(opts,logs)
 	defer wg.Done()
 	if err==nil{
-		logger.Info("watching asset transfer")
+		logger.Info("watching add")
 		*subs = append(*subs, sub)
 		for {
 			select {
-			case err:=<-sub.Err():
-				logger.Error("subscript asset transfer runtime error",err)
+			case e :=<-sub.Err():
+				logger.Error("subscript add runtime error", e)
 				return
 			case log:= <-logs:
 				lastSavingPoint = log.Raw.BlockNumber
-				updateAsset(log.NameHash,lastSavingPoint)
-				logger.Info("detected asset transfer : ")
-				showMemeory(log.NameHash)
+				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				logger.Info("detected add : ",
+					string(Records[log.NameHash].Name),
+				)
 			}
 		}
 	}else{
-		logger.Error("subscript asset transfer failed " ,err)
+		logger.Error("subscript add failed " ,err)
 	}
 }
 
-func loopOverMintAsset(opts *bind.FilterOpts, handler EventHandler){
-	it,err:=Bas_Ethereum.BasAsset().FilterMintAsset(opts)
+func loopOverUpdate(opts *bind.FilterOpts,wg *sync.WaitGroup){
+	defer wg.Done()
+	it,err:=Bas_Ethereum.BasOwnership().FilterUpdate(opts)
 	if err==nil{
-		LoopEvent(it, handler)
+		for it.Next() {
+			insertQueue(it.Event.NameHash,queueOwnership)
+		}
 	}else{
-		logger.Error("loop over mint asset err :" , err)
+		logger.Error("loop over update err :" , err)
 	}
 }
 
-
-func loopOverTakeoverAsset(waitGroup *sync.WaitGroup,opts *bind.FilterOpts, handler EventHandler){
-	it,err:=Bas_Ethereum.BasAsset().FilterTakeoverAsset(opts)
+func watchUpdate(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs := make(chan *Contract.BasOwnershipUpdate)
+	sub,err:=Bas_Ethereum.BasOwnership().WatchUpdate(opts,logs)
+	defer wg.Done()
 	if err==nil{
-		LoopEvent(it,handler)
+		logger.Info("watching update")
+		*subs = append(*subs, sub)
+		for {
+			select {
+			case e :=<-sub.Err():
+				logger.Error("subscript update runtime error", e)
+				return
+			case log:= <-logs:
+				lastSavingPoint = log.Raw.BlockNumber
+				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				logger.Info("detected update : ",
+					string(Records[log.NameHash].Name),
+				)
+			}
+		}
 	}else{
-		logger.Error("loop over takeover asset err :" , err)
+		logger.Error("subscript update failed " ,err)
 	}
-	waitGroup.Done()
 }
 
-func loopOverRechargeAsset(waitGroup *sync.WaitGroup,opts *bind.FilterOpts, handler EventHandler){
-	it,err:=Bas_Ethereum.BasAsset().FilterRechargeAsset(opts)
+func loopOverTakeover(opts *bind.FilterOpts,wg *sync.WaitGroup){
+	defer wg.Done()
+	it,err:=Bas_Ethereum.BasOwnership().FilterTakeover(opts)
 	if err==nil{
-		LoopEvent(it, handler)
+		for it.Next() {
+			insertQueue(it.Event.NameHash,queueOwnership)
+		}
 	}else{
-		logger.Error("loop over recharge asset err :" , err)
+		logger.Error("loop over takeover err :" , err)
 	}
-	waitGroup.Done()
 }
 
-func loopOverRootChanged(waitGroup *sync.WaitGroup,opts *bind.FilterOpts, handler EventHandler){
-	it,err:=Bas_Ethereum.BasAsset().FilterRootChanged(opts)
+func watchTakeover(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs := make(chan *Contract.BasOwnershipTakeover)
+	sub,err:=Bas_Ethereum.BasOwnership().WatchTakeover(opts,logs)
+	defer wg.Done()
 	if err==nil{
-		LoopEvent(it,handler)
+		logger.Info("watching takeover")
+		*subs = append(*subs, sub)
+		for {
+			select {
+			case e :=<-sub.Err():
+				logger.Error("subscript takeover runtime error", e)
+				return
+			case log:= <-logs:
+				lastSavingPoint = log.Raw.BlockNumber
+				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				logger.Info("detected takeover : ",
+					string(Records[log.NameHash].Name),
+				)
+			}
+		}
 	}else{
-		logger.Error("loop over root changed err :" , err)
+		logger.Error("subscript takeover failed " ,err)
 	}
-	waitGroup.Done()
 }
 
-func loopOverDNSRecordChange(waitGroup *sync.WaitGroup,opts *bind.FilterOpts, handler EventHandler){
-	it,err:=Bas_Ethereum.BasAsset().FilterDNSRecordChange(opts)
+func loopOverTransfer(opts *bind.FilterOpts,wg *sync.WaitGroup){
+	defer wg.Done()
+	it,err:=Bas_Ethereum.BasOwnership().FilterTransfer(opts)
 	if err==nil{
-		LoopEvent(it,handler)
+		for it.Next() {
+			insertQueue(it.Event.NameHash,queueOwnership)
+		}
 	}else{
-		logger.Error("loop over DNS Record change err :" , err)
+		logger.Error("loop over transfer err :" , err)
 	}
-	waitGroup.Done()
 }
 
-func loopOverDNSRecordRemove(waitGroup *sync.WaitGroup,opts *bind.FilterOpts, handler EventHandler){
-	it,err:=Bas_Ethereum.BasAsset().FilterDNSRecordRemove(opts)
+func watchTransfer(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs := make(chan *Contract.BasOwnershipTransfer)
+	sub,err:=Bas_Ethereum.BasOwnership().WatchTransfer(opts,logs)
+	defer wg.Done()
 	if err==nil{
-		LoopEvent(it,handler)
+		logger.Info("watching transfer")
+		*subs = append(*subs, sub)
+		for {
+			select {
+			case e :=<-sub.Err():
+				logger.Error("subscript transfer runtime error", e)
+				return
+			case log:= <-logs:
+				lastSavingPoint = log.Raw.BlockNumber
+				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				logger.Info("detected transfer : ",
+					string(Records[log.NameHash].Name),
+				)
+			}
+		}
 	}else{
-		logger.Error("loop over DNS Record remove err :" , err)
+		logger.Error("subscript transfer failed " ,err)
 	}
-	waitGroup.Done()
+}
+
+func loopOverTransferFrom(opts *bind.FilterOpts,wg *sync.WaitGroup){
+	defer wg.Done()
+	it,err:=Bas_Ethereum.BasOwnership().FilterTransferFrom(opts)
+	if err==nil{
+		for it.Next() {
+			insertQueue(it.Event.NameHash,queueOwnership)
+		}
+	}else{
+		logger.Error("loop over transferFrom err :" , err)
+	}
+}
+
+func watchTransferFrom(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs := make(chan *Contract.BasOwnershipTransferFrom)
+	sub,err:=Bas_Ethereum.BasOwnership().WatchTransferFrom(opts,logs)
+	defer wg.Done()
+	if err==nil{
+		logger.Info("watching transferFrom")
+		*subs = append(*subs, sub)
+		for {
+			select {
+			case e :=<-sub.Err():
+				logger.Error("subscript transferFrom runtime error", e)
+				return
+			case log:= <-logs:
+				lastSavingPoint = log.Raw.BlockNumber
+				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				logger.Info("detected transferFrom : ",
+					string(Records[log.NameHash].Name),
+				)
+			}
+		}
+	}else{
+		logger.Error("subscript transferFrom failed " ,err)
+	}
+}
+
+func loopOverRemove(opts *bind.FilterOpts,wg *sync.WaitGroup){
+	defer wg.Done()
+	it,err:=Bas_Ethereum.BasOwnership().FilterRemove(opts)
+	if err==nil{
+		for it.Next() {
+			insertQueue(it.Event.NameHash,queueOwnership)
+		}
+	}else{
+		logger.Error("loop over remove err :" , err)
+	}
+}
+
+func watchRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs := make(chan *Contract.BasOwnershipRemove)
+	sub,err:=Bas_Ethereum.BasOwnership().WatchRemove(opts,logs)
+	defer wg.Done()
+	if err==nil{
+		logger.Info("watching remove")
+		*subs = append(*subs, sub)
+		for {
+			select {
+			case e :=<-sub.Err():
+				logger.Error("subscript remove runtime error", e)
+				return
+			case log:= <-logs:
+				lastSavingPoint = log.Raw.BlockNumber
+				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				logger.Info("detected remove : ",
+					string(Records[log.NameHash].Name),
+				)
+			}
+		}
+	}else{
+		logger.Error("subscript remove failed " ,err)
+	}
+}
+
+func loopOverPaid(opts *bind.FilterOpts,wg *sync.WaitGroup){
+	defer wg.Done()
+	it,err:=Bas_Ethereum.BasOANN().FilterPaid(opts)
+	if err==nil{
+		for it.Next() {
+			updatePaid(Receipt{
+				Payer:  it.Event.Payer,
+				Name:   string(it.Event.Name),
+				Option: it.Event.Option,
+				Amount: it.Event.Amount,
+			})
+		}
+	}else{
+		logger.Error("loop over remove err :" , err)
+	}
+}
+
+func watchPaid(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs := make(chan *Contract.BasOANNPaid)
+	sub,err:=Bas_Ethereum.BasOANN().WatchPaid(opts,logs)
+	defer wg.Done()
+	if err==nil{
+		logger.Info("watching paid")
+		*subs = append(*subs, sub)
+		for {
+			select {
+			case e :=<-sub.Err():
+				logger.Error("subscript paid runtime error", e)
+				return
+			case log:= <-logs:
+				lastSavingPoint = log.Raw.BlockNumber
+				updatePaid(Receipt{
+					Payer:  log.Payer,
+					Name:   string(log.Name),
+					Option: log.Option,
+					Amount: log.Amount,
+				})
+				logger.Info("detected paid : ",
+					string(log.Name),
+				)
+			}
+		}
+	}else{
+		logger.Error("subscript paid failed " ,err)
+	}
 }

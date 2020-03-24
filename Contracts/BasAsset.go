@@ -28,7 +28,7 @@ var (
 )
 
 // BasAssetABI is the input ABI used to generate the binding from.
-const BasAssetABI = "[{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"clearRecord\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isOpen\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cusPrice\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"takeoverRoot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isRoot\",\"type\":\"bool\"}],\"name\":\"recharge\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"totalDomainSize\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"DnsDetailsByHash\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"bytes4\",\"name\":\"ipv4\",\"type\":\"bytes4\"},{\"internalType\":\"bytes16\",\"name\":\"ipv6\",\"type\":\"bytes16\"},{\"internalType\":\"string\",\"name\":\"bcAddr\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"opData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"aName\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"name\":\"openCustomedPrice\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"idx\",\"type\":\"uint256\"}],\"name\":\"getMayAssetIndexOf\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"aName\",\"type\":\"string\"}],\"name\":\"setAlias\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"EXTEND_LEN\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes4\",\"name\":\"ipv4\",\"type\":\"bytes4\"},{\"internalType\":\"bytes16\",\"name\":\"ipv6\",\"type\":\"bytes16\"}],\"name\":\"setIP\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"lastOwnerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ContractOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"approve\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"BADDRESS_LEN\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"AssetDetailsByHash\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isRoot\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"r_openToPublic\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"r_isCustomed\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"r_isPureA\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"r_customPrice\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"s_rootHash\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"isExpired\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"bcAddress\",\"type\":\"string\"}],\"name\":\"setBCAddress\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"transfer\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"GetExpire\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"currentOwnerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"revoke\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes4\",\"name\":\"ipv4\",\"type\":\"bytes4\"},{\"internalType\":\"bytes16\",\"name\":\"ipv6\",\"type\":\"bytes16\"},{\"internalType\":\"string\",\"name\":\"bcAddress\",\"type\":\"string\"},{\"internalType\":\"bytes\",\"name\":\"opData\",\"type\":\"bytes\"},{\"internalType\":\"string\",\"name\":\"aName\",\"type\":\"string\"}],\"name\":\"setRecord\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"myAssetCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"opData\",\"type\":\"bytes\"}],\"name\":\"setOpData\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferContractOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"transferFrom\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOANN\",\"type\":\"address\"}],\"name\":\"setOANN\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"Hash\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"closeCustomedPrice\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"idx\",\"type\":\"uint256\"}],\"name\":\"getDomainOfIndex\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"sHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"sname\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"rHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"mintSubAsset\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"closeToPublic\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"sHash\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"takeoverSubName\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"Alias_LEN\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"openToPublic\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"},{\"internalType\":\"uint256\",\"name\":\"expire\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isOpen\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"cusPrice\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isAType\",\"type\":\"bool\"},{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"mintRootAsset\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"}],\"name\":\"MintAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"TakeoverAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"duration\",\"type\":\"uint256\"}],\"name\":\"RechargeAsset\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"DNSRecordChange\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"DNSRecordRemove\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"RootAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"RootChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"SubAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"SubChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"}],\"name\":\"AssertTransfer\",\"type\":\"event\"}]"
+const BasAssetABI = "[{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"subExist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"Sub\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"totalName\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"o\",\"outputs\":[{\"internalType\":\"contractBasOwnership\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"},{\"internalType\":\"bool\",\"name\":\"openToPublic\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"customedPrice\",\"type\":\"uint256\"}],\"name\":\"_c_updateRoot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"totalName\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"_a_updateSub\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"totalName\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"rootHash\",\"type\":\"bytes32\"}],\"name\":\"_c_addSub\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"rootName\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"openToPublic\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"customedPrice\",\"type\":\"uint256\"}],\"name\":\"_c_addRoot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"rootExist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"name\":\"Root\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"rootName\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"openToPublic\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"customedPrice\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"rootName\",\"type\":\"bytes\"},{\"internalType\":\"bool\",\"name\":\"openToPublic\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isCustomed\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"customedPrice\",\"type\":\"uint256\"}],\"name\":\"_a_updateRoot\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"name\",\"type\":\"bytes\"}],\"name\":\"Hash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"bytes\",\"name\":\"sName\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"rName\",\"type\":\"bytes\"}],\"name\":\"TotalNameHash\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_o\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"RootChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"nameHash\",\"type\":\"bytes32\"}],\"name\":\"SubChanged\",\"type\":\"event\"}]"
 
 // BasAsset is an auto generated Go binding around an Ethereum contract.
 type BasAsset struct {
@@ -172,1732 +172,319 @@ func (_BasAsset *BasAssetTransactorRaw) Transact(opts *bind.TransactOpts, method
 	return _BasAsset.Contract.contract.Transact(opts, method, params...)
 }
 
-// AliasLEN is a free data retrieval call binding the contract method 0xda203e69.
+// Hash is a free data retrieval call binding the contract method 0xbd1bd35a.
 //
-// Solidity: function Alias_LEN() constant returns(uint256)
-func (_BasAsset *BasAssetCaller) AliasLEN(opts *bind.CallOpts) (*big.Int, error) {
+// Solidity: function Hash(bytes name) constant returns(bytes32)
+func (_BasAsset *BasAssetCaller) Hash(opts *bind.CallOpts, name []byte) ([32]byte, error) {
 	var (
-		ret0 = new(*big.Int)
+		ret0 = new([32]byte)
 	)
 	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "Alias_LEN")
-	return *ret0, err
-}
-
-// AliasLEN is a free data retrieval call binding the contract method 0xda203e69.
-//
-// Solidity: function Alias_LEN() constant returns(uint256)
-func (_BasAsset *BasAssetSession) AliasLEN() (*big.Int, error) {
-	return _BasAsset.Contract.AliasLEN(&_BasAsset.CallOpts)
-}
-
-// AliasLEN is a free data retrieval call binding the contract method 0xda203e69.
-//
-// Solidity: function Alias_LEN() constant returns(uint256)
-func (_BasAsset *BasAssetCallerSession) AliasLEN() (*big.Int, error) {
-	return _BasAsset.Contract.AliasLEN(&_BasAsset.CallOpts)
-}
-
-// AssetDetailsByHash is a free data retrieval call binding the contract method 0x6cdb220f.
-//
-// Solidity: function AssetDetailsByHash(bytes32 nameHash) constant returns(bytes name, uint256 expire, address owner, bool isRoot, bool r_openToPublic, bool r_isCustomed, bool r_isPureA, uint256 r_customPrice, bytes32 s_rootHash)
-func (_BasAsset *BasAssetCaller) AssetDetailsByHash(opts *bind.CallOpts, nameHash [32]byte) (struct {
-	Name          []byte
-	Expire        *big.Int
-	Owner         common.Address
-	IsRoot        bool
-	ROpenToPublic bool
-	RIsCustomed   bool
-	RIsPureA      bool
-	RCustomPrice  *big.Int
-	SRootHash     [32]byte
-}, error) {
-	ret := new(struct {
-		Name          []byte
-		Expire        *big.Int
-		Owner         common.Address
-		IsRoot        bool
-		ROpenToPublic bool
-		RIsCustomed   bool
-		RIsPureA      bool
-		RCustomPrice  *big.Int
-		SRootHash     [32]byte
-	})
-	out := ret
-	err := _BasAsset.contract.Call(opts, out, "AssetDetailsByHash", nameHash)
-	return *ret, err
-}
-
-// AssetDetailsByHash is a free data retrieval call binding the contract method 0x6cdb220f.
-//
-// Solidity: function AssetDetailsByHash(bytes32 nameHash) constant returns(bytes name, uint256 expire, address owner, bool isRoot, bool r_openToPublic, bool r_isCustomed, bool r_isPureA, uint256 r_customPrice, bytes32 s_rootHash)
-func (_BasAsset *BasAssetSession) AssetDetailsByHash(nameHash [32]byte) (struct {
-	Name          []byte
-	Expire        *big.Int
-	Owner         common.Address
-	IsRoot        bool
-	ROpenToPublic bool
-	RIsCustomed   bool
-	RIsPureA      bool
-	RCustomPrice  *big.Int
-	SRootHash     [32]byte
-}, error) {
-	return _BasAsset.Contract.AssetDetailsByHash(&_BasAsset.CallOpts, nameHash)
-}
-
-// AssetDetailsByHash is a free data retrieval call binding the contract method 0x6cdb220f.
-//
-// Solidity: function AssetDetailsByHash(bytes32 nameHash) constant returns(bytes name, uint256 expire, address owner, bool isRoot, bool r_openToPublic, bool r_isCustomed, bool r_isPureA, uint256 r_customPrice, bytes32 s_rootHash)
-func (_BasAsset *BasAssetCallerSession) AssetDetailsByHash(nameHash [32]byte) (struct {
-	Name          []byte
-	Expire        *big.Int
-	Owner         common.Address
-	IsRoot        bool
-	ROpenToPublic bool
-	RIsCustomed   bool
-	RIsPureA      bool
-	RCustomPrice  *big.Int
-	SRootHash     [32]byte
-}, error) {
-	return _BasAsset.Contract.AssetDetailsByHash(&_BasAsset.CallOpts, nameHash)
-}
-
-// BADDRESSLEN is a free data retrieval call binding the contract method 0x5ce6f0a4.
-//
-// Solidity: function BADDRESS_LEN() constant returns(uint256)
-func (_BasAsset *BasAssetCaller) BADDRESSLEN(opts *bind.CallOpts) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "BADDRESS_LEN")
-	return *ret0, err
-}
-
-// BADDRESSLEN is a free data retrieval call binding the contract method 0x5ce6f0a4.
-//
-// Solidity: function BADDRESS_LEN() constant returns(uint256)
-func (_BasAsset *BasAssetSession) BADDRESSLEN() (*big.Int, error) {
-	return _BasAsset.Contract.BADDRESSLEN(&_BasAsset.CallOpts)
-}
-
-// BADDRESSLEN is a free data retrieval call binding the contract method 0x5ce6f0a4.
-//
-// Solidity: function BADDRESS_LEN() constant returns(uint256)
-func (_BasAsset *BasAssetCallerSession) BADDRESSLEN() (*big.Int, error) {
-	return _BasAsset.Contract.BADDRESSLEN(&_BasAsset.CallOpts)
-}
-
-// ContractOwner is a free data retrieval call binding the contract method 0x5a63fbc9.
-//
-// Solidity: function ContractOwner() constant returns(address)
-func (_BasAsset *BasAssetCaller) ContractOwner(opts *bind.CallOpts) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "ContractOwner")
-	return *ret0, err
-}
-
-// ContractOwner is a free data retrieval call binding the contract method 0x5a63fbc9.
-//
-// Solidity: function ContractOwner() constant returns(address)
-func (_BasAsset *BasAssetSession) ContractOwner() (common.Address, error) {
-	return _BasAsset.Contract.ContractOwner(&_BasAsset.CallOpts)
-}
-
-// ContractOwner is a free data retrieval call binding the contract method 0x5a63fbc9.
-//
-// Solidity: function ContractOwner() constant returns(address)
-func (_BasAsset *BasAssetCallerSession) ContractOwner() (common.Address, error) {
-	return _BasAsset.Contract.ContractOwner(&_BasAsset.CallOpts)
-}
-
-// DnsDetailsByHash is a free data retrieval call binding the contract method 0x39a9a72e.
-//
-// Solidity: function DnsDetailsByHash(bytes32 nameHash) constant returns(bytes name, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName)
-func (_BasAsset *BasAssetCaller) DnsDetailsByHash(opts *bind.CallOpts, nameHash [32]byte) (struct {
-	Name   []byte
-	Ipv4   [4]byte
-	Ipv6   [16]byte
-	BcAddr string
-	OpData []byte
-	AName  string
-}, error) {
-	ret := new(struct {
-		Name   []byte
-		Ipv4   [4]byte
-		Ipv6   [16]byte
-		BcAddr string
-		OpData []byte
-		AName  string
-	})
-	out := ret
-	err := _BasAsset.contract.Call(opts, out, "DnsDetailsByHash", nameHash)
-	return *ret, err
-}
-
-// DnsDetailsByHash is a free data retrieval call binding the contract method 0x39a9a72e.
-//
-// Solidity: function DnsDetailsByHash(bytes32 nameHash) constant returns(bytes name, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName)
-func (_BasAsset *BasAssetSession) DnsDetailsByHash(nameHash [32]byte) (struct {
-	Name   []byte
-	Ipv4   [4]byte
-	Ipv6   [16]byte
-	BcAddr string
-	OpData []byte
-	AName  string
-}, error) {
-	return _BasAsset.Contract.DnsDetailsByHash(&_BasAsset.CallOpts, nameHash)
-}
-
-// DnsDetailsByHash is a free data retrieval call binding the contract method 0x39a9a72e.
-//
-// Solidity: function DnsDetailsByHash(bytes32 nameHash) constant returns(bytes name, bytes4 ipv4, bytes16 ipv6, string bcAddr, bytes opData, string aName)
-func (_BasAsset *BasAssetCallerSession) DnsDetailsByHash(nameHash [32]byte) (struct {
-	Name   []byte
-	Ipv4   [4]byte
-	Ipv6   [16]byte
-	BcAddr string
-	OpData []byte
-	AName  string
-}, error) {
-	return _BasAsset.Contract.DnsDetailsByHash(&_BasAsset.CallOpts, nameHash)
-}
-
-// EXTENDLEN is a free data retrieval call binding the contract method 0x4b50acc8.
-//
-// Solidity: function EXTEND_LEN() constant returns(uint256)
-func (_BasAsset *BasAssetCaller) EXTENDLEN(opts *bind.CallOpts) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "EXTEND_LEN")
-	return *ret0, err
-}
-
-// EXTENDLEN is a free data retrieval call binding the contract method 0x4b50acc8.
-//
-// Solidity: function EXTEND_LEN() constant returns(uint256)
-func (_BasAsset *BasAssetSession) EXTENDLEN() (*big.Int, error) {
-	return _BasAsset.Contract.EXTENDLEN(&_BasAsset.CallOpts)
-}
-
-// EXTENDLEN is a free data retrieval call binding the contract method 0x4b50acc8.
-//
-// Solidity: function EXTEND_LEN() constant returns(uint256)
-func (_BasAsset *BasAssetCallerSession) EXTENDLEN() (*big.Int, error) {
-	return _BasAsset.Contract.EXTENDLEN(&_BasAsset.CallOpts)
-}
-
-// GetExpire is a free data retrieval call binding the contract method 0x8303ed38.
-//
-// Solidity: function GetExpire(bytes32 nameHash) constant returns(uint256)
-func (_BasAsset *BasAssetCaller) GetExpire(opts *bind.CallOpts, nameHash [32]byte) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "GetExpire", nameHash)
-	return *ret0, err
-}
-
-// GetExpire is a free data retrieval call binding the contract method 0x8303ed38.
-//
-// Solidity: function GetExpire(bytes32 nameHash) constant returns(uint256)
-func (_BasAsset *BasAssetSession) GetExpire(nameHash [32]byte) (*big.Int, error) {
-	return _BasAsset.Contract.GetExpire(&_BasAsset.CallOpts, nameHash)
-}
-
-// GetExpire is a free data retrieval call binding the contract method 0x8303ed38.
-//
-// Solidity: function GetExpire(bytes32 nameHash) constant returns(uint256)
-func (_BasAsset *BasAssetCallerSession) GetExpire(nameHash [32]byte) (*big.Int, error) {
-	return _BasAsset.Contract.GetExpire(&_BasAsset.CallOpts, nameHash)
-}
-
-// Hash is a free data retrieval call binding the contract method 0xbc780a0c.
-//
-// Solidity: function Hash(string name) constant returns(bytes, bytes32)
-func (_BasAsset *BasAssetCaller) Hash(opts *bind.CallOpts, name string) ([]byte, [32]byte, error) {
-	var (
-		ret0 = new([]byte)
-		ret1 = new([32]byte)
-	)
-	out := &[]interface{}{
-		ret0,
-		ret1,
-	}
 	err := _BasAsset.contract.Call(opts, out, "Hash", name)
-	return *ret0, *ret1, err
-}
-
-// Hash is a free data retrieval call binding the contract method 0xbc780a0c.
-//
-// Solidity: function Hash(string name) constant returns(bytes, bytes32)
-func (_BasAsset *BasAssetSession) Hash(name string) ([]byte, [32]byte, error) {
-	return _BasAsset.Contract.Hash(&_BasAsset.CallOpts, name)
-}
-
-// Hash is a free data retrieval call binding the contract method 0xbc780a0c.
-//
-// Solidity: function Hash(string name) constant returns(bytes, bytes32)
-func (_BasAsset *BasAssetCallerSession) Hash(name string) ([]byte, [32]byte, error) {
-	return _BasAsset.Contract.Hash(&_BasAsset.CallOpts, name)
-}
-
-// Allowance is a free data retrieval call binding the contract method 0xbcf9fcad.
-//
-// Solidity: function allowance(address owner, bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetCaller) Allowance(opts *bind.CallOpts, owner common.Address, nameHash [32]byte) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "allowance", owner, nameHash)
 	return *ret0, err
 }
 
-// Allowance is a free data retrieval call binding the contract method 0xbcf9fcad.
+// Hash is a free data retrieval call binding the contract method 0xbd1bd35a.
 //
-// Solidity: function allowance(address owner, bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetSession) Allowance(owner common.Address, nameHash [32]byte) (common.Address, error) {
-	return _BasAsset.Contract.Allowance(&_BasAsset.CallOpts, owner, nameHash)
+// Solidity: function Hash(bytes name) constant returns(bytes32)
+func (_BasAsset *BasAssetSession) Hash(name []byte) ([32]byte, error) {
+	return _BasAsset.Contract.Hash(&_BasAsset.CallOpts, name)
 }
 
-// Allowance is a free data retrieval call binding the contract method 0xbcf9fcad.
+// Hash is a free data retrieval call binding the contract method 0xbd1bd35a.
 //
-// Solidity: function allowance(address owner, bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetCallerSession) Allowance(owner common.Address, nameHash [32]byte) (common.Address, error) {
-	return _BasAsset.Contract.Allowance(&_BasAsset.CallOpts, owner, nameHash)
+// Solidity: function Hash(bytes name) constant returns(bytes32)
+func (_BasAsset *BasAssetCallerSession) Hash(name []byte) ([32]byte, error) {
+	return _BasAsset.Contract.Hash(&_BasAsset.CallOpts, name)
 }
 
-// CurrentOwnerOf is a free data retrieval call binding the contract method 0x85cf9d31.
+// Root is a free data retrieval call binding the contract method 0x83b8202f.
 //
-// Solidity: function currentOwnerOf(bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetCaller) CurrentOwnerOf(opts *bind.CallOpts, nameHash [32]byte) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "currentOwnerOf", nameHash)
-	return *ret0, err
+// Solidity: function Root(bytes32 ) constant returns(bytes rootName, bool openToPublic, bool isCustomed, uint256 customedPrice)
+func (_BasAsset *BasAssetCaller) Root(opts *bind.CallOpts, arg0 [32]byte) (struct {
+	RootName      []byte
+	OpenToPublic  bool
+	IsCustomed    bool
+	CustomedPrice *big.Int
+}, error) {
+	ret := new(struct {
+		RootName      []byte
+		OpenToPublic  bool
+		IsCustomed    bool
+		CustomedPrice *big.Int
+	})
+	out := ret
+	err := _BasAsset.contract.Call(opts, out, "Root", arg0)
+	return *ret, err
 }
 
-// CurrentOwnerOf is a free data retrieval call binding the contract method 0x85cf9d31.
+// Root is a free data retrieval call binding the contract method 0x83b8202f.
 //
-// Solidity: function currentOwnerOf(bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetSession) CurrentOwnerOf(nameHash [32]byte) (common.Address, error) {
-	return _BasAsset.Contract.CurrentOwnerOf(&_BasAsset.CallOpts, nameHash)
+// Solidity: function Root(bytes32 ) constant returns(bytes rootName, bool openToPublic, bool isCustomed, uint256 customedPrice)
+func (_BasAsset *BasAssetSession) Root(arg0 [32]byte) (struct {
+	RootName      []byte
+	OpenToPublic  bool
+	IsCustomed    bool
+	CustomedPrice *big.Int
+}, error) {
+	return _BasAsset.Contract.Root(&_BasAsset.CallOpts, arg0)
 }
 
-// CurrentOwnerOf is a free data retrieval call binding the contract method 0x85cf9d31.
+// Root is a free data retrieval call binding the contract method 0x83b8202f.
 //
-// Solidity: function currentOwnerOf(bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetCallerSession) CurrentOwnerOf(nameHash [32]byte) (common.Address, error) {
-	return _BasAsset.Contract.CurrentOwnerOf(&_BasAsset.CallOpts, nameHash)
+// Solidity: function Root(bytes32 ) constant returns(bytes rootName, bool openToPublic, bool isCustomed, uint256 customedPrice)
+func (_BasAsset *BasAssetCallerSession) Root(arg0 [32]byte) (struct {
+	RootName      []byte
+	OpenToPublic  bool
+	IsCustomed    bool
+	CustomedPrice *big.Int
+}, error) {
+	return _BasAsset.Contract.Root(&_BasAsset.CallOpts, arg0)
 }
 
-// GetDomainOfIndex is a free data retrieval call binding the contract method 0xc5efdc3d.
+// Sub is a free data retrieval call binding the contract method 0x333cf44c.
 //
-// Solidity: function getDomainOfIndex(uint256 idx) constant returns(bytes32)
-func (_BasAsset *BasAssetCaller) GetDomainOfIndex(opts *bind.CallOpts, idx *big.Int) ([32]byte, error) {
+// Solidity: function Sub(bytes32 ) constant returns(bytes totalName, bytes32 rootHash)
+func (_BasAsset *BasAssetCaller) Sub(opts *bind.CallOpts, arg0 [32]byte) (struct {
+	TotalName []byte
+	RootHash  [32]byte
+}, error) {
+	ret := new(struct {
+		TotalName []byte
+		RootHash  [32]byte
+	})
+	out := ret
+	err := _BasAsset.contract.Call(opts, out, "Sub", arg0)
+	return *ret, err
+}
+
+// Sub is a free data retrieval call binding the contract method 0x333cf44c.
+//
+// Solidity: function Sub(bytes32 ) constant returns(bytes totalName, bytes32 rootHash)
+func (_BasAsset *BasAssetSession) Sub(arg0 [32]byte) (struct {
+	TotalName []byte
+	RootHash  [32]byte
+}, error) {
+	return _BasAsset.Contract.Sub(&_BasAsset.CallOpts, arg0)
+}
+
+// Sub is a free data retrieval call binding the contract method 0x333cf44c.
+//
+// Solidity: function Sub(bytes32 ) constant returns(bytes totalName, bytes32 rootHash)
+func (_BasAsset *BasAssetCallerSession) Sub(arg0 [32]byte) (struct {
+	TotalName []byte
+	RootHash  [32]byte
+}, error) {
+	return _BasAsset.Contract.Sub(&_BasAsset.CallOpts, arg0)
+}
+
+// TotalNameHash is a free data retrieval call binding the contract method 0xc3821972.
+//
+// Solidity: function TotalNameHash(bytes sName, bytes rName) constant returns(bytes32)
+func (_BasAsset *BasAssetCaller) TotalNameHash(opts *bind.CallOpts, sName []byte, rName []byte) ([32]byte, error) {
 	var (
 		ret0 = new([32]byte)
 	)
 	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "getDomainOfIndex", idx)
+	err := _BasAsset.contract.Call(opts, out, "TotalNameHash", sName, rName)
 	return *ret0, err
 }
 
-// GetDomainOfIndex is a free data retrieval call binding the contract method 0xc5efdc3d.
+// TotalNameHash is a free data retrieval call binding the contract method 0xc3821972.
 //
-// Solidity: function getDomainOfIndex(uint256 idx) constant returns(bytes32)
-func (_BasAsset *BasAssetSession) GetDomainOfIndex(idx *big.Int) ([32]byte, error) {
-	return _BasAsset.Contract.GetDomainOfIndex(&_BasAsset.CallOpts, idx)
+// Solidity: function TotalNameHash(bytes sName, bytes rName) constant returns(bytes32)
+func (_BasAsset *BasAssetSession) TotalNameHash(sName []byte, rName []byte) ([32]byte, error) {
+	return _BasAsset.Contract.TotalNameHash(&_BasAsset.CallOpts, sName, rName)
 }
 
-// GetDomainOfIndex is a free data retrieval call binding the contract method 0xc5efdc3d.
+// TotalNameHash is a free data retrieval call binding the contract method 0xc3821972.
 //
-// Solidity: function getDomainOfIndex(uint256 idx) constant returns(bytes32)
-func (_BasAsset *BasAssetCallerSession) GetDomainOfIndex(idx *big.Int) ([32]byte, error) {
-	return _BasAsset.Contract.GetDomainOfIndex(&_BasAsset.CallOpts, idx)
+// Solidity: function TotalNameHash(bytes sName, bytes rName) constant returns(bytes32)
+func (_BasAsset *BasAssetCallerSession) TotalNameHash(sName []byte, rName []byte) ([32]byte, error) {
+	return _BasAsset.Contract.TotalNameHash(&_BasAsset.CallOpts, sName, rName)
 }
 
-// GetMayAssetIndexOf is a free data retrieval call binding the contract method 0x3db8b32c.
+// O is a free data retrieval call binding the contract method 0x50cd4df2.
 //
-// Solidity: function getMayAssetIndexOf(uint256 idx) constant returns(bytes32)
-func (_BasAsset *BasAssetCaller) GetMayAssetIndexOf(opts *bind.CallOpts, idx *big.Int) ([32]byte, error) {
+// Solidity: function o() constant returns(address)
+func (_BasAsset *BasAssetCaller) O(opts *bind.CallOpts) (common.Address, error) {
 	var (
-		ret0 = new([32]byte)
+		ret0 = new(common.Address)
 	)
 	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "getMayAssetIndexOf", idx)
+	err := _BasAsset.contract.Call(opts, out, "o")
 	return *ret0, err
 }
 
-// GetMayAssetIndexOf is a free data retrieval call binding the contract method 0x3db8b32c.
+// O is a free data retrieval call binding the contract method 0x50cd4df2.
 //
-// Solidity: function getMayAssetIndexOf(uint256 idx) constant returns(bytes32)
-func (_BasAsset *BasAssetSession) GetMayAssetIndexOf(idx *big.Int) ([32]byte, error) {
-	return _BasAsset.Contract.GetMayAssetIndexOf(&_BasAsset.CallOpts, idx)
+// Solidity: function o() constant returns(address)
+func (_BasAsset *BasAssetSession) O() (common.Address, error) {
+	return _BasAsset.Contract.O(&_BasAsset.CallOpts)
 }
 
-// GetMayAssetIndexOf is a free data retrieval call binding the contract method 0x3db8b32c.
+// O is a free data retrieval call binding the contract method 0x50cd4df2.
 //
-// Solidity: function getMayAssetIndexOf(uint256 idx) constant returns(bytes32)
-func (_BasAsset *BasAssetCallerSession) GetMayAssetIndexOf(idx *big.Int) ([32]byte, error) {
-	return _BasAsset.Contract.GetMayAssetIndexOf(&_BasAsset.CallOpts, idx)
+// Solidity: function o() constant returns(address)
+func (_BasAsset *BasAssetCallerSession) O() (common.Address, error) {
+	return _BasAsset.Contract.O(&_BasAsset.CallOpts)
 }
 
-// IsExpired is a free data retrieval call binding the contract method 0x6db2feb2.
+// RootExist is a free data retrieval call binding the contract method 0x83026106.
 //
-// Solidity: function isExpired(bytes32 nameHash) constant returns(bool)
-func (_BasAsset *BasAssetCaller) IsExpired(opts *bind.CallOpts, nameHash [32]byte) (bool, error) {
+// Solidity: function rootExist(bytes32 nameHash) constant returns(bool)
+func (_BasAsset *BasAssetCaller) RootExist(opts *bind.CallOpts, nameHash [32]byte) (bool, error) {
 	var (
 		ret0 = new(bool)
 	)
 	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "isExpired", nameHash)
+	err := _BasAsset.contract.Call(opts, out, "rootExist", nameHash)
 	return *ret0, err
 }
 
-// IsExpired is a free data retrieval call binding the contract method 0x6db2feb2.
+// RootExist is a free data retrieval call binding the contract method 0x83026106.
 //
-// Solidity: function isExpired(bytes32 nameHash) constant returns(bool)
-func (_BasAsset *BasAssetSession) IsExpired(nameHash [32]byte) (bool, error) {
-	return _BasAsset.Contract.IsExpired(&_BasAsset.CallOpts, nameHash)
+// Solidity: function rootExist(bytes32 nameHash) constant returns(bool)
+func (_BasAsset *BasAssetSession) RootExist(nameHash [32]byte) (bool, error) {
+	return _BasAsset.Contract.RootExist(&_BasAsset.CallOpts, nameHash)
 }
 
-// IsExpired is a free data retrieval call binding the contract method 0x6db2feb2.
+// RootExist is a free data retrieval call binding the contract method 0x83026106.
 //
-// Solidity: function isExpired(bytes32 nameHash) constant returns(bool)
-func (_BasAsset *BasAssetCallerSession) IsExpired(nameHash [32]byte) (bool, error) {
-	return _BasAsset.Contract.IsExpired(&_BasAsset.CallOpts, nameHash)
+// Solidity: function rootExist(bytes32 nameHash) constant returns(bool)
+func (_BasAsset *BasAssetCallerSession) RootExist(nameHash [32]byte) (bool, error) {
+	return _BasAsset.Contract.RootExist(&_BasAsset.CallOpts, nameHash)
 }
 
-// LastOwnerOf is a free data retrieval call binding the contract method 0x5a0e698f.
+// SubExist is a free data retrieval call binding the contract method 0x0119a9e6.
 //
-// Solidity: function lastOwnerOf(bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetCaller) LastOwnerOf(opts *bind.CallOpts, nameHash [32]byte) (common.Address, error) {
+// Solidity: function subExist(bytes32 nameHash) constant returns(bool)
+func (_BasAsset *BasAssetCaller) SubExist(opts *bind.CallOpts, nameHash [32]byte) (bool, error) {
 	var (
-		ret0 = new(common.Address)
+		ret0 = new(bool)
 	)
 	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "lastOwnerOf", nameHash)
+	err := _BasAsset.contract.Call(opts, out, "subExist", nameHash)
 	return *ret0, err
 }
 
-// LastOwnerOf is a free data retrieval call binding the contract method 0x5a0e698f.
+// SubExist is a free data retrieval call binding the contract method 0x0119a9e6.
 //
-// Solidity: function lastOwnerOf(bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetSession) LastOwnerOf(nameHash [32]byte) (common.Address, error) {
-	return _BasAsset.Contract.LastOwnerOf(&_BasAsset.CallOpts, nameHash)
+// Solidity: function subExist(bytes32 nameHash) constant returns(bool)
+func (_BasAsset *BasAssetSession) SubExist(nameHash [32]byte) (bool, error) {
+	return _BasAsset.Contract.SubExist(&_BasAsset.CallOpts, nameHash)
 }
 
-// LastOwnerOf is a free data retrieval call binding the contract method 0x5a0e698f.
+// SubExist is a free data retrieval call binding the contract method 0x0119a9e6.
 //
-// Solidity: function lastOwnerOf(bytes32 nameHash) constant returns(address)
-func (_BasAsset *BasAssetCallerSession) LastOwnerOf(nameHash [32]byte) (common.Address, error) {
-	return _BasAsset.Contract.LastOwnerOf(&_BasAsset.CallOpts, nameHash)
+// Solidity: function subExist(bytes32 nameHash) constant returns(bool)
+func (_BasAsset *BasAssetCallerSession) SubExist(nameHash [32]byte) (bool, error) {
+	return _BasAsset.Contract.SubExist(&_BasAsset.CallOpts, nameHash)
 }
 
-// MyAssetCount is a free data retrieval call binding the contract method 0x96c9de20.
+// AUpdateRoot is a paid mutator transaction binding the contract method 0xaa57635e.
 //
-// Solidity: function myAssetCount(address owner) constant returns(uint256)
-func (_BasAsset *BasAssetCaller) MyAssetCount(opts *bind.CallOpts, owner common.Address) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "myAssetCount", owner)
-	return *ret0, err
+// Solidity: function _a_updateRoot(bytes rootName, bool openToPublic, bool isCustomed, uint256 customedPrice) returns()
+func (_BasAsset *BasAssetTransactor) AUpdateRoot(opts *bind.TransactOpts, rootName []byte, openToPublic bool, isCustomed bool, customedPrice *big.Int) (*types.Transaction, error) {
+	return _BasAsset.contract.Transact(opts, "_a_updateRoot", rootName, openToPublic, isCustomed, customedPrice)
 }
 
-// MyAssetCount is a free data retrieval call binding the contract method 0x96c9de20.
+// AUpdateRoot is a paid mutator transaction binding the contract method 0xaa57635e.
 //
-// Solidity: function myAssetCount(address owner) constant returns(uint256)
-func (_BasAsset *BasAssetSession) MyAssetCount(owner common.Address) (*big.Int, error) {
-	return _BasAsset.Contract.MyAssetCount(&_BasAsset.CallOpts, owner)
+// Solidity: function _a_updateRoot(bytes rootName, bool openToPublic, bool isCustomed, uint256 customedPrice) returns()
+func (_BasAsset *BasAssetSession) AUpdateRoot(rootName []byte, openToPublic bool, isCustomed bool, customedPrice *big.Int) (*types.Transaction, error) {
+	return _BasAsset.Contract.AUpdateRoot(&_BasAsset.TransactOpts, rootName, openToPublic, isCustomed, customedPrice)
 }
 
-// MyAssetCount is a free data retrieval call binding the contract method 0x96c9de20.
+// AUpdateRoot is a paid mutator transaction binding the contract method 0xaa57635e.
 //
-// Solidity: function myAssetCount(address owner) constant returns(uint256)
-func (_BasAsset *BasAssetCallerSession) MyAssetCount(owner common.Address) (*big.Int, error) {
-	return _BasAsset.Contract.MyAssetCount(&_BasAsset.CallOpts, owner)
+// Solidity: function _a_updateRoot(bytes rootName, bool openToPublic, bool isCustomed, uint256 customedPrice) returns()
+func (_BasAsset *BasAssetTransactorSession) AUpdateRoot(rootName []byte, openToPublic bool, isCustomed bool, customedPrice *big.Int) (*types.Transaction, error) {
+	return _BasAsset.Contract.AUpdateRoot(&_BasAsset.TransactOpts, rootName, openToPublic, isCustomed, customedPrice)
 }
 
-// TotalDomainSize is a free data retrieval call binding the contract method 0x24ea2e6b.
+// AUpdateSub is a paid mutator transaction binding the contract method 0x603f29cd.
 //
-// Solidity: function totalDomainSize() constant returns(uint256)
-func (_BasAsset *BasAssetCaller) TotalDomainSize(opts *bind.CallOpts) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _BasAsset.contract.Call(opts, out, "totalDomainSize")
-	return *ret0, err
+// Solidity: function _a_updateSub(bytes totalName, bytes32 rootHash) returns()
+func (_BasAsset *BasAssetTransactor) AUpdateSub(opts *bind.TransactOpts, totalName []byte, rootHash [32]byte) (*types.Transaction, error) {
+	return _BasAsset.contract.Transact(opts, "_a_updateSub", totalName, rootHash)
 }
 
-// TotalDomainSize is a free data retrieval call binding the contract method 0x24ea2e6b.
+// AUpdateSub is a paid mutator transaction binding the contract method 0x603f29cd.
 //
-// Solidity: function totalDomainSize() constant returns(uint256)
-func (_BasAsset *BasAssetSession) TotalDomainSize() (*big.Int, error) {
-	return _BasAsset.Contract.TotalDomainSize(&_BasAsset.CallOpts)
+// Solidity: function _a_updateSub(bytes totalName, bytes32 rootHash) returns()
+func (_BasAsset *BasAssetSession) AUpdateSub(totalName []byte, rootHash [32]byte) (*types.Transaction, error) {
+	return _BasAsset.Contract.AUpdateSub(&_BasAsset.TransactOpts, totalName, rootHash)
 }
 
-// TotalDomainSize is a free data retrieval call binding the contract method 0x24ea2e6b.
+// AUpdateSub is a paid mutator transaction binding the contract method 0x603f29cd.
 //
-// Solidity: function totalDomainSize() constant returns(uint256)
-func (_BasAsset *BasAssetCallerSession) TotalDomainSize() (*big.Int, error) {
-	return _BasAsset.Contract.TotalDomainSize(&_BasAsset.CallOpts)
+// Solidity: function _a_updateSub(bytes totalName, bytes32 rootHash) returns()
+func (_BasAsset *BasAssetTransactorSession) AUpdateSub(totalName []byte, rootHash [32]byte) (*types.Transaction, error) {
+	return _BasAsset.Contract.AUpdateSub(&_BasAsset.TransactOpts, totalName, rootHash)
 }
 
-// Approve is a paid mutator transaction binding the contract method 0x5cd2f4d3.
+// CAddRoot is a paid mutator transaction binding the contract method 0x6f84208d.
 //
-// Solidity: function approve(address spender, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetTransactor) Approve(opts *bind.TransactOpts, spender common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "approve", spender, nameHash)
+// Solidity: function _c_addRoot(bytes rootName, bool openToPublic, bool isCustomed, uint256 customedPrice) returns()
+func (_BasAsset *BasAssetTransactor) CAddRoot(opts *bind.TransactOpts, rootName []byte, openToPublic bool, isCustomed bool, customedPrice *big.Int) (*types.Transaction, error) {
+	return _BasAsset.contract.Transact(opts, "_c_addRoot", rootName, openToPublic, isCustomed, customedPrice)
 }
 
-// Approve is a paid mutator transaction binding the contract method 0x5cd2f4d3.
+// CAddRoot is a paid mutator transaction binding the contract method 0x6f84208d.
 //
-// Solidity: function approve(address spender, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetSession) Approve(spender common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.Approve(&_BasAsset.TransactOpts, spender, nameHash)
+// Solidity: function _c_addRoot(bytes rootName, bool openToPublic, bool isCustomed, uint256 customedPrice) returns()
+func (_BasAsset *BasAssetSession) CAddRoot(rootName []byte, openToPublic bool, isCustomed bool, customedPrice *big.Int) (*types.Transaction, error) {
+	return _BasAsset.Contract.CAddRoot(&_BasAsset.TransactOpts, rootName, openToPublic, isCustomed, customedPrice)
 }
 
-// Approve is a paid mutator transaction binding the contract method 0x5cd2f4d3.
+// CAddRoot is a paid mutator transaction binding the contract method 0x6f84208d.
 //
-// Solidity: function approve(address spender, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetTransactorSession) Approve(spender common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.Approve(&_BasAsset.TransactOpts, spender, nameHash)
+// Solidity: function _c_addRoot(bytes rootName, bool openToPublic, bool isCustomed, uint256 customedPrice) returns()
+func (_BasAsset *BasAssetTransactorSession) CAddRoot(rootName []byte, openToPublic bool, isCustomed bool, customedPrice *big.Int) (*types.Transaction, error) {
+	return _BasAsset.Contract.CAddRoot(&_BasAsset.TransactOpts, rootName, openToPublic, isCustomed, customedPrice)
 }
 
-// ClearRecord is a paid mutator transaction binding the contract method 0x081780f4.
+// CAddSub is a paid mutator transaction binding the contract method 0x66967cfb.
 //
-// Solidity: function clearRecord(bytes32 nameHash) returns()
-func (_BasAsset *BasAssetTransactor) ClearRecord(opts *bind.TransactOpts, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "clearRecord", nameHash)
+// Solidity: function _c_addSub(bytes totalName, bytes32 rootHash) returns()
+func (_BasAsset *BasAssetTransactor) CAddSub(opts *bind.TransactOpts, totalName []byte, rootHash [32]byte) (*types.Transaction, error) {
+	return _BasAsset.contract.Transact(opts, "_c_addSub", totalName, rootHash)
 }
 
-// ClearRecord is a paid mutator transaction binding the contract method 0x081780f4.
+// CAddSub is a paid mutator transaction binding the contract method 0x66967cfb.
 //
-// Solidity: function clearRecord(bytes32 nameHash) returns()
-func (_BasAsset *BasAssetSession) ClearRecord(nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.ClearRecord(&_BasAsset.TransactOpts, nameHash)
+// Solidity: function _c_addSub(bytes totalName, bytes32 rootHash) returns()
+func (_BasAsset *BasAssetSession) CAddSub(totalName []byte, rootHash [32]byte) (*types.Transaction, error) {
+	return _BasAsset.Contract.CAddSub(&_BasAsset.TransactOpts, totalName, rootHash)
 }
 
-// ClearRecord is a paid mutator transaction binding the contract method 0x081780f4.
+// CAddSub is a paid mutator transaction binding the contract method 0x66967cfb.
 //
-// Solidity: function clearRecord(bytes32 nameHash) returns()
-func (_BasAsset *BasAssetTransactorSession) ClearRecord(nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.ClearRecord(&_BasAsset.TransactOpts, nameHash)
+// Solidity: function _c_addSub(bytes totalName, bytes32 rootHash) returns()
+func (_BasAsset *BasAssetTransactorSession) CAddSub(totalName []byte, rootHash [32]byte) (*types.Transaction, error) {
+	return _BasAsset.Contract.CAddSub(&_BasAsset.TransactOpts, totalName, rootHash)
 }
 
-// CloseCustomedPrice is a paid mutator transaction binding the contract method 0xc0bd516d.
+// CUpdateRoot is a paid mutator transaction binding the contract method 0x514bfdca.
 //
-// Solidity: function closeCustomedPrice(bytes32 rootHash) returns()
-func (_BasAsset *BasAssetTransactor) CloseCustomedPrice(opts *bind.TransactOpts, rootHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "closeCustomedPrice", rootHash)
+// Solidity: function _c_updateRoot(bytes32 nameHash, bool openToPublic, bool isCustomed, uint256 customedPrice) returns()
+func (_BasAsset *BasAssetTransactor) CUpdateRoot(opts *bind.TransactOpts, nameHash [32]byte, openToPublic bool, isCustomed bool, customedPrice *big.Int) (*types.Transaction, error) {
+	return _BasAsset.contract.Transact(opts, "_c_updateRoot", nameHash, openToPublic, isCustomed, customedPrice)
 }
 
-// CloseCustomedPrice is a paid mutator transaction binding the contract method 0xc0bd516d.
+// CUpdateRoot is a paid mutator transaction binding the contract method 0x514bfdca.
 //
-// Solidity: function closeCustomedPrice(bytes32 rootHash) returns()
-func (_BasAsset *BasAssetSession) CloseCustomedPrice(rootHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.CloseCustomedPrice(&_BasAsset.TransactOpts, rootHash)
+// Solidity: function _c_updateRoot(bytes32 nameHash, bool openToPublic, bool isCustomed, uint256 customedPrice) returns()
+func (_BasAsset *BasAssetSession) CUpdateRoot(nameHash [32]byte, openToPublic bool, isCustomed bool, customedPrice *big.Int) (*types.Transaction, error) {
+	return _BasAsset.Contract.CUpdateRoot(&_BasAsset.TransactOpts, nameHash, openToPublic, isCustomed, customedPrice)
 }
 
-// CloseCustomedPrice is a paid mutator transaction binding the contract method 0xc0bd516d.
+// CUpdateRoot is a paid mutator transaction binding the contract method 0x514bfdca.
 //
-// Solidity: function closeCustomedPrice(bytes32 rootHash) returns()
-func (_BasAsset *BasAssetTransactorSession) CloseCustomedPrice(rootHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.CloseCustomedPrice(&_BasAsset.TransactOpts, rootHash)
-}
-
-// CloseToPublic is a paid mutator transaction binding the contract method 0xd0f0b43d.
-//
-// Solidity: function closeToPublic(bytes32 rootHash) returns()
-func (_BasAsset *BasAssetTransactor) CloseToPublic(opts *bind.TransactOpts, rootHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "closeToPublic", rootHash)
-}
-
-// CloseToPublic is a paid mutator transaction binding the contract method 0xd0f0b43d.
-//
-// Solidity: function closeToPublic(bytes32 rootHash) returns()
-func (_BasAsset *BasAssetSession) CloseToPublic(rootHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.CloseToPublic(&_BasAsset.TransactOpts, rootHash)
-}
-
-// CloseToPublic is a paid mutator transaction binding the contract method 0xd0f0b43d.
-//
-// Solidity: function closeToPublic(bytes32 rootHash) returns()
-func (_BasAsset *BasAssetTransactorSession) CloseToPublic(rootHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.CloseToPublic(&_BasAsset.TransactOpts, rootHash)
-}
-
-// MintRootAsset is a paid mutator transaction binding the contract method 0xfbc94c0b.
-//
-// Solidity: function mintRootAsset(bytes32 nameHash, bytes name, uint256 expire, bool isOpen, bool isCustomed, uint256 cusPrice, bool isAType, address owner) returns()
-func (_BasAsset *BasAssetTransactor) MintRootAsset(opts *bind.TransactOpts, nameHash [32]byte, name []byte, expire *big.Int, isOpen bool, isCustomed bool, cusPrice *big.Int, isAType bool, owner common.Address) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "mintRootAsset", nameHash, name, expire, isOpen, isCustomed, cusPrice, isAType, owner)
-}
-
-// MintRootAsset is a paid mutator transaction binding the contract method 0xfbc94c0b.
-//
-// Solidity: function mintRootAsset(bytes32 nameHash, bytes name, uint256 expire, bool isOpen, bool isCustomed, uint256 cusPrice, bool isAType, address owner) returns()
-func (_BasAsset *BasAssetSession) MintRootAsset(nameHash [32]byte, name []byte, expire *big.Int, isOpen bool, isCustomed bool, cusPrice *big.Int, isAType bool, owner common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.MintRootAsset(&_BasAsset.TransactOpts, nameHash, name, expire, isOpen, isCustomed, cusPrice, isAType, owner)
-}
-
-// MintRootAsset is a paid mutator transaction binding the contract method 0xfbc94c0b.
-//
-// Solidity: function mintRootAsset(bytes32 nameHash, bytes name, uint256 expire, bool isOpen, bool isCustomed, uint256 cusPrice, bool isAType, address owner) returns()
-func (_BasAsset *BasAssetTransactorSession) MintRootAsset(nameHash [32]byte, name []byte, expire *big.Int, isOpen bool, isCustomed bool, cusPrice *big.Int, isAType bool, owner common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.MintRootAsset(&_BasAsset.TransactOpts, nameHash, name, expire, isOpen, isCustomed, cusPrice, isAType, owner)
-}
-
-// MintSubAsset is a paid mutator transaction binding the contract method 0xcc2312f1.
-//
-// Solidity: function mintSubAsset(bytes32 sHash, bytes sname, bytes32 rHash, uint256 expire, address owner) returns()
-func (_BasAsset *BasAssetTransactor) MintSubAsset(opts *bind.TransactOpts, sHash [32]byte, sname []byte, rHash [32]byte, expire *big.Int, owner common.Address) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "mintSubAsset", sHash, sname, rHash, expire, owner)
-}
-
-// MintSubAsset is a paid mutator transaction binding the contract method 0xcc2312f1.
-//
-// Solidity: function mintSubAsset(bytes32 sHash, bytes sname, bytes32 rHash, uint256 expire, address owner) returns()
-func (_BasAsset *BasAssetSession) MintSubAsset(sHash [32]byte, sname []byte, rHash [32]byte, expire *big.Int, owner common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.MintSubAsset(&_BasAsset.TransactOpts, sHash, sname, rHash, expire, owner)
-}
-
-// MintSubAsset is a paid mutator transaction binding the contract method 0xcc2312f1.
-//
-// Solidity: function mintSubAsset(bytes32 sHash, bytes sname, bytes32 rHash, uint256 expire, address owner) returns()
-func (_BasAsset *BasAssetTransactorSession) MintSubAsset(sHash [32]byte, sname []byte, rHash [32]byte, expire *big.Int, owner common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.MintSubAsset(&_BasAsset.TransactOpts, sHash, sname, rHash, expire, owner)
-}
-
-// OpenCustomedPrice is a paid mutator transaction binding the contract method 0x3d04f2fb.
-//
-// Solidity: function openCustomedPrice(bytes32 rootHash, uint256 price) returns()
-func (_BasAsset *BasAssetTransactor) OpenCustomedPrice(opts *bind.TransactOpts, rootHash [32]byte, price *big.Int) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "openCustomedPrice", rootHash, price)
-}
-
-// OpenCustomedPrice is a paid mutator transaction binding the contract method 0x3d04f2fb.
-//
-// Solidity: function openCustomedPrice(bytes32 rootHash, uint256 price) returns()
-func (_BasAsset *BasAssetSession) OpenCustomedPrice(rootHash [32]byte, price *big.Int) (*types.Transaction, error) {
-	return _BasAsset.Contract.OpenCustomedPrice(&_BasAsset.TransactOpts, rootHash, price)
-}
-
-// OpenCustomedPrice is a paid mutator transaction binding the contract method 0x3d04f2fb.
-//
-// Solidity: function openCustomedPrice(bytes32 rootHash, uint256 price) returns()
-func (_BasAsset *BasAssetTransactorSession) OpenCustomedPrice(rootHash [32]byte, price *big.Int) (*types.Transaction, error) {
-	return _BasAsset.Contract.OpenCustomedPrice(&_BasAsset.TransactOpts, rootHash, price)
-}
-
-// OpenToPublic is a paid mutator transaction binding the contract method 0xed26e5ae.
-//
-// Solidity: function openToPublic(bytes32 rootHash) returns()
-func (_BasAsset *BasAssetTransactor) OpenToPublic(opts *bind.TransactOpts, rootHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "openToPublic", rootHash)
-}
-
-// OpenToPublic is a paid mutator transaction binding the contract method 0xed26e5ae.
-//
-// Solidity: function openToPublic(bytes32 rootHash) returns()
-func (_BasAsset *BasAssetSession) OpenToPublic(rootHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.OpenToPublic(&_BasAsset.TransactOpts, rootHash)
-}
-
-// OpenToPublic is a paid mutator transaction binding the contract method 0xed26e5ae.
-//
-// Solidity: function openToPublic(bytes32 rootHash) returns()
-func (_BasAsset *BasAssetTransactorSession) OpenToPublic(rootHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.OpenToPublic(&_BasAsset.TransactOpts, rootHash)
-}
-
-// Recharge is a paid mutator transaction binding the contract method 0x1c31e2da.
-//
-// Solidity: function recharge(bytes32 nameHash, uint256 expire, bool isRoot) returns()
-func (_BasAsset *BasAssetTransactor) Recharge(opts *bind.TransactOpts, nameHash [32]byte, expire *big.Int, isRoot bool) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "recharge", nameHash, expire, isRoot)
-}
-
-// Recharge is a paid mutator transaction binding the contract method 0x1c31e2da.
-//
-// Solidity: function recharge(bytes32 nameHash, uint256 expire, bool isRoot) returns()
-func (_BasAsset *BasAssetSession) Recharge(nameHash [32]byte, expire *big.Int, isRoot bool) (*types.Transaction, error) {
-	return _BasAsset.Contract.Recharge(&_BasAsset.TransactOpts, nameHash, expire, isRoot)
-}
-
-// Recharge is a paid mutator transaction binding the contract method 0x1c31e2da.
-//
-// Solidity: function recharge(bytes32 nameHash, uint256 expire, bool isRoot) returns()
-func (_BasAsset *BasAssetTransactorSession) Recharge(nameHash [32]byte, expire *big.Int, isRoot bool) (*types.Transaction, error) {
-	return _BasAsset.Contract.Recharge(&_BasAsset.TransactOpts, nameHash, expire, isRoot)
-}
-
-// Revoke is a paid mutator transaction binding the contract method 0x88e62721.
-//
-// Solidity: function revoke(address from, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetTransactor) Revoke(opts *bind.TransactOpts, from common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "revoke", from, nameHash)
-}
-
-// Revoke is a paid mutator transaction binding the contract method 0x88e62721.
-//
-// Solidity: function revoke(address from, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetSession) Revoke(from common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.Revoke(&_BasAsset.TransactOpts, from, nameHash)
-}
-
-// Revoke is a paid mutator transaction binding the contract method 0x88e62721.
-//
-// Solidity: function revoke(address from, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetTransactorSession) Revoke(from common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.Revoke(&_BasAsset.TransactOpts, from, nameHash)
-}
-
-// SetAlias is a paid mutator transaction binding the contract method 0x468c024c.
-//
-// Solidity: function setAlias(bytes32 nameHash, string aName) returns()
-func (_BasAsset *BasAssetTransactor) SetAlias(opts *bind.TransactOpts, nameHash [32]byte, aName string) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "setAlias", nameHash, aName)
-}
-
-// SetAlias is a paid mutator transaction binding the contract method 0x468c024c.
-//
-// Solidity: function setAlias(bytes32 nameHash, string aName) returns()
-func (_BasAsset *BasAssetSession) SetAlias(nameHash [32]byte, aName string) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetAlias(&_BasAsset.TransactOpts, nameHash, aName)
-}
-
-// SetAlias is a paid mutator transaction binding the contract method 0x468c024c.
-//
-// Solidity: function setAlias(bytes32 nameHash, string aName) returns()
-func (_BasAsset *BasAssetTransactorSession) SetAlias(nameHash [32]byte, aName string) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetAlias(&_BasAsset.TransactOpts, nameHash, aName)
-}
-
-// SetBCAddress is a paid mutator transaction binding the contract method 0x706ef095.
-//
-// Solidity: function setBCAddress(bytes32 nameHash, string bcAddress) returns()
-func (_BasAsset *BasAssetTransactor) SetBCAddress(opts *bind.TransactOpts, nameHash [32]byte, bcAddress string) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "setBCAddress", nameHash, bcAddress)
-}
-
-// SetBCAddress is a paid mutator transaction binding the contract method 0x706ef095.
-//
-// Solidity: function setBCAddress(bytes32 nameHash, string bcAddress) returns()
-func (_BasAsset *BasAssetSession) SetBCAddress(nameHash [32]byte, bcAddress string) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetBCAddress(&_BasAsset.TransactOpts, nameHash, bcAddress)
-}
-
-// SetBCAddress is a paid mutator transaction binding the contract method 0x706ef095.
-//
-// Solidity: function setBCAddress(bytes32 nameHash, string bcAddress) returns()
-func (_BasAsset *BasAssetTransactorSession) SetBCAddress(nameHash [32]byte, bcAddress string) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetBCAddress(&_BasAsset.TransactOpts, nameHash, bcAddress)
-}
-
-// SetIP is a paid mutator transaction binding the contract method 0x4fd2d18a.
-//
-// Solidity: function setIP(bytes32 nameHash, bytes4 ipv4, bytes16 ipv6) returns()
-func (_BasAsset *BasAssetTransactor) SetIP(opts *bind.TransactOpts, nameHash [32]byte, ipv4 [4]byte, ipv6 [16]byte) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "setIP", nameHash, ipv4, ipv6)
-}
-
-// SetIP is a paid mutator transaction binding the contract method 0x4fd2d18a.
-//
-// Solidity: function setIP(bytes32 nameHash, bytes4 ipv4, bytes16 ipv6) returns()
-func (_BasAsset *BasAssetSession) SetIP(nameHash [32]byte, ipv4 [4]byte, ipv6 [16]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetIP(&_BasAsset.TransactOpts, nameHash, ipv4, ipv6)
-}
-
-// SetIP is a paid mutator transaction binding the contract method 0x4fd2d18a.
-//
-// Solidity: function setIP(bytes32 nameHash, bytes4 ipv4, bytes16 ipv6) returns()
-func (_BasAsset *BasAssetTransactorSession) SetIP(nameHash [32]byte, ipv4 [4]byte, ipv6 [16]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetIP(&_BasAsset.TransactOpts, nameHash, ipv4, ipv6)
-}
-
-// SetOANN is a paid mutator transaction binding the contract method 0xbc63d8b9.
-//
-// Solidity: function setOANN(address newOANN) returns()
-func (_BasAsset *BasAssetTransactor) SetOANN(opts *bind.TransactOpts, newOANN common.Address) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "setOANN", newOANN)
-}
-
-// SetOANN is a paid mutator transaction binding the contract method 0xbc63d8b9.
-//
-// Solidity: function setOANN(address newOANN) returns()
-func (_BasAsset *BasAssetSession) SetOANN(newOANN common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetOANN(&_BasAsset.TransactOpts, newOANN)
-}
-
-// SetOANN is a paid mutator transaction binding the contract method 0xbc63d8b9.
-//
-// Solidity: function setOANN(address newOANN) returns()
-func (_BasAsset *BasAssetTransactorSession) SetOANN(newOANN common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetOANN(&_BasAsset.TransactOpts, newOANN)
-}
-
-// SetOpData is a paid mutator transaction binding the contract method 0x9e19a994.
-//
-// Solidity: function setOpData(bytes32 nameHash, bytes opData) returns()
-func (_BasAsset *BasAssetTransactor) SetOpData(opts *bind.TransactOpts, nameHash [32]byte, opData []byte) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "setOpData", nameHash, opData)
-}
-
-// SetOpData is a paid mutator transaction binding the contract method 0x9e19a994.
-//
-// Solidity: function setOpData(bytes32 nameHash, bytes opData) returns()
-func (_BasAsset *BasAssetSession) SetOpData(nameHash [32]byte, opData []byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetOpData(&_BasAsset.TransactOpts, nameHash, opData)
-}
-
-// SetOpData is a paid mutator transaction binding the contract method 0x9e19a994.
-//
-// Solidity: function setOpData(bytes32 nameHash, bytes opData) returns()
-func (_BasAsset *BasAssetTransactorSession) SetOpData(nameHash [32]byte, opData []byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetOpData(&_BasAsset.TransactOpts, nameHash, opData)
-}
-
-// SetRecord is a paid mutator transaction binding the contract method 0x9385b5e1.
-//
-// Solidity: function setRecord(bytes32 nameHash, bytes4 ipv4, bytes16 ipv6, string bcAddress, bytes opData, string aName) returns()
-func (_BasAsset *BasAssetTransactor) SetRecord(opts *bind.TransactOpts, nameHash [32]byte, ipv4 [4]byte, ipv6 [16]byte, bcAddress string, opData []byte, aName string) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "setRecord", nameHash, ipv4, ipv6, bcAddress, opData, aName)
-}
-
-// SetRecord is a paid mutator transaction binding the contract method 0x9385b5e1.
-//
-// Solidity: function setRecord(bytes32 nameHash, bytes4 ipv4, bytes16 ipv6, string bcAddress, bytes opData, string aName) returns()
-func (_BasAsset *BasAssetSession) SetRecord(nameHash [32]byte, ipv4 [4]byte, ipv6 [16]byte, bcAddress string, opData []byte, aName string) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetRecord(&_BasAsset.TransactOpts, nameHash, ipv4, ipv6, bcAddress, opData, aName)
-}
-
-// SetRecord is a paid mutator transaction binding the contract method 0x9385b5e1.
-//
-// Solidity: function setRecord(bytes32 nameHash, bytes4 ipv4, bytes16 ipv6, string bcAddress, bytes opData, string aName) returns()
-func (_BasAsset *BasAssetTransactorSession) SetRecord(nameHash [32]byte, ipv4 [4]byte, ipv6 [16]byte, bcAddress string, opData []byte, aName string) (*types.Transaction, error) {
-	return _BasAsset.Contract.SetRecord(&_BasAsset.TransactOpts, nameHash, ipv4, ipv6, bcAddress, opData, aName)
-}
-
-// TakeoverRoot is a paid mutator transaction binding the contract method 0x1bdf10ff.
-//
-// Solidity: function takeoverRoot(bytes32 nameHash, uint256 expire, bool isOpen, bool isCustomed, uint256 cusPrice, address oldOwner, address newOwner) returns()
-func (_BasAsset *BasAssetTransactor) TakeoverRoot(opts *bind.TransactOpts, nameHash [32]byte, expire *big.Int, isOpen bool, isCustomed bool, cusPrice *big.Int, oldOwner common.Address, newOwner common.Address) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "takeoverRoot", nameHash, expire, isOpen, isCustomed, cusPrice, oldOwner, newOwner)
-}
-
-// TakeoverRoot is a paid mutator transaction binding the contract method 0x1bdf10ff.
-//
-// Solidity: function takeoverRoot(bytes32 nameHash, uint256 expire, bool isOpen, bool isCustomed, uint256 cusPrice, address oldOwner, address newOwner) returns()
-func (_BasAsset *BasAssetSession) TakeoverRoot(nameHash [32]byte, expire *big.Int, isOpen bool, isCustomed bool, cusPrice *big.Int, oldOwner common.Address, newOwner common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.TakeoverRoot(&_BasAsset.TransactOpts, nameHash, expire, isOpen, isCustomed, cusPrice, oldOwner, newOwner)
-}
-
-// TakeoverRoot is a paid mutator transaction binding the contract method 0x1bdf10ff.
-//
-// Solidity: function takeoverRoot(bytes32 nameHash, uint256 expire, bool isOpen, bool isCustomed, uint256 cusPrice, address oldOwner, address newOwner) returns()
-func (_BasAsset *BasAssetTransactorSession) TakeoverRoot(nameHash [32]byte, expire *big.Int, isOpen bool, isCustomed bool, cusPrice *big.Int, oldOwner common.Address, newOwner common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.TakeoverRoot(&_BasAsset.TransactOpts, nameHash, expire, isOpen, isCustomed, cusPrice, oldOwner, newOwner)
-}
-
-// TakeoverSubName is a paid mutator transaction binding the contract method 0xd59a0e68.
-//
-// Solidity: function takeoverSubName(bytes32 sHash, uint256 expire, address oldOwner, address newOwner) returns()
-func (_BasAsset *BasAssetTransactor) TakeoverSubName(opts *bind.TransactOpts, sHash [32]byte, expire *big.Int, oldOwner common.Address, newOwner common.Address) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "takeoverSubName", sHash, expire, oldOwner, newOwner)
-}
-
-// TakeoverSubName is a paid mutator transaction binding the contract method 0xd59a0e68.
-//
-// Solidity: function takeoverSubName(bytes32 sHash, uint256 expire, address oldOwner, address newOwner) returns()
-func (_BasAsset *BasAssetSession) TakeoverSubName(sHash [32]byte, expire *big.Int, oldOwner common.Address, newOwner common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.TakeoverSubName(&_BasAsset.TransactOpts, sHash, expire, oldOwner, newOwner)
-}
-
-// TakeoverSubName is a paid mutator transaction binding the contract method 0xd59a0e68.
-//
-// Solidity: function takeoverSubName(bytes32 sHash, uint256 expire, address oldOwner, address newOwner) returns()
-func (_BasAsset *BasAssetTransactorSession) TakeoverSubName(sHash [32]byte, expire *big.Int, oldOwner common.Address, newOwner common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.TakeoverSubName(&_BasAsset.TransactOpts, sHash, expire, oldOwner, newOwner)
-}
-
-// Transfer is a paid mutator transaction binding the contract method 0x7d32e7bd.
-//
-// Solidity: function transfer(address to, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetTransactor) Transfer(opts *bind.TransactOpts, to common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "transfer", to, nameHash)
-}
-
-// Transfer is a paid mutator transaction binding the contract method 0x7d32e7bd.
-//
-// Solidity: function transfer(address to, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetSession) Transfer(to common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.Transfer(&_BasAsset.TransactOpts, to, nameHash)
-}
-
-// Transfer is a paid mutator transaction binding the contract method 0x7d32e7bd.
-//
-// Solidity: function transfer(address to, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetTransactorSession) Transfer(to common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.Transfer(&_BasAsset.TransactOpts, to, nameHash)
-}
-
-// TransferContractOwnership is a paid mutator transaction binding the contract method 0xa843c51f.
-//
-// Solidity: function transferContractOwnership(address newOwner) returns()
-func (_BasAsset *BasAssetTransactor) TransferContractOwnership(opts *bind.TransactOpts, newOwner common.Address) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "transferContractOwnership", newOwner)
-}
-
-// TransferContractOwnership is a paid mutator transaction binding the contract method 0xa843c51f.
-//
-// Solidity: function transferContractOwnership(address newOwner) returns()
-func (_BasAsset *BasAssetSession) TransferContractOwnership(newOwner common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.TransferContractOwnership(&_BasAsset.TransactOpts, newOwner)
-}
-
-// TransferContractOwnership is a paid mutator transaction binding the contract method 0xa843c51f.
-//
-// Solidity: function transferContractOwnership(address newOwner) returns()
-func (_BasAsset *BasAssetTransactorSession) TransferContractOwnership(newOwner common.Address) (*types.Transaction, error) {
-	return _BasAsset.Contract.TransferContractOwnership(&_BasAsset.TransactOpts, newOwner)
-}
-
-// TransferFrom is a paid mutator transaction binding the contract method 0xb3c06f50.
-//
-// Solidity: function transferFrom(address from, address to, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetTransactor) TransferFrom(opts *bind.TransactOpts, from common.Address, to common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.contract.Transact(opts, "transferFrom", from, to, nameHash)
-}
-
-// TransferFrom is a paid mutator transaction binding the contract method 0xb3c06f50.
-//
-// Solidity: function transferFrom(address from, address to, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetSession) TransferFrom(from common.Address, to common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.TransferFrom(&_BasAsset.TransactOpts, from, to, nameHash)
-}
-
-// TransferFrom is a paid mutator transaction binding the contract method 0xb3c06f50.
-//
-// Solidity: function transferFrom(address from, address to, bytes32 nameHash) returns()
-func (_BasAsset *BasAssetTransactorSession) TransferFrom(from common.Address, to common.Address, nameHash [32]byte) (*types.Transaction, error) {
-	return _BasAsset.Contract.TransferFrom(&_BasAsset.TransactOpts, from, to, nameHash)
-}
-
-// BasAssetAssertTransferIterator is returned from FilterAssertTransfer and is used to iterate over the raw logs and unpacked data for AssertTransfer events raised by the BasAsset contract.
-type BasAssetAssertTransferIterator struct {
-	Event *BasAssetAssertTransfer // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *BasAssetAssertTransferIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(BasAssetAssertTransfer)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(BasAssetAssertTransfer)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *BasAssetAssertTransferIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *BasAssetAssertTransferIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// BasAssetAssertTransfer represents a AssertTransfer event raised by the BasAsset contract.
-type BasAssetAssertTransfer struct {
-	NameHash [32]byte
-	From     common.Address
-	To       common.Address
-	Raw      types.Log // Blockchain specific contextual infos
-}
-
-// FilterAssertTransfer is a free log retrieval operation binding the contract event 0xcd4efa8d78d4de87992137b0ae50f3f3db87dc11a7ffeabc0994bf58b0e65a6a.
-//
-// Solidity: event AssertTransfer(bytes32 nameHash, address from, address to)
-func (_BasAsset *BasAssetFilterer) FilterAssertTransfer(opts *bind.FilterOpts) (*BasAssetAssertTransferIterator, error) {
-
-	logs, sub, err := _BasAsset.contract.FilterLogs(opts, "AssertTransfer")
-	if err != nil {
-		return nil, err
-	}
-	return &BasAssetAssertTransferIterator{contract: _BasAsset.contract, event: "AssertTransfer", logs: logs, sub: sub}, nil
-}
-
-// WatchAssertTransfer is a free log subscription operation binding the contract event 0xcd4efa8d78d4de87992137b0ae50f3f3db87dc11a7ffeabc0994bf58b0e65a6a.
-//
-// Solidity: event AssertTransfer(bytes32 nameHash, address from, address to)
-func (_BasAsset *BasAssetFilterer) WatchAssertTransfer(opts *bind.WatchOpts, sink chan<- *BasAssetAssertTransfer) (event.Subscription, error) {
-
-	logs, sub, err := _BasAsset.contract.WatchLogs(opts, "AssertTransfer")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(BasAssetAssertTransfer)
-				if err := _BasAsset.contract.UnpackLog(event, "AssertTransfer", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseAssertTransfer is a log parse operation binding the contract event 0xcd4efa8d78d4de87992137b0ae50f3f3db87dc11a7ffeabc0994bf58b0e65a6a.
-//
-// Solidity: event AssertTransfer(bytes32 nameHash, address from, address to)
-func (_BasAsset *BasAssetFilterer) ParseAssertTransfer(log types.Log) (*BasAssetAssertTransfer, error) {
-	event := new(BasAssetAssertTransfer)
-	if err := _BasAsset.contract.UnpackLog(event, "AssertTransfer", log); err != nil {
-		return nil, err
-	}
-	return event, nil
-}
-
-// BasAssetDNSRecordChangeIterator is returned from FilterDNSRecordChange and is used to iterate over the raw logs and unpacked data for DNSRecordChange events raised by the BasAsset contract.
-type BasAssetDNSRecordChangeIterator struct {
-	Event *BasAssetDNSRecordChange // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *BasAssetDNSRecordChangeIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(BasAssetDNSRecordChange)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(BasAssetDNSRecordChange)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *BasAssetDNSRecordChangeIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *BasAssetDNSRecordChangeIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// BasAssetDNSRecordChange represents a DNSRecordChange event raised by the BasAsset contract.
-type BasAssetDNSRecordChange struct {
-	NameHash [32]byte
-	Raw      types.Log // Blockchain specific contextual infos
-}
-
-// FilterDNSRecordChange is a free log retrieval operation binding the contract event 0xc4aaff00d9c0e5be36460c841ba5920da4c842307539cdbe500387afa617e621.
-//
-// Solidity: event DNSRecordChange(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) FilterDNSRecordChange(opts *bind.FilterOpts) (*BasAssetDNSRecordChangeIterator, error) {
-
-	logs, sub, err := _BasAsset.contract.FilterLogs(opts, "DNSRecordChange")
-	if err != nil {
-		return nil, err
-	}
-	return &BasAssetDNSRecordChangeIterator{contract: _BasAsset.contract, event: "DNSRecordChange", logs: logs, sub: sub}, nil
-}
-
-// WatchDNSRecordChange is a free log subscription operation binding the contract event 0xc4aaff00d9c0e5be36460c841ba5920da4c842307539cdbe500387afa617e621.
-//
-// Solidity: event DNSRecordChange(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) WatchDNSRecordChange(opts *bind.WatchOpts, sink chan<- *BasAssetDNSRecordChange) (event.Subscription, error) {
-
-	logs, sub, err := _BasAsset.contract.WatchLogs(opts, "DNSRecordChange")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(BasAssetDNSRecordChange)
-				if err := _BasAsset.contract.UnpackLog(event, "DNSRecordChange", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseDNSRecordChange is a log parse operation binding the contract event 0xc4aaff00d9c0e5be36460c841ba5920da4c842307539cdbe500387afa617e621.
-//
-// Solidity: event DNSRecordChange(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) ParseDNSRecordChange(log types.Log) (*BasAssetDNSRecordChange, error) {
-	event := new(BasAssetDNSRecordChange)
-	if err := _BasAsset.contract.UnpackLog(event, "DNSRecordChange", log); err != nil {
-		return nil, err
-	}
-	return event, nil
-}
-
-// BasAssetDNSRecordRemoveIterator is returned from FilterDNSRecordRemove and is used to iterate over the raw logs and unpacked data for DNSRecordRemove events raised by the BasAsset contract.
-type BasAssetDNSRecordRemoveIterator struct {
-	Event *BasAssetDNSRecordRemove // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *BasAssetDNSRecordRemoveIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(BasAssetDNSRecordRemove)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(BasAssetDNSRecordRemove)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *BasAssetDNSRecordRemoveIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *BasAssetDNSRecordRemoveIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// BasAssetDNSRecordRemove represents a DNSRecordRemove event raised by the BasAsset contract.
-type BasAssetDNSRecordRemove struct {
-	NameHash [32]byte
-	Raw      types.Log // Blockchain specific contextual infos
-}
-
-// FilterDNSRecordRemove is a free log retrieval operation binding the contract event 0xcf86f295942fcb9fa5bae52547a73e10a7a197b753af74ec610b8a9283a21439.
-//
-// Solidity: event DNSRecordRemove(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) FilterDNSRecordRemove(opts *bind.FilterOpts) (*BasAssetDNSRecordRemoveIterator, error) {
-
-	logs, sub, err := _BasAsset.contract.FilterLogs(opts, "DNSRecordRemove")
-	if err != nil {
-		return nil, err
-	}
-	return &BasAssetDNSRecordRemoveIterator{contract: _BasAsset.contract, event: "DNSRecordRemove", logs: logs, sub: sub}, nil
-}
-
-// WatchDNSRecordRemove is a free log subscription operation binding the contract event 0xcf86f295942fcb9fa5bae52547a73e10a7a197b753af74ec610b8a9283a21439.
-//
-// Solidity: event DNSRecordRemove(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) WatchDNSRecordRemove(opts *bind.WatchOpts, sink chan<- *BasAssetDNSRecordRemove) (event.Subscription, error) {
-
-	logs, sub, err := _BasAsset.contract.WatchLogs(opts, "DNSRecordRemove")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(BasAssetDNSRecordRemove)
-				if err := _BasAsset.contract.UnpackLog(event, "DNSRecordRemove", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseDNSRecordRemove is a log parse operation binding the contract event 0xcf86f295942fcb9fa5bae52547a73e10a7a197b753af74ec610b8a9283a21439.
-//
-// Solidity: event DNSRecordRemove(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) ParseDNSRecordRemove(log types.Log) (*BasAssetDNSRecordRemove, error) {
-	event := new(BasAssetDNSRecordRemove)
-	if err := _BasAsset.contract.UnpackLog(event, "DNSRecordRemove", log); err != nil {
-		return nil, err
-	}
-	return event, nil
-}
-
-// BasAssetMintAssetIterator is returned from FilterMintAsset and is used to iterate over the raw logs and unpacked data for MintAsset events raised by the BasAsset contract.
-type BasAssetMintAssetIterator struct {
-	Event *BasAssetMintAsset // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *BasAssetMintAssetIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(BasAssetMintAsset)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(BasAssetMintAsset)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *BasAssetMintAssetIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *BasAssetMintAssetIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// BasAssetMintAsset represents a MintAsset event raised by the BasAsset contract.
-type BasAssetMintAsset struct {
-	Owner common.Address
-	Hash  [32]byte
-	Name  []byte
-	Raw   types.Log // Blockchain specific contextual infos
-}
-
-// FilterMintAsset is a free log retrieval operation binding the contract event 0x52d8e8dc2982b49519977efd1fdb015121fc21583eafae05e568c207b3109059.
-//
-// Solidity: event MintAsset(address owner, bytes32 hash, bytes name)
-func (_BasAsset *BasAssetFilterer) FilterMintAsset(opts *bind.FilterOpts) (*BasAssetMintAssetIterator, error) {
-
-	logs, sub, err := _BasAsset.contract.FilterLogs(opts, "MintAsset")
-	if err != nil {
-		return nil, err
-	}
-	return &BasAssetMintAssetIterator{contract: _BasAsset.contract, event: "MintAsset", logs: logs, sub: sub}, nil
-}
-
-// WatchMintAsset is a free log subscription operation binding the contract event 0x52d8e8dc2982b49519977efd1fdb015121fc21583eafae05e568c207b3109059.
-//
-// Solidity: event MintAsset(address owner, bytes32 hash, bytes name)
-func (_BasAsset *BasAssetFilterer) WatchMintAsset(opts *bind.WatchOpts, sink chan<- *BasAssetMintAsset) (event.Subscription, error) {
-
-	logs, sub, err := _BasAsset.contract.WatchLogs(opts, "MintAsset")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(BasAssetMintAsset)
-				if err := _BasAsset.contract.UnpackLog(event, "MintAsset", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseMintAsset is a log parse operation binding the contract event 0x52d8e8dc2982b49519977efd1fdb015121fc21583eafae05e568c207b3109059.
-//
-// Solidity: event MintAsset(address owner, bytes32 hash, bytes name)
-func (_BasAsset *BasAssetFilterer) ParseMintAsset(log types.Log) (*BasAssetMintAsset, error) {
-	event := new(BasAssetMintAsset)
-	if err := _BasAsset.contract.UnpackLog(event, "MintAsset", log); err != nil {
-		return nil, err
-	}
-	return event, nil
-}
-
-// BasAssetRechargeAssetIterator is returned from FilterRechargeAsset and is used to iterate over the raw logs and unpacked data for RechargeAsset events raised by the BasAsset contract.
-type BasAssetRechargeAssetIterator struct {
-	Event *BasAssetRechargeAsset // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *BasAssetRechargeAssetIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(BasAssetRechargeAsset)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(BasAssetRechargeAsset)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *BasAssetRechargeAssetIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *BasAssetRechargeAssetIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// BasAssetRechargeAsset represents a RechargeAsset event raised by the BasAsset contract.
-type BasAssetRechargeAsset struct {
-	Hash     [32]byte
-	Duration *big.Int
-	Raw      types.Log // Blockchain specific contextual infos
-}
-
-// FilterRechargeAsset is a free log retrieval operation binding the contract event 0x0429f51dcf78228d5341fb0e92fdbd3330a07a9aede215114103ac1ae0d8395a.
-//
-// Solidity: event RechargeAsset(bytes32 hash, uint256 duration)
-func (_BasAsset *BasAssetFilterer) FilterRechargeAsset(opts *bind.FilterOpts) (*BasAssetRechargeAssetIterator, error) {
-
-	logs, sub, err := _BasAsset.contract.FilterLogs(opts, "RechargeAsset")
-	if err != nil {
-		return nil, err
-	}
-	return &BasAssetRechargeAssetIterator{contract: _BasAsset.contract, event: "RechargeAsset", logs: logs, sub: sub}, nil
-}
-
-// WatchRechargeAsset is a free log subscription operation binding the contract event 0x0429f51dcf78228d5341fb0e92fdbd3330a07a9aede215114103ac1ae0d8395a.
-//
-// Solidity: event RechargeAsset(bytes32 hash, uint256 duration)
-func (_BasAsset *BasAssetFilterer) WatchRechargeAsset(opts *bind.WatchOpts, sink chan<- *BasAssetRechargeAsset) (event.Subscription, error) {
-
-	logs, sub, err := _BasAsset.contract.WatchLogs(opts, "RechargeAsset")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(BasAssetRechargeAsset)
-				if err := _BasAsset.contract.UnpackLog(event, "RechargeAsset", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseRechargeAsset is a log parse operation binding the contract event 0x0429f51dcf78228d5341fb0e92fdbd3330a07a9aede215114103ac1ae0d8395a.
-//
-// Solidity: event RechargeAsset(bytes32 hash, uint256 duration)
-func (_BasAsset *BasAssetFilterer) ParseRechargeAsset(log types.Log) (*BasAssetRechargeAsset, error) {
-	event := new(BasAssetRechargeAsset)
-	if err := _BasAsset.contract.UnpackLog(event, "RechargeAsset", log); err != nil {
-		return nil, err
-	}
-	return event, nil
-}
-
-// BasAssetRootAddedIterator is returned from FilterRootAdded and is used to iterate over the raw logs and unpacked data for RootAdded events raised by the BasAsset contract.
-type BasAssetRootAddedIterator struct {
-	Event *BasAssetRootAdded // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *BasAssetRootAddedIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(BasAssetRootAdded)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(BasAssetRootAdded)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *BasAssetRootAddedIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *BasAssetRootAddedIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// BasAssetRootAdded represents a RootAdded event raised by the BasAsset contract.
-type BasAssetRootAdded struct {
-	NameHash [32]byte
-	Raw      types.Log // Blockchain specific contextual infos
-}
-
-// FilterRootAdded is a free log retrieval operation binding the contract event 0x388a5f4af784e29fc791e14e90d372b6057e8379d9d5556e843545420c675dea.
-//
-// Solidity: event RootAdded(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) FilterRootAdded(opts *bind.FilterOpts) (*BasAssetRootAddedIterator, error) {
-
-	logs, sub, err := _BasAsset.contract.FilterLogs(opts, "RootAdded")
-	if err != nil {
-		return nil, err
-	}
-	return &BasAssetRootAddedIterator{contract: _BasAsset.contract, event: "RootAdded", logs: logs, sub: sub}, nil
-}
-
-// WatchRootAdded is a free log subscription operation binding the contract event 0x388a5f4af784e29fc791e14e90d372b6057e8379d9d5556e843545420c675dea.
-//
-// Solidity: event RootAdded(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) WatchRootAdded(opts *bind.WatchOpts, sink chan<- *BasAssetRootAdded) (event.Subscription, error) {
-
-	logs, sub, err := _BasAsset.contract.WatchLogs(opts, "RootAdded")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(BasAssetRootAdded)
-				if err := _BasAsset.contract.UnpackLog(event, "RootAdded", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseRootAdded is a log parse operation binding the contract event 0x388a5f4af784e29fc791e14e90d372b6057e8379d9d5556e843545420c675dea.
-//
-// Solidity: event RootAdded(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) ParseRootAdded(log types.Log) (*BasAssetRootAdded, error) {
-	event := new(BasAssetRootAdded)
-	if err := _BasAsset.contract.UnpackLog(event, "RootAdded", log); err != nil {
-		return nil, err
-	}
-	return event, nil
+// Solidity: function _c_updateRoot(bytes32 nameHash, bool openToPublic, bool isCustomed, uint256 customedPrice) returns()
+func (_BasAsset *BasAssetTransactorSession) CUpdateRoot(nameHash [32]byte, openToPublic bool, isCustomed bool, customedPrice *big.Int) (*types.Transaction, error) {
+	return _BasAsset.Contract.CUpdateRoot(&_BasAsset.TransactOpts, nameHash, openToPublic, isCustomed, customedPrice)
 }
 
 // BasAssetRootChangedIterator is returned from FilterRootChanged and is used to iterate over the raw logs and unpacked data for RootChanged events raised by the BasAsset contract.
@@ -2033,139 +620,6 @@ func (_BasAsset *BasAssetFilterer) ParseRootChanged(log types.Log) (*BasAssetRoo
 	return event, nil
 }
 
-// BasAssetSubAddedIterator is returned from FilterSubAdded and is used to iterate over the raw logs and unpacked data for SubAdded events raised by the BasAsset contract.
-type BasAssetSubAddedIterator struct {
-	Event *BasAssetSubAdded // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *BasAssetSubAddedIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(BasAssetSubAdded)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(BasAssetSubAdded)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *BasAssetSubAddedIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *BasAssetSubAddedIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// BasAssetSubAdded represents a SubAdded event raised by the BasAsset contract.
-type BasAssetSubAdded struct {
-	NameHash [32]byte
-	Raw      types.Log // Blockchain specific contextual infos
-}
-
-// FilterSubAdded is a free log retrieval operation binding the contract event 0x89553af7cea334c9dc75d0da93f13782badf6eb8ff1c31cf1792297cf3a8a914.
-//
-// Solidity: event SubAdded(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) FilterSubAdded(opts *bind.FilterOpts) (*BasAssetSubAddedIterator, error) {
-
-	logs, sub, err := _BasAsset.contract.FilterLogs(opts, "SubAdded")
-	if err != nil {
-		return nil, err
-	}
-	return &BasAssetSubAddedIterator{contract: _BasAsset.contract, event: "SubAdded", logs: logs, sub: sub}, nil
-}
-
-// WatchSubAdded is a free log subscription operation binding the contract event 0x89553af7cea334c9dc75d0da93f13782badf6eb8ff1c31cf1792297cf3a8a914.
-//
-// Solidity: event SubAdded(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) WatchSubAdded(opts *bind.WatchOpts, sink chan<- *BasAssetSubAdded) (event.Subscription, error) {
-
-	logs, sub, err := _BasAsset.contract.WatchLogs(opts, "SubAdded")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(BasAssetSubAdded)
-				if err := _BasAsset.contract.UnpackLog(event, "SubAdded", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseSubAdded is a log parse operation binding the contract event 0x89553af7cea334c9dc75d0da93f13782badf6eb8ff1c31cf1792297cf3a8a914.
-//
-// Solidity: event SubAdded(bytes32 nameHash)
-func (_BasAsset *BasAssetFilterer) ParseSubAdded(log types.Log) (*BasAssetSubAdded, error) {
-	event := new(BasAssetSubAdded)
-	if err := _BasAsset.contract.UnpackLog(event, "SubAdded", log); err != nil {
-		return nil, err
-	}
-	return event, nil
-}
-
 // BasAssetSubChangedIterator is returned from FilterSubChanged and is used to iterate over the raw logs and unpacked data for SubChanged events raised by the BasAsset contract.
 type BasAssetSubChangedIterator struct {
 	Event *BasAssetSubChanged // Event containing the contract specifics and raw log
@@ -2294,141 +748,6 @@ func (_BasAsset *BasAssetFilterer) WatchSubChanged(opts *bind.WatchOpts, sink ch
 func (_BasAsset *BasAssetFilterer) ParseSubChanged(log types.Log) (*BasAssetSubChanged, error) {
 	event := new(BasAssetSubChanged)
 	if err := _BasAsset.contract.UnpackLog(event, "SubChanged", log); err != nil {
-		return nil, err
-	}
-	return event, nil
-}
-
-// BasAssetTakeoverAssetIterator is returned from FilterTakeoverAsset and is used to iterate over the raw logs and unpacked data for TakeoverAsset events raised by the BasAsset contract.
-type BasAssetTakeoverAssetIterator struct {
-	Event *BasAssetTakeoverAsset // Event containing the contract specifics and raw log
-
-	contract *bind.BoundContract // Generic contract to use for unpacking event data
-	event    string              // Event name to use for unpacking event data
-
-	logs chan types.Log        // Log channel receiving the found contract events
-	sub  ethereum.Subscription // Subscription for errors, completion and termination
-	done bool                  // Whether the subscription completed delivering logs
-	fail error                 // Occurred error to stop iteration
-}
-
-// Next advances the iterator to the subsequent event, returning whether there
-// are any more events found. In case of a retrieval or parsing error, false is
-// returned and Error() can be queried for the exact failure.
-func (it *BasAssetTakeoverAssetIterator) Next() bool {
-	// If the iterator failed, stop iterating
-	if it.fail != nil {
-		return false
-	}
-	// If the iterator completed, deliver directly whatever's available
-	if it.done {
-		select {
-		case log := <-it.logs:
-			it.Event = new(BasAssetTakeoverAsset)
-			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-				it.fail = err
-				return false
-			}
-			it.Event.Raw = log
-			return true
-
-		default:
-			return false
-		}
-	}
-	// Iterator still in progress, wait for either a data or an error event
-	select {
-	case log := <-it.logs:
-		it.Event = new(BasAssetTakeoverAsset)
-		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
-			it.fail = err
-			return false
-		}
-		it.Event.Raw = log
-		return true
-
-	case err := <-it.sub.Err():
-		it.done = true
-		it.fail = err
-		return it.Next()
-	}
-}
-
-// Error returns any retrieval or parsing error occurred during filtering.
-func (it *BasAssetTakeoverAssetIterator) Error() error {
-	return it.fail
-}
-
-// Close terminates the iteration process, releasing any pending underlying
-// resources.
-func (it *BasAssetTakeoverAssetIterator) Close() error {
-	it.sub.Unsubscribe()
-	return nil
-}
-
-// BasAssetTakeoverAsset represents a TakeoverAsset event raised by the BasAsset contract.
-type BasAssetTakeoverAsset struct {
-	OldOwner common.Address
-	NewOwner common.Address
-	Hash     [32]byte
-	Raw      types.Log // Blockchain specific contextual infos
-}
-
-// FilterTakeoverAsset is a free log retrieval operation binding the contract event 0x9224ee6f06391fbcf8b3f9ab9c1f0c339a04d38a72fdaa9b4abec371afbcfd00.
-//
-// Solidity: event TakeoverAsset(address oldOwner, address newOwner, bytes32 hash)
-func (_BasAsset *BasAssetFilterer) FilterTakeoverAsset(opts *bind.FilterOpts) (*BasAssetTakeoverAssetIterator, error) {
-
-	logs, sub, err := _BasAsset.contract.FilterLogs(opts, "TakeoverAsset")
-	if err != nil {
-		return nil, err
-	}
-	return &BasAssetTakeoverAssetIterator{contract: _BasAsset.contract, event: "TakeoverAsset", logs: logs, sub: sub}, nil
-}
-
-// WatchTakeoverAsset is a free log subscription operation binding the contract event 0x9224ee6f06391fbcf8b3f9ab9c1f0c339a04d38a72fdaa9b4abec371afbcfd00.
-//
-// Solidity: event TakeoverAsset(address oldOwner, address newOwner, bytes32 hash)
-func (_BasAsset *BasAssetFilterer) WatchTakeoverAsset(opts *bind.WatchOpts, sink chan<- *BasAssetTakeoverAsset) (event.Subscription, error) {
-
-	logs, sub, err := _BasAsset.contract.WatchLogs(opts, "TakeoverAsset")
-	if err != nil {
-		return nil, err
-	}
-	return event.NewSubscription(func(quit <-chan struct{}) error {
-		defer sub.Unsubscribe()
-		for {
-			select {
-			case log := <-logs:
-				// New log arrived, parse the event and forward to the user
-				event := new(BasAssetTakeoverAsset)
-				if err := _BasAsset.contract.UnpackLog(event, "TakeoverAsset", log); err != nil {
-					return err
-				}
-				event.Raw = log
-
-				select {
-				case sink <- event:
-				case err := <-sub.Err():
-					return err
-				case <-quit:
-					return nil
-				}
-			case err := <-sub.Err():
-				return err
-			case <-quit:
-				return nil
-			}
-		}
-	}), nil
-}
-
-// ParseTakeoverAsset is a log parse operation binding the contract event 0x9224ee6f06391fbcf8b3f9ab9c1f0c339a04d38a72fdaa9b4abec371afbcfd00.
-//
-// Solidity: event TakeoverAsset(address oldOwner, address newOwner, bytes32 hash)
-func (_BasAsset *BasAssetFilterer) ParseTakeoverAsset(log types.Log) (*BasAssetTakeoverAsset, error) {
-	event := new(BasAssetTakeoverAsset)
-	if err := _BasAsset.contract.UnpackLog(event, "TakeoverAsset", log); err != nil {
 		return nil, err
 	}
 	return event, nil

@@ -5,50 +5,61 @@ import (
 	"sync"
 )
 
-var queueAsset []Bas_Ethereum.Hash
-var queueDns []Bas_Ethereum.Hash
+var queueOwnership = new([]Bas_Ethereum.Hash)
+var queueRoot = new([]Bas_Ethereum.Hash)
+var queueSub = new([]Bas_Ethereum.Hash)
+var queueDns = new([]Bas_Ethereum.Hash)
 
-var queryAssetLock = &sync.RWMutex{}
-var queryDNSLock = &sync.RWMutex{}
+var oLock = &sync.RWMutex{}
+var rLock = &sync.RWMutex{}
+var sLock = &sync.RWMutex{}
+var dLock = &sync.RWMutex{}
 
 
-func insertQueueAsset(key Bas_Ethereum.Hash){
-	if !exists(queueAsset,key) {
-		queueAsset = append(queueAsset, key)
+func insertQueue(key Bas_Ethereum.Hash,queue *[]Bas_Ethereum.Hash){
+	if !exists(*queue,key) {
+		*queue = append(*queue, key)
 	}
 }
 
 
-func clearQueryAsset(){
-	queueAsset = []Bas_Ethereum.Hash{}
-}
-
-func insertQueueDns(key Bas_Ethereum.Hash){
-	if !exists(queueDns,key){
-		queueDns = append(queueDns, key)
-	}
-}
-
-func clearQueueDns(){
-	queueDns = []Bas_Ethereum.Hash{}
+func clearQuery(queue *[]Bas_Ethereum.Hash){
+	queue = new([]Bas_Ethereum.Hash)
 }
 
 
-
-func loopOverQueueAsset(waitGroup *sync.WaitGroup){
-	queryAssetLock.Lock()
-	defer queryAssetLock.Unlock()
-	for _,s:= range queueAsset {
-		updateAsset(s,0)
+func loopOverQueueOwnership(waitGroup *sync.WaitGroup){
+	oLock.Lock()
+	defer oLock.Unlock()
+	for _,s:= range *queueOwnership {
+		updateByQueryOwnership(s,0)
 	}
 	waitGroup.Done()
 }
 
-func loopOverQueueDNS(waitGroup *sync.WaitGroup){
-	queryDNSLock.Lock()
-	defer queryDNSLock.Unlock()
-	for _,s:=range queueDns {
-		updateDNS(s,0)
+func loopOverQueueRoot(waitGroup *sync.WaitGroup){
+	rLock.Lock()
+	defer rLock.Unlock()
+	for _,s:= range *queueRoot {
+		updateByQueryRoot(s,0)
+	}
+	waitGroup.Done()
+}
+
+func loopOverQueueSub(waitGroup *sync.WaitGroup){
+	sLock.Lock()
+	defer sLock.Unlock()
+	for _,s:= range *queueSub {
+		updateByQuerySub(s,0)
+	}
+	waitGroup.Done()
+}
+
+func loopOverQueueDns(waitGroup *sync.WaitGroup){
+	dLock.Lock()
+	defer dLock.Unlock()
+	for _,s:= range *queueDns {
+		updateByQueryDNS(s,0)
 	}
 	waitGroup.Done()
 }
