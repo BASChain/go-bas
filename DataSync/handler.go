@@ -12,12 +12,6 @@ import (
 
 var logger, _ = logging.GetLogger("DataSync")
 
-type EventHandler func(iterator interface{})
-
-type EventIterator interface {
-	Next() bool
-}
-
 func getLoopOpts(s uint64, e *uint64)  *bind.FilterOpts{
 	var opts  = &bind.FilterOpts{
 		Start:s,
@@ -174,8 +168,7 @@ func watchAdd(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected add : ",
-					string(Records[log.NameHash].Name),
-				)
+					string(log.NameHash[:]), "owner : ", log.Owner.String())
 			}
 		}
 	}else{
@@ -211,8 +204,7 @@ func watchUpdate(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGr
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected update : ",
-					string(Records[log.NameHash].Name),
-				)
+					string(log.NameHash[:]), "owner : ", log.Owner.String())
 			}
 		}
 	}else{
@@ -248,8 +240,7 @@ func watchTakeover(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected takeover : ",
-					string(Records[log.NameHash].Name),
-				)
+					string(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
 		}
 	}else{
@@ -285,8 +276,7 @@ func watchTransfer(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected transfer : ",
-					string(Records[log.NameHash].Name),
-				)
+					string(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
 		}
 	}else{
@@ -322,8 +312,7 @@ func watchTransferFrom(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected transferFrom : ",
-					string(Records[log.NameHash].Name),
-				)
+					string(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
 		}
 	}else{
@@ -359,8 +348,7 @@ func watchRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGr
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected remove : ",
-					string(Records[log.NameHash].Name),
-				)
+					string(log.NameHash[:]))
 			}
 		}
 	}else{
@@ -378,6 +366,7 @@ func loopOverPaid(opts *bind.FilterOpts,wg *sync.WaitGroup){
 				Name:   string(it.Event.Name),
 				Option: it.Event.Option,
 				Amount: it.Event.Amount,
+				CommitBlock: it.Event.Raw.BlockNumber,
 			})
 		}
 	}else{
@@ -404,10 +393,10 @@ func watchPaid(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGrou
 					Name:   string(log.Name),
 					Option: log.Option,
 					Amount: log.Amount,
+					CommitBlock:log.Raw.BlockNumber,
 				})
-				logger.Info("detected paid : ",
-					string(log.Name),
-				)
+				logger.Info("detected address ",
+					log.Payer.String(), " paied " , log.Amount.String(), "for ", log.Option," on", string(log.Name))
 			}
 		}
 	}else{

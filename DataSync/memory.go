@@ -19,7 +19,8 @@ var pLock = &sync.Mutex{}
 
 var Records = make(map[Bas_Ethereum.Hash]*DomainRecord)
 var Assets = make(map[common.Address][]Bas_Ethereum.Hash)
-var PayRecords =&([]Receipt{})
+var PayRecords = []Receipt{}
+
 
 
 type DomainRecord struct{
@@ -45,7 +46,7 @@ type Receipt struct {
 	Name   string
 	Option string
 	Amount *big.Int
-	Timestamp uint64
+	CommitBlock uint64
 }
 
 func showMemory(hash Bas_Ethereum.Hash){
@@ -298,5 +299,5 @@ func updateByQueryDNS(hash Bas_Ethereum.Hash,blockNumber uint64){
 func updatePaid(receipt Receipt){
 	pLock.Lock()
 	defer pLock.Unlock()
-	*PayRecords = append(*PayRecords, receipt)
+	PayRecords = append(PayRecords, receipt)
 }
