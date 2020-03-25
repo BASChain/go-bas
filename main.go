@@ -5,13 +5,15 @@ import (
 	"github.com/BASChain/go-bas/Account"
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/BASChain/go-bas/DataSync"
+	"github.com/BASChain/go-bas/Market"
 	"github.com/BASChain/go-bas/Transactions"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 )
 
 func main()  {
-	testSync()
+	//testSync()
+	testMarket()
 	//testCreatAccount()
 	//Account.GetAuth("./key/UTC--2020-03-11T06-56-52.423772000Z--33324a5ee0b35f17536ceda27274e88e76640f24","secret")
 	//testSendFreeEth()
@@ -23,6 +25,10 @@ func main()  {
 
 func testSync(){
 	DataSync.Sync();
+}
+
+func testMarket(){
+	Market.Sync()
 }
 
 func testCreatAccount(){

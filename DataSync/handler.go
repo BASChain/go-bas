@@ -1,6 +1,7 @@
 package DataSync
 
 import (
+	"encoding/hex"
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -168,7 +169,7 @@ func watchAdd(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected add : ",
-					string(log.NameHash[:]), "owner : ", log.Owner.String())
+					hex.EncodeToString(log.NameHash[:]), "owner : ", log.Owner.String())
 			}
 		}
 	}else{
@@ -204,7 +205,7 @@ func watchUpdate(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGr
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected update : ",
-					string(log.NameHash[:]), "owner : ", log.Owner.String())
+					hex.EncodeToString(log.NameHash[:]), "owner : ", log.Owner.String())
 			}
 		}
 	}else{
@@ -240,7 +241,7 @@ func watchTakeover(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected takeover : ",
-					string(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
+					hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
 		}
 	}else{
@@ -276,7 +277,7 @@ func watchTransfer(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected transfer : ",
-					string(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
+					hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
 		}
 	}else{
@@ -312,7 +313,7 @@ func watchTransferFrom(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected transferFrom : ",
-					string(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
+					hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
 		}
 	}else{
@@ -348,7 +349,7 @@ func watchRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGr
 				lastSavingPoint = log.Raw.BlockNumber
 				updateByQueryOwnership(log.NameHash,lastSavingPoint)
 				logger.Info("detected remove : ",
-					string(log.NameHash[:]))
+					hex.EncodeToString(log.NameHash[:]))
 			}
 		}
 	}else{

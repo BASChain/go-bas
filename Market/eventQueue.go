@@ -1,5 +1,7 @@
 package Market
 
+import "sort"
+
 type EventQueue []EventWrapper
 
 type EventWrapper struct {
@@ -33,10 +35,23 @@ func insertEq(blockNumber uint64, txIndex uint, name string, data interface{}){
 }
 
 func loopOverEventQueue()  {
-	for _,d:=range eq {
-		switch d.EventName {
+	sort.Sort(eq)
+	for _,e:=range eq {
+		switch e.EventName {
 		case "SellAdded":
-			//todo
+			handleSellAdded(e.EventData)
+		case "SellChanged":
+			handleSellChanged(e.EventData)
+		case "SellRemoved":
+			handleSellRemoved(e.EventData)
+		case "AskAdded":
+			handleAskAdded(e.EventData)
+		case "AskChanged":
+			handleAskChanged(e.EventData)
+		case "AskRemoved":
+			handleAskRemoved(e.EventData)
+		default:
+			logger.Error("undefined type")
 		}
 	}
 }
