@@ -49,3 +49,57 @@ func IsRare(name string)  bool{
 	matched, _ := regexp.MatchString(`^[0-9a-z]{0,`+ RARETYPELENGTH.String() + `}$`, name)
 	return matched
 }
+
+func CheckSettings()   {
+	if AROOTGAS == nil || BROOTGAS==nil ||
+		SUBGAS == nil || CUSTOMPRICEGAS == nil ||
+		MAXYEAR == nil || RARETYPELENGTH == nil{
+			Settings(0)
+	}
+}
+
+
+func GetARootGas() string {
+	if AROOTGAS == nil{
+		return ""
+	}
+	return AROOTGAS.String()
+}
+
+
+func GetBRootGas() string{
+	if BROOTGAS == nil{
+		return ""
+	}
+	return BROOTGAS.String()
+}
+
+func GetSubGas() string {
+	if SUBGAS == nil{
+		return ""
+	}
+	return SUBGAS.String()
+}
+
+func GetCustomPriceGas() string  {
+	if CUSTOMPRICEGAS == nil{
+		return ""
+	}
+	return CUSTOMPRICEGAS.String()
+}
+
+func GetMaxYear() int64  {
+	if MAXYEAR == nil{
+		return 0
+	}
+	return MAXYEAR.Int64()
+}
+
+func GetRareTypeLength() int64 {
+	if RARETYPELENGTH == nil{
+		return 0
+	}
+
+	return RARETYPELENGTH.Int64()
+}
+
