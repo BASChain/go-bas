@@ -12,7 +12,6 @@ import (
 	"github.com/op/go-logging"
 	"math/big"
 	"errors"
-	"github.com/BASChain/go-bas-dns-server/dns/mem"
 )
 
 
@@ -87,13 +86,3 @@ func SendFreeEth(key *keystore.Key,toAddress common.Address,amount *big.Int) err
 	return nil
 }
 
-func SendFreeEthWrapper(key *keystore.Key,toAddress common.Address,amount *big.Int)  {
-	mem.Update(toAddress,mem.ETH,mem.WAITING)
-	go func() {
-		if err:=SendFreeEth(key,toAddress,amount);err!=nil{
-			mem.Update(toAddress,mem.ETH,mem.FAILURE)
-		}else{
-			mem.Update(toAddress,mem.ETH,mem.SUCCESS)
-		}
-	}()
-}
