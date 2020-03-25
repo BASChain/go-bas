@@ -46,6 +46,6 @@ func Settings(blockNumber uint64)  {
 }
 
 func IsRare(name string)  bool{
-	matched, _ := regexp.MatchString(`^[0-9a-z]{0,`+ RARETYPELENGTH.String() + `}$`, "123456")
+	matched, _ := regexp.MatchString(`^[0-9a-z]{0,`+ RARETYPELENGTH.String() + `}$`, name)
 	return matched
 }
