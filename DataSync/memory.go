@@ -97,11 +97,11 @@ func (dr *DomainRecord)GetIPv4Addr() [4]byte  {
 	return dr.Ipv4
 }
 
-func (dr *DomainRecord)GetBCAddr() []byte {
+func (dr *DomainRecord)GetBCAddrStr() string {
 	if dr == nil{
-		return nil
+		return ""
 	}
-	return dr.Bca
+	return hex.EncodeToString(dr.Bca)
 }
 
 func (dr *DomainRecord)GetIpv6Str() string  {

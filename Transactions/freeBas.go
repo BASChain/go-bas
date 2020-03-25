@@ -7,7 +7,6 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/keystore"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
-	"github.com/BASChain/go-bas-dns-server/dns/mem"
 )
 
 func CheckIfApplied(addr common.Address) (bool,error){
@@ -32,13 +31,3 @@ func SendFreeBasByContract(key *keystore.Key,addr common.Address,amount *big.Int
 	return nil
 }
 
-func SendFreeBasByContractWrapper(key *keystore.Key,addr common.Address,amount *big.Int){
-	mem.Update(addr,mem.BAS,mem.WAITING)
-	go func() {
-		if err:=SendFreeBasByContract(key,addr,amount);err!=nil{
-			mem.Update(addr,mem.BAS,mem.FAILURE)
-		}else {
-			mem.Update(addr,mem.BAS,mem.SUCCESS)
-		}
-	}()
-}
