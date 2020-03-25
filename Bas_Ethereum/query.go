@@ -14,7 +14,7 @@ import (
 type Hash [32]byte
 
 func (hash Hash)String() string{
-	return hex.EncodeToString(hash[:])
+	return "0x"+hex.EncodeToString(hash[:])
 }
 
 func GetHash(key string) Hash{
