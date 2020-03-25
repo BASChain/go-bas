@@ -12,33 +12,33 @@ var CUSTOMPRICEGAS *big.Int
 var MAXYEAR *big.Int
 var RARETYPELENGTH *big.Int
 
-func Settings(blockNumber uint64)  {
-	if gas,err:=BasOANN().AROOTGAS(GetOpts(blockNumber));err!=nil{
+func Settings()  {
+	if gas,err:=BasOANN().AROOTGAS(GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param AROOTGAS")
 	}else{
 		AROOTGAS = gas
 	}
-	if gas,err:=BasOANN().BROOTGAS(GetOpts(blockNumber));err!=nil{
+	if gas,err:=BasOANN().BROOTGAS(GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param BROOTGAS")
 	}else{
 		BROOTGAS = gas
 	}
-	if gas,err:=BasOANN().SUBGAS(GetOpts(blockNumber));err!=nil{
+	if gas,err:=BasOANN().SUBGAS(GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param SUBGAS")
 	}else{
 		SUBGAS = gas
 	}
-	if gas,err:=BasOANN().CUSTOMEDPRICEGAS(GetOpts(blockNumber));err!=nil{
+	if gas,err:=BasOANN().CUSTOMEDPRICEGAS(GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param CUSTOMPRICEGAS")
 	}else{
 		CUSTOMPRICEGAS = gas
 	}
-	if year,err:=BasOANN().MAXYEAR(GetOpts(blockNumber));err!=nil{
+	if year,err:=BasOANN().MAXYEAR(GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param MAXYEAR")
 	}else{
 		MAXYEAR = year
 	}
-	if length,err:=BasOANN().RARETYPELENGTH(GetOpts(blockNumber));err!=nil{
+	if length,err:=BasOANN().RARETYPELENGTH(GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param MAXYEAR")
 	}else{
 		RARETYPELENGTH = length
@@ -54,7 +54,7 @@ func CheckSettings()   {
 	if AROOTGAS == nil || BROOTGAS==nil ||
 		SUBGAS == nil || CUSTOMPRICEGAS == nil ||
 		MAXYEAR == nil || RARETYPELENGTH == nil{
-			Settings(0)
+			Settings()
 	}
 }
 

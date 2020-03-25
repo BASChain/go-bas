@@ -34,7 +34,6 @@ func loopOverSellAdded(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 func handleSellAdded(d interface{}){
 	event:=d.(Contract.BasMarketSellAdded)
 
-
 }
 
 func loopOverSellChanged(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
