@@ -11,11 +11,11 @@ import (
 var logger, _ = logging.GetLogger("Market")
 
 func loopOverSoldBySell()  {
-	
+
 }
 
 func loopOverSoldByAsk()  {
-	
+
 }
 
 func loopOverSellAdded(opts *bind.FilterOpts,wg *sync.WaitGroup) {
@@ -33,7 +33,11 @@ func loopOverSellAdded(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 
 func handleSellAdded(d interface{}){
 	event:=d.(Contract.BasMarketSellAdded)
-
+	updateSellOrdersByEvent(
+		event.Operator,
+		event.NameHash,
+		*event.Price,
+		&event.Raw.BlockNumber)
 }
 
 func loopOverSellChanged(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
@@ -47,6 +51,15 @@ func loopOverSellChanged(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 				it.Event)
 		}
 	}
+}
+
+func handleSellChanged(d interface{}){
+	event:=d.(Contract.BasMarketSellChanged)
+	updateSellOrdersByEvent(
+		event.Operator,
+		event.NameHash,
+		*event.Price,
+		&event.Raw.BlockNumber)
 }
 
 func loopOverSellRemoved(opts *bind.FilterOpts,wg *sync.WaitGroup) {

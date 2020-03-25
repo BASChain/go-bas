@@ -7,13 +7,13 @@ import (
 )
 
 type SellOrder struct {
-	price *big.Int
+	price big.Int
 	BlockNumber uint64
 }
 
 type AskOrder struct {
-	price *big.Int
-	protectiveRemainTime *big.Int
+	price big.Int
+	protectiveRemainTime big.Int
 	BlockNumber uint64
 }
 
@@ -22,17 +22,20 @@ var AskOrders = make(map[common.Address]map[Bas_Ethereum.Hash]*AskOrder)
 
 
 
-func updateSellOrdersByEvent(addr common.Address, hash Bas_Ethereum.Hash, price *big.Int, blockNumber uint64)  {
+func updateSellOrdersByEvent(addr common.Address, hash Bas_Ethereum.Hash, price big.Int, blockNumber *uint64)  {
 	if SellOrders[addr] == nil {
 		SellOrders[addr] = make(map[Bas_Ethereum.Hash]*SellOrder)
 	}
 	if SellOrders[addr][hash] == nil {
 		SellOrders[addr][hash] = &SellOrder{}
 	}
-
+	SellOrders[addr][hash].price = price
+	if blockNumber !=nil {
+		SellOrders[addr][hash].BlockNumber = *blockNumber
+	}
 }
 
-func updateAskOrdersByEvent(addr common.Address, hash Bas_Ethereum.Hash, price, protectiveRemainTime *big.Int, blockNumber uint64)  {
+func updateAskOrdersByEvent(addr common.Address, hash Bas_Ethereum.Hash, price, protectiveRemainTime big.Int, blockNumber *uint64)  {
 	if AskOrders[addr] == nil {
 		AskOrders[addr] = make(map[Bas_Ethereum.Hash]*AskOrder)
 	}
@@ -41,5 +44,8 @@ func updateAskOrdersByEvent(addr common.Address, hash Bas_Ethereum.Hash, price, 
 	}
 	AskOrders[addr][hash].price = price
 	AskOrders[addr][hash].protectiveRemainTime = protectiveRemainTime
+	if blockNumber != nil {
+		AskOrders[addr][hash].BlockNumber = *blockNumber
+	}
 }
 
