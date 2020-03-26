@@ -53,6 +53,14 @@ var SellOrders = make(map[common.Address]map[Bas_Ethereum.Hash]*SellOrder)
 var AskOrders = make(map[common.Address]map[Bas_Ethereum.Hash]*AskOrder)
 var Sold = make([]Deal,0)
 
+func (so *SellOrder)GetPrice() *big.Int  {
+	return &so.price
+}
+
+func (so *SellOrder)GetPriceStr() string  {
+	return so.price.String()
+}
+
 func echoSellOrder(addr common.Address, hash Bas_Ethereum.Hash) string {
 	return "user : "+ addr.String() +
 		" hash : " +  hash.String() +
