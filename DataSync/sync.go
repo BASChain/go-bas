@@ -11,13 +11,14 @@ import (
 func fillWaitQueue(lastBlockNumber uint64){
 	opts := getLoopOpts(lastSavingPoint,&lastBlockNumber)
 	var waitGroup sync.WaitGroup
-	waitGroup.Add(10)
+	waitGroup.Add(11)
 
 	go loopOverRootChanged(opts,&waitGroup)
 	go loopOverSubChanged(opts,&waitGroup)
 	go loopOverDNSChanged(opts,&waitGroup)
 	go loopOverAdd(opts,&waitGroup)
 	go loopOverUpdate(opts,&waitGroup)
+	go loopOverExtend(opts,&waitGroup)
 	go loopOverTakeover(opts,&waitGroup)
 	go loopOverTransfer(opts,&waitGroup)
 	go loopOverTransferFrom(opts,&waitGroup)
@@ -63,13 +64,14 @@ func watch(lastBlockNumber uint64){
 	opts := getWatchOpts(lastBlockNumber)
 	subs = []event.Subscription{}
 
-	waitGroup.Add(10)
+	waitGroup.Add(11)
 
 	go watchRootChanged(opts,&subs,&waitGroup)
 	go watchSubChanged(opts,&subs,&waitGroup)
 	go watchDNSChanged(opts,&subs,&waitGroup)
 	go watchAdd(opts,&subs,&waitGroup)
 	go watchUpdate(opts,&subs,&waitGroup)
+	go watchExtend(opts,&subs,&waitGroup)
 	go watchTakeover(opts,&subs,&waitGroup)
 	go watchTransfer(opts,&subs,&waitGroup)
 	go watchTransferFrom(opts,&subs,&waitGroup)

@@ -219,6 +219,43 @@ func watchUpdate(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGr
 	}
 }
 
+func loopOverExtend(opts *bind.FilterOpts,wg *sync.WaitGroup){
+	defer wg.Done()
+	it,err:=Bas_Ethereum.BasOwnership().FilterExtend(opts)
+	if err==nil{
+		for it.Next() {
+			insertQueue(it.Event.NameHash,queueOwnership)
+		}
+	}else{
+		logger.Error("loop over extend err :" , err)
+	}
+}
+
+func watchExtend(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs := make(chan *Contract.BasOwnershipExtend)
+	sub,err:=Bas_Ethereum.BasOwnership().WatchExtend(opts,logs)
+	defer wg.Done()
+	if err==nil{
+		logger.Info("watching extend")
+		*subs = append(*subs, sub)
+		for {
+			select {
+			case e :=<-sub.Err():
+				logger.Error("subscript extend runtime error", e)
+				return
+			case log:= <-logs:
+				lastSavingPoint = log.Raw.BlockNumber
+				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				logger.Info("detected extend : ",
+					"0x"+hex.EncodeToString(log.NameHash[:]))
+			}
+		}
+	}else{
+		logger.Error("subscript update failed " ,err)
+	}
+}
+
+
 func loopOverTakeover(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
 	it,err:=Bas_Ethereum.BasOwnership().FilterTakeover(opts)
