@@ -31,11 +31,11 @@ var (
 	conn *ethclient.Client
 
 	token *Contract.BasToken
-	miner *Contract.BasMiner
+	ownership *Contract.BasOwnership
 	asset *Contract.BasAsset
 	dns *Contract.BasDNS
+	miner *Contract.BasMiner
 	oann  *Contract.BasOANN
-	ownership *Contract.BasOwnership
 	market *Contract.BasMarket
 	free  *Contract.SendFreeBas
 )
@@ -72,13 +72,19 @@ func GetConn() *ethclient.Client {
 	return nil
 }
 
+
 func ResetConnAndContracts(){
 	conn.Close()
 	conn = nil
 	token = nil
-	miner = nil
+	ownership = nil
 	asset = nil
+	dns = nil
+	miner = nil
 	oann = nil
+	market = nil
+	free = nil
+
 	GetConn()
 }
 

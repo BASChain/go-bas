@@ -324,6 +324,8 @@ func watchSoldBySell(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wa
 					*log.Price,
 					log.Raw.BlockNumber}
 				Sold = append(Sold, deal)
+				delete(SellOrders[log.From],log.NameHash)
+				delete(AskOrders[log.To],log.NameHash)
 				logger.Info(echoSold(deal))
 			}
 		}
@@ -344,6 +346,8 @@ func loopOverSoldByAsk(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 				*it.Event.Price,
 				it.Event.Raw.BlockNumber}
 			Sold = append(Sold, deal)
+			delete(SellOrders[it.Event.From],it.Event.NameHash)
+			delete(AskOrders[it.Event.To],it.Event.NameHash)
 			logger.Info(echoSold(deal))
 		}
 	}
@@ -369,6 +373,8 @@ func watchSoldByAsk(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wai
 					*log.Price,
 					log.Raw.BlockNumber}
 				Sold = append(Sold, deal)
+				delete(SellOrders[log.From],log.NameHash)
+				delete(AskOrders[log.To],log.NameHash)
 				logger.Info(echoSold(deal))
 			}
 		}

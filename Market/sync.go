@@ -29,6 +29,7 @@ func syncDataByHandleQueue(){
 
 var subs []event.Subscription
 
+
 func watch(lastBlockNumber uint64){
 	var waitGroup sync.WaitGroup
 
