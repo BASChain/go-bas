@@ -35,7 +35,7 @@ func loopOverRootChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=Bas_Ethereum.BasAsset().FilterRootChanged(opts)
 	if err==nil{
 		for it.Next() {
-			insertQueueOther(it.Event.NameHash,queueRoot)
+			insertQueue(it.Event.NameHash,queueRoot)
 		}
 	}else{
 		logger.Error("loop over root changed err :" , err)
@@ -72,7 +72,7 @@ func loopOverSubChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=Bas_Ethereum.BasAsset().FilterSubChanged(opts)
 	if err==nil{
 		for it.Next() {
-			insertQueueOther(it.Event.NameHash,queueSub)
+			insertQueue(it.Event.NameHash,queueSub)
 		}
 	}else{
 		logger.Error("loop over sub changed err :" , err)
@@ -109,7 +109,7 @@ func loopOverDNSChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=Bas_Ethereum.BasDNS().FilterDNSChanged(opts)
 	if err==nil{
 		for it.Next() {
-			insertQueueOther(it.Event.NameHash,queueDns)
+			insertQueue(it.Event.NameHash,queueDns)
 		}
 	}else{
 		logger.Error("loop over dns changed err :" , err)
@@ -146,7 +146,10 @@ func loopOverAdd(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=Bas_Ethereum.BasOwnership().FilterAdd(opts)
 	if err==nil{
 		for it.Next() {
-			insertQueueOwnership(it.Event.NameHash,it.Event.Raw.BlockNumber)
+			insertQueue(it.Event.NameHash,queueOwnership)
+			if firstAppearInBlock[it.Event.NameHash] == 0 || firstAppearInBlock[it.Event.NameHash] > it.Event.Raw.BlockNumber{
+				firstAppearInBlock[it.Event.NameHash] = it.Event.Raw.BlockNumber
+			}
 		}
 	}else{
 		logger.Error("loop over add err :" , err)
@@ -182,7 +185,10 @@ func loopOverUpdate(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=Bas_Ethereum.BasOwnership().FilterUpdate(opts)
 	if err==nil{
 		for it.Next() {
-			insertQueueOwnership(it.Event.NameHash,it.Event.Raw.BlockNumber)
+			insertQueue(it.Event.NameHash,queueOwnership)
+			if firstAppearInBlock[it.Event.NameHash] == 0 || firstAppearInBlock[it.Event.NameHash] > it.Event.Raw.BlockNumber{
+				firstAppearInBlock[it.Event.NameHash] = it.Event.Raw.BlockNumber
+			}
 		}
 	}else{
 		logger.Error("loop over update err :" , err)
@@ -218,7 +224,7 @@ func loopOverTakeover(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=Bas_Ethereum.BasOwnership().FilterTakeover(opts)
 	if err==nil{
 		for it.Next() {
-			insertQueueOther(it.Event.NameHash,queueOwnership)
+			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
 		logger.Error("loop over takeover err :" , err)
@@ -254,7 +260,7 @@ func loopOverTransfer(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=Bas_Ethereum.BasOwnership().FilterTransfer(opts)
 	if err==nil{
 		for it.Next() {
-			insertQueueOther(it.Event.NameHash,queueOwnership)
+			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
 		logger.Error("loop over transfer err :" , err)
@@ -290,7 +296,7 @@ func loopOverTransferFrom(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=Bas_Ethereum.BasOwnership().FilterTransferFrom(opts)
 	if err==nil{
 		for it.Next() {
-			insertQueueOther(it.Event.NameHash,queueOwnership)
+			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
 		logger.Error("loop over transferFrom err :" , err)
@@ -326,7 +332,7 @@ func loopOverRemove(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=Bas_Ethereum.BasOwnership().FilterRemove(opts)
 	if err==nil{
 		for it.Next() {
-			insertQueueOther(it.Event.NameHash,queueOwnership)
+			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
 		logger.Error("loop over remove err :" , err)
