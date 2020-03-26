@@ -217,6 +217,13 @@ func (dr *DomainRecord)GetParentHash() Bas_Ethereum.Hash  {
 	return dr.SRootHash
 }
 
+func (dr *DomainRecord)GetRegTime() int64  {
+	t,_:=Bas_Ethereum.GetTimestamp(dr.CommitBlock)
+	return int64(t)
+}
+
+
+
 func updateByQueryOwnership(hash Bas_Ethereum.Hash, blockNumber uint64){
 	newOwner,expire,err:=Bas_Ethereum.QueryOwnership(hash,blockNumber)
 	if err!=nil{
