@@ -25,7 +25,6 @@ func main()  {
 
 func testSync(){
 	DataSync.Sync();
-	Bas_Ethereum.CloseConn()
 }
 
 func testMarket(){
