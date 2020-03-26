@@ -256,6 +256,7 @@ func updateByQueryRoot(hash Bas_Ethereum.Hash, blockNumber uint64)  {
 		Records[hash].RCustomPrice = *root.CustomedPrice
 		Records[hash].RIsCustomed = root.IsCustomed
 		Records[hash].Name = root.RootName
+		Records[hash].IsRoot = true
 		Records[hash].RIsRare = Bas_Ethereum.IsRare(string(root.RootName))
 		Records[hash].ROpenToPublic = root.OpenToPublic
 	}

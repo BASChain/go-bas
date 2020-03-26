@@ -1,12 +1,22 @@
 package Notification
 
-import "github.com/BASChain/go-bas/Bas_Ethereum"
+import (
+	"github.com/BASChain/go-bas/Bas_Ethereum"
+	"github.com/ethereum/go-ethereum/common"
+	"math/big"
+)
 
-var BatchUpdateOwnershipFunc func(hash Bas_Ethereum.Hash,commitBlock uint64)
+var OwnershipUpdateNotifications = make([]OwnershipUpdate,0)
+
+type OwnershipUpdate func(
+	hash Bas_Ethereum.Hash,
+	owner common.Address,
+	expire big.Int,
+	commitBlock uint64)
+
+type OwnershipAdd func(
+	
+	)
 
 
 
-
-func BatchUpdateOwnership()  {
-
-}
