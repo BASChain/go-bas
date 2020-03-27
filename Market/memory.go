@@ -57,6 +57,23 @@ func (so *SellOrder)GetPrice() *big.Int  {
 	return &so.price
 }
 
+func (d *Deal)GetFromOwner() string  {
+	return d.oldOwner.String()
+}
+
+func (d *Deal)GetOwner() string  {
+	return d.newOwner.String()
+}
+
+func (d *Deal)GetHash() Bas_Ethereum.Hash  {
+	return d.nameHash
+}
+
+func (d *Deal)GetAGreedPrice() *big.Int  {
+	return &d.agreedPrice
+}
+
+
 func (so *SellOrder)GetPriceStr() string  {
 	return so.price.String()
 }
