@@ -31,7 +31,7 @@ func testSync(){
 func testReg(){
 	Bas_Ethereum.Settings()
 	fmt.Println(Bas_Ethereum.RARETYPELENGTH.String())
-	fmt.Println(Bas_Ethereum.IsRare("btc"))
+	fmt.Println(Bas_Ethereum.IsRare("apple"))
 }
 
 func testMarket(){

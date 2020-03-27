@@ -46,6 +46,9 @@ func Settings()  {
 }
 
 func IsRare(name string)  bool{
+	if RARETYPELENGTH == nil {
+		RARETYPELENGTH = big.NewInt(6)
+	}
 	matched, _ := regexp.MatchString(`^[0-9a-z]{0,`+ RARETYPELENGTH.String() + `}$`, name)
 	return matched
 }

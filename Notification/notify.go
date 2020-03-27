@@ -62,57 +62,81 @@ func NotifyOwnershipTransferFrom (
 	}
 }
 
-//func OwnershipRemove(
-//	hash Bas_Ethereum.Hash){
-//	for _, f:=range OwnershipRemoveNotifications {
-//
-//	}
-//}
-//
-////there we do not specify which variable is changed, rather offer a whole record
-//type AssetRootChanged func(
-//	hash Bas_Ethereum.Hash,
-//	isOpen bool,
-//	isCustomized bool,
-//	isRare bool,
-//	customizedPrice big.Int)
-//
-//type AssetSubChanged func(
-//	hash Bas_Ethereum.Hash,
-//	rootHash Bas_Ethereum.Hash)
-//
-//type DNSChanged func(
-//	hash Bas_Ethereum.Hash,
-//	IPv4 [4]byte,
-//	IPv6 [16]byte,
-//	Bca map[string]byte,
-//	OpData map[string]byte,
-//	AliasName string)
-//
-////name is domain in ascii, option is pay reason
-//type Paid func(
-//	payer common.Address,
-//	name map[string]byte,
-//	option string,
-//	amount big.Int)
-//
-//type MarketSoldBySell func(
-//	hash Bas_Ethereum.Hash,
-//	oldOwner common.Address,
-//	newOwner common.Address,
-//	price big.Int)
-//
-//type MarketSoldByAsk func(
-//	hash Bas_Ethereum.Hash,
-//	oldOwner common.Address,
-//	newOwner common.Address,
-//	price big.Int)
-//
-//type MarketSellAdded func(
+func NotifyOwnershipRemove(
+	hash Bas_Ethereum.Hash){
+	for _, f:=range OwnershipRemoveNotifications {
+		f(hash)
+	}
+}
+
+func NotifyAssetRootChanged(
+	hash Bas_Ethereum.Hash,
+	isOpen bool,
+	isCustomized bool,
+	isRare bool,
+	customizedPrice big.Int){
+	for _, f:=range AssetRootChangedNotifications {
+		f(hash,isOpen,isCustomized,isRare,customizedPrice)
+	}
+}
+
+func NotifyAssetSubChanged (
+	hash Bas_Ethereum.Hash,
+	rootHash Bas_Ethereum.Hash){
+	for _,f:=range AssetSubChangedNotifications {
+		f(hash,rootHash)
+	}
+}
+
+func NotifyDNSChanged(
+	hash Bas_Ethereum.Hash,
+	IPv4 [4]byte,
+	IPv6 [16]byte,
+	Bca map[string]byte,
+	OpData map[string]byte,
+	AliasName string){
+	for _,f :=range DNSChangedNotifications {
+		f(hash,IPv4,IPv6,Bca,OpData,AliasName)
+	}
+}
+
+func NotifyPaid (
+	payer common.Address,
+	name map[string]byte,
+	option string,
+	amount big.Int){
+	for _,f :=range PaidNotifications {
+		f(payer,name,option,amount)
+	}
+}
+
+func NotifyMarketSoldBySell (
+	hash Bas_Ethereum.Hash,
+	oldOwner common.Address,
+	newOwner common.Address,
+	price big.Int){
+	for _,f :=range MarketSoldBySellNotifications {
+		f(hash,oldOwner,newOwner,price)
+	}
+}
+
+func NotifyMarketSoldByAsk (
+	hash Bas_Ethereum.Hash,
+	oldOwner common.Address,
+	newOwner common.Address,
+	price big.Int){
+	for _, f := range MarketSoldByAskNotifications {
+		f(hash,oldOwner,newOwner,price)
+	}
+}
+
+//func NotifyMarketSellAdded (
 //	hash Bas_Ethereum.Hash,
 //	seller common.Address,
-//	price big.Int)
-//
+//	price big.Int){
+//	for _, f := range MarketSellAddedNotifications
+//}
+
 //type MarketSellChanged func(
 //	hash Bas_Ethereum.Hash,
 //	seller common.Address,
