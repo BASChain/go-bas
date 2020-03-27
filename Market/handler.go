@@ -3,6 +3,7 @@ package Market
 import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	Contract "github.com/BASChain/go-bas/Contracts"
+	"github.com/BASChain/go-bas/Notification"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/event"
 	"github.com/op/go-logging"
@@ -44,12 +45,13 @@ func loopOverSellAdded(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 
 func handleSellAdded(d interface{}){
 	event:=d.(*Contract.BasMarketSellAdded)
-	updateSellOrdersByEvent(
+	insertSellOrders(
 		event.Operator,
 		event.NameHash,
 		*event.Price,
 		&event.Raw.BlockNumber)
 	logger.Info("sell add ", echoSellOrder(event.Operator,event.NameHash))
+
 }
 
 func watchSellAdded(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
@@ -88,11 +90,10 @@ func loopOverSellChanged(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 
 func handleSellChanged(d interface{}){
 	event:=d.(*Contract.BasMarketSellChanged)
-	updateSellOrdersByEvent(
+	updateSellOrders(
 		event.Operator,
 		event.NameHash,
-		*event.Price,
-		nil)
+		*event.Price)
 	logger.Info("sell changed ", echoSellOrder(event.Operator,event.NameHash))
 }
 
@@ -133,7 +134,7 @@ func loopOverSellRemoved(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 func handleSellRemoved(d interface{})  {
 	event:=d.(*Contract.BasMarketSellRemoved)
 	logger.Info("sell remove ", echoSellOrder(event.Operator,event.NameHash))
-	delete(SellOrders[event.Operator],event.NameHash)
+	removeSellOrders(event.Operator,event.NameHash)
 }
 
 func watchSellRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
@@ -193,7 +194,7 @@ func watchAskAdded(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 
 func handleAskAdded(d interface{}){
 	event:=d.(*Contract.BasMarketAskAdded)
-	updateAskOrdersByEvent(
+	insertAskOrders(
 		event.Operator,
 		event.NameHash,
 		*event.Price,
@@ -217,12 +218,11 @@ func loopOverAskChanged(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 
 func handleAskChanged(d interface{}){
 	event:=d.(*Contract.BasMarketAskChanged)
-	updateAskOrdersByEvent(
+	updateAskOrders(
 		event.Operator,
 		event.NameHash,
 		*event.Price,
-		*event.Time,
-		nil)
+		*event.Time)
 	logger.Info("ask changed ", echoAskOrder(event.Operator,event.NameHash))
 }
 
@@ -263,7 +263,7 @@ func loopOverAskRemoved(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 func handleAskRemoved(d interface{})  {
 	event:=d.(*Contract.BasMarketAskRemoved)
 	logger.Info("ask remove ", echoAskOrder(event.Operator,event.NameHash))
-	delete(AskOrders[event.Operator],event.NameHash)
+	removeAskOrders(event.Operator,event.NameHash)
 }
 
 func watchAskRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
@@ -300,6 +300,13 @@ func loopOverSoldBySell(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 				it.Event.Raw.BlockNumber}
 			Sold = append(Sold, deal)
 			logger.Info(echoSold(deal))
+
+			Notification.NotifyMarketSoldBySell(
+				it.Event.NameHash,
+				it.Event.From,
+				it.Event.To,
+				*it.Event.Price,
+				it.Event.Raw.BlockNumber)
 		}
 	}
 }
@@ -327,6 +334,13 @@ func watchSoldBySell(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wa
 				delete(SellOrders[log.From],log.NameHash)
 				delete(AskOrders[log.To],log.NameHash)
 				logger.Info(echoSold(deal))
+
+				Notification.NotifyMarketSoldBySell(
+					log.NameHash,
+					log.From,
+					log.To,
+					*log.Price,
+					log.Raw.BlockNumber)
 			}
 		}
 	}else{
@@ -349,6 +363,13 @@ func loopOverSoldByAsk(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 			delete(SellOrders[it.Event.From],it.Event.NameHash)
 			delete(AskOrders[it.Event.To],it.Event.NameHash)
 			logger.Info(echoSold(deal))
+
+			Notification.NotifyMarketSoldByAsk(
+				it.Event.NameHash,
+				it.Event.From,
+				it.Event.To,
+				*it.Event.Price,
+				it.Event.Raw.BlockNumber)
 		}
 	}
 }
@@ -376,6 +397,13 @@ func watchSoldByAsk(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wai
 				delete(SellOrders[log.From],log.NameHash)
 				delete(AskOrders[log.To],log.NameHash)
 				logger.Info(echoSold(deal))
+
+				Notification.NotifyMarketSoldByAsk(
+					log.NameHash,
+					log.From,
+					log.To,
+					*log.Price,
+					log.Raw.BlockNumber)
 			}
 		}
 	}else{

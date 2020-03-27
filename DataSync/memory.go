@@ -4,6 +4,7 @@ import (
 	"encoding/binary"
 	"encoding/hex"
 	"github.com/BASChain/go-bas/Bas_Ethereum"
+	"github.com/BASChain/go-bas/Notification"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 	"net"
@@ -43,7 +44,7 @@ type DomainRecord struct{
 
 type Receipt struct {
 	Payer  common.Address
-	Name   string
+	Name   []byte
 	Option string
 	Amount *big.Int
 	CommitBlock uint64
@@ -246,6 +247,12 @@ func updateByQueryOwnership(hash Bas_Ethereum.Hash, blockNumber uint64){
 			Assets[oldOwner] = deleteFromStringList(Assets[oldOwner],hash)
 		}
 		Records[hash].Expire = *expire
+
+		Notification.NotifyOwnershipUpdate(
+			hash,
+			newOwner,
+			*expire,
+			blockNumber)
 	}
 }
 
@@ -266,6 +273,13 @@ func updateByQueryRoot(hash Bas_Ethereum.Hash, blockNumber uint64)  {
 		Records[hash].IsRoot = true
 		Records[hash].RIsRare = Bas_Ethereum.IsRare(string(root.RootName))
 		Records[hash].ROpenToPublic = root.OpenToPublic
+
+		Notification.NotifyAssetRootChanged(
+			hash,
+			root.OpenToPublic,
+			root.IsCustomed,
+			Records[hash].RIsRare,
+			*root.CustomedPrice)
 	}
 }
 
@@ -282,6 +296,10 @@ func updateByQuerySub(hash Bas_Ethereum.Hash, blockNumber uint64) {
 		}
 		Records[hash].SRootHash = sub.RootHash
 		Records[hash].Name = sub.TotalName
+
+		Notification.NotifyAssetSubChanged(
+			hash,
+			sub.RootHash)
 	}
 }
 
@@ -301,6 +319,14 @@ func updateByQueryDNS(hash Bas_Ethereum.Hash,blockNumber uint64){
 		Records[hash].Bca = dns.Bca
 		Records[hash].AliasName = dns.AliasName
 		Records[hash].OpData = dns.OpData
+
+		Notification.NotifyDNSChanged(
+			hash,
+			dns.Ipv4,
+			dns.Ipv6,
+			dns.Bca,
+			dns.OpData,
+			dns.AliasName)
 	}
 }
 
@@ -308,4 +334,11 @@ func updatePaid(receipt Receipt){
 	pLock.Lock()
 	defer pLock.Unlock()
 	PayRecords = append(PayRecords, receipt)
+
+	Notification.NotifyPaid(
+		receipt.Payer,
+		receipt.Name,
+		receipt.Option,
+		*receipt.Amount,
+		receipt.CommitBlock)
 }

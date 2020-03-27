@@ -2,6 +2,7 @@ package Market
 
 import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
+	"github.com/BASChain/go-bas/Notification"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 	"sync"
@@ -80,33 +81,86 @@ func echoSold(deal Deal) string {
 		"by soldway :" + deal.way.String()
 }
 
-func updateSellOrdersByEvent(addr common.Address, hash Bas_Ethereum.Hash, price big.Int, blockNumber *uint64)  {
+func insertSellOrders(addr common.Address, hash Bas_Ethereum.Hash, price big.Int, blockNumber *uint64)  {
 	sLock.Lock()
 	defer sLock.Unlock()
 	if SellOrders[addr] == nil {
 		SellOrders[addr] = make(map[Bas_Ethereum.Hash]*SellOrder)
 	}
-	if SellOrders[addr][hash] == nil {
-		SellOrders[addr][hash] = &SellOrder{}
+
+	SellOrders[addr][hash] = &SellOrder{
+		price:       price,
+		BlockNumber: *blockNumber,
 	}
-	SellOrders[addr][hash].price = price
-	if blockNumber !=nil {
-		SellOrders[addr][hash].BlockNumber = *blockNumber
-	}
+
+	Notification.NotifyMarketSellAdded(
+		hash,
+		addr,
+		price,
+		*blockNumber)
 }
 
-func updateAskOrdersByEvent(addr common.Address, hash Bas_Ethereum.Hash, price, protectiveRemainTime big.Int, blockNumber *uint64)  {
+
+func updateSellOrders(addr common.Address, hash Bas_Ethereum.Hash, price big.Int)  {
+	sLock.Lock()
+	defer sLock.Unlock()
+	SellOrders[addr][hash].price = price
+	Notification.NotifyMarketSellChanged(
+		hash,
+		addr,
+		price)
+}
+
+func removeSellOrders(addr common.Address, hash Bas_Ethereum.Hash){
+	sLock.Lock()
+	defer sLock.Unlock()
+	delete(SellOrders[addr],hash)
+	
+	Notification.NotifyMarketSellRemoved(
+		hash,
+		addr)
+}
+
+func insertAskOrders(addr common.Address, hash Bas_Ethereum.Hash, price, protectiveRemainTime big.Int, blockNumber *uint64)  {
 	aLock.Lock()
 	defer aLock.Unlock()
 	if AskOrders[addr] == nil {
 		AskOrders[addr] = make(map[Bas_Ethereum.Hash]*AskOrder)
 	}
-	if AskOrders[addr][hash] == nil {
-		AskOrders[addr][hash] = &AskOrder{}
+	AskOrders[addr][hash] = &AskOrder{
+		price:                price,
+		protectiveRemainTime: protectiveRemainTime,
+		BlockNumber:          *blockNumber,
 	}
+
+	Notification.NotifyMarketAskAdded(
+		hash,
+		addr,
+		price,
+		protectiveRemainTime,
+		*blockNumber)
+}
+
+func updateAskOrders(addr common.Address, hash Bas_Ethereum.Hash, price, protectiveRemainTime big.Int)  {
+	aLock.Lock()
+	defer aLock.Unlock()
+	
 	AskOrders[addr][hash].price = price
 	AskOrders[addr][hash].protectiveRemainTime = protectiveRemainTime
-	if blockNumber != nil {
-		AskOrders[addr][hash].BlockNumber = *blockNumber
-	}
+
+	Notification.NotifyMarketAskChanged(
+		hash,
+		addr,
+		price,
+		protectiveRemainTime)
+}
+
+func removeAskOrders(addr common.Address, hash Bas_Ethereum.Hash)  {
+	aLock.Lock()
+	defer aLock.Unlock()
+	delete(AskOrders[addr],hash)
+
+	Notification.NotifyMarketAskRemove(
+		hash,
+		addr)
 }

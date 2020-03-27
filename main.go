@@ -12,9 +12,9 @@ import (
 )
 
 func main()  {
-	testSync()
+	//testSync()
+	testMarket()
 	//testReg()
-	//testMarket()
 	//testCreatAccount()
 	//Account.GetAuth("./key/UTC--2020-03-11T06-56-52.423772000Z--33324a5ee0b35f17536ceda27274e88e76640f24","secret")
 	//testSendFreeEth()
@@ -28,11 +28,6 @@ func testSync(){
 	DataSync.Sync();
 }
 
-func testReg(){
-	Bas_Ethereum.Settings()
-	fmt.Println(Bas_Ethereum.RARETYPELENGTH.String())
-	fmt.Println(Bas_Ethereum.IsRare("apple"))
-}
 
 func testMarket(){
 	Market.Sync()

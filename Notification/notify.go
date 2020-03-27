@@ -92,8 +92,8 @@ func NotifyDNSChanged(
 	hash Bas_Ethereum.Hash,
 	IPv4 [4]byte,
 	IPv6 [16]byte,
-	Bca map[string]byte,
-	OpData map[string]byte,
+	Bca []byte,
+	OpData []byte,
 	AliasName string){
 	for _,f :=range DNSChangedNotifications {
 		f(hash,IPv4,IPv6,Bca,OpData,AliasName)
@@ -102,11 +102,12 @@ func NotifyDNSChanged(
 
 func NotifyPaid (
 	payer common.Address,
-	name map[string]byte,
+	name []byte,
 	option string,
-	amount big.Int){
+	amount big.Int,
+	commitBlock uint64){
 	for _,f :=range PaidNotifications {
-		f(payer,name,option,amount)
+		f(payer,name,option,amount, commitBlock)
 	}
 }
 
@@ -114,9 +115,10 @@ func NotifyMarketSoldBySell (
 	hash Bas_Ethereum.Hash,
 	oldOwner common.Address,
 	newOwner common.Address,
-	price big.Int){
+	price big.Int,
+	commitBlock uint64){
 	for _,f :=range MarketSoldBySellNotifications {
-		f(hash,oldOwner,newOwner,price)
+		f(hash,oldOwner,newOwner,price,commitBlock)
 	}
 }
 
@@ -124,38 +126,65 @@ func NotifyMarketSoldByAsk (
 	hash Bas_Ethereum.Hash,
 	oldOwner common.Address,
 	newOwner common.Address,
-	price big.Int){
+	price big.Int,
+	commitBlock uint64){
 	for _, f := range MarketSoldByAskNotifications {
-		f(hash,oldOwner,newOwner,price)
+		f(hash,oldOwner,newOwner,price, commitBlock)
 	}
 }
 
-//func NotifyMarketSellAdded (
-//	hash Bas_Ethereum.Hash,
-//	seller common.Address,
-//	price big.Int){
-//	for _, f := range MarketSellAddedNotifications
-//}
+func NotifyMarketSellAdded (
+	hash Bas_Ethereum.Hash,
+	seller common.Address,
+	price big.Int,
+	commitBlock uint64){
+	for _, f := range MarketSellAddedNotifications {
+		f(hash,seller,price,commitBlock)
+	}
+}
 
-//type MarketSellChanged func(
-//	hash Bas_Ethereum.Hash,
-//	seller common.Address,
-//	price big.Int)
-//
-//type MarketSellRemoved func(
-//	hash Bas_Ethereum.Hash,
-//	seller common.Address)
-//
-//type MarketAskAdded func(
-//	hash Bas_Ethereum.Hash,
-//	buyer common.Address,
-//	price big.Int)
-//
-//type MarketAskChanged func(
-//	hash Bas_Ethereum.Hash,
-//	buyer common.Address,
-//	price big.Int)
-//
-//type MarketAskRemove func(
-//	hash Bas_Ethereum.Hash,
-//	buyer common.Address)
+func NotifyMarketSellChanged (
+	hash Bas_Ethereum.Hash,
+	seller common.Address,
+	price big.Int){
+	for _, f := range MarketSellChangedNotifications {
+		f(hash,seller,price)
+	}
+}
+
+func NotifyMarketSellRemoved (
+	hash Bas_Ethereum.Hash,
+	seller common.Address){
+	for _, f := range MarketSellRemovedNotifications {
+		f(hash,seller)
+	}
+}
+
+func NotifyMarketAskAdded (
+	hash Bas_Ethereum.Hash,
+	buyer common.Address,
+	price big.Int,
+	protectiveTime big.Int,
+	commitBlock uint64){
+	for _, f := range MarketAskAddedNotifications {
+		f(hash,buyer, price,protectiveTime,commitBlock)
+	}
+}
+
+func NotifyMarketAskChanged (
+	hash Bas_Ethereum.Hash,
+	buyer common.Address,
+	price big.Int,
+	protectiveTime big.Int){
+	for _, f := range MarketAskChangedNotifications {
+		f(hash,buyer,price,protectiveTime)
+	}
+}
+
+func NotifyMarketAskRemove (
+	hash Bas_Ethereum.Hash,
+	buyer common.Address) {
+	for _, f := range MarketAskRemovedNotifications {
+		f(hash,buyer)
+	}
+}

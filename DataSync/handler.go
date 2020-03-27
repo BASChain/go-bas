@@ -407,7 +407,7 @@ func loopOverPaid(opts *bind.FilterOpts,wg *sync.WaitGroup){
 		for it.Next() {
 			updatePaid(Receipt{
 				Payer:  it.Event.Payer,
-				Name:   string(it.Event.Name),
+				Name:   it.Event.Name,
 				Option: it.Event.Option,
 				Amount: it.Event.Amount,
 				CommitBlock: it.Event.Raw.BlockNumber,
@@ -434,7 +434,7 @@ func watchPaid(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGrou
 				lastSavingPoint = log.Raw.BlockNumber
 				updatePaid(Receipt{
 					Payer:  log.Payer,
-					Name:   string(log.Name),
+					Name:   log.Name,
 					Option: log.Option,
 					Amount: log.Amount,
 					CommitBlock:log.Raw.BlockNumber,

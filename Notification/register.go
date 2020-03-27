@@ -35,7 +35,7 @@ var MarketAskRemovedNotifications = make(map[string]MarketAskRemove)
 /*
 please check if hash exists, and act accordingly,
 if hash exists, you should drop any record of old owner and insert this record,
-and don't update commitBlock because hash is mint already.
+and keep the smallest commitBlockNumber if not zero.
 if hash does not exist, simple add record is ok
 */
 type OwnershipUpdate func(
@@ -96,33 +96,38 @@ type DNSChanged func(
 	hash Bas_Ethereum.Hash,
 	IPv4 [4]byte,
 	IPv6 [16]byte,
-	Bca map[string]byte,
-	OpData map[string]byte,
+	Bca []byte,
+	OpData []byte,
 	AliasName string)
 
-//name is domain in ascii, option is pay reason
 type Paid func(
 	payer common.Address,
-	name map[string]byte,
+	name []byte,
 	option string,
-	amount big.Int)
+	amount big.Int,
+	commitBlock uint64)
+
 
 type MarketSoldBySell func(
 	hash Bas_Ethereum.Hash,
 	oldOwner common.Address,
 	newOwner common.Address,
-	price big.Int)
+	price big.Int,
+	commitBlock uint64)
 
 type MarketSoldByAsk func(
 	hash Bas_Ethereum.Hash,
 	oldOwner common.Address,
 	newOwner common.Address,
-	price big.Int)
+	price big.Int,
+	commitBlock uint64)
 
 type MarketSellAdded func(
 	hash Bas_Ethereum.Hash,
 	seller common.Address,
-	price big.Int)
+	price big.Int,
+	commitBlock uint64)
+
 
 type MarketSellChanged func(
 	hash Bas_Ethereum.Hash,
@@ -136,12 +141,15 @@ type MarketSellRemoved func(
 type MarketAskAdded func(
 	hash Bas_Ethereum.Hash,
 	buyer common.Address,
-	price big.Int)
+	price big.Int,
+	protectiveTime big.Int,
+	commitBlock uint64)
 
 type MarketAskChanged func(
 	hash Bas_Ethereum.Hash,
 	buyer common.Address,
-	price big.Int)
+	price big.Int,
+	protectiveTime big.Int)
 
 type MarketAskRemove func(
 	hash Bas_Ethereum.Hash,
