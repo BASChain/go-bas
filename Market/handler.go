@@ -298,25 +298,33 @@ func loopOverSoldBySell(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 	it,err:=Bas_Ethereum.BasMarket().FilterSoldBySell(opts)
 	if err==nil{
 		for it.Next() {
-			deal := Deal{it.Event.NameHash,
-				BuyFromSell,
-				it.Event.From,
-				it.Event.To,
-				*it.Event.Price,
-				it.Event.Raw.BlockNumber}
-			Sold = append(Sold, deal)
-			delete(SellOrders[it.Event.From],it.Event.NameHash)
-			delete(AskOrders[it.Event.To],it.Event.NameHash)
-			logger.Info(echoSold(deal))
-
-			Notification.NotifyMarketSoldBySell(
-				it.Event.NameHash,
-				it.Event.From,
-				it.Event.To,
-				*it.Event.Price,
-				it.Event.Raw.BlockNumber)
+			insertEq(it.Event.Raw.BlockNumber,
+				it.Event.Raw.TxIndex,
+				"SoldBySell",
+				it.Event)
 		}
 	}
+}
+
+func handleSoldBySell(d interface{})  {
+	event:=d.(*Contract.BasMarketSoldBySell)
+	deal := Deal{event.NameHash,
+		BuyFromSell,
+		event.From,
+		event.To,
+		*event.Price,
+		event.Raw.BlockNumber}
+	Sold = append(Sold, deal)
+	delete(SellOrders[event.From],event.NameHash)
+	delete(AskOrders[event.To],event.NameHash)
+	logger.Info(echoSold(deal))
+
+	Notification.NotifyMarketSoldBySell(
+		event.NameHash,
+		event.From,
+		event.To,
+		*event.Price,
+		event.Raw.BlockNumber)
 }
 
 func watchSoldBySell(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
@@ -333,23 +341,7 @@ func watchSoldBySell(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wa
 				return
 			case log:= <-logs:
 				lastSavingPoint = log.Raw.BlockNumber
-				deal := Deal{log.NameHash,
-					BuyFromSell,
-					log.From,
-					log.To,
-					*log.Price,
-					log.Raw.BlockNumber}
-				Sold = append(Sold, deal)
-				delete(SellOrders[log.From],log.NameHash)
-				delete(AskOrders[log.To],log.NameHash)
-				logger.Info(echoSold(deal))
-
-				Notification.NotifyMarketSoldBySell(
-					log.NameHash,
-					log.From,
-					log.To,
-					*log.Price,
-					log.Raw.BlockNumber)
+				handleSoldBySell(log)
 			}
 		}
 	}else{
@@ -362,25 +354,33 @@ func loopOverSoldByAsk(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 	it,err:=Bas_Ethereum.BasMarket().FilterSoldByAsk(opts)
 	if err==nil{
 		for it.Next() {
-			deal := Deal{it.Event.NameHash,
-				SellToAsk,
-				it.Event.From,
-				it.Event.To,
-				*it.Event.Price,
-				it.Event.Raw.BlockNumber}
-			Sold = append(Sold, deal)
-			delete(SellOrders[it.Event.From],it.Event.NameHash)
-			delete(AskOrders[it.Event.To],it.Event.NameHash)
-			logger.Info(echoSold(deal))
-
-			Notification.NotifyMarketSoldByAsk(
-				it.Event.NameHash,
-				it.Event.From,
-				it.Event.To,
-				*it.Event.Price,
-				it.Event.Raw.BlockNumber)
+			insertEq(it.Event.Raw.BlockNumber,
+				it.Event.Raw.TxIndex,
+				"SellToAsk",
+				it.Event)
 		}
 	}
+}
+
+func handleSoldByAsk(d interface{})  {
+	event:=d.(*Contract.BasMarketSoldByAsk)
+	deal := Deal{event.NameHash,
+		SellToAsk,
+		event.From,
+		event.To,
+		*event.Price,
+		event.Raw.BlockNumber}
+	Sold = append(Sold, deal)
+	delete(SellOrders[event.From],event.NameHash)
+	delete(AskOrders[event.To],event.NameHash)
+	logger.Info(echoSold(deal))
+
+	Notification.NotifyMarketSoldByAsk(
+		event.NameHash,
+		event.From,
+		event.To,
+		*event.Price,
+		event.Raw.BlockNumber)
 }
 
 func watchSoldByAsk(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
@@ -397,23 +397,7 @@ func watchSoldByAsk(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wai
 				return
 			case log:= <-logs:
 				lastSavingPoint = log.Raw.BlockNumber
-				deal := Deal{log.NameHash,
-					SellToAsk,
-					log.From,
-					log.To,
-					*log.Price,
-					log.Raw.BlockNumber}
-				Sold = append(Sold, deal)
-				delete(SellOrders[log.From],log.NameHash)
-				delete(AskOrders[log.To],log.NameHash)
-				logger.Info(echoSold(deal))
-
-				Notification.NotifyMarketSoldByAsk(
-					log.NameHash,
-					log.From,
-					log.To,
-					*log.Price,
-					log.Raw.BlockNumber)
+				handleSoldByAsk(log)
 			}
 		}
 	}else{
