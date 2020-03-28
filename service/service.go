@@ -8,5 +8,5 @@ import (
 func StartService() {
 	go DataSync.Sync()
 	Market.Sync()
-	
+
 }

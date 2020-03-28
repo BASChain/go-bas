@@ -74,10 +74,21 @@ func (d *Deal)GetAGreedPrice() *big.Int  {
 	return &d.agreedPrice
 }
 
+func (d *Deal)GetTime() int64  {
+	t,_:=Bas_Ethereum.GetTimestamp(d.BlockNumber)
+	return int64(t)
+}
+
 
 func (so *SellOrder)GetPriceStr() string  {
 	return so.price.String()
 }
+func (so *SellOrder)GetTime() int64  {
+	t,_:=Bas_Ethereum.GetTimestamp(so.BlockNumber)
+	return int64(t)
+}
+
+
 
 func echoSellOrder(addr common.Address, hash Bas_Ethereum.Hash) string {
 	return "user : "+ addr.String() +
