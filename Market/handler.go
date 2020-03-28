@@ -305,6 +305,8 @@ func loopOverSoldBySell(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 				*it.Event.Price,
 				it.Event.Raw.BlockNumber}
 			Sold = append(Sold, deal)
+			delete(SellOrders[it.Event.From],it.Event.NameHash)
+			delete(AskOrders[it.Event.To],it.Event.NameHash)
 			logger.Info(echoSold(deal))
 
 			Notification.NotifyMarketSoldBySell(
