@@ -57,6 +57,7 @@ func handleSellAdded(d interface{}){
 func watchSellAdded(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketSellAdded)
 	sub,err:=Bas_Ethereum.BasMarket().WatchSellAdded(opts,logs)
+	defer wg.Done()
 	if err==nil{
 		logger.Info("watching sell added")
 		*subs = append(*subs, sub)
@@ -100,6 +101,7 @@ func handleSellChanged(d interface{}){
 func watchSellChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketSellChanged)
 	sub,err:=Bas_Ethereum.BasMarket().WatchSellChanged(opts,logs)
+	defer wg.Done()
 	if err==nil{
 		logger.Info("watching sell changed")
 		*subs = append(*subs, sub)
@@ -140,6 +142,7 @@ func handleSellRemoved(d interface{})  {
 func watchSellRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketSellRemoved)
 	sub,err:=Bas_Ethereum.BasMarket().WatchSellRemoved(opts,logs)
+	defer wg.Done()
 	if err==nil{
 		logger.Info("watching sell remove")
 		*subs = append(*subs, sub)
@@ -174,6 +177,7 @@ func loopOverAskAdded(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 func watchAskAdded(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketAskAdded)
 	sub,err:=Bas_Ethereum.BasMarket().WatchAskAdded(opts,logs)
+	defer wg.Done()
 	if err==nil{
 		logger.Info("watching ask added")
 		*subs = append(*subs, sub)
@@ -229,6 +233,7 @@ func handleAskChanged(d interface{}){
 func watchAskChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketAskChanged)
 	sub,err:=Bas_Ethereum.BasMarket().WatchAskChanged(opts,logs)
+	defer wg.Done()
 	if err==nil{
 		logger.Info("watching ask changed")
 		*subs = append(*subs, sub)
@@ -269,6 +274,7 @@ func handleAskRemoved(d interface{})  {
 func watchAskRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketAskRemoved)
 	sub,err:=Bas_Ethereum.BasMarket().WatchAskRemoved(opts,logs)
+	defer wg.Done()
 	if err==nil{
 		logger.Info("watching ask remove")
 		*subs = append(*subs, sub)
@@ -314,6 +320,7 @@ func loopOverSoldBySell(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 func watchSoldBySell(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketSoldBySell)
 	sub,err:=Bas_Ethereum.BasMarket().WatchSoldBySell(opts,logs)
+	defer wg.Done()
 	if err==nil{
 		logger.Info("watching sold by sell")
 		*subs = append(*subs, sub)
@@ -377,6 +384,7 @@ func loopOverSoldByAsk(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 func watchSoldByAsk(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketSoldByAsk)
 	sub,err:=Bas_Ethereum.BasMarket().WatchSoldByAsk(opts,logs)
+	defer wg.Done()
 	if err==nil{
 		logger.Info("watching sold by ask")
 		*subs = append(*subs, sub)
