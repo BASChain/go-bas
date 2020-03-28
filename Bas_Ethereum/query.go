@@ -151,7 +151,7 @@ func _GetTimestamp(blockNumber uint64, tryTimes int) (uint64,error){
 	if err!=nil{
 		tryTimes +=1
 		if tryTimes>3{
-			return header.Time,err
+			return 0,err
 		}else{
 			logger.Error("query blockheader error : " , err , "retry in "+ strconv.Itoa(retryRule[tryTimes])+" seconds")
 			time.Sleep(time.Duration(retryRule[tryTimes])*time.Second)
