@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/BASChain/go-bas/Account"
-	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/BASChain/go-bas/DataSync"
 	"github.com/BASChain/go-bas/Market"
 	"github.com/BASChain/go-bas/Transactions"
@@ -12,7 +11,7 @@ import (
 )
 
 func main()  {
-	//testSync()
+	testSync()
 	testMarket()
 	//testReg()
 	//testCreatAccount()
@@ -37,11 +36,6 @@ func testCreatAccount(){
 	Account.CreateKs("secret");
 }
 
-func testResetConn(){
-	Bas_Ethereum.BasAsset()
-	Bas_Ethereum.ResetConnAndContracts()
-	Bas_Ethereum.BasAsset()
-}
 
 func testSendFreeEth()  {
 	keys:=Account.PrivateKeyRecover("./key/UTC--2020-03-11T06-56-52.423772000Z--33324a5ee0b35f17536ceda27274e88e76640f24","secret")

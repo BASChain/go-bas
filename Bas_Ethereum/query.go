@@ -147,7 +147,7 @@ func _GetTimestamp(blockNumber uint64, tryTimes int) (uint64,error){
 	if blockTimeMapping[blockNumber] != 0 {
 		return blockTimeMapping[blockNumber],nil
 	}
-	header,err:=GetConn().HeaderByNumber(context.Background(),big.NewInt(int64(blockNumber)))
+	header,err:=GetConn(DATASYNC).HeaderByNumber(context.Background(),big.NewInt(int64(blockNumber)))
 	if err!=nil{
 		tryTimes +=1
 		if tryTimes>3{

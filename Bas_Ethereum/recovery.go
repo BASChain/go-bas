@@ -9,6 +9,9 @@ import (
 )
 var logger, _ = logging.GetLogger("Bas_Ethereum")
 
+const DATASYNC string = "data_sync"
+const MARKET string = "market"
+
 var (
 
 	AccessPoints = []string{
@@ -27,7 +30,7 @@ var (
 	_market = "0xA32ccce4B7aB28d3Ce40BBa03A2748bCbe4544dB"
 	_f = "0x6B80cA84B64e2Fd7957138eA7480FB4E775b997F"
 
-	conn *ethclient.Client
+	conns = make(map[string]*ethclient.Client)
 
 	token *Contract.BasToken
 	ownership *Contract.BasOwnership
@@ -41,19 +44,19 @@ var (
 
 
 
-func RestoreConnectionManually(entrance string) {
+func RestoreConnectionManually(entrance , service string) {
 	c, err := ethclient.Dial(entrance)
 	if err!=nil{
 		logger.Error("can't connect to ethereum")
 	}else{
-		conn = c
+		conns[service] = c
 		logger.Info("conn is ready")
 	}
 }
 
-func GetConn() *ethclient.Client {
-	if conn!=nil{
-		return conn
+func GetConn(service string) *ethclient.Client {
+	if conns[service]!=nil{
+		return conns[service]
 	}else{
 		for _,s := range AccessPoints{
 			c, err := ethclient.Dial(s)
@@ -61,9 +64,9 @@ func GetConn() *ethclient.Client {
 				logger.Error("can't get access through : " ,s)
 				continue
 			}else{
-				conn = c
-				logger.Info("conn is ready")
-				return conn
+				conns[service] = c
+				logger.Info(service + " conn is ready")
+				return conns[service]
 			}
 		}
 	}
@@ -72,23 +75,28 @@ func GetConn() *ethclient.Client {
 }
 
 
-func ResetConnAndContracts(){
-	conn.Close()
-	conn = nil
+func ResetServiceSync(){
+	conns[DATASYNC].Close()
+	conns[DATASYNC] = nil
 	token = nil
 	ownership = nil
 	asset = nil
 	dns = nil
 	miner = nil
 	oann = nil
-	market = nil
 	free = nil
-
-	GetConn()
+	GetConn(DATASYNC)
 }
 
-func GetLastBlockNumber() uint64{
-	b,e:= GetConn().BlockByNumber(context.Background(),nil)
+func ResetServiceMarket(){
+	conns[MARKET].Close()
+	conns[MARKET] = nil
+	market = nil
+	GetConn(MARKET)
+}
+
+func GetLastBlockNumber(service string ) uint64{
+	b,e:= GetConn(service).BlockByNumber(context.Background(),nil)
 	if e==nil{
 		return  b.NumberU64()
 	}else {
@@ -99,7 +107,7 @@ func GetLastBlockNumber() uint64{
 
 func BasToken() *Contract.BasToken{
 	if token==nil{
-		if t,err:=Contract.NewBasToken(common.HexToAddress(_t), GetConn());err==nil{
+		if t,err:=Contract.NewBasToken(common.HexToAddress(_t), GetConn(DATASYNC));err==nil{
 			token = t
 		}else{
 			logger.Fatal("can't recover BasToken",err)
@@ -110,7 +118,7 @@ func BasToken() *Contract.BasToken{
 
 func BasOwnership() *Contract.BasOwnership  {
 	if ownership==nil{
-		if o,err:=Contract.NewBasOwnership(common.HexToAddress(_o), GetConn());err==nil{
+		if o,err:=Contract.NewBasOwnership(common.HexToAddress(_o), GetConn(DATASYNC));err==nil{
 			ownership = o
 		}else{
 			logger.Fatal("can't recover ownership",err)
@@ -121,7 +129,7 @@ func BasOwnership() *Contract.BasOwnership  {
 
 func BasAsset() *Contract.BasAsset{
 	if asset==nil{
-		if a,err:=Contract.NewBasAsset(common.HexToAddress(_a), GetConn());err==nil{
+		if a,err:=Contract.NewBasAsset(common.HexToAddress(_a), GetConn(DATASYNC));err==nil{
 			asset = a
 		}else{
 			logger.Fatal("can't recover Asset",err)
@@ -132,7 +140,7 @@ func BasAsset() *Contract.BasAsset{
 
 func BasDNS() *Contract.BasDNS{
 	if dns==nil{
-		if d,err:=Contract.NewBasDNS(common.HexToAddress(_d), GetConn());err==nil{
+		if d,err:=Contract.NewBasDNS(common.HexToAddress(_d), GetConn(DATASYNC));err==nil{
 			dns = d
 		}else{
 			logger.Fatal("can't recover dns",err)
@@ -143,7 +151,7 @@ func BasDNS() *Contract.BasDNS{
 
 func BasMiner() *Contract.BasMiner{
 	if miner==nil{
-		if m,err:=Contract.NewBasMiner(common.HexToAddress(_m), GetConn());err==nil{
+		if m,err:=Contract.NewBasMiner(common.HexToAddress(_m), GetConn(DATASYNC));err==nil{
 			miner = m
 		}else{
 			logger.Fatal("can't recover Miner",err)
@@ -154,7 +162,7 @@ func BasMiner() *Contract.BasMiner{
 
 func BasOANN() *Contract.BasOANN{
 	if oann==nil{
-		if o,err:=Contract.NewBasOANN(common.HexToAddress(_oann), GetConn());err==nil{
+		if o,err:=Contract.NewBasOANN(common.HexToAddress(_oann), GetConn(DATASYNC));err==nil{
 			oann = o
 		}else{
 			logger.Fatal("can't recover OANN",err)
@@ -165,7 +173,7 @@ func BasOANN() *Contract.BasOANN{
 
 func BasMarket() *Contract.BasMarket{
 	if market==nil{
-		if m,err:=Contract.NewBasMarket(common.HexToAddress(_market), GetConn());err==nil{
+		if m,err:=Contract.NewBasMarket(common.HexToAddress(_market), GetConn(MARKET));err==nil{
 			market = m
 		}else{
 			logger.Fatal("can't recover market",err)
@@ -176,7 +184,7 @@ func BasMarket() *Contract.BasMarket{
 
 func FreeBas() *Contract.SendFreeBas{
 	if free==nil{
-		if o,err:=Contract.NewSendFreeBas(common.HexToAddress(_f),GetConn());err==nil{
+		if o,err:=Contract.NewSendFreeBas(common.HexToAddress(_f),GetConn(DATASYNC));err==nil{
 			free = o
 		}else{
 			logger.Fatal("can't recover Send Free Bas", err)

@@ -62,12 +62,12 @@ func unSubscriptAll(){
 func ReSync(){
 	logger.Info("ReSyncing")
 	unSubscriptAll()
-	Bas_Ethereum.ResetConnAndContracts()
+	Bas_Ethereum.ResetServiceMarket()
 	Sync()
 }
 
 func Sync(){
-	lastBlockNumber := Bas_Ethereum.GetLastBlockNumber()
+	lastBlockNumber := Bas_Ethereum.GetLastBlockNumber(Bas_Ethereum.MARKET)
 	fillEventQueue(lastBlockNumber)
 	syncDataByHandleQueue()
 	lastSavingPoint = lastBlockNumber

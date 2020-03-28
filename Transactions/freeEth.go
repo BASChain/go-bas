@@ -19,7 +19,7 @@ var logger, _ = logging.GetLogger("Transactions")
 
 func CheckBalance(key *keystore.Key) *big.Int{
 	account := GetPublicAddressFromKeyStore(key)
-	balance, err := Bas_Ethereum.GetConn().BalanceAt(context.Background(), account, nil)
+	balance, err := Bas_Ethereum.GetConn(Bas_Ethereum.DATASYNC).BalanceAt(context.Background(), account, nil)
 	if err != nil {
 		logger.Error("check balance failed",err)
 	}
@@ -41,14 +41,14 @@ func SendFreeEth(key *keystore.Key,toAddress common.Address,amount *big.Int) err
 	}
 
 	fromAddress := crypto.PubkeyToAddress(*publicKeyECDSA)
-	nonce, err := Bas_Ethereum.GetConn().PendingNonceAt(context.Background(), fromAddress)
+	nonce, err := Bas_Ethereum.GetConn(Bas_Ethereum.DATASYNC).PendingNonceAt(context.Background(), fromAddress)
 	if err != nil {
 		logger.Error("send free eth, create none error : ",err)
 		return err
 	}
 
 	gasLimit := uint64(21000)                // in units
-	gasPrice, err := Bas_Ethereum.GetConn().SuggestGasPrice(context.Background())
+	gasPrice, err := Bas_Ethereum.GetConn(Bas_Ethereum.DATASYNC).SuggestGasPrice(context.Background())
 	if err != nil {
 		logger.Error("get gasPrice error : ", err)
 		return err
@@ -57,7 +57,7 @@ func SendFreeEth(key *keystore.Key,toAddress common.Address,amount *big.Int) err
 	var data []byte
 	tx := types.NewTransaction(nonce, toAddress, amount, gasLimit, gasPrice, data)
 
-	chainID, err := Bas_Ethereum.GetConn().NetworkID(context.Background())
+	chainID, err := Bas_Ethereum.GetConn(Bas_Ethereum.DATASYNC).NetworkID(context.Background())
 	if err != nil {
 		logger.Error("get chainId error : ", err)
 		return err
@@ -69,12 +69,12 @@ func SendFreeEth(key *keystore.Key,toAddress common.Address,amount *big.Int) err
 		return err
 	}
 
-	err = Bas_Ethereum.GetConn().SendTransaction(context.Background(), signedTx)
+	err = Bas_Ethereum.GetConn(Bas_Ethereum.DATASYNC).SendTransaction(context.Background(), signedTx)
 	if err != nil {
 		logger.Error("failed to send transaction : ", err)
 	}
 
-	receipt, err := bind.WaitMined(context.Background(),Bas_Ethereum.GetConn(),signedTx)
+	receipt, err := bind.WaitMined(context.Background(),Bas_Ethereum.GetConn(Bas_Ethereum.DATASYNC),signedTx)
 
 	if err != nil {
 		logger.Error("send free eth error :", err)

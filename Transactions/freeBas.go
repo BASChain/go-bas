@@ -21,7 +21,7 @@ func SendFreeBasByContract(key *keystore.Key,addr common.Address,amount *big.Int
 		logger.Error("send BAS error : ",err)
 		return err
 	}
-	receipt, err := bind.WaitMined(context.Background(), Bas_Ethereum.GetConn(), tx)
+	receipt, err := bind.WaitMined(context.Background(), Bas_Ethereum.GetConn(Bas_Ethereum.DATASYNC), tx)
 	if err!=nil{
 		logger.Error("mine send BAS error : ", err)
 		return err
