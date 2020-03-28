@@ -54,4 +54,5 @@ func loopOverEventQueue()  {
 			logger.Error("undefined type")
 		}
 	}
+	eq = EventQueue{}
 }
