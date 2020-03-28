@@ -147,6 +147,7 @@ func loopOverAdd(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	if err==nil{
 		for it.Next() {
 			insertQueue(it.Event.NameHash,queueOwnership)
+			//logger.Info("!!!add:" , "0x"+hex.EncodeToString(it.Event.NameHash[:]), it.Event.Owner.String())
 			if firstAppearInBlock[it.Event.NameHash] == 0 || firstAppearInBlock[it.Event.NameHash] > it.Event.Raw.BlockNumber{
 				firstAppearInBlock[it.Event.NameHash] = it.Event.Raw.BlockNumber
 			}

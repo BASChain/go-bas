@@ -11,7 +11,7 @@ import (
 )
 
 func main()  {
-	testSync()
+	//testSync()
 	testMarket()
 	//testReg()
 	//testCreatAccount()
