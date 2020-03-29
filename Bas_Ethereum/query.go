@@ -8,6 +8,7 @@ import (
 	solsha3 "github.com/miguelmota/go-solidity-sha3"
 	"math/big"
 	"strconv"
+	"sync"
 	"time"
 )
 
@@ -140,6 +141,8 @@ func _QueryOwnership(key Hash,blockNumber uint64, tryTimes int) (common.Address,
 
 var blockTimeMapping = make(map[uint64]uint64)
 
+var bLock = &sync.Mutex{}
+
 func GetTimestamp(blockNumber uint64) (uint64,error){
 	return _GetTimestamp(blockNumber,0)
 }
@@ -158,6 +161,8 @@ func _GetTimestamp(blockNumber uint64, tryTimes int) (uint64,error){
 			return _GetTimestamp(blockNumber,tryTimes)
 		}
 	}else{
+		bLock.Lock()
+		defer bLock.Unlock()
 		blockTimeMapping[blockNumber] = header.Time
 		return header.Time,nil
 	}
