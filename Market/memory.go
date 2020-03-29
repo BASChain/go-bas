@@ -98,7 +98,7 @@ func echoSellOrder(addr common.Address, hash Bas_Ethereum.Hash) string {
 			msg += " price : 0"
 		}else{
 			if d,ok:=m[hash];!ok{
-				msg += " price : 0"
+				msg += " price : 0 , need to recheck code !!!"
 			}else{
 				msg += " price : " + d.price.String()
 			}

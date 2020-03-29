@@ -11,8 +11,8 @@ import (
 )
 
 func main()  {
-	//testSync()
-	testMarket()
+	testSync()
+	//testMarket()
 	//testReg()
 	//testCreatAccount()
 	//Account.GetAuth("./key/UTC--2020-03-11T06-56-52.423772000Z--33324a5ee0b35f17536ceda27274e88e76640f24","secret")
