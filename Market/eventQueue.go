@@ -56,7 +56,7 @@ func loopOverEventQueue()  {
 		case "SoldByAsk":
 			handleSoldByAsk(e.EventData)
 		default:
-			logger.Error("undefined type")
+			logger.Error("undefined type : ", e.EventName)
 		}
 	}
 	eq = EventQueue{}
