@@ -5,6 +5,7 @@ import (
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/BASChain/go-bas/Notification"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/event"
 	"github.com/op/go-logging"
 	"golang.org/x/net/context"
@@ -44,13 +45,13 @@ func loopOverSellAdded(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 }
 
 func handleSellAdded(d interface{}){
-	event:=d.(*Contract.BasMarketSellAdded)
+	e :=d.(*Contract.BasMarketSellAdded)
 	insertSellOrders(
-		event.Operator,
-		event.NameHash,
-		*event.Price,
-		&event.Raw.BlockNumber)
-	logger.Info("sell add ", echoSellOrder(event.Operator,event.NameHash))
+		e.Operator,
+		e.NameHash,
+		*e.Price,
+		&e.Raw.BlockNumber)
+	logger.Info("sell add ", echoSellOrder(e.Operator, e.NameHash))
 
 }
 
@@ -90,12 +91,12 @@ func loopOverSellChanged(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 }
 
 func handleSellChanged(d interface{}){
-	event:=d.(*Contract.BasMarketSellChanged)
+	e:=d.(*Contract.BasMarketSellChanged)
 	updateSellOrders(
-		event.Operator,
-		event.NameHash,
-		*event.Price)
-	logger.Info("sell changed ", echoSellOrder(event.Operator,event.NameHash))
+		e.Operator,
+		e.NameHash,
+		*e.Price)
+	logger.Info("sell changed ", echoSellOrder(e.Operator, e.NameHash))
 }
 
 func watchSellChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
@@ -134,9 +135,9 @@ func loopOverSellRemoved(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 }
 
 func handleSellRemoved(d interface{})  {
-	event:=d.(*Contract.BasMarketSellRemoved)
-	logger.Info("sell remove ", echoSellOrder(event.Operator,event.NameHash))
-	removeSellOrders(event.Operator,event.NameHash)
+	e :=d.(*Contract.BasMarketSellRemoved)
+	logger.Info("sell remove ", echoSellOrder(e.Operator, e.NameHash))
+	removeSellOrders(e.Operator, e.NameHash)
 }
 
 func watchSellRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
@@ -197,14 +198,14 @@ func watchAskAdded(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 }
 
 func handleAskAdded(d interface{}){
-	event:=d.(*Contract.BasMarketAskAdded)
+	e:=d.(*Contract.BasMarketAskAdded)
 	insertAskOrders(
-		event.Operator,
-		event.NameHash,
-		*event.Price,
-		*event.Time,
-		&event.Raw.BlockNumber)
-	logger.Info("ask add ", echoAskOrder(event.Operator,event.NameHash))
+		e.Operator,
+		e.NameHash,
+		*e.Price,
+		*e.Time,
+		&e.Raw.BlockNumber)
+	logger.Info("ask add ", echoAskOrder(e.Operator, e.NameHash))
 }
 
 func loopOverAskChanged(opts *bind.FilterOpts,wg *sync.WaitGroup) {
@@ -221,13 +222,13 @@ func loopOverAskChanged(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 }
 
 func handleAskChanged(d interface{}){
-	event:=d.(*Contract.BasMarketAskChanged)
+	e :=d.(*Contract.BasMarketAskChanged)
 	updateAskOrders(
-		event.Operator,
-		event.NameHash,
-		*event.Price,
-		*event.Time)
-	logger.Info("ask changed ", echoAskOrder(event.Operator,event.NameHash))
+		e.Operator,
+		e.NameHash,
+		*e.Price,
+		*e.Time)
+	logger.Info("ask changed ", echoAskOrder(e.Operator, e.NameHash))
 }
 
 func watchAskChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
@@ -266,9 +267,9 @@ func loopOverAskRemoved(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 }
 
 func handleAskRemoved(d interface{})  {
-	event:=d.(*Contract.BasMarketAskRemoved)
-	logger.Info("ask remove ", echoAskOrder(event.Operator,event.NameHash))
-	removeAskOrders(event.Operator,event.NameHash)
+	e :=d.(*Contract.BasMarketAskRemoved)
+	logger.Info("ask remove ", echoAskOrder(e.Operator, e.NameHash))
+	removeAskOrders(e.Operator, e.NameHash)
 }
 
 func watchAskRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
@@ -306,25 +307,35 @@ func loopOverSoldBySell(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 	}
 }
 
+func clearOrders(seller,buyer common.Address, hash Bas_Ethereum.Hash){
+	delete(SellOrders[seller],hash)
+	delete(AskOrders[buyer],hash)
+	if len(SellOrders[seller])==0 {
+		delete(SellOrders,seller)
+	}
+	if len(AskOrders[buyer]) ==0 {
+		delete(AskOrders,buyer)
+	}
+}
+
 func handleSoldBySell(d interface{})  {
-	event:=d.(*Contract.BasMarketSoldBySell)
-	deal := Deal{event.NameHash,
+	e :=d.(*Contract.BasMarketSoldBySell)
+	deal := Deal{e.NameHash,
 		BuyFromSell,
-		event.From,
-		event.To,
-		*event.Price,
-		event.Raw.BlockNumber}
+		e.From,
+		e.To,
+		*e.Price,
+		e.Raw.BlockNumber}
 	Sold = append(Sold, deal)
-	delete(SellOrders[event.From],event.NameHash)
-	delete(AskOrders[event.To],event.NameHash)
+	clearOrders(e.From,e.To,e.NameHash)
 	logger.Info(echoSold(deal))
 
 	Notification.NotifyMarketSoldBySell(
-		event.NameHash,
-		event.From,
-		event.To,
-		*event.Price,
-		event.Raw.BlockNumber)
+		e.NameHash,
+		e.From,
+		e.To,
+		*e.Price,
+		e.Raw.BlockNumber)
 }
 
 func watchSoldBySell(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
@@ -356,31 +367,30 @@ func loopOverSoldByAsk(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 		for it.Next() {
 			insertEq(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
-				"SellToAsk",
+				"SoldByAsk",
 				it.Event)
 		}
 	}
 }
 
 func handleSoldByAsk(d interface{})  {
-	event:=d.(*Contract.BasMarketSoldByAsk)
-	deal := Deal{event.NameHash,
+	e :=d.(*Contract.BasMarketSoldByAsk)
+	deal := Deal{e.NameHash,
 		SellToAsk,
-		event.From,
-		event.To,
-		*event.Price,
-		event.Raw.BlockNumber}
+		e.From,
+		e.To,
+		*e.Price,
+		e.Raw.BlockNumber}
 	Sold = append(Sold, deal)
-	delete(SellOrders[event.From],event.NameHash)
-	delete(AskOrders[event.To],event.NameHash)
+	clearOrders(e.From,e.To,e.NameHash)
 	logger.Info(echoSold(deal))
 
 	Notification.NotifyMarketSoldByAsk(
-		event.NameHash,
-		event.From,
-		event.To,
-		*event.Price,
-		event.Raw.BlockNumber)
+		e.NameHash,
+		e.From,
+		e.To,
+		*e.Price,
+		e.Raw.BlockNumber)
 }
 
 func watchSoldByAsk(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
