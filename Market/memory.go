@@ -91,9 +91,22 @@ func (so *SellOrder)GetTime() int64  {
 
 
 func echoSellOrder(addr common.Address, hash Bas_Ethereum.Hash) string {
-	return "user : "+ addr.String() +
-		" hash : " +  hash.String() +
-		" price : "+ SellOrders[addr][hash].price.String()
+	msg := "user : "+ addr.String() +
+		" hash : " +  hash.String()
+
+		if m,ok:=SellOrders[addr];!ok{
+			msg += " price : 0"
+		}else{
+			if d,ok:=m[hash];!ok{
+				msg += " price : 0"
+			}else{
+				msg += " price : " + d.price.String()
+			}
+		}
+
+
+
+	return msg
 }
 
 func echoAskOrder(addr common.Address, hash Bas_Ethereum.Hash) string{
