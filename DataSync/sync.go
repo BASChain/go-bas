@@ -6,10 +6,20 @@ import (
 	"sync"
 )
 
+var lastSavingPoint = uint64(0)
+var currentSavingPoint = uint64(0)
 
+func moveToNewSavingPoint(blockNumber uint64){
+	lastSavingPoint = currentSavingPoint;
+	currentSavingPoint = blockNumber;
+	logger.Info("[Data_Sync]  saving point  ", lastSavingPoint, "----->" , currentSavingPoint)
+}
 
-func fillWaitQueue(lastBlockNumber uint64){
-	opts := getLoopOpts(lastSavingPoint,&lastBlockNumber)
+func syncGap(from ,to uint64){
+	if from>to {
+		return
+	}
+	opts := getLoopOpts(from,&to)
 	var waitGroup sync.WaitGroup
 	waitGroup.Add(11)
 
@@ -26,7 +36,17 @@ func fillWaitQueue(lastBlockNumber uint64){
 	go loopOverPaid(opts,&waitGroup)
 
 	waitGroup.Wait()
+	syncDataByHandleQueue()
+}
 
+func SyncGapWithNoTrust(blockNumber uint64){
+	moveToNewSavingPoint(blockNumber)
+	syncGap(lastSavingPoint+1,blockNumber-1)
+}
+
+func syncGapToNewest(){
+	moveToNewSavingPoint(Bas_Ethereum.GetLastBlockNumber(Bas_Ethereum.DATASYNC))
+	syncGap(lastSavingPoint,currentSavingPoint)
 }
 
 func syncDataByHandleQueue(){
@@ -44,8 +64,6 @@ func syncDataByHandleQueue(){
 	clearQuery(queueRoot)
 	clearQuery(queueSub)
 	clearQuery(queueDns)
-
-	ShowCachedNames()
 }
 
 func ShowCachedNames(){
@@ -97,12 +115,14 @@ func ReSync(){
 	Sync()
 }
 
+var firstStart = true;
+
 func Sync(){
-	lastBlockNumber := Bas_Ethereum.GetLastBlockNumber(Bas_Ethereum.DATASYNC)
 	Bas_Ethereum.Settings()
-	fillWaitQueue(lastBlockNumber)
-	logger.Info("from ",lastSavingPoint,"-----------------syncing--------------> to ", lastBlockNumber)
-	syncDataByHandleQueue()
-	lastSavingPoint = lastBlockNumber
-	watch(lastBlockNumber)
+	syncGapToNewest()
+	if firstStart {
+		ShowCachedNames()
+		firstStart = false
+	}
+	watch(currentSavingPoint)
 }

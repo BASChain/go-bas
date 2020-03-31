@@ -55,8 +55,8 @@ func watchRootChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.W
 				logger.Error("subscript root changed runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateByQueryRoot(log.NameHash,lastSavingPoint)
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryRoot(log.NameHash,currentSavingPoint)
 				logger.Info("detected root changed : ",
 					string(Records[log.NameHash].Name),
 				)
@@ -92,8 +92,8 @@ func watchSubChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wa
 				logger.Error("subscript sub changed runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateByQuerySub(log.NameHash,lastSavingPoint)
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQuerySub(log.NameHash,currentSavingPoint)
 				logger.Info("detected sub changed : ",
 					string(Records[log.NameHash].Name),
 				)
@@ -129,8 +129,8 @@ func watchDNSChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wa
 				logger.Error("subscript dns changed runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateByQueryDNS(log.NameHash,lastSavingPoint)
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryDNS(log.NameHash,currentSavingPoint)
 				logger.Info("detected dns changed : ",
 					string(Records[log.NameHash].Name),
 				)
@@ -170,8 +170,8 @@ func watchAdd(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup
 				logger.Error("subscript add runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected add : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "owner : ", log.Owner.String())
 			}
@@ -209,8 +209,8 @@ func watchUpdate(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGr
 				logger.Error("subscript update runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected update : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "owner : ", log.Owner.String())
 			}
@@ -245,8 +245,8 @@ func watchExtend(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGr
 				logger.Error("subscript extend runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected extend : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]))
 			}
@@ -282,8 +282,8 @@ func watchTakeover(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 				logger.Error("subscript takeover runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected takeover : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
@@ -318,8 +318,8 @@ func watchTransfer(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 				logger.Error("subscript transfer runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected transfer : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
@@ -354,8 +354,8 @@ func watchTransferFrom(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.
 				logger.Error("subscript transferFrom runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected transferFrom : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
@@ -390,8 +390,8 @@ func watchRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGr
 				logger.Error("subscript remove runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
-				updateByQueryOwnership(log.NameHash,lastSavingPoint)
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected remove : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]))
 			}
@@ -432,7 +432,7 @@ func watchPaid(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGrou
 				logger.Error("subscript paid runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				updatePaid(Receipt{
 					Payer:  log.Payer,
 					Name:   log.Name,

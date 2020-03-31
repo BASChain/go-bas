@@ -8,7 +8,6 @@ import (
 	"sync"
 )
 
-var lastSavingPoint = uint64(0)
 
 type SellOrder struct {
 	price big.Int

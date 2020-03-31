@@ -13,8 +13,6 @@ import (
 
 var DebugFlag = true
 
-var lastSavingPoint = uint64(0)
-
 var lock = &sync.Mutex{}
 var pLock = &sync.Mutex{}
 

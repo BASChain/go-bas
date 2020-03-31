@@ -68,7 +68,7 @@ func watchSellAdded(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wai
 				logger.Error("subscript sell added runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleSellAdded(log)
 			}
 		}
@@ -112,7 +112,7 @@ func watchSellChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.W
 				logger.Error("subscript sell changed runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleSellChanged(log)
 			}
 		}
@@ -153,7 +153,7 @@ func watchSellRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wa
 				logger.Error("subscript sell remove runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleSellRemoved(log)
 			}
 		}
@@ -188,7 +188,7 @@ func watchAskAdded(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 				logger.Error("subscript ask added runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleAskAdded(log)
 			}
 		}
@@ -244,7 +244,7 @@ func watchAskChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wa
 				logger.Error("subscript ask changed runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleAskChanged(log)
 			}
 		}
@@ -285,7 +285,7 @@ func watchAskRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wai
 				logger.Error("subscript ask remove runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleAskRemoved(log)
 			}
 		}
@@ -351,7 +351,7 @@ func watchSoldBySell(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wa
 				logger.Error("subscript sold by sell runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleSoldBySell(log)
 			}
 		}
@@ -406,7 +406,7 @@ func watchSoldByAsk(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wai
 				logger.Error("subscript sold by ask runtime error", e)
 				return
 			case log:= <-logs:
-				lastSavingPoint = log.Raw.BlockNumber
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleSoldByAsk(log)
 			}
 		}

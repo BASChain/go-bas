@@ -6,8 +6,20 @@ import (
 	"sync"
 )
 
-func fillEventQueue(lastBlockNumber uint64){
-	opts := getLoopOpts(lastSavingPoint,&lastBlockNumber)
+var lastSavingPoint = uint64(0)
+var currentSavingPoint = uint64(0)
+
+func moveToNewSavingPoint(blockNumber uint64){
+	lastSavingPoint = currentSavingPoint;
+	currentSavingPoint = blockNumber;
+	logger.Info("[Market]  saving point  ", lastSavingPoint, "----->" , currentSavingPoint)
+}
+
+func syncGap(from,to uint64){
+	if from>to {
+		return
+	}
+	opts := getLoopOpts(from,&to)
 	var waitGroup sync.WaitGroup
 	waitGroup.Add(8)
 
@@ -21,10 +33,17 @@ func fillEventQueue(lastBlockNumber uint64){
 	go loopOverSoldBySell(opts,&waitGroup)
 
 	waitGroup.Wait()
+	loopOverEventQueue()
 }
 
-func syncDataByHandleQueue(){
-	loopOverEventQueue()
+func SyncGapWithNoTrust(blockNumber uint64){
+	moveToNewSavingPoint(blockNumber)
+	syncGap(lastSavingPoint+1,blockNumber-1)
+}
+
+func syncGapToNewest(){
+	moveToNewSavingPoint(Bas_Ethereum.GetLastBlockNumber(Bas_Ethereum.MARKET))
+	syncGap(lastSavingPoint,currentSavingPoint)
 }
 
 var subs []event.Subscription
@@ -68,10 +87,6 @@ func ReSync(){
 
 func Sync(){
 	lastBlockNumber := Bas_Ethereum.GetLastBlockNumber(Bas_Ethereum.MARKET)
-	fillEventQueue(lastBlockNumber)
-	logger.Info("from ",lastSavingPoint,"-----------------syncing--------------> to ", lastBlockNumber)
-	syncDataByHandleQueue()
-	lastSavingPoint = lastBlockNumber
-	logger.Info("current saving point is blocknumber : ", lastSavingPoint)
+	syncGapToNewest()
 	watch(lastBlockNumber)
 }
