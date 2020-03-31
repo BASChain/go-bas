@@ -69,6 +69,7 @@ func ReSync(){
 func Sync(){
 	lastBlockNumber := Bas_Ethereum.GetLastBlockNumber(Bas_Ethereum.MARKET)
 	fillEventQueue(lastBlockNumber)
+	logger.Info("from ",lastSavingPoint,"-----------------syncing--------------> to ", lastBlockNumber)
 	syncDataByHandleQueue()
 	lastSavingPoint = lastBlockNumber
 	logger.Info("current saving point is blocknumber : ", lastSavingPoint)
