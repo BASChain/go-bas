@@ -2,7 +2,6 @@ package DataSync
 
 import (
 	"encoding/hex"
-	"github.com/BASChain/go-bas/Bas_Ethereum"
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/event"
@@ -32,7 +31,7 @@ func getWatchOpts(s uint64) *bind.WatchOpts{
 
 func loopOverRootChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
-	it,err:=Bas_Ethereum.BasAsset().FilterRootChanged(opts)
+	it,err:=BasAsset().FilterRootChanged(opts)
 	if err==nil{
 		for it.Next() {
 			insertQueue(it.Event.NameHash,queueRoot)
@@ -44,7 +43,7 @@ func loopOverRootChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func watchRootChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasAssetRootChanged)
-	sub,err:=Bas_Ethereum.BasAsset().WatchRootChanged(opts,logs)
+	sub,err:=BasAsset().WatchRootChanged(opts,logs)
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching root changed")
@@ -69,7 +68,7 @@ func watchRootChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.W
 
 func loopOverSubChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
-	it,err:=Bas_Ethereum.BasAsset().FilterSubChanged(opts)
+	it,err:=BasAsset().FilterSubChanged(opts)
 	if err==nil{
 		for it.Next() {
 			insertQueue(it.Event.NameHash,queueSub)
@@ -81,7 +80,7 @@ func loopOverSubChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func watchSubChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasAssetSubChanged)
-	sub,err:=Bas_Ethereum.BasAsset().WatchSubChanged(opts,logs)
+	sub,err:=BasAsset().WatchSubChanged(opts,logs)
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching sub changed")
@@ -106,7 +105,7 @@ func watchSubChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wa
 
 func loopOverDNSChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
-	it,err:=Bas_Ethereum.BasDNS().FilterDNSChanged(opts)
+	it,err:=BasDNS().FilterDNSChanged(opts)
 	if err==nil{
 		for it.Next() {
 			insertQueue(it.Event.NameHash,queueDns)
@@ -118,7 +117,7 @@ func loopOverDNSChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func watchDNSChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasDNSDNSChanged)
-	sub,err:=Bas_Ethereum.BasDNS().WatchDNSChanged(opts,logs)
+	sub,err:=BasDNS().WatchDNSChanged(opts,logs)
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching dns changed")
@@ -143,7 +142,7 @@ func watchDNSChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wa
 
 func loopOverAdd(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
-	it,err:=Bas_Ethereum.BasOwnership().FilterAdd(opts)
+	it,err:=BasOwnership().FilterAdd(opts)
 	if err==nil{
 		for it.Next() {
 			insertQueue(it.Event.NameHash,queueOwnership)
@@ -159,7 +158,7 @@ func loopOverAdd(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func watchAdd(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipAdd)
-	sub,err:=Bas_Ethereum.BasOwnership().WatchAdd(opts,logs)
+	sub,err:=BasOwnership().WatchAdd(opts,logs)
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching add")
@@ -183,7 +182,7 @@ func watchAdd(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup
 
 func loopOverUpdate(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
-	it,err:=Bas_Ethereum.BasOwnership().FilterUpdate(opts)
+	it,err:=BasOwnership().FilterUpdate(opts)
 	if err==nil{
 		for it.Next() {
 			insertQueue(it.Event.NameHash,queueOwnership)
@@ -198,7 +197,7 @@ func loopOverUpdate(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func watchUpdate(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipUpdate)
-	sub,err:=Bas_Ethereum.BasOwnership().WatchUpdate(opts,logs)
+	sub,err:=BasOwnership().WatchUpdate(opts,logs)
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching update")
@@ -222,7 +221,7 @@ func watchUpdate(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGr
 
 func loopOverExtend(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
-	it,err:=Bas_Ethereum.BasOwnership().FilterExtend(opts)
+	it,err:=BasOwnership().FilterExtend(opts)
 	if err==nil{
 		for it.Next() {
 			insertQueue(it.Event.NameHash,queueOwnership)
@@ -234,7 +233,7 @@ func loopOverExtend(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func watchExtend(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipExtend)
-	sub,err:=Bas_Ethereum.BasOwnership().WatchExtend(opts,logs)
+	sub,err:=BasOwnership().WatchExtend(opts,logs)
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching extend")
@@ -259,7 +258,7 @@ func watchExtend(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGr
 
 func loopOverTakeover(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
-	it,err:=Bas_Ethereum.BasOwnership().FilterTakeover(opts)
+	it,err:=BasOwnership().FilterTakeover(opts)
 	if err==nil{
 		for it.Next() {
 			insertQueue(it.Event.NameHash,queueOwnership)
@@ -271,7 +270,7 @@ func loopOverTakeover(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func watchTakeover(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipTakeover)
-	sub,err:=Bas_Ethereum.BasOwnership().WatchTakeover(opts,logs)
+	sub,err:=BasOwnership().WatchTakeover(opts,logs)
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching takeover")
@@ -295,7 +294,7 @@ func watchTakeover(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 
 func loopOverTransfer(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
-	it,err:=Bas_Ethereum.BasOwnership().FilterTransfer(opts)
+	it,err:=BasOwnership().FilterTransfer(opts)
 	if err==nil{
 		for it.Next() {
 			insertQueue(it.Event.NameHash,queueOwnership)
@@ -307,7 +306,7 @@ func loopOverTransfer(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func watchTransfer(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipTransfer)
-	sub,err:=Bas_Ethereum.BasOwnership().WatchTransfer(opts,logs)
+	sub,err:=BasOwnership().WatchTransfer(opts,logs)
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching transfer")
@@ -331,7 +330,7 @@ func watchTransfer(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 
 func loopOverTransferFrom(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
-	it,err:=Bas_Ethereum.BasOwnership().FilterTransferFrom(opts)
+	it,err:=BasOwnership().FilterTransferFrom(opts)
 	if err==nil{
 		for it.Next() {
 			insertQueue(it.Event.NameHash,queueOwnership)
@@ -343,7 +342,7 @@ func loopOverTransferFrom(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func watchTransferFrom(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipTransferFrom)
-	sub,err:=Bas_Ethereum.BasOwnership().WatchTransferFrom(opts,logs)
+	sub,err:=BasOwnership().WatchTransferFrom(opts,logs)
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching transferFrom")
@@ -367,7 +366,7 @@ func watchTransferFrom(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.
 
 func loopOverRemove(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
-	it,err:=Bas_Ethereum.BasOwnership().FilterRemove(opts)
+	it,err:=BasOwnership().FilterRemove(opts)
 	if err==nil{
 		for it.Next() {
 			insertQueue(it.Event.NameHash,queueOwnership)
@@ -379,7 +378,7 @@ func loopOverRemove(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func watchRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipRemove)
-	sub,err:=Bas_Ethereum.BasOwnership().WatchRemove(opts,logs)
+	sub,err:=BasOwnership().WatchRemove(opts,logs)
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching remove")
@@ -403,7 +402,7 @@ func watchRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGr
 
 func loopOverPaid(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()
-	it,err:=Bas_Ethereum.BasOANN().FilterPaid(opts)
+	it,err:=BasOANN().FilterPaid(opts)
 	if err==nil{
 		for it.Next() {
 			updatePaid(Receipt{
@@ -412,16 +411,17 @@ func loopOverPaid(opts *bind.FilterOpts,wg *sync.WaitGroup){
 				Option: it.Event.Option,
 				Amount: it.Event.Amount,
 				CommitBlock: it.Event.Raw.BlockNumber,
+				ReceiptNumber:it.Event.Receipt,
 			})
 		}
 	}else{
-		logger.Error("loop over remove err :" , err)
+		logger.Error("loop over paid err :" , err)
 	}
 }
 
 func watchPaid(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOANNPaid)
-	sub,err:=Bas_Ethereum.BasOANN().WatchPaid(opts,logs)
+	sub,err:=BasOANN().WatchPaid(opts,logs)
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching paid")
@@ -439,6 +439,7 @@ func watchPaid(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGrou
 					Option: log.Option,
 					Amount: log.Amount,
 					CommitBlock:log.Raw.BlockNumber,
+					ReceiptNumber:log.Receipt,
 				})
 				logger.Info("detected address ",
 					log.Payer.String(), " paied " , log.Amount.String(), "for ", log.Option," on", string(log.Name))

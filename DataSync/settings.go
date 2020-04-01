@@ -1,8 +1,8 @@
-package Bas_Ethereum
+package DataSync
 
 import (
-	"math/big"
-	"regexp"
+"math/big"
+"regexp"
 )
 
 var AROOTGAS *big.Int
@@ -57,7 +57,7 @@ func CheckSettings()   {
 	if AROOTGAS == nil || BROOTGAS==nil ||
 		SUBGAS == nil || CUSTOMPRICEGAS == nil ||
 		MAXYEAR == nil || RARETYPELENGTH == nil{
-			Settings()
+		Settings()
 	}
 }
 

@@ -1,7 +1,6 @@
 package Market
 
 import (
-	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/event"
 	"sync"
 )
@@ -42,7 +41,7 @@ func SyncGapWithNoTrust(blockNumber uint64){
 }
 
 func syncGapToNewest(){
-	moveToNewSavingPoint(Bas_Ethereum.GetLastBlockNumber(Bas_Ethereum.MARKET))
+	moveToNewSavingPoint(conn.GetLastBlockNumber())
 	syncGap(lastSavingPoint,currentSavingPoint)
 }
 
@@ -81,12 +80,11 @@ func unSubscriptAll(){
 func ReSync(){
 	logger.Info("ReSyncing")
 	unSubscriptAll()
-	Bas_Ethereum.ResetServiceMarket()
+	ResetConnAndService()
 	Sync()
 }
 
 func Sync(){
-	lastBlockNumber := Bas_Ethereum.GetLastBlockNumber(Bas_Ethereum.MARKET)
 	syncGapToNewest()
-	watch(lastBlockNumber)
+	watch(currentSavingPoint)
 }

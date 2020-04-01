@@ -46,6 +46,7 @@ type Receipt struct {
 	Option string
 	Amount *big.Int
 	CommitBlock uint64
+	ReceiptNumber Bas_Ethereum.Hash
 }
 
 func showMemory(hash Bas_Ethereum.Hash){
@@ -217,14 +218,14 @@ func (dr *DomainRecord)GetParentHash() Bas_Ethereum.Hash  {
 }
 
 func (dr *DomainRecord)GetRegTime() int64  {
-	t,_:=Bas_Ethereum.GetTimestamp(dr.CommitBlock)
+	t,_:=conn.GetTimestamp(dr.CommitBlock)
 	return int64(t)
 }
 
 
 
 func updateByQueryOwnership(hash Bas_Ethereum.Hash, blockNumber uint64){
-	newOwner,expire,err:=Bas_Ethereum.QueryOwnership(hash,blockNumber)
+	newOwner,expire,err:=QueryOwnership(hash,blockNumber)
 	if err!=nil{
 		logger.Error("update Ownership error: " , err )
 		return
@@ -255,7 +256,7 @@ func updateByQueryOwnership(hash Bas_Ethereum.Hash, blockNumber uint64){
 }
 
 func updateByQueryRoot(hash Bas_Ethereum.Hash, blockNumber uint64)  {
-	root,err:=Bas_Ethereum.QueryRoot(hash,blockNumber)
+	root,err:=QueryRoot(hash,blockNumber)
 	if err!=nil{
 		logger.Error("update root error : " , err)
 		return
@@ -269,7 +270,7 @@ func updateByQueryRoot(hash Bas_Ethereum.Hash, blockNumber uint64)  {
 		Records[hash].RIsCustomed = root.IsCustomed
 		Records[hash].Name = root.RootName
 		Records[hash].IsRoot = true
-		Records[hash].RIsRare = Bas_Ethereum.IsRare(string(root.RootName))
+		Records[hash].RIsRare = IsRare(string(root.RootName))
 		Records[hash].ROpenToPublic = root.OpenToPublic
 
 		Notification.NotifyAssetRootChanged(
@@ -282,7 +283,7 @@ func updateByQueryRoot(hash Bas_Ethereum.Hash, blockNumber uint64)  {
 }
 
 func updateByQuerySub(hash Bas_Ethereum.Hash, blockNumber uint64) {
-	sub,err:=Bas_Ethereum.QuerySub(hash,blockNumber)
+	sub,err:=QuerySub(hash,blockNumber)
 	if err!=nil{
 		logger.Error("update root error : " , err)
 		return
@@ -302,7 +303,7 @@ func updateByQuerySub(hash Bas_Ethereum.Hash, blockNumber uint64) {
 }
 
 func updateByQueryDNS(hash Bas_Ethereum.Hash,blockNumber uint64){
-	dns,err:=Bas_Ethereum.QueryDNS(hash,blockNumber)
+	dns,err:=QueryDNS(hash,blockNumber)
 	if err!=nil{
 		logger.Error("update dns error : " , err )
 		return

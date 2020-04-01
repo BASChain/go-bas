@@ -1,7 +1,6 @@
 package DataSync
 
 import (
-	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/event"
 	"sync"
 )
@@ -45,7 +44,7 @@ func SyncGapWithNoTrust(blockNumber uint64){
 }
 
 func syncGapToNewest(){
-	moveToNewSavingPoint(Bas_Ethereum.GetLastBlockNumber(Bas_Ethereum.DATASYNC))
+	moveToNewSavingPoint(conn.GetLastBlockNumber())
 	syncGap(lastSavingPoint,currentSavingPoint)
 }
 
@@ -111,14 +110,14 @@ func unSubscriptAll(){
 func ReSync(){
 	logger.Info("ReSyncing")
 	unSubscriptAll()
-	Bas_Ethereum.ResetServiceSync()
+	ResetConnAndService()
 	Sync()
 }
 
 var firstStart = true;
 
 func Sync(){
-	Bas_Ethereum.Settings()
+	Settings()
 	syncGapToNewest()
 	if firstStart {
 		ShowCachedNames()

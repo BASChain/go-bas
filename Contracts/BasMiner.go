@@ -28,7 +28,7 @@ var (
 )
 
 // BasMinerABI is the input ABI used to generate the binding from.
-const BasMinerABI = "[{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\"}],\"name\":\"setDefaultSubSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"oldM\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newM\",\"type\":\"address\"}],\"name\":\"replaceMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"miner\",\"type\":\"address\"}],\"name\":\"removeMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"_a_changeAdmin\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"GetAllMainNodeAddress\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\"}],\"name\":\"setCustomedSubSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"}],\"name\":\"rootAllocateProfit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"customedSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"OANNAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"contractCaller\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"MainNode\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ViceNodeSize\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"}],\"name\":\"setRootSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"conAddr\",\"type\":\"address\"}],\"name\":\"_a_changeContract\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"rootSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"no\",\"type\":\"uint256\"}],\"name\":\"emergencyWithdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"oann\",\"type\":\"address\"}],\"name\":\"setOANN\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"Satoshi_Nakamoto\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"ViceNode\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"defaultSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"},{\"internalType\":\"enumBasMiner.ProfitType\",\"name\":\"typ\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"rOwner\",\"type\":\"address\"}],\"name\":\"subNameProfit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"selfSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"MainNodeSize\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"m\",\"type\":\"address\"}],\"name\":\"addMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"contractBasToken\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"t\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"team\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}]"
+const BasMinerABI = "[{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\"}],\"name\":\"setDefaultSubSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"oldM\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newM\",\"type\":\"address\"}],\"name\":\"replaceMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"miner\",\"type\":\"address\"}],\"name\":\"removeMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"_a_changeAdmin\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"GetAllMainNodeAddress\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\"}],\"name\":\"setCustomedSubSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"customedSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"OANNAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"contractCaller\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"MainNode\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ViceNodeSize\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"}],\"name\":\"setRootSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"receiptNumber\",\"type\":\"bytes32\"}],\"name\":\"rootAllocateProfit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"conAddr\",\"type\":\"address\"}],\"name\":\"_a_changeContract\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"rootSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"no\",\"type\":\"uint256\"}],\"name\":\"emergencyWithdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"},{\"internalType\":\"enumBasMiner.ProfitType\",\"name\":\"typ\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"rOwner\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"receiptNumber\",\"type\":\"bytes32\"}],\"name\":\"subNameProfit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"oann\",\"type\":\"address\"}],\"name\":\"setOANN\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"Satoshi_Nakamoto\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"ViceNode\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"defaultSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"selfSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"MainNodeSize\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"m\",\"type\":\"address\"}],\"name\":\"addMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"contractBasToken\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"t\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"team\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"receiptNumber\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"}],\"name\":\"Receipt\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"drawer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amout\",\"type\":\"uint256\"}],\"name\":\"Withdraw\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"AllocationChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"MinerChanged\",\"type\":\"event\"}]"
 
 // BasMiner is an auto generated Go binding around an Ethereum contract.
 type BasMiner struct {
@@ -756,25 +756,25 @@ func (_BasMiner *BasMinerTransactorSession) ReplaceMiner(oldM common.Address, ne
 	return _BasMiner.Contract.ReplaceMiner(&_BasMiner.TransactOpts, oldM, newM)
 }
 
-// RootAllocateProfit is a paid mutator transaction binding the contract method 0x23a9f1d4.
+// RootAllocateProfit is a paid mutator transaction binding the contract method 0x645a3675.
 //
-// Solidity: function rootAllocateProfit(uint256 cost) returns()
-func (_BasMiner *BasMinerTransactor) RootAllocateProfit(opts *bind.TransactOpts, cost *big.Int) (*types.Transaction, error) {
-	return _BasMiner.contract.Transact(opts, "rootAllocateProfit", cost)
+// Solidity: function rootAllocateProfit(uint256 cost, bytes32 receiptNumber) returns()
+func (_BasMiner *BasMinerTransactor) RootAllocateProfit(opts *bind.TransactOpts, cost *big.Int, receiptNumber [32]byte) (*types.Transaction, error) {
+	return _BasMiner.contract.Transact(opts, "rootAllocateProfit", cost, receiptNumber)
 }
 
-// RootAllocateProfit is a paid mutator transaction binding the contract method 0x23a9f1d4.
+// RootAllocateProfit is a paid mutator transaction binding the contract method 0x645a3675.
 //
-// Solidity: function rootAllocateProfit(uint256 cost) returns()
-func (_BasMiner *BasMinerSession) RootAllocateProfit(cost *big.Int) (*types.Transaction, error) {
-	return _BasMiner.Contract.RootAllocateProfit(&_BasMiner.TransactOpts, cost)
+// Solidity: function rootAllocateProfit(uint256 cost, bytes32 receiptNumber) returns()
+func (_BasMiner *BasMinerSession) RootAllocateProfit(cost *big.Int, receiptNumber [32]byte) (*types.Transaction, error) {
+	return _BasMiner.Contract.RootAllocateProfit(&_BasMiner.TransactOpts, cost, receiptNumber)
 }
 
-// RootAllocateProfit is a paid mutator transaction binding the contract method 0x23a9f1d4.
+// RootAllocateProfit is a paid mutator transaction binding the contract method 0x645a3675.
 //
-// Solidity: function rootAllocateProfit(uint256 cost) returns()
-func (_BasMiner *BasMinerTransactorSession) RootAllocateProfit(cost *big.Int) (*types.Transaction, error) {
-	return _BasMiner.Contract.RootAllocateProfit(&_BasMiner.TransactOpts, cost)
+// Solidity: function rootAllocateProfit(uint256 cost, bytes32 receiptNumber) returns()
+func (_BasMiner *BasMinerTransactorSession) RootAllocateProfit(cost *big.Int, receiptNumber [32]byte) (*types.Transaction, error) {
+	return _BasMiner.Contract.RootAllocateProfit(&_BasMiner.TransactOpts, cost, receiptNumber)
 }
 
 // SetCustomedSubSetting is a paid mutator transaction binding the contract method 0x1918f4ef.
@@ -861,25 +861,25 @@ func (_BasMiner *BasMinerTransactorSession) SetRootSetting(admin *big.Int, burn 
 	return _BasMiner.Contract.SetRootSetting(&_BasMiner.TransactOpts, admin, burn, miner)
 }
 
-// SubNameProfit is a paid mutator transaction binding the contract method 0xd08d1535.
+// SubNameProfit is a paid mutator transaction binding the contract method 0xafd878d8.
 //
-// Solidity: function subNameProfit(uint256 cost, uint8 typ, address rOwner) returns()
-func (_BasMiner *BasMinerTransactor) SubNameProfit(opts *bind.TransactOpts, cost *big.Int, typ uint8, rOwner common.Address) (*types.Transaction, error) {
-	return _BasMiner.contract.Transact(opts, "subNameProfit", cost, typ, rOwner)
+// Solidity: function subNameProfit(uint256 cost, uint8 typ, address rOwner, bytes32 receiptNumber) returns()
+func (_BasMiner *BasMinerTransactor) SubNameProfit(opts *bind.TransactOpts, cost *big.Int, typ uint8, rOwner common.Address, receiptNumber [32]byte) (*types.Transaction, error) {
+	return _BasMiner.contract.Transact(opts, "subNameProfit", cost, typ, rOwner, receiptNumber)
 }
 
-// SubNameProfit is a paid mutator transaction binding the contract method 0xd08d1535.
+// SubNameProfit is a paid mutator transaction binding the contract method 0xafd878d8.
 //
-// Solidity: function subNameProfit(uint256 cost, uint8 typ, address rOwner) returns()
-func (_BasMiner *BasMinerSession) SubNameProfit(cost *big.Int, typ uint8, rOwner common.Address) (*types.Transaction, error) {
-	return _BasMiner.Contract.SubNameProfit(&_BasMiner.TransactOpts, cost, typ, rOwner)
+// Solidity: function subNameProfit(uint256 cost, uint8 typ, address rOwner, bytes32 receiptNumber) returns()
+func (_BasMiner *BasMinerSession) SubNameProfit(cost *big.Int, typ uint8, rOwner common.Address, receiptNumber [32]byte) (*types.Transaction, error) {
+	return _BasMiner.Contract.SubNameProfit(&_BasMiner.TransactOpts, cost, typ, rOwner, receiptNumber)
 }
 
-// SubNameProfit is a paid mutator transaction binding the contract method 0xd08d1535.
+// SubNameProfit is a paid mutator transaction binding the contract method 0xafd878d8.
 //
-// Solidity: function subNameProfit(uint256 cost, uint8 typ, address rOwner) returns()
-func (_BasMiner *BasMinerTransactorSession) SubNameProfit(cost *big.Int, typ uint8, rOwner common.Address) (*types.Transaction, error) {
-	return _BasMiner.Contract.SubNameProfit(&_BasMiner.TransactOpts, cost, typ, rOwner)
+// Solidity: function subNameProfit(uint256 cost, uint8 typ, address rOwner, bytes32 receiptNumber) returns()
+func (_BasMiner *BasMinerTransactorSession) SubNameProfit(cost *big.Int, typ uint8, rOwner common.Address, receiptNumber [32]byte) (*types.Transaction, error) {
+	return _BasMiner.Contract.SubNameProfit(&_BasMiner.TransactOpts, cost, typ, rOwner, receiptNumber)
 }
 
 // Withdraw is a paid mutator transaction binding the contract method 0x3ccfd60b.
@@ -901,4 +901,536 @@ func (_BasMiner *BasMinerSession) Withdraw() (*types.Transaction, error) {
 // Solidity: function withdraw() returns()
 func (_BasMiner *BasMinerTransactorSession) Withdraw() (*types.Transaction, error) {
 	return _BasMiner.Contract.Withdraw(&_BasMiner.TransactOpts)
+}
+
+// BasMinerAllocationChangedIterator is returned from FilterAllocationChanged and is used to iterate over the raw logs and unpacked data for AllocationChanged events raised by the BasMiner contract.
+type BasMinerAllocationChangedIterator struct {
+	Event *BasMinerAllocationChanged // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BasMinerAllocationChangedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BasMinerAllocationChanged)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BasMinerAllocationChanged)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BasMinerAllocationChangedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BasMinerAllocationChangedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BasMinerAllocationChanged represents a AllocationChanged event raised by the BasMiner contract.
+type BasMinerAllocationChanged struct {
+	Raw types.Log // Blockchain specific contextual infos
+}
+
+// FilterAllocationChanged is a free log retrieval operation binding the contract event 0x315c884dd6c5858ebe0d5c16dc4eed2fc70df851669a1dbd221990202eaa733c.
+//
+// Solidity: event AllocationChanged()
+func (_BasMiner *BasMinerFilterer) FilterAllocationChanged(opts *bind.FilterOpts) (*BasMinerAllocationChangedIterator, error) {
+
+	logs, sub, err := _BasMiner.contract.FilterLogs(opts, "AllocationChanged")
+	if err != nil {
+		return nil, err
+	}
+	return &BasMinerAllocationChangedIterator{contract: _BasMiner.contract, event: "AllocationChanged", logs: logs, sub: sub}, nil
+}
+
+// WatchAllocationChanged is a free log subscription operation binding the contract event 0x315c884dd6c5858ebe0d5c16dc4eed2fc70df851669a1dbd221990202eaa733c.
+//
+// Solidity: event AllocationChanged()
+func (_BasMiner *BasMinerFilterer) WatchAllocationChanged(opts *bind.WatchOpts, sink chan<- *BasMinerAllocationChanged) (event.Subscription, error) {
+
+	logs, sub, err := _BasMiner.contract.WatchLogs(opts, "AllocationChanged")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BasMinerAllocationChanged)
+				if err := _BasMiner.contract.UnpackLog(event, "AllocationChanged", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseAllocationChanged is a log parse operation binding the contract event 0x315c884dd6c5858ebe0d5c16dc4eed2fc70df851669a1dbd221990202eaa733c.
+//
+// Solidity: event AllocationChanged()
+func (_BasMiner *BasMinerFilterer) ParseAllocationChanged(log types.Log) (*BasMinerAllocationChanged, error) {
+	event := new(BasMinerAllocationChanged)
+	if err := _BasMiner.contract.UnpackLog(event, "AllocationChanged", log); err != nil {
+		return nil, err
+	}
+	return event, nil
+}
+
+// BasMinerMinerChangedIterator is returned from FilterMinerChanged and is used to iterate over the raw logs and unpacked data for MinerChanged events raised by the BasMiner contract.
+type BasMinerMinerChangedIterator struct {
+	Event *BasMinerMinerChanged // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BasMinerMinerChangedIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BasMinerMinerChanged)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BasMinerMinerChanged)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BasMinerMinerChangedIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BasMinerMinerChangedIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BasMinerMinerChanged represents a MinerChanged event raised by the BasMiner contract.
+type BasMinerMinerChanged struct {
+	Raw types.Log // Blockchain specific contextual infos
+}
+
+// FilterMinerChanged is a free log retrieval operation binding the contract event 0x7e308cc084e00d620063a76a644739d79059ab4b54ac41e7739b3635e569445b.
+//
+// Solidity: event MinerChanged()
+func (_BasMiner *BasMinerFilterer) FilterMinerChanged(opts *bind.FilterOpts) (*BasMinerMinerChangedIterator, error) {
+
+	logs, sub, err := _BasMiner.contract.FilterLogs(opts, "MinerChanged")
+	if err != nil {
+		return nil, err
+	}
+	return &BasMinerMinerChangedIterator{contract: _BasMiner.contract, event: "MinerChanged", logs: logs, sub: sub}, nil
+}
+
+// WatchMinerChanged is a free log subscription operation binding the contract event 0x7e308cc084e00d620063a76a644739d79059ab4b54ac41e7739b3635e569445b.
+//
+// Solidity: event MinerChanged()
+func (_BasMiner *BasMinerFilterer) WatchMinerChanged(opts *bind.WatchOpts, sink chan<- *BasMinerMinerChanged) (event.Subscription, error) {
+
+	logs, sub, err := _BasMiner.contract.WatchLogs(opts, "MinerChanged")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BasMinerMinerChanged)
+				if err := _BasMiner.contract.UnpackLog(event, "MinerChanged", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseMinerChanged is a log parse operation binding the contract event 0x7e308cc084e00d620063a76a644739d79059ab4b54ac41e7739b3635e569445b.
+//
+// Solidity: event MinerChanged()
+func (_BasMiner *BasMinerFilterer) ParseMinerChanged(log types.Log) (*BasMinerMinerChanged, error) {
+	event := new(BasMinerMinerChanged)
+	if err := _BasMiner.contract.UnpackLog(event, "MinerChanged", log); err != nil {
+		return nil, err
+	}
+	return event, nil
+}
+
+// BasMinerReceiptIterator is returned from FilterReceipt and is used to iterate over the raw logs and unpacked data for Receipt events raised by the BasMiner contract.
+type BasMinerReceiptIterator struct {
+	Event *BasMinerReceipt // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BasMinerReceiptIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BasMinerReceipt)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BasMinerReceipt)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BasMinerReceiptIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BasMinerReceiptIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BasMinerReceipt represents a Receipt event raised by the BasMiner contract.
+type BasMinerReceipt struct {
+	ReceiptNumber [32]byte
+	From          common.Address
+	Raw           types.Log // Blockchain specific contextual infos
+}
+
+// FilterReceipt is a free log retrieval operation binding the contract event 0xe0279b2669a15826965c3f2418236311d0e48e112d0f8302163e3ddc159c2dba.
+//
+// Solidity: event Receipt(bytes32 receiptNumber, address from)
+func (_BasMiner *BasMinerFilterer) FilterReceipt(opts *bind.FilterOpts) (*BasMinerReceiptIterator, error) {
+
+	logs, sub, err := _BasMiner.contract.FilterLogs(opts, "Receipt")
+	if err != nil {
+		return nil, err
+	}
+	return &BasMinerReceiptIterator{contract: _BasMiner.contract, event: "Receipt", logs: logs, sub: sub}, nil
+}
+
+// WatchReceipt is a free log subscription operation binding the contract event 0xe0279b2669a15826965c3f2418236311d0e48e112d0f8302163e3ddc159c2dba.
+//
+// Solidity: event Receipt(bytes32 receiptNumber, address from)
+func (_BasMiner *BasMinerFilterer) WatchReceipt(opts *bind.WatchOpts, sink chan<- *BasMinerReceipt) (event.Subscription, error) {
+
+	logs, sub, err := _BasMiner.contract.WatchLogs(opts, "Receipt")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BasMinerReceipt)
+				if err := _BasMiner.contract.UnpackLog(event, "Receipt", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseReceipt is a log parse operation binding the contract event 0xe0279b2669a15826965c3f2418236311d0e48e112d0f8302163e3ddc159c2dba.
+//
+// Solidity: event Receipt(bytes32 receiptNumber, address from)
+func (_BasMiner *BasMinerFilterer) ParseReceipt(log types.Log) (*BasMinerReceipt, error) {
+	event := new(BasMinerReceipt)
+	if err := _BasMiner.contract.UnpackLog(event, "Receipt", log); err != nil {
+		return nil, err
+	}
+	return event, nil
+}
+
+// BasMinerWithdrawIterator is returned from FilterWithdraw and is used to iterate over the raw logs and unpacked data for Withdraw events raised by the BasMiner contract.
+type BasMinerWithdrawIterator struct {
+	Event *BasMinerWithdraw // Event containing the contract specifics and raw log
+
+	contract *bind.BoundContract // Generic contract to use for unpacking event data
+	event    string              // Event name to use for unpacking event data
+
+	logs chan types.Log        // Log channel receiving the found contract events
+	sub  ethereum.Subscription // Subscription for errors, completion and termination
+	done bool                  // Whether the subscription completed delivering logs
+	fail error                 // Occurred error to stop iteration
+}
+
+// Next advances the iterator to the subsequent event, returning whether there
+// are any more events found. In case of a retrieval or parsing error, false is
+// returned and Error() can be queried for the exact failure.
+func (it *BasMinerWithdrawIterator) Next() bool {
+	// If the iterator failed, stop iterating
+	if it.fail != nil {
+		return false
+	}
+	// If the iterator completed, deliver directly whatever's available
+	if it.done {
+		select {
+		case log := <-it.logs:
+			it.Event = new(BasMinerWithdraw)
+			if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+				it.fail = err
+				return false
+			}
+			it.Event.Raw = log
+			return true
+
+		default:
+			return false
+		}
+	}
+	// Iterator still in progress, wait for either a data or an error event
+	select {
+	case log := <-it.logs:
+		it.Event = new(BasMinerWithdraw)
+		if err := it.contract.UnpackLog(it.Event, it.event, log); err != nil {
+			it.fail = err
+			return false
+		}
+		it.Event.Raw = log
+		return true
+
+	case err := <-it.sub.Err():
+		it.done = true
+		it.fail = err
+		return it.Next()
+	}
+}
+
+// Error returns any retrieval or parsing error occurred during filtering.
+func (it *BasMinerWithdrawIterator) Error() error {
+	return it.fail
+}
+
+// Close terminates the iteration process, releasing any pending underlying
+// resources.
+func (it *BasMinerWithdrawIterator) Close() error {
+	it.sub.Unsubscribe()
+	return nil
+}
+
+// BasMinerWithdraw represents a Withdraw event raised by the BasMiner contract.
+type BasMinerWithdraw struct {
+	Drawer common.Address
+	Amout  *big.Int
+	Raw    types.Log // Blockchain specific contextual infos
+}
+
+// FilterWithdraw is a free log retrieval operation binding the contract event 0x884edad9ce6fa2440d8a54cc123490eb96d2768479d49ff9c7366125a9424364.
+//
+// Solidity: event Withdraw(address drawer, uint256 amout)
+func (_BasMiner *BasMinerFilterer) FilterWithdraw(opts *bind.FilterOpts) (*BasMinerWithdrawIterator, error) {
+
+	logs, sub, err := _BasMiner.contract.FilterLogs(opts, "Withdraw")
+	if err != nil {
+		return nil, err
+	}
+	return &BasMinerWithdrawIterator{contract: _BasMiner.contract, event: "Withdraw", logs: logs, sub: sub}, nil
+}
+
+// WatchWithdraw is a free log subscription operation binding the contract event 0x884edad9ce6fa2440d8a54cc123490eb96d2768479d49ff9c7366125a9424364.
+//
+// Solidity: event Withdraw(address drawer, uint256 amout)
+func (_BasMiner *BasMinerFilterer) WatchWithdraw(opts *bind.WatchOpts, sink chan<- *BasMinerWithdraw) (event.Subscription, error) {
+
+	logs, sub, err := _BasMiner.contract.WatchLogs(opts, "Withdraw")
+	if err != nil {
+		return nil, err
+	}
+	return event.NewSubscription(func(quit <-chan struct{}) error {
+		defer sub.Unsubscribe()
+		for {
+			select {
+			case log := <-logs:
+				// New log arrived, parse the event and forward to the user
+				event := new(BasMinerWithdraw)
+				if err := _BasMiner.contract.UnpackLog(event, "Withdraw", log); err != nil {
+					return err
+				}
+				event.Raw = log
+
+				select {
+				case sink <- event:
+				case err := <-sub.Err():
+					return err
+				case <-quit:
+					return nil
+				}
+			case err := <-sub.Err():
+				return err
+			case <-quit:
+				return nil
+			}
+		}
+	}), nil
+}
+
+// ParseWithdraw is a log parse operation binding the contract event 0x884edad9ce6fa2440d8a54cc123490eb96d2768479d49ff9c7366125a9424364.
+//
+// Solidity: event Withdraw(address drawer, uint256 amout)
+func (_BasMiner *BasMinerFilterer) ParseWithdraw(log types.Log) (*BasMinerWithdraw, error) {
+	event := new(BasMinerWithdraw)
+	if err := _BasMiner.contract.UnpackLog(event, "Withdraw", log); err != nil {
+		return nil, err
+	}
+	return event, nil
 }
