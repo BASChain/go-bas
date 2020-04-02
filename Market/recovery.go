@@ -29,3 +29,9 @@ func BasMarket() *Contract.BasMarket{
 	}
 	return market
 }
+
+func BlockNumnber2TimeStamp(blockNumber uint64) int64  {
+	t,_:=conn.GetTimestamp(blockNumber)
+
+	return int64(t)
+}

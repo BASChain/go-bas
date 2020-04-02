@@ -92,3 +92,4 @@ func (conn *Conn)GetLastBlockNumber() uint64{
 		return 0
 	}
 }
+
