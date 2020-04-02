@@ -47,8 +47,6 @@ func (conn *Conn) GetClient() *ethclient.Client {
 }
 
 func (conn *Conn) Reset(){
-	conn.lock.Lock()
-	defer conn.lock.Unlock()
 	conn.Client.Close()
 	conn.Client = nil
 	conn.GetClient()
