@@ -11,7 +11,7 @@ Contract "github.com/BASChain/go-bas/Contracts"
 var logger, _ = logging.GetLogger("Miner")
 
 var (
-	_miner = "0x7C804CD3C925C1254ff79EcD9D611Ad02D3855F1"
+	_miner = "0x34149F28b03B2Db2778Cc4F3d99e0ca71C34cc95"
 	miner *Contract.BasMiner
 
 	conn = Bas_Ethereum.NewConn()
