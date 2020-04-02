@@ -9,6 +9,9 @@ var lastSavingPoint = uint64(0)
 var currentSavingPoint = uint64(0)
 
 func moveToNewSavingPoint(blockNumber uint64){
+	if currentSavingPoint == blockNumber {
+		return
+	}
 	lastSavingPoint = currentSavingPoint;
 	currentSavingPoint = blockNumber;
 	logger.Info("[Data_Sync]  saving point  ", lastSavingPoint, "----->" , currentSavingPoint)
