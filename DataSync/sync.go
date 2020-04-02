@@ -20,7 +20,7 @@ func syncGap(from ,to uint64){
 	}
 	opts := getLoopOpts(from,&to)
 	var waitGroup sync.WaitGroup
-	waitGroup.Add(11)
+	waitGroup.Add(12)
 
 	go loopOverRootChanged(opts,&waitGroup)
 	go loopOverSubChanged(opts,&waitGroup)
@@ -33,6 +33,7 @@ func syncGap(from ,to uint64){
 	go loopOverTransferFrom(opts,&waitGroup)
 	go loopOverRemove(opts,&waitGroup)
 	go loopOverPaid(opts,&waitGroup)
+	go loopOverSettingChanged(opts,&waitGroup)
 
 	waitGroup.Wait()
 	syncDataByHandleQueue()
@@ -81,7 +82,7 @@ func watch(lastBlockNumber uint64){
 	opts := getWatchOpts(lastBlockNumber)
 	subs = []event.Subscription{}
 
-	waitGroup.Add(11)
+	waitGroup.Add(12)
 
 	go watchRootChanged(opts,&subs,&waitGroup)
 	go watchSubChanged(opts,&subs,&waitGroup)
@@ -94,6 +95,7 @@ func watch(lastBlockNumber uint64){
 	go watchTransferFrom(opts,&subs,&waitGroup)
 	go watchRemove(opts,&subs,&waitGroup)
 	go watchPaid(opts,&subs,&waitGroup)
+	go watchSettingChanged(opts,&subs,&waitGroup)
 
 	waitGroup.Wait()
 

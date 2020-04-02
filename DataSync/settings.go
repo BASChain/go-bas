@@ -1,8 +1,12 @@
 package DataSync
 
 import (
-"math/big"
-"regexp"
+	Contract "github.com/BASChain/go-bas/Contracts"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
+	"github.com/ethereum/go-ethereum/event"
+	"math/big"
+	"regexp"
+	"sync"
 )
 
 var AROOTGAS *big.Int
@@ -44,6 +48,47 @@ func Settings()  {
 		RARETYPELENGTH = length
 	}
 }
+
+func loopOverSettingChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
+	defer wg.Done()
+	it,err:=BasOANN().FilterSettingChanged(opts)
+	if err==nil{
+		changed:=false
+		for it.Next() {
+			changed = true
+			break
+		}
+		if changed {
+			Settings()
+		}
+	}else{
+		logger.Error("loop over setting changed err :" , err)
+	}
+}
+
+func watchSettingChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+	logs := make(chan *Contract.BasOANNSettingChanged)
+	sub,err:=BasOANN().WatchSettingChanged(opts,logs)
+	defer wg.Done()
+	if err==nil{
+		logger.Info("watching setting changed")
+		*subs = append(*subs, sub)
+		for {
+			select {
+			case e :=<-sub.Err():
+				logger.Error("subscript setting changed runtime error", e)
+				return
+			case log:= <-logs:
+				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				Settings()
+				logger.Info("setting changed")
+			}
+		}
+	}else{
+		logger.Error("subscript setting changed failed " ,err)
+	}
+}
+
 
 func IsRare(name string)  bool{
 	if RARETYPELENGTH == nil {

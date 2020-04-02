@@ -7,12 +7,11 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/event"
-	"github.com/op/go-logging"
 	"golang.org/x/net/context"
 	"sync"
 )
 
-var logger, _ = logging.GetLogger("Market")
+
 
 func getLoopOpts(s uint64, e *uint64)  *bind.FilterOpts{
 	var opts  = &bind.FilterOpts{

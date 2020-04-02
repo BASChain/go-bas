@@ -28,7 +28,7 @@ var (
 )
 
 // BasMinerABI is the input ABI used to generate the binding from.
-const BasMinerABI = "[{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\"}],\"name\":\"setDefaultSubSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"oldM\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newM\",\"type\":\"address\"}],\"name\":\"replaceMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"miner\",\"type\":\"address\"}],\"name\":\"removeMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"_a_changeAdmin\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"GetAllMainNodeAddress\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\"}],\"name\":\"setCustomedSubSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"customedSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"OANNAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"contractCaller\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"MainNode\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"ViceNodeSize\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"}],\"name\":\"setRootSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"receiptNumber\",\"type\":\"bytes32\"}],\"name\":\"rootAllocateProfit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"conAddr\",\"type\":\"address\"}],\"name\":\"_a_changeContract\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"rootSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"no\",\"type\":\"uint256\"}],\"name\":\"emergencyWithdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"},{\"internalType\":\"enumBasMiner.ProfitType\",\"name\":\"typ\",\"type\":\"uint8\"},{\"internalType\":\"address\",\"name\":\"rOwner\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"receiptNumber\",\"type\":\"bytes32\"}],\"name\":\"subNameProfit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"oann\",\"type\":\"address\"}],\"name\":\"setOANN\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"Satoshi_Nakamoto\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"ViceNode\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"defaultSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"selfSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"MainNodeSize\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"m\",\"type\":\"address\"}],\"name\":\"addMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"contractBasToken\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"t\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"team\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"receiptNumber\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"}],\"name\":\"Receipt\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"drawer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amout\",\"type\":\"uint256\"}],\"name\":\"Withdraw\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"AllocationChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"MinerChanged\",\"type\":\"event\"}]"
+const BasMinerABI = "[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"oldM\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newM\",\"type\":\"address\"}],\"name\":\"replaceMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"miner\",\"type\":\"address\"}],\"name\":\"removeMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"_a_changeAdmin\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"GetAllMainNodeAddress\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"cost\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"allocateType\",\"type\":\"uint8\"},{\"internalType\":\"bytes32\",\"name\":\"receiptNumber\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"rootOwner\",\"type\":\"address\"}],\"name\":\"allocateProfit\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\"}],\"name\":\"changeDefaultSubSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"customedSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\"}],\"name\":\"changeCustomedSubSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[],\"name\":\"withdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"AllocationRoot\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"AllocationCustomedSub\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"OANNAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"contractCaller\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"MainNode\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"AllocationSelfSub\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"root\",\"type\":\"uint256\"}],\"name\":\"changeSelfSubSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"conAddr\",\"type\":\"address\"}],\"name\":\"_a_changeContract\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"rootSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"no\",\"type\":\"uint256\"}],\"name\":\"emergencyWithdraw\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"admin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"burn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"miner\",\"type\":\"uint256\"}],\"name\":\"changeRootSetting\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"Satoshi_Nakamoto\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"defaultSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"selfSubSetting\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"toAdmin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toBurn\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toMiner\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"toRootOwner\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"MainNodeSize\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"AllocationSub\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"m\",\"type\":\"address\"}],\"name\":\"addMiner\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"admin\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"token\",\"outputs\":[{\"internalType\":\"contractBasToken\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"t\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"team\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"receiptNumber\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amout\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"allocation\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"}],\"name\":\"Receipt\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"drawer\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amout\",\"type\":\"uint256\"}],\"name\":\"Withdraw\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"AllocationChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[],\"name\":\"MinerChanged\",\"type\":\"event\"}]"
 
 // BasMiner is an auto generated Go binding around an Ethereum contract.
 type BasMiner struct {
@@ -172,6 +172,110 @@ func (_BasMiner *BasMinerTransactorRaw) Transact(opts *bind.TransactOpts, method
 	return _BasMiner.Contract.contract.Transact(opts, method, params...)
 }
 
+// AllocationCustomedSub is a free data retrieval call binding the contract method 0x4cd9e136.
+//
+// Solidity: function AllocationCustomedSub() constant returns(uint8)
+func (_BasMiner *BasMinerCaller) AllocationCustomedSub(opts *bind.CallOpts) (uint8, error) {
+	var (
+		ret0 = new(uint8)
+	)
+	out := ret0
+	err := _BasMiner.contract.Call(opts, out, "AllocationCustomedSub")
+	return *ret0, err
+}
+
+// AllocationCustomedSub is a free data retrieval call binding the contract method 0x4cd9e136.
+//
+// Solidity: function AllocationCustomedSub() constant returns(uint8)
+func (_BasMiner *BasMinerSession) AllocationCustomedSub() (uint8, error) {
+	return _BasMiner.Contract.AllocationCustomedSub(&_BasMiner.CallOpts)
+}
+
+// AllocationCustomedSub is a free data retrieval call binding the contract method 0x4cd9e136.
+//
+// Solidity: function AllocationCustomedSub() constant returns(uint8)
+func (_BasMiner *BasMinerCallerSession) AllocationCustomedSub() (uint8, error) {
+	return _BasMiner.Contract.AllocationCustomedSub(&_BasMiner.CallOpts)
+}
+
+// AllocationRoot is a free data retrieval call binding the contract method 0x41e9a9fe.
+//
+// Solidity: function AllocationRoot() constant returns(uint8)
+func (_BasMiner *BasMinerCaller) AllocationRoot(opts *bind.CallOpts) (uint8, error) {
+	var (
+		ret0 = new(uint8)
+	)
+	out := ret0
+	err := _BasMiner.contract.Call(opts, out, "AllocationRoot")
+	return *ret0, err
+}
+
+// AllocationRoot is a free data retrieval call binding the contract method 0x41e9a9fe.
+//
+// Solidity: function AllocationRoot() constant returns(uint8)
+func (_BasMiner *BasMinerSession) AllocationRoot() (uint8, error) {
+	return _BasMiner.Contract.AllocationRoot(&_BasMiner.CallOpts)
+}
+
+// AllocationRoot is a free data retrieval call binding the contract method 0x41e9a9fe.
+//
+// Solidity: function AllocationRoot() constant returns(uint8)
+func (_BasMiner *BasMinerCallerSession) AllocationRoot() (uint8, error) {
+	return _BasMiner.Contract.AllocationRoot(&_BasMiner.CallOpts)
+}
+
+// AllocationSelfSub is a free data retrieval call binding the contract method 0x63831e0e.
+//
+// Solidity: function AllocationSelfSub() constant returns(uint8)
+func (_BasMiner *BasMinerCaller) AllocationSelfSub(opts *bind.CallOpts) (uint8, error) {
+	var (
+		ret0 = new(uint8)
+	)
+	out := ret0
+	err := _BasMiner.contract.Call(opts, out, "AllocationSelfSub")
+	return *ret0, err
+}
+
+// AllocationSelfSub is a free data retrieval call binding the contract method 0x63831e0e.
+//
+// Solidity: function AllocationSelfSub() constant returns(uint8)
+func (_BasMiner *BasMinerSession) AllocationSelfSub() (uint8, error) {
+	return _BasMiner.Contract.AllocationSelfSub(&_BasMiner.CallOpts)
+}
+
+// AllocationSelfSub is a free data retrieval call binding the contract method 0x63831e0e.
+//
+// Solidity: function AllocationSelfSub() constant returns(uint8)
+func (_BasMiner *BasMinerCallerSession) AllocationSelfSub() (uint8, error) {
+	return _BasMiner.Contract.AllocationSelfSub(&_BasMiner.CallOpts)
+}
+
+// AllocationSub is a free data retrieval call binding the contract method 0xf22c9b00.
+//
+// Solidity: function AllocationSub() constant returns(uint8)
+func (_BasMiner *BasMinerCaller) AllocationSub(opts *bind.CallOpts) (uint8, error) {
+	var (
+		ret0 = new(uint8)
+	)
+	out := ret0
+	err := _BasMiner.contract.Call(opts, out, "AllocationSub")
+	return *ret0, err
+}
+
+// AllocationSub is a free data retrieval call binding the contract method 0xf22c9b00.
+//
+// Solidity: function AllocationSub() constant returns(uint8)
+func (_BasMiner *BasMinerSession) AllocationSub() (uint8, error) {
+	return _BasMiner.Contract.AllocationSub(&_BasMiner.CallOpts)
+}
+
+// AllocationSub is a free data retrieval call binding the contract method 0xf22c9b00.
+//
+// Solidity: function AllocationSub() constant returns(uint8)
+func (_BasMiner *BasMinerCallerSession) AllocationSub() (uint8, error) {
+	return _BasMiner.Contract.AllocationSub(&_BasMiner.CallOpts)
+}
+
 // GetAllMainNodeAddress is a free data retrieval call binding the contract method 0x179e0f00.
 //
 // Solidity: function GetAllMainNodeAddress() constant returns(address[])
@@ -300,58 +404,6 @@ func (_BasMiner *BasMinerSession) SatoshiNakamoto() (common.Address, error) {
 // Solidity: function Satoshi_Nakamoto() constant returns(address)
 func (_BasMiner *BasMinerCallerSession) SatoshiNakamoto() (common.Address, error) {
 	return _BasMiner.Contract.SatoshiNakamoto(&_BasMiner.CallOpts)
-}
-
-// ViceNode is a free data retrieval call binding the contract method 0xcccccfcf.
-//
-// Solidity: function ViceNode(uint256 ) constant returns(address)
-func (_BasMiner *BasMinerCaller) ViceNode(opts *bind.CallOpts, arg0 *big.Int) (common.Address, error) {
-	var (
-		ret0 = new(common.Address)
-	)
-	out := ret0
-	err := _BasMiner.contract.Call(opts, out, "ViceNode", arg0)
-	return *ret0, err
-}
-
-// ViceNode is a free data retrieval call binding the contract method 0xcccccfcf.
-//
-// Solidity: function ViceNode(uint256 ) constant returns(address)
-func (_BasMiner *BasMinerSession) ViceNode(arg0 *big.Int) (common.Address, error) {
-	return _BasMiner.Contract.ViceNode(&_BasMiner.CallOpts, arg0)
-}
-
-// ViceNode is a free data retrieval call binding the contract method 0xcccccfcf.
-//
-// Solidity: function ViceNode(uint256 ) constant returns(address)
-func (_BasMiner *BasMinerCallerSession) ViceNode(arg0 *big.Int) (common.Address, error) {
-	return _BasMiner.Contract.ViceNode(&_BasMiner.CallOpts, arg0)
-}
-
-// ViceNodeSize is a free data retrieval call binding the contract method 0x5911606f.
-//
-// Solidity: function ViceNodeSize() constant returns(uint256)
-func (_BasMiner *BasMinerCaller) ViceNodeSize(opts *bind.CallOpts) (*big.Int, error) {
-	var (
-		ret0 = new(*big.Int)
-	)
-	out := ret0
-	err := _BasMiner.contract.Call(opts, out, "ViceNodeSize")
-	return *ret0, err
-}
-
-// ViceNodeSize is a free data retrieval call binding the contract method 0x5911606f.
-//
-// Solidity: function ViceNodeSize() constant returns(uint256)
-func (_BasMiner *BasMinerSession) ViceNodeSize() (*big.Int, error) {
-	return _BasMiner.Contract.ViceNodeSize(&_BasMiner.CallOpts)
-}
-
-// ViceNodeSize is a free data retrieval call binding the contract method 0x5911606f.
-//
-// Solidity: function ViceNodeSize() constant returns(uint256)
-func (_BasMiner *BasMinerCallerSession) ViceNodeSize() (*big.Int, error) {
-	return _BasMiner.Contract.ViceNodeSize(&_BasMiner.CallOpts)
 }
 
 // Admin is a free data retrieval call binding the contract method 0xf851a440.
@@ -522,16 +574,18 @@ func (_BasMiner *BasMinerCallerSession) DefaultSubSetting() (struct {
 
 // RootSetting is a free data retrieval call binding the contract method 0x75d4b7f7.
 //
-// Solidity: function rootSetting() constant returns(uint256 toAdmin, uint256 toBurn, uint256 toMiner)
+// Solidity: function rootSetting() constant returns(uint256 toAdmin, uint256 toBurn, uint256 toMiner, uint256 toRootOwner)
 func (_BasMiner *BasMinerCaller) RootSetting(opts *bind.CallOpts) (struct {
-	ToAdmin *big.Int
-	ToBurn  *big.Int
-	ToMiner *big.Int
+	ToAdmin     *big.Int
+	ToBurn      *big.Int
+	ToMiner     *big.Int
+	ToRootOwner *big.Int
 }, error) {
 	ret := new(struct {
-		ToAdmin *big.Int
-		ToBurn  *big.Int
-		ToMiner *big.Int
+		ToAdmin     *big.Int
+		ToBurn      *big.Int
+		ToMiner     *big.Int
+		ToRootOwner *big.Int
 	})
 	out := ret
 	err := _BasMiner.contract.Call(opts, out, "rootSetting")
@@ -540,22 +594,24 @@ func (_BasMiner *BasMinerCaller) RootSetting(opts *bind.CallOpts) (struct {
 
 // RootSetting is a free data retrieval call binding the contract method 0x75d4b7f7.
 //
-// Solidity: function rootSetting() constant returns(uint256 toAdmin, uint256 toBurn, uint256 toMiner)
+// Solidity: function rootSetting() constant returns(uint256 toAdmin, uint256 toBurn, uint256 toMiner, uint256 toRootOwner)
 func (_BasMiner *BasMinerSession) RootSetting() (struct {
-	ToAdmin *big.Int
-	ToBurn  *big.Int
-	ToMiner *big.Int
+	ToAdmin     *big.Int
+	ToBurn      *big.Int
+	ToMiner     *big.Int
+	ToRootOwner *big.Int
 }, error) {
 	return _BasMiner.Contract.RootSetting(&_BasMiner.CallOpts)
 }
 
 // RootSetting is a free data retrieval call binding the contract method 0x75d4b7f7.
 //
-// Solidity: function rootSetting() constant returns(uint256 toAdmin, uint256 toBurn, uint256 toMiner)
+// Solidity: function rootSetting() constant returns(uint256 toAdmin, uint256 toBurn, uint256 toMiner, uint256 toRootOwner)
 func (_BasMiner *BasMinerCallerSession) RootSetting() (struct {
-	ToAdmin *big.Int
-	ToBurn  *big.Int
-	ToMiner *big.Int
+	ToAdmin     *big.Int
+	ToBurn      *big.Int
+	ToMiner     *big.Int
+	ToRootOwner *big.Int
 }, error) {
 	return _BasMiner.Contract.RootSetting(&_BasMiner.CallOpts)
 }
@@ -693,6 +749,111 @@ func (_BasMiner *BasMinerTransactorSession) AddMiner(m common.Address) (*types.T
 	return _BasMiner.Contract.AddMiner(&_BasMiner.TransactOpts, m)
 }
 
+// AllocateProfit is a paid mutator transaction binding the contract method 0x226329cc.
+//
+// Solidity: function allocateProfit(uint256 cost, uint8 allocateType, bytes32 receiptNumber, address rootOwner) returns()
+func (_BasMiner *BasMinerTransactor) AllocateProfit(opts *bind.TransactOpts, cost *big.Int, allocateType uint8, receiptNumber [32]byte, rootOwner common.Address) (*types.Transaction, error) {
+	return _BasMiner.contract.Transact(opts, "allocateProfit", cost, allocateType, receiptNumber, rootOwner)
+}
+
+// AllocateProfit is a paid mutator transaction binding the contract method 0x226329cc.
+//
+// Solidity: function allocateProfit(uint256 cost, uint8 allocateType, bytes32 receiptNumber, address rootOwner) returns()
+func (_BasMiner *BasMinerSession) AllocateProfit(cost *big.Int, allocateType uint8, receiptNumber [32]byte, rootOwner common.Address) (*types.Transaction, error) {
+	return _BasMiner.Contract.AllocateProfit(&_BasMiner.TransactOpts, cost, allocateType, receiptNumber, rootOwner)
+}
+
+// AllocateProfit is a paid mutator transaction binding the contract method 0x226329cc.
+//
+// Solidity: function allocateProfit(uint256 cost, uint8 allocateType, bytes32 receiptNumber, address rootOwner) returns()
+func (_BasMiner *BasMinerTransactorSession) AllocateProfit(cost *big.Int, allocateType uint8, receiptNumber [32]byte, rootOwner common.Address) (*types.Transaction, error) {
+	return _BasMiner.Contract.AllocateProfit(&_BasMiner.TransactOpts, cost, allocateType, receiptNumber, rootOwner)
+}
+
+// ChangeCustomedSubSetting is a paid mutator transaction binding the contract method 0x35e3c723.
+//
+// Solidity: function changeCustomedSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
+func (_BasMiner *BasMinerTransactor) ChangeCustomedSubSetting(opts *bind.TransactOpts, admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
+	return _BasMiner.contract.Transact(opts, "changeCustomedSubSetting", admin, burn, miner, root)
+}
+
+// ChangeCustomedSubSetting is a paid mutator transaction binding the contract method 0x35e3c723.
+//
+// Solidity: function changeCustomedSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
+func (_BasMiner *BasMinerSession) ChangeCustomedSubSetting(admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
+	return _BasMiner.Contract.ChangeCustomedSubSetting(&_BasMiner.TransactOpts, admin, burn, miner, root)
+}
+
+// ChangeCustomedSubSetting is a paid mutator transaction binding the contract method 0x35e3c723.
+//
+// Solidity: function changeCustomedSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
+func (_BasMiner *BasMinerTransactorSession) ChangeCustomedSubSetting(admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
+	return _BasMiner.Contract.ChangeCustomedSubSetting(&_BasMiner.TransactOpts, admin, burn, miner, root)
+}
+
+// ChangeDefaultSubSetting is a paid mutator transaction binding the contract method 0x2616976f.
+//
+// Solidity: function changeDefaultSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
+func (_BasMiner *BasMinerTransactor) ChangeDefaultSubSetting(opts *bind.TransactOpts, admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
+	return _BasMiner.contract.Transact(opts, "changeDefaultSubSetting", admin, burn, miner, root)
+}
+
+// ChangeDefaultSubSetting is a paid mutator transaction binding the contract method 0x2616976f.
+//
+// Solidity: function changeDefaultSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
+func (_BasMiner *BasMinerSession) ChangeDefaultSubSetting(admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
+	return _BasMiner.Contract.ChangeDefaultSubSetting(&_BasMiner.TransactOpts, admin, burn, miner, root)
+}
+
+// ChangeDefaultSubSetting is a paid mutator transaction binding the contract method 0x2616976f.
+//
+// Solidity: function changeDefaultSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
+func (_BasMiner *BasMinerTransactorSession) ChangeDefaultSubSetting(admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
+	return _BasMiner.Contract.ChangeDefaultSubSetting(&_BasMiner.TransactOpts, admin, burn, miner, root)
+}
+
+// ChangeRootSetting is a paid mutator transaction binding the contract method 0x993a0d27.
+//
+// Solidity: function changeRootSetting(uint256 admin, uint256 burn, uint256 miner) returns()
+func (_BasMiner *BasMinerTransactor) ChangeRootSetting(opts *bind.TransactOpts, admin *big.Int, burn *big.Int, miner *big.Int) (*types.Transaction, error) {
+	return _BasMiner.contract.Transact(opts, "changeRootSetting", admin, burn, miner)
+}
+
+// ChangeRootSetting is a paid mutator transaction binding the contract method 0x993a0d27.
+//
+// Solidity: function changeRootSetting(uint256 admin, uint256 burn, uint256 miner) returns()
+func (_BasMiner *BasMinerSession) ChangeRootSetting(admin *big.Int, burn *big.Int, miner *big.Int) (*types.Transaction, error) {
+	return _BasMiner.Contract.ChangeRootSetting(&_BasMiner.TransactOpts, admin, burn, miner)
+}
+
+// ChangeRootSetting is a paid mutator transaction binding the contract method 0x993a0d27.
+//
+// Solidity: function changeRootSetting(uint256 admin, uint256 burn, uint256 miner) returns()
+func (_BasMiner *BasMinerTransactorSession) ChangeRootSetting(admin *big.Int, burn *big.Int, miner *big.Int) (*types.Transaction, error) {
+	return _BasMiner.Contract.ChangeRootSetting(&_BasMiner.TransactOpts, admin, burn, miner)
+}
+
+// ChangeSelfSubSetting is a paid mutator transaction binding the contract method 0x6aa9ce0b.
+//
+// Solidity: function changeSelfSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
+func (_BasMiner *BasMinerTransactor) ChangeSelfSubSetting(opts *bind.TransactOpts, admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
+	return _BasMiner.contract.Transact(opts, "changeSelfSubSetting", admin, burn, miner, root)
+}
+
+// ChangeSelfSubSetting is a paid mutator transaction binding the contract method 0x6aa9ce0b.
+//
+// Solidity: function changeSelfSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
+func (_BasMiner *BasMinerSession) ChangeSelfSubSetting(admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
+	return _BasMiner.Contract.ChangeSelfSubSetting(&_BasMiner.TransactOpts, admin, burn, miner, root)
+}
+
+// ChangeSelfSubSetting is a paid mutator transaction binding the contract method 0x6aa9ce0b.
+//
+// Solidity: function changeSelfSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
+func (_BasMiner *BasMinerTransactorSession) ChangeSelfSubSetting(admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
+	return _BasMiner.Contract.ChangeSelfSubSetting(&_BasMiner.TransactOpts, admin, burn, miner, root)
+}
+
 // EmergencyWithdraw is a paid mutator transaction binding the contract method 0x95ccea67.
 //
 // Solidity: function emergencyWithdraw(address to, uint256 no) returns()
@@ -754,132 +915,6 @@ func (_BasMiner *BasMinerSession) ReplaceMiner(oldM common.Address, newM common.
 // Solidity: function replaceMiner(address oldM, address newM) returns()
 func (_BasMiner *BasMinerTransactorSession) ReplaceMiner(oldM common.Address, newM common.Address) (*types.Transaction, error) {
 	return _BasMiner.Contract.ReplaceMiner(&_BasMiner.TransactOpts, oldM, newM)
-}
-
-// RootAllocateProfit is a paid mutator transaction binding the contract method 0x645a3675.
-//
-// Solidity: function rootAllocateProfit(uint256 cost, bytes32 receiptNumber) returns()
-func (_BasMiner *BasMinerTransactor) RootAllocateProfit(opts *bind.TransactOpts, cost *big.Int, receiptNumber [32]byte) (*types.Transaction, error) {
-	return _BasMiner.contract.Transact(opts, "rootAllocateProfit", cost, receiptNumber)
-}
-
-// RootAllocateProfit is a paid mutator transaction binding the contract method 0x645a3675.
-//
-// Solidity: function rootAllocateProfit(uint256 cost, bytes32 receiptNumber) returns()
-func (_BasMiner *BasMinerSession) RootAllocateProfit(cost *big.Int, receiptNumber [32]byte) (*types.Transaction, error) {
-	return _BasMiner.Contract.RootAllocateProfit(&_BasMiner.TransactOpts, cost, receiptNumber)
-}
-
-// RootAllocateProfit is a paid mutator transaction binding the contract method 0x645a3675.
-//
-// Solidity: function rootAllocateProfit(uint256 cost, bytes32 receiptNumber) returns()
-func (_BasMiner *BasMinerTransactorSession) RootAllocateProfit(cost *big.Int, receiptNumber [32]byte) (*types.Transaction, error) {
-	return _BasMiner.Contract.RootAllocateProfit(&_BasMiner.TransactOpts, cost, receiptNumber)
-}
-
-// SetCustomedSubSetting is a paid mutator transaction binding the contract method 0x1918f4ef.
-//
-// Solidity: function setCustomedSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
-func (_BasMiner *BasMinerTransactor) SetCustomedSubSetting(opts *bind.TransactOpts, admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
-	return _BasMiner.contract.Transact(opts, "setCustomedSubSetting", admin, burn, miner, root)
-}
-
-// SetCustomedSubSetting is a paid mutator transaction binding the contract method 0x1918f4ef.
-//
-// Solidity: function setCustomedSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
-func (_BasMiner *BasMinerSession) SetCustomedSubSetting(admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
-	return _BasMiner.Contract.SetCustomedSubSetting(&_BasMiner.TransactOpts, admin, burn, miner, root)
-}
-
-// SetCustomedSubSetting is a paid mutator transaction binding the contract method 0x1918f4ef.
-//
-// Solidity: function setCustomedSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
-func (_BasMiner *BasMinerTransactorSession) SetCustomedSubSetting(admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
-	return _BasMiner.Contract.SetCustomedSubSetting(&_BasMiner.TransactOpts, admin, burn, miner, root)
-}
-
-// SetDefaultSubSetting is a paid mutator transaction binding the contract method 0x0767a424.
-//
-// Solidity: function setDefaultSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
-func (_BasMiner *BasMinerTransactor) SetDefaultSubSetting(opts *bind.TransactOpts, admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
-	return _BasMiner.contract.Transact(opts, "setDefaultSubSetting", admin, burn, miner, root)
-}
-
-// SetDefaultSubSetting is a paid mutator transaction binding the contract method 0x0767a424.
-//
-// Solidity: function setDefaultSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
-func (_BasMiner *BasMinerSession) SetDefaultSubSetting(admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
-	return _BasMiner.Contract.SetDefaultSubSetting(&_BasMiner.TransactOpts, admin, burn, miner, root)
-}
-
-// SetDefaultSubSetting is a paid mutator transaction binding the contract method 0x0767a424.
-//
-// Solidity: function setDefaultSubSetting(uint256 admin, uint256 burn, uint256 miner, uint256 root) returns()
-func (_BasMiner *BasMinerTransactorSession) SetDefaultSubSetting(admin *big.Int, burn *big.Int, miner *big.Int, root *big.Int) (*types.Transaction, error) {
-	return _BasMiner.Contract.SetDefaultSubSetting(&_BasMiner.TransactOpts, admin, burn, miner, root)
-}
-
-// SetOANN is a paid mutator transaction binding the contract method 0xbc63d8b9.
-//
-// Solidity: function setOANN(address oann) returns()
-func (_BasMiner *BasMinerTransactor) SetOANN(opts *bind.TransactOpts, oann common.Address) (*types.Transaction, error) {
-	return _BasMiner.contract.Transact(opts, "setOANN", oann)
-}
-
-// SetOANN is a paid mutator transaction binding the contract method 0xbc63d8b9.
-//
-// Solidity: function setOANN(address oann) returns()
-func (_BasMiner *BasMinerSession) SetOANN(oann common.Address) (*types.Transaction, error) {
-	return _BasMiner.Contract.SetOANN(&_BasMiner.TransactOpts, oann)
-}
-
-// SetOANN is a paid mutator transaction binding the contract method 0xbc63d8b9.
-//
-// Solidity: function setOANN(address oann) returns()
-func (_BasMiner *BasMinerTransactorSession) SetOANN(oann common.Address) (*types.Transaction, error) {
-	return _BasMiner.Contract.SetOANN(&_BasMiner.TransactOpts, oann)
-}
-
-// SetRootSetting is a paid mutator transaction binding the contract method 0x5d89ae36.
-//
-// Solidity: function setRootSetting(uint256 admin, uint256 burn, uint256 miner) returns()
-func (_BasMiner *BasMinerTransactor) SetRootSetting(opts *bind.TransactOpts, admin *big.Int, burn *big.Int, miner *big.Int) (*types.Transaction, error) {
-	return _BasMiner.contract.Transact(opts, "setRootSetting", admin, burn, miner)
-}
-
-// SetRootSetting is a paid mutator transaction binding the contract method 0x5d89ae36.
-//
-// Solidity: function setRootSetting(uint256 admin, uint256 burn, uint256 miner) returns()
-func (_BasMiner *BasMinerSession) SetRootSetting(admin *big.Int, burn *big.Int, miner *big.Int) (*types.Transaction, error) {
-	return _BasMiner.Contract.SetRootSetting(&_BasMiner.TransactOpts, admin, burn, miner)
-}
-
-// SetRootSetting is a paid mutator transaction binding the contract method 0x5d89ae36.
-//
-// Solidity: function setRootSetting(uint256 admin, uint256 burn, uint256 miner) returns()
-func (_BasMiner *BasMinerTransactorSession) SetRootSetting(admin *big.Int, burn *big.Int, miner *big.Int) (*types.Transaction, error) {
-	return _BasMiner.Contract.SetRootSetting(&_BasMiner.TransactOpts, admin, burn, miner)
-}
-
-// SubNameProfit is a paid mutator transaction binding the contract method 0xafd878d8.
-//
-// Solidity: function subNameProfit(uint256 cost, uint8 typ, address rOwner, bytes32 receiptNumber) returns()
-func (_BasMiner *BasMinerTransactor) SubNameProfit(opts *bind.TransactOpts, cost *big.Int, typ uint8, rOwner common.Address, receiptNumber [32]byte) (*types.Transaction, error) {
-	return _BasMiner.contract.Transact(opts, "subNameProfit", cost, typ, rOwner, receiptNumber)
-}
-
-// SubNameProfit is a paid mutator transaction binding the contract method 0xafd878d8.
-//
-// Solidity: function subNameProfit(uint256 cost, uint8 typ, address rOwner, bytes32 receiptNumber) returns()
-func (_BasMiner *BasMinerSession) SubNameProfit(cost *big.Int, typ uint8, rOwner common.Address, receiptNumber [32]byte) (*types.Transaction, error) {
-	return _BasMiner.Contract.SubNameProfit(&_BasMiner.TransactOpts, cost, typ, rOwner, receiptNumber)
-}
-
-// SubNameProfit is a paid mutator transaction binding the contract method 0xafd878d8.
-//
-// Solidity: function subNameProfit(uint256 cost, uint8 typ, address rOwner, bytes32 receiptNumber) returns()
-func (_BasMiner *BasMinerTransactorSession) SubNameProfit(cost *big.Int, typ uint8, rOwner common.Address, receiptNumber [32]byte) (*types.Transaction, error) {
-	return _BasMiner.Contract.SubNameProfit(&_BasMiner.TransactOpts, cost, typ, rOwner, receiptNumber)
 }
 
 // Withdraw is a paid mutator transaction binding the contract method 0x3ccfd60b.
@@ -1237,13 +1272,15 @@ func (it *BasMinerReceiptIterator) Close() error {
 // BasMinerReceipt represents a Receipt event raised by the BasMiner contract.
 type BasMinerReceipt struct {
 	ReceiptNumber [32]byte
+	Amout         *big.Int
+	Allocation    uint8
 	From          common.Address
 	Raw           types.Log // Blockchain specific contextual infos
 }
 
-// FilterReceipt is a free log retrieval operation binding the contract event 0xe0279b2669a15826965c3f2418236311d0e48e112d0f8302163e3ddc159c2dba.
+// FilterReceipt is a free log retrieval operation binding the contract event 0x3758759a794787144866c77ee84ba833a2225c12a6d58982691b2e88363544ff.
 //
-// Solidity: event Receipt(bytes32 receiptNumber, address from)
+// Solidity: event Receipt(bytes32 receiptNumber, uint256 amout, uint8 allocation, address from)
 func (_BasMiner *BasMinerFilterer) FilterReceipt(opts *bind.FilterOpts) (*BasMinerReceiptIterator, error) {
 
 	logs, sub, err := _BasMiner.contract.FilterLogs(opts, "Receipt")
@@ -1253,9 +1290,9 @@ func (_BasMiner *BasMinerFilterer) FilterReceipt(opts *bind.FilterOpts) (*BasMin
 	return &BasMinerReceiptIterator{contract: _BasMiner.contract, event: "Receipt", logs: logs, sub: sub}, nil
 }
 
-// WatchReceipt is a free log subscription operation binding the contract event 0xe0279b2669a15826965c3f2418236311d0e48e112d0f8302163e3ddc159c2dba.
+// WatchReceipt is a free log subscription operation binding the contract event 0x3758759a794787144866c77ee84ba833a2225c12a6d58982691b2e88363544ff.
 //
-// Solidity: event Receipt(bytes32 receiptNumber, address from)
+// Solidity: event Receipt(bytes32 receiptNumber, uint256 amout, uint8 allocation, address from)
 func (_BasMiner *BasMinerFilterer) WatchReceipt(opts *bind.WatchOpts, sink chan<- *BasMinerReceipt) (event.Subscription, error) {
 
 	logs, sub, err := _BasMiner.contract.WatchLogs(opts, "Receipt")
@@ -1290,9 +1327,9 @@ func (_BasMiner *BasMinerFilterer) WatchReceipt(opts *bind.WatchOpts, sink chan<
 	}), nil
 }
 
-// ParseReceipt is a log parse operation binding the contract event 0xe0279b2669a15826965c3f2418236311d0e48e112d0f8302163e3ddc159c2dba.
+// ParseReceipt is a log parse operation binding the contract event 0x3758759a794787144866c77ee84ba833a2225c12a6d58982691b2e88363544ff.
 //
-// Solidity: event Receipt(bytes32 receiptNumber, address from)
+// Solidity: event Receipt(bytes32 receiptNumber, uint256 amout, uint8 allocation, address from)
 func (_BasMiner *BasMinerFilterer) ParseReceipt(log types.Log) (*BasMinerReceipt, error) {
 	event := new(BasMinerReceipt)
 	if err := _BasMiner.contract.UnpackLog(event, "Receipt", log); err != nil {
