@@ -442,7 +442,7 @@ func watchPaid(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGrou
 					ReceiptNumber:log.Receipt,
 				})
 				logger.Info("detected address ",
-					log.Payer.String(), " paied " , log.Amount.String(), "for ", log.Option," on", string(log.Name))
+					log.Payer.String(), " paid " , log.Amount.String(), "for ", log.Option," on", string(log.Name))
 			}
 		}
 	}else{
