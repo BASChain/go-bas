@@ -1,6 +1,7 @@
 package DataSync
 
 import (
+	"github.com/BASChain/go-bas/Bas_Ethereum"
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/event"
@@ -17,32 +18,32 @@ var MAXYEAR *big.Int
 var RARETYPELENGTH *big.Int
 
 func Settings()  {
-	if gas,err:=BasOANN().AROOTGAS(GetOpts(0));err!=nil{
+	if gas,err:=BasOANN().AROOTGAS(Bas_Ethereum.GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param AROOTGAS")
 	}else{
 		AROOTGAS = gas
 	}
-	if gas,err:=BasOANN().BROOTGAS(GetOpts(0));err!=nil{
+	if gas,err:=BasOANN().BROOTGAS(Bas_Ethereum.GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param BROOTGAS")
 	}else{
 		BROOTGAS = gas
 	}
-	if gas,err:=BasOANN().SUBGAS(GetOpts(0));err!=nil{
+	if gas,err:=BasOANN().SUBGAS(Bas_Ethereum.GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param SUBGAS")
 	}else{
 		SUBGAS = gas
 	}
-	if gas,err:=BasOANN().CUSTOMEDPRICEGAS(GetOpts(0));err!=nil{
+	if gas,err:=BasOANN().CUSTOMEDPRICEGAS(Bas_Ethereum.GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param CUSTOMPRICEGAS")
 	}else{
 		CUSTOMPRICEGAS = gas
 	}
-	if year,err:=BasOANN().MAXYEAR(GetOpts(0));err!=nil{
+	if year,err:=BasOANN().MAXYEAR(Bas_Ethereum.GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param MAXYEAR")
 	}else{
 		MAXYEAR = year
 	}
-	if length,err:=BasOANN().RARETYPELENGTH(GetOpts(0));err!=nil{
+	if length,err:=BasOANN().RARETYPELENGTH(Bas_Ethereum.GetOpts(0));err!=nil{
 		logger.Fatal("can't get sys param MAXYEAR")
 	}else{
 		RARETYPELENGTH = length

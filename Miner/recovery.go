@@ -11,7 +11,9 @@ Contract "github.com/BASChain/go-bas/Contracts"
 var logger, _ = logging.GetLogger("Miner")
 
 var (
-	_miner = "0x34149F28b03B2Db2778Cc4F3d99e0ca71C34cc95"
+	_miner = "0xCAB59645aE535A7b5a4f81d8D17E2fe0d2Cf4687"
+
+
 	miner *Contract.BasMiner
 
 	conn = Bas_Ethereum.NewConn()
@@ -32,10 +34,4 @@ func BasMiner() *Contract.BasMiner{
 		}
 	}
 	return miner
-}
-
-func BlockNumnber2TimeStamp(blockNumber uint64) int64  {
-	t,_:=conn.GetTimestamp(blockNumber)
-
-	return int64(t)
 }
