@@ -2,7 +2,9 @@ package Bas_Ethereum
 
 import (
 	"encoding/hex"
+	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	solsha3 "github.com/miguelmota/go-solidity-sha3"
+	"math/big"
 )
 
 type Hash [32]byte
@@ -33,3 +35,12 @@ var RetryRule = map[int]int{
 	3:15,
 }
 
+func GetOpts(blockNumber uint64) *bind.CallOpts {
+	var opts = new(bind.CallOpts)
+	if blockNumber == 0 {
+		opts = nil
+	}else{
+		opts.BlockNumber = new(big.Int).SetUint64(blockNumber)
+	}
+	return opts
+}

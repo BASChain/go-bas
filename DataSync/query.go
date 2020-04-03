@@ -2,7 +2,6 @@ package DataSync
 
 import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 	"strconv"
@@ -29,22 +28,13 @@ type SubRecord struct {
 	RootHash  [32]byte
 }
 
-func GetOpts(blockNumber uint64) *bind.CallOpts {
-	var opts = new(bind.CallOpts)
-	if blockNumber == 0 {
-		opts = nil
-	}else{
-		opts.BlockNumber = new(big.Int).SetUint64(blockNumber)
-	}
-	return opts
-}
 
 
 func QueryDNS(key Bas_Ethereum.Hash, blockNumber uint64)  (DNSRecord,error){
 	return _QueryDNS(key,blockNumber,0)
 }
 func _QueryDNS(key Bas_Ethereum.Hash, blockNumber uint64, tryTimes int)  (DNSRecord,error){
-	dns,err:=BasDNS().DNS(GetOpts(blockNumber),key)
+	dns,err:=BasDNS().DNS(Bas_Ethereum.GetOpts(blockNumber),key)
 	if err!=nil{
 		tryTimes +=1
 		if tryTimes>3{
@@ -63,7 +53,7 @@ func QueryRoot(key Bas_Ethereum.Hash,blockNumber uint64) (RootRecord,error) {
 	return _QueryRoot(key,blockNumber,0)
 }
 func _QueryRoot(key Bas_Ethereum.Hash,blockNumber uint64, tryTimes int) (RootRecord,error) {
-	root,err:=BasAsset().Root(GetOpts(blockNumber),key)
+	root,err:=BasAsset().Root(Bas_Ethereum.GetOpts(blockNumber),key)
 	if err!=nil{
 		tryTimes +=1
 		if tryTimes>3{
@@ -82,7 +72,7 @@ func QuerySub(key Bas_Ethereum.Hash,blockNumber uint64) (SubRecord,error) {
 	return _QuerySub(key,blockNumber,0)
 }
 func _QuerySub(key Bas_Ethereum.Hash,blockNumber uint64, tryTimes int) (SubRecord,error) {
-	sub,err:=BasAsset().Sub(GetOpts(blockNumber),key)
+	sub,err:=BasAsset().Sub(Bas_Ethereum.GetOpts(blockNumber),key)
 	if err!=nil{
 		tryTimes +=1
 		if tryTimes>3{
@@ -101,7 +91,7 @@ func QueryOwnership(key Bas_Ethereum.Hash,blockNumber uint64) (common.Address, *
 	return _QueryOwnership(key,blockNumber,0)
 }
 func _QueryOwnership(key Bas_Ethereum.Hash,blockNumber uint64, tryTimes int) (common.Address, *big.Int, error){
-	newOwner,expire,err := BasOwnership().Query(GetOpts(blockNumber),key)
+	newOwner,expire,err := BasOwnership().Query(Bas_Ethereum.GetOpts(blockNumber),key)
 	if err!=nil{
 		tryTimes +=1
 		if tryTimes>3{
