@@ -101,7 +101,7 @@ func (dr *DomainRecord)GetBCAddrStr() string {
 	if dr == nil{
 		return ""
 	}
-	return hex.EncodeToString(dr.Bca)
+	return "0x"+hex.EncodeToString(dr.Bca)
 }
 
 func (dr *DomainRecord)GetIpv6Str() string  {
