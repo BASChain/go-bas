@@ -13,7 +13,6 @@ var logger, _ = logging.GetLogger("Miner")
 var (
 	_miner = "0xCAB59645aE535A7b5a4f81d8D17E2fe0d2Cf4687"
 
-
 	miner *Contract.BasMiner
 
 	conn = Bas_Ethereum.NewConn()
