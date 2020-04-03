@@ -5,12 +5,11 @@ import (
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/event"
-	"github.com/op/go-logging"
 	"golang.org/x/net/context"
 	"sync"
 )
 
-var logger, _ = logging.GetLogger("DataSync")
+
 
 func getLoopOpts(s uint64, e *uint64)  *bind.FilterOpts{
 	var opts  = &bind.FilterOpts{
@@ -411,8 +410,7 @@ func loopOverPaid(opts *bind.FilterOpts,wg *sync.WaitGroup){
 				Option: it.Event.Option,
 				Amount: it.Event.Amount,
 				CommitBlock: it.Event.Raw.BlockNumber,
-				ReceiptNumber:it.Event.Receipt,
-			})
+			},it.Event.Receipt)
 		}
 	}else{
 		logger.Error("loop over paid err :" , err)
@@ -439,8 +437,7 @@ func watchPaid(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGrou
 					Option: log.Option,
 					Amount: log.Amount,
 					CommitBlock:log.Raw.BlockNumber,
-					ReceiptNumber:log.Receipt,
-				})
+				},log.Receipt)
 				logger.Info("detected address ",
 					log.Payer.String(), " paid " , log.Amount.String(), "for ", log.Option," on", string(log.Name))
 			}

@@ -4,9 +4,12 @@ import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/op/go-logging"
 )
 
+var logger, _ = logging.GetLogger("Market")
 var (
+
 	_market = "0xA32ccce4B7aB28d3Ce40BBa03A2748bCbe4544dB"
 	market *Contract.BasMarket
 

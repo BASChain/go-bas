@@ -4,7 +4,10 @@ import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/op/go-logging"
 )
+
+var logger, _ = logging.GetLogger("DataSync")
 
 var (
 
@@ -12,7 +15,7 @@ var (
 	_o = "0x4b91b82bed39B1d946C9E3BC12ba09C2F22fd3ee"
 	_a = "0x2B1110a13183A7045C7BCE3ba0092Ff0de4FD241"
 	_d = "0x8951f6B80b880E8A47d0d18000A4c90F288F61a3"
-	_oann = "0xd6bA5488a46028e3346ed792c4E74f67c0e11DD4"
+	_oann = "0x3C72cfaEf3f514A08D30b5e065c7F014dB88f0bb"
 
 	conn = Bas_Ethereum.NewConn()
 
