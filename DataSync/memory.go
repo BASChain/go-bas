@@ -99,6 +99,9 @@ func (dr *DomainRecord)GetBCAddrStr() string {
 	if dr == nil{
 		return ""
 	}
+	if len(dr.Bca) == 0{
+		return ""
+	}
 	return "0x"+hex.EncodeToString(dr.Bca)
 }
 
