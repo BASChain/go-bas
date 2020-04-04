@@ -5,28 +5,10 @@ import (
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/event"
-	"golang.org/x/net/context"
 	"sync"
 )
 
 
-
-func getLoopOpts(s uint64, e *uint64)  *bind.FilterOpts{
-	var opts  = &bind.FilterOpts{
-		Start:s,
-		End: e,
-		Context:context.Background(),
-	}
-	return opts
-}
-
-func getWatchOpts(s uint64) *bind.WatchOpts{
-	var opts = &bind.WatchOpts{
-		Start:   &s,
-		Context: context.Background(),
-	}
-	return opts
-}
 
 func loopOverRootChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	defer wg.Done()

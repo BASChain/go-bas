@@ -1,6 +1,7 @@
 package DataSync
 
 import (
+	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/event"
 	"sync"
 )
@@ -21,7 +22,7 @@ func syncGap(from ,to uint64){
 	if from>to {
 		return
 	}
-	opts := getLoopOpts(from,&to)
+	opts := Bas_Ethereum.GetLoopOpts(from,&to)
 	var waitGroup sync.WaitGroup
 	waitGroup.Add(12)
 
@@ -82,7 +83,7 @@ var subs []event.Subscription
 func watch(lastBlockNumber uint64){
 	var waitGroup sync.WaitGroup
 
-	opts := getWatchOpts(lastBlockNumber)
+	opts := Bas_Ethereum.GetWatchOpts(lastBlockNumber)
 	subs = []event.Subscription{}
 
 	waitGroup.Add(12)

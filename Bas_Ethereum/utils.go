@@ -4,6 +4,7 @@ import (
 	"encoding/hex"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	solsha3 "github.com/miguelmota/go-solidity-sha3"
+	"golang.org/x/net/context"
 	"math/big"
 )
 
@@ -41,6 +42,23 @@ func GetOpts(blockNumber uint64) *bind.CallOpts {
 		opts = nil
 	}else{
 		opts.BlockNumber = new(big.Int).SetUint64(blockNumber)
+	}
+	return opts
+}
+
+func GetLoopOpts(s uint64, e *uint64)  *bind.FilterOpts{
+	var opts  = &bind.FilterOpts{
+		Start:s,
+		End: e,
+		Context:context.Background(),
+	}
+	return opts
+}
+
+func GetWatchOpts(s uint64) *bind.WatchOpts{
+	var opts = &bind.WatchOpts{
+		Start:   &s,
+		Context: context.Background(),
 	}
 	return opts
 }

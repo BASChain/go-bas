@@ -1,4 +1,4 @@
-package Market
+package Miner
 
 import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
@@ -10,27 +10,28 @@ var lastSavingPoint = uint64(0)
 var currentSavingPoint = uint64(0)
 
 func moveToNewSavingPoint(blockNumber uint64){
+	if currentSavingPoint == blockNumber {
+		return
+	}
 	lastSavingPoint = currentSavingPoint;
 	currentSavingPoint = blockNumber;
-	logger.Info("[Market]  saving point  ", lastSavingPoint, "----->" , currentSavingPoint)
+	logger.Info("[Miner]  saving point  ", lastSavingPoint, "----->" , currentSavingPoint)
 }
 
-func syncGap(from,to uint64){
+func syncGap(from ,to uint64){
 	if from>to {
 		return
 	}
 	opts := Bas_Ethereum.GetLoopOpts(from,&to)
 	var waitGroup sync.WaitGroup
-	waitGroup.Add(8)
+	waitGroup.Add(6)
 
-	go loopOverAskAdded(opts,&waitGroup)
-	go loopOverAskChanged(opts,&waitGroup)
-	go loopOverAskRemoved(opts,&waitGroup)
-	go loopOverSellAdded(opts,&waitGroup)
-	go loopOverSellChanged(opts,&waitGroup)
-	go loopOverSellRemoved(opts,&waitGroup)
-	go loopOverSoldByAsk(opts,&waitGroup)
-	go loopOverSoldBySell(opts,&waitGroup)
+	go loopOverAllocationChanged(opts,&waitGroup)
+	go loopOverMinerAdd(opts,&waitGroup)
+	go loopOverMinerRemove(opts,&waitGroup)
+	go loopOverMinerReplace(opts,&waitGroup)
+	go loopOverReceipt(opts,&waitGroup)
+	go loopOverWithdraw(opts,&waitGroup)
 
 	waitGroup.Wait()
 	loopOverEventQueue()
@@ -55,16 +56,14 @@ func watch(lastBlockNumber uint64){
 	opts := Bas_Ethereum.GetWatchOpts(lastBlockNumber)
 	subs = []event.Subscription{}
 
-	waitGroup.Add(8)
+	waitGroup.Add(6)
 
-	go watchAskAdded(opts,&subs,&waitGroup)
-	go watchAskChanged(opts,&subs,&waitGroup)
-	go watchAskRemove(opts,&subs,&waitGroup)
-	go watchSellAdded(opts,&subs,&waitGroup)
-	go watchSellChanged(opts,&subs,&waitGroup)
-	go watchSellRemove(opts,&subs,&waitGroup)
-	go watchSoldByAsk(opts,&subs,&waitGroup)
-	go watchSoldBySell(opts,&subs,&waitGroup)
+	go watchAllocationChanged(opts,&subs,&waitGroup)
+	go watchMinerAdd(opts,&subs,&waitGroup)
+	go watchMinerRemove(opts,&subs,&waitGroup)
+	go watchMinerReplace(opts,&subs,&waitGroup)
+	go watchReceipt(opts,&subs,&waitGroup)
+	go watchWithdraw(opts,&subs,&waitGroup)
 
 	waitGroup.Wait()
 
@@ -85,7 +84,22 @@ func ReSync(){
 	Sync()
 }
 
+func ShowSysParams(){
+	_,rcd:=SettingRecords.GetClosest(currentSavingPoint,0)
+	st:=rcd.(Setting)
+	logger.Info("allocations root: ", st.Allocation)
+	for _,m := range st.Miners {
+		logger.Info("miner -->" ,m.String())
+	}
+}
+
+var firstStart = true;
+
 func Sync(){
 	syncGapToNewest()
+	if firstStart {
+		ShowSysParams()
+		firstStart = false
+	}
 	watch(currentSavingPoint)
 }

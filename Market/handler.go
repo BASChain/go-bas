@@ -7,35 +7,16 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/event"
-	"golang.org/x/net/context"
 	"sync"
 )
 
-
-
-func getLoopOpts(s uint64, e *uint64)  *bind.FilterOpts{
-	var opts  = &bind.FilterOpts{
-		Start:s,
-		End: e,
-		Context:context.Background(),
-	}
-	return opts
-}
-
-func getWatchOpts(s uint64) *bind.WatchOpts{
-	var opts = &bind.WatchOpts{
-		Start:   &s,
-		Context: context.Background(),
-	}
-	return opts
-}
 
 func loopOverSellAdded(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 	defer wg.Done()
 	it,err:=BasMarket().FilterSellAdded(opts)
 	if err==nil{
 		for it.Next() {
-			insertEq(it.Event.Raw.BlockNumber,
+			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"SellAdded",
 				it.Event)
@@ -81,7 +62,7 @@ func loopOverSellChanged(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 	it,err:=BasMarket().FilterSellChanged(opts)
 	if err==nil{
 		for it.Next() {
-			insertEq(it.Event.Raw.BlockNumber,
+			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"SellChanged",
 				it.Event)
@@ -125,7 +106,7 @@ func loopOverSellRemoved(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 	it,err:=BasMarket().FilterSellRemoved(opts)
 	if err==nil{
 		for it.Next() {
-			insertEq(it.Event.Raw.BlockNumber,
+			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"SellRemoved",
 				it.Event)
@@ -166,7 +147,7 @@ func loopOverAskAdded(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 	it,err:=BasMarket().FilterAskAdded(opts)
 	if err==nil{
 		for it.Next() {
-			insertEq(it.Event.Raw.BlockNumber,
+			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"AskAdded",
 				it.Event)
@@ -212,7 +193,7 @@ func loopOverAskChanged(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 	it,err:=BasMarket().FilterAskChanged(opts)
 	if err==nil{
 		for it.Next() {
-			insertEq(it.Event.Raw.BlockNumber,
+			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"AskChanged",
 				it.Event)
@@ -257,7 +238,7 @@ func loopOverAskRemoved(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 	it,err:=BasMarket().FilterAskRemoved(opts)
 	if err==nil{
 		for it.Next() {
-			insertEq(it.Event.Raw.BlockNumber,
+			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"AskRemoved",
 				it.Event)
@@ -298,7 +279,7 @@ func loopOverSoldBySell(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 	it,err:=BasMarket().FilterSoldBySell(opts)
 	if err==nil{
 		for it.Next() {
-			insertEq(it.Event.Raw.BlockNumber,
+			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"SoldBySell",
 				it.Event)
@@ -364,7 +345,7 @@ func loopOverSoldByAsk(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 	it,err:=BasMarket().FilterSoldByAsk(opts)
 	if err==nil{
 		for it.Next() {
-			insertEq(it.Event.Raw.BlockNumber,
+			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"SoldByAsk",
 				it.Event)
