@@ -264,7 +264,7 @@ func loopOverReceipt(opts *bind.FilterOpts,wg *sync.WaitGroup){
 }
 
 func handleReceipt(r *Contract.BasMinerReceipt){
-	Receipts = append(Receipts, SimplifiedRecepit{
+	Receipts = append(Receipts, SimplifiedReceipt{
 		BlockNumber:   r.Raw.BlockNumber,
 		TxIndex:       r.Raw.TxIndex,
 		ReceiptNumber: r.ReceiptNumber,

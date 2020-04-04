@@ -11,7 +11,7 @@ const (
 	RootOwner uint8 = 1
 )
 
-type SimplifiedRecepit struct {
+type SimplifiedReceipt struct {
 	BlockNumber   uint64
 	TxIndex       uint
 	ReceiptNumber Bas_Ethereum.Hash
@@ -24,5 +24,5 @@ type SimplifiedWithdraw struct {
 	Amount big.Int
 }
 
-var Receipts  []SimplifiedRecepit
+var Receipts  []SimplifiedReceipt
 var Withdraws []SimplifiedWithdraw
