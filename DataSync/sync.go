@@ -140,7 +140,7 @@ func Sync(){
 		firstStart = false
 	}
 
-	go watch(currentSavingPoint)
+	watch(currentSavingPoint)
 
 
 }
