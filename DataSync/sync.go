@@ -130,7 +130,7 @@ func Sync(){
 	Settings()
 	syncGapToNewest()
 	//make second fast sync to avoid new event during sync
-	syncGapToNewest()
+	go syncGapToNewest()
 
 	if firstStart {
 		go func() {
@@ -140,7 +140,7 @@ func Sync(){
 		firstStart = false
 	}
 
-	watch(currentSavingPoint)
+	go watch(currentSavingPoint)
 
 
 }
