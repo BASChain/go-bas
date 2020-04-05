@@ -38,7 +38,7 @@ func syncGap(from,to uint64){
 
 func SyncGapWithNoTrust(blockNumber uint64){
 	moveToNewSavingPoint(blockNumber)
-	syncGap(lastSavingPoint+1,blockNumber-1)
+	go syncGap(lastSavingPoint+1,blockNumber-1)
 }
 
 func syncGapToNewest(){
