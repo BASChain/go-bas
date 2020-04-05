@@ -133,7 +133,7 @@ func Sync(){
 	if firstStart {
 
 		go func() {
-			time.Sleep(time.Duration(30)*time.Second)
+			time.Sleep(time.Duration(120)*time.Second)
 			ShowCachedNames()
 		}()
 		firstStart = false
