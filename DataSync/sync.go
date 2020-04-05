@@ -107,7 +107,7 @@ func watch(lastBlockNumber uint64){
 
 	waitGroup.Wait()
 
-	ReSync()
+	ReWatch()
 }
 
 func unSubscriptAll(){
@@ -117,7 +117,7 @@ func unSubscriptAll(){
 	logger.Info("Unsubscribed all event watches")
 }
 
-func ReSync(){
+func ReWatch(){
 	logger.Info("ReSyncing")
 	unSubscriptAll()
 	ResetConnAndService()
