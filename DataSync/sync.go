@@ -129,9 +129,10 @@ var firstStart = true;
 func Sync(){
 	Settings()
 	syncGapToNewest()
+	//make second fast sync to avoid new event during sync
+	syncGapToNewest()
 
 	if firstStart {
-
 		go func() {
 			time.Sleep(time.Duration(120)*time.Second)
 			ShowCachedNames()
