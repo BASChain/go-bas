@@ -24,8 +24,28 @@ func insertQueue(key Bas_Ethereum.Hash,queue *[]Bas_Ethereum.Hash){
 	}
 }
 
-func clearQuery(queue *[]Bas_Ethereum.Hash){
-	queue = new([]Bas_Ethereum.Hash)
+func clearQueueO(){
+	oLock.Lock()
+	defer oLock.Unlock()
+	queueOwnership = new([]Bas_Ethereum.Hash)
+}
+
+func clearQueueR(){
+	rLock.Lock()
+	defer rLock.Unlock()
+	queueRoot = new([]Bas_Ethereum.Hash)
+}
+
+func clearQueueS(){
+	sLock.Lock()
+	defer sLock.Unlock()
+	queueSub = new([]Bas_Ethereum.Hash)
+}
+
+func clearQueueD(){
+	dLock.Lock()
+	defer dLock.Unlock()
+	queueDns = new([]Bas_Ethereum.Hash)
 }
 
 
@@ -33,10 +53,7 @@ func loopOverQueueOwnership(waitGroup *sync.WaitGroup){
 	oLock.Lock()
 	defer oLock.Unlock()
 	for _,s:= range *queueOwnership {
-		updateByQueryOwnership(s, 0)
-		if(Records[s].CommitBlock==0){
-			Records[s].CommitBlock = firstAppearInBlock[s]
-		}
+		go updateByQueryOwnership(s, 0)
 	}
 	waitGroup.Done()
 }
@@ -45,7 +62,7 @@ func loopOverQueueRoot(waitGroup *sync.WaitGroup){
 	rLock.Lock()
 	defer rLock.Unlock()
 	for _,s:= range *queueRoot {
-		updateByQueryRoot(s,0)
+		go updateByQueryRoot(s,0)
 	}
 	waitGroup.Done()
 }
@@ -54,7 +71,7 @@ func loopOverQueueSub(waitGroup *sync.WaitGroup){
 	sLock.Lock()
 	defer sLock.Unlock()
 	for _,s:= range *queueSub {
-		updateByQuerySub(s,0)
+		go updateByQuerySub(s,0)
 	}
 	waitGroup.Done()
 }
@@ -63,7 +80,7 @@ func loopOverQueueDns(waitGroup *sync.WaitGroup){
 	dLock.Lock()
 	defer dLock.Unlock()
 	for _,s:= range *queueDns {
-		updateByQueryDNS(s,0)
+		go updateByQueryDNS(s,0)
 	}
 	waitGroup.Done()
 }
