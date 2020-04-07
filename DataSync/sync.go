@@ -4,18 +4,20 @@ import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	"github.com/ethereum/go-ethereum/event"
 	"sync"
+	"time"
 )
 
 var lastSavingPoint = uint64(0)
 var currentSavingPoint = uint64(0)
 
-func moveToNewSavingPoint(blockNumber uint64){
+func moveToNewSavingPoint(blockNumber uint64) bool{
 	if currentSavingPoint == blockNumber {
-		return
+		return false
 	}
 	lastSavingPoint = currentSavingPoint;
 	currentSavingPoint = blockNumber;
 	logger.Info("[Data_Sync]  saving point  ", lastSavingPoint, "----->" , currentSavingPoint)
+	return true
 }
 
 func syncGap(from ,to uint64){
@@ -43,9 +45,11 @@ func syncGap(from ,to uint64){
 	syncDataByHandleQueue()
 }
 
+
 func SyncGapWithNoTrust(blockNumber uint64){
-	moveToNewSavingPoint(blockNumber)
-	syncGap(lastSavingPoint+1,blockNumber-1)
+	if moveToNewSavingPoint(blockNumber){
+		go syncGap(lastSavingPoint+1, blockNumber-1)
+	}
 }
 
 func syncGapToNewest(){
@@ -64,10 +68,10 @@ func syncDataByHandleQueue(){
 
 	waitGroup.Wait()
 
-	clearQuery(queueOwnership)
-	clearQuery(queueRoot)
-	clearQuery(queueSub)
-	clearQuery(queueDns)
+	clearQueueO()
+	clearQueueD()
+	clearQueueR()
+	clearQueueS()
 }
 
 func ShowCachedNames(){
@@ -103,7 +107,7 @@ func watch(lastBlockNumber uint64){
 
 	waitGroup.Wait()
 
-	ReSync()
+	ReWatch()
 }
 
 func unSubscriptAll(){
@@ -113,11 +117,11 @@ func unSubscriptAll(){
 	logger.Info("Unsubscribed all event watches")
 }
 
-func ReSync(){
+func ReWatch(){
 	logger.Info("ReSyncing")
 	unSubscriptAll()
 	ResetConnAndService()
-	Sync()
+	watch(currentSavingPoint)
 }
 
 var firstStart = true;
@@ -125,9 +129,18 @@ var firstStart = true;
 func Sync(){
 	Settings()
 	syncGapToNewest()
+	//make second fast sync to avoid new event during sync
+	go syncGapToNewest()
+
 	if firstStart {
-		ShowCachedNames()
+		go func() {
+			time.Sleep(time.Duration(120)*time.Second)
+			ShowCachedNames()
+		}()
 		firstStart = false
 	}
+
 	watch(currentSavingPoint)
+
+
 }

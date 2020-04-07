@@ -248,6 +248,10 @@ func updateByQueryOwnership(hash Bas_Ethereum.Hash, blockNumber uint64){
 		}
 		Records[hash].Expire = *expire
 
+		if(Records[hash].CommitBlock==0){
+			Records[hash].CommitBlock = firstAppearInBlock[hash]
+		}
+
 		Notification.NotifyOwnershipUpdate(
 			hash,
 			newOwner,

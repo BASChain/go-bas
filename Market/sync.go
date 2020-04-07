@@ -9,10 +9,14 @@ import (
 var lastSavingPoint = uint64(0)
 var currentSavingPoint = uint64(0)
 
-func moveToNewSavingPoint(blockNumber uint64){
+func moveToNewSavingPoint(blockNumber uint64) bool{
+	if currentSavingPoint == blockNumber {
+		return false
+	}
 	lastSavingPoint = currentSavingPoint;
 	currentSavingPoint = blockNumber;
 	logger.Info("[Market]  saving point  ", lastSavingPoint, "----->" , currentSavingPoint)
+	return true
 }
 
 func syncGap(from,to uint64){
@@ -37,8 +41,9 @@ func syncGap(from,to uint64){
 }
 
 func SyncGapWithNoTrust(blockNumber uint64){
-	moveToNewSavingPoint(blockNumber)
-	syncGap(lastSavingPoint+1,blockNumber-1)
+	if moveToNewSavingPoint(blockNumber){
+		go syncGap(lastSavingPoint+1, blockNumber-1)
+	}
 }
 
 func syncGapToNewest(){
@@ -68,7 +73,7 @@ func watch(lastBlockNumber uint64){
 
 	waitGroup.Wait()
 
-	ReSync()
+	ReWatch()
 }
 
 func unSubscriptAll(){
@@ -78,11 +83,11 @@ func unSubscriptAll(){
 	logger.Info("Unsubscribed all event watches")
 }
 
-func ReSync(){
+func ReWatch(){
 	logger.Info("ReSyncing")
 	unSubscriptAll()
 	ResetConnAndService()
-	Sync()
+	watch(currentSavingPoint)
 }
 
 func Sync(){
