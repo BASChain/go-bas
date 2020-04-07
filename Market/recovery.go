@@ -10,8 +10,8 @@ import (
 var logger, _ = logging.GetLogger("Market")
 var (
 
-	_market = "0xA32ccce4B7aB28d3Ce40BBa03A2748bCbe4544dB"
-	market *Contract.BasMarket
+	MarketAddr = "0xA32ccce4B7aB28d3Ce40BBa03A2748bCbe4544dB"
+	market     *Contract.BasMarket
 
 	conn = Bas_Ethereum.NewConn()
 )
@@ -24,7 +24,7 @@ func ResetConnAndService(){
 
 func BasMarket() *Contract.BasMarket{
 	if market==nil{
-		if m,err:=Contract.NewBasMarket(common.HexToAddress(_market), conn.GetClient());err==nil{
+		if m,err:=Contract.NewBasMarket(common.HexToAddress(MarketAddr), conn.GetClient());err==nil{
 			market = m
 		}else{
 			logger.Fatal("can't recover market",err)

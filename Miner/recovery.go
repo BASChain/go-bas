@@ -11,7 +11,7 @@ Contract "github.com/BASChain/go-bas/Contracts"
 var logger, _ = logging.GetLogger("Miner")
 
 var (
-	_miner = "0xCAB59645aE535A7b5a4f81d8D17E2fe0d2Cf4687"
+	MinerAddr = "0xCAB59645aE535A7b5a4f81d8D17E2fe0d2Cf4687"
 
 	miner *Contract.BasMiner
 
@@ -26,7 +26,7 @@ func ResetConnAndService(){
 
 func BasMiner() *Contract.BasMiner{
 	if miner==nil{
-		if m,err:=Contract.NewBasMiner(common.HexToAddress(_miner), conn.GetClient());err==nil{
+		if m,err:=Contract.NewBasMiner(common.HexToAddress(MinerAddr), conn.GetClient());err==nil{
 			miner = m
 		}else{
 			logger.Fatal("can't recover miner",err)
