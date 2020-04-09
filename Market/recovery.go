@@ -10,7 +10,7 @@ import (
 var logger, _ = logging.GetLogger("Market")
 var (
 
-	MarketAddr = "0xA32ccce4B7aB28d3Ce40BBa03A2748bCbe4544dB"
+	MarketAddr = "0x327A1F063423342Cdd94a15e0C6A2133cC3EEb12"
 	market     *Contract.BasMarket
 
 	conn = Bas_Ethereum.NewConn()

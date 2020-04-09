@@ -11,7 +11,7 @@ Contract "github.com/BASChain/go-bas/Contracts"
 var logger, _ = logging.GetLogger("Miner")
 
 var (
-	MinerAddr = "0xCAB59645aE535A7b5a4f81d8D17E2fe0d2Cf4687"
+	MinerAddr = "0xCDB7F15d3c80FaA48595F1764Efe416002fFFdc8"
 
 	miner *Contract.BasMiner
 
