@@ -308,6 +308,8 @@ func loopOverWithdraw(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func handleWithdraw(w *Contract.BasMinerWithdraw){
 	Withdraws = append(Withdraws, SimplifiedWithdraw{
+		BlockNumber:w.Raw.BlockNumber,
+		TxIndex:w.Raw.TxIndex,
 		Drawer: w.Drawer,
 		Amount: *w.Amout,
 	})
