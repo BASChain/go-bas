@@ -50,10 +50,15 @@ func (bn2t *BlockNum2Time)Run()  {
 	bn2t.wg.Add(1)
 	defer bn2t.wg.Done()
 
+	bnwait := uint64(0)
 
 	for{
 		select {
 		case bn:=<-bn2t.c:
+			if bn == bnwait{
+				continue
+			}
+			bnwait = bn
 			if !conn.IsGetTimeStamp(bn){
 				go BlockNumnber2TimeStamp(bn)
 			}
