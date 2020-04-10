@@ -12,8 +12,9 @@ var Sync *Bas_Ethereum.SyncHelper = Bas_Ethereum.NewSyncHelper(
 	watchLogic,
 	ResetConnAndService,
 	func() {
+		Settings()
 		go func() {
-			time.Sleep(time.Duration(60) * time.Second)
+			time.Sleep(time.Duration(30) * time.Second)
 			ShowCachedNames()
 		}()
 
