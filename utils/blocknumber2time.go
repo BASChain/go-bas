@@ -54,7 +54,9 @@ func (bn2t *BlockNum2Time)Run()  {
 	for{
 		select {
 		case bn:=<-bn2t.c:
-			go BlockNumnber2TimeStamp(bn)
+			if !conn.IsGetTimeStamp(bn){
+				go BlockNumnber2TimeStamp(bn)
+			}
 		case <-bn2t.quit:
 			return
 		}

@@ -61,6 +61,12 @@ var bLock = &sync.Mutex{}
 func (conn *Conn) GetTimestamp(blockNumber uint64) (uint64,error){
 	return conn._GetTimestamp(blockNumber,0)
 }
+
+func (conn *Conn)IsGetTimeStamp(blockNumber uint64) bool  {
+	_,ok:=blockTimeMapping[blockNumber]
+	return ok
+}
+
 func (conn *Conn)_GetTimestamp(blockNumber uint64, tryTimes int) (uint64,error){
 	if blockTimeMapping[blockNumber] != 0 {
 		return blockTimeMapping[blockNumber],nil
