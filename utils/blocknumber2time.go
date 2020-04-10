@@ -75,8 +75,8 @@ func (bn2t *BlockNum2Time)Stop()  {
 	bn2t.quit <- 0
 
 	bn2t.wg.Wait()
-	close(bn2t.c)
-	//close(bn2t.quit)
+	//close(bn2t.c)
+	close(bn2t.quit)
 }
 
 func (bn2t *BlockNum2Time)Push(blockNumber uint64) error {
