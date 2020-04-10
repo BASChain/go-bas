@@ -17,6 +17,8 @@ type Conn struct {
 	lock *sync.Mutex
 }
 
+
+
 func NewConn() *Conn {
 	return &Conn{
 		Client: nil,
