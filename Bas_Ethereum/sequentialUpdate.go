@@ -1,19 +1,21 @@
 package Bas_Ethereum
 
 func PushQueryThenUpdate(prior chan bool,
-						q func(hash Hash, blockNumber uint64) chan interface{},
-						u func(data interface{}),
+						query func(hash Hash, blockNumber uint64) chan interface{},
+						update func(data interface{}),
 						hash Hash,
 						blockNumber uint64) chan bool{
-						r := q(hash,blockNumber)
+						//query should be in go routine
+						r := query(hash,blockNumber)
 						next := make(chan bool)
 						defer func() {
-						go func() {
-							d := <- r
-							_ = <- prior
-							u(d)
-							next <- true
-						}()
+							go func() {
+								d := <- r
+								//update should be sequential
+								_ = <- prior
+								update(d)
+								next <- true
+							}()
 						}()
 						return next
 }
