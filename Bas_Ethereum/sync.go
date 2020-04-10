@@ -46,3 +46,6 @@ func (sync *SyncHelper) Sync(){
 	sync.SyncGap(0,currentBlock)
 }
 
+func (sync *SyncHelper) ReplaySync(from,to uint64){
+	go sync.SyncGap(from,to)
+}
