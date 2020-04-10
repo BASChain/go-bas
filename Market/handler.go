@@ -6,7 +6,6 @@ import (
 	"github.com/BASChain/go-bas/Notification"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/event"
 	"sync"
 )
 
@@ -35,20 +34,19 @@ func handleSellAdded(d interface{}){
 
 }
 
-func watchSellAdded(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchSellAdded(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketSellAdded)
 	sub,err:=BasMarket().WatchSellAdded(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching sell added")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript sell added runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleSellAdded(log)
 			}
 		}
@@ -79,20 +77,19 @@ func handleSellChanged(d interface{}){
 	logger.Info("sell changed ", echoSellOrder(e.Operator, e.NameHash))
 }
 
-func watchSellChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchSellChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketSellChanged)
 	sub,err:=BasMarket().WatchSellChanged(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching sell changed")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript sell changed runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleSellChanged(log)
 			}
 		}
@@ -120,20 +117,19 @@ func handleSellRemoved(d interface{})  {
 	removeSellOrders(e.Operator, e.NameHash)
 }
 
-func watchSellRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchSellRemove(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketSellRemoved)
 	sub,err:=BasMarket().WatchSellRemoved(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching sell remove")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript sell remove runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleSellRemoved(log)
 			}
 		}
@@ -155,20 +151,19 @@ func loopOverAskAdded(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 	}
 }
 
-func watchAskAdded(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchAskAdded(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketAskAdded)
 	sub,err:=BasMarket().WatchAskAdded(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching ask added")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript ask added runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleAskAdded(log)
 			}
 		}
@@ -211,20 +206,19 @@ func handleAskChanged(d interface{}){
 	logger.Info("ask changed ", echoAskOrder(e.Operator, e.NameHash))
 }
 
-func watchAskChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchAskChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketAskChanged)
 	sub,err:=BasMarket().WatchAskChanged(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching ask changed")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript ask changed runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleAskChanged(log)
 			}
 		}
@@ -252,20 +246,19 @@ func handleAskRemoved(d interface{})  {
 	removeAskOrders(e.Operator, e.NameHash)
 }
 
-func watchAskRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchAskRemove(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketAskRemoved)
 	sub,err:=BasMarket().WatchAskRemoved(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching ask remove")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript ask remove runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleAskRemoved(log)
 			}
 		}
@@ -318,20 +311,19 @@ func handleSoldBySell(d interface{})  {
 		e.Raw.BlockNumber)
 }
 
-func watchSoldBySell(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchSoldBySell(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketSoldBySell)
 	sub,err:=BasMarket().WatchSoldBySell(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching sold by sell")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript sold by sell runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleSoldBySell(log)
 			}
 		}
@@ -373,20 +365,19 @@ func handleSoldByAsk(d interface{})  {
 		e.Raw.BlockNumber)
 }
 
-func watchSoldByAsk(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchSoldByAsk(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMarketSoldByAsk)
 	sub,err:=BasMarket().WatchSoldByAsk(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching sold by ask")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript sold by ask runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				handleSoldByAsk(log)
 			}
 		}

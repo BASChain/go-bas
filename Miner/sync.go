@@ -2,22 +2,18 @@ package Miner
 
 import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
-	"github.com/ethereum/go-ethereum/event"
 	"sync"
 )
 
-var lastSavingPoint = uint64(0)
-var currentSavingPoint = uint64(0)
 
-func moveToNewSavingPoint(blockNumber uint64) bool{
-	if currentSavingPoint == blockNumber {
-		return false
-	}
-	lastSavingPoint = currentSavingPoint;
-	currentSavingPoint = blockNumber;
-	logger.Info("[Miner]  saving point  ", lastSavingPoint, "----->" , currentSavingPoint)
-	return true
-}
+
+var Sync *Bas_Ethereum.SyncHelper = Bas_Ethereum.NewSyncHelper(
+	conn,
+	syncGap,
+	watchLogic,
+	ResetConnAndService,
+	func() {},
+)
 
 func syncGap(from ,to uint64){
 	if from>to {
@@ -38,70 +34,16 @@ func syncGap(from ,to uint64){
 	loopOverEventQueue()
 }
 
-func SyncGapWithNoTrust(blockNumber uint64){
-	if moveToNewSavingPoint(blockNumber){
-		go syncGap(lastSavingPoint+1, blockNumber-1)
-	}
-}
-
-func syncGapToNewest(){
-	moveToNewSavingPoint(conn.GetLastBlockNumber())
-	syncGap(lastSavingPoint,currentSavingPoint)
-}
-
-var subs []event.Subscription
-
-
-func watch(lastBlockNumber uint64){
+func watchLogic(lastBlockNumber uint64){
 	var waitGroup sync.WaitGroup
-
 	opts := Bas_Ethereum.GetWatchOpts(lastBlockNumber)
-	subs = []event.Subscription{}
-
 	waitGroup.Add(6)
-
-	go watchAllocationChanged(opts,&subs,&waitGroup)
-	go watchMinerAdd(opts,&subs,&waitGroup)
-	go watchMinerRemove(opts,&subs,&waitGroup)
-	go watchMinerReplace(opts,&subs,&waitGroup)
-	go watchReceipt(opts,&subs,&waitGroup)
-	go watchWithdraw(opts,&subs,&waitGroup)
+	go watchAllocationChanged(opts,&waitGroup)
+	go watchMinerAdd(opts,&waitGroup)
+	go watchMinerRemove(opts,&waitGroup)
+	go watchMinerReplace(opts,&waitGroup)
+	go watchReceipt(opts,&waitGroup)
+	go watchWithdraw(opts,&waitGroup)
 
 	waitGroup.Wait()
-
-	ReWatch()
-}
-
-func unSubscriptAll(){
-	for _ ,s:= range subs {
-		s.Unsubscribe()
-	}
-	logger.Info("Unsubscribed all event watches")
-}
-
-func ReWatch(){
-	logger.Info("ReSyncing")
-	unSubscriptAll()
-	ResetConnAndService()
-	watch(currentSavingPoint)
-}
-
-func ShowSysParams(){
-	_,rcd:=SettingRecords.GetClosest(currentSavingPoint,0)
-	st:=rcd.(Setting)
-	logger.Info("allocations root: ", st.Allocation)
-	for _,m := range st.Miners {
-		logger.Info("miner -->" ,m.String())
-	}
-}
-
-var firstStart = true;
-
-func Sync(){
-	syncGapToNewest()
-	if firstStart {
-		ShowSysParams()
-		firstStart = false
-	}
-	watch(currentSavingPoint)
 }

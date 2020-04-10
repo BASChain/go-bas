@@ -3,7 +3,6 @@ package Miner
 import (
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/event"
 	"sync"
 )
 
@@ -78,13 +77,13 @@ func handleAllocation(d interface{})  {
 
 
 
-func watchAllocationChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchAllocationChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMinerAllocationChanged)
 	sub,err:=BasMiner().WatchAllocationChanged(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching allocation changed")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
@@ -124,13 +123,13 @@ func handleMinerAdd(d interface{}) {
 	logger.Info("[IMPORTANT] miner added : ", e.Miner.String())
 }
 
-func watchMinerAdd(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchMinerAdd(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMinerMinerAdd)
 	sub,err:=BasMiner().WatchMinerAdd(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching miner add")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
@@ -177,13 +176,13 @@ func handleMinerRemove(d interface{}) {
 	logger.Error("[IMPORTANT] miner removed not found! miner : ", e.Miner.String())
 }
 
-func watchMinerRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchMinerRemove(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMinerMinerRemove)
 	sub,err:=BasMiner().WatchMinerRemove(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching miner remove")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
@@ -230,13 +229,13 @@ func handleMinerReplace(d interface{}) {
 	logger.Error("[IMPORTANT] miner replace not found! miner : ", e.OldMiner.String())
 }
 
-func watchMinerReplace(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchMinerReplace(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMinerMinerReplace)
 	sub,err:=BasMiner().WatchMinerReplace(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching miner replace")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
@@ -273,13 +272,13 @@ func handleReceipt(r *Contract.BasMinerReceipt){
 	})
 }
 
-func watchReceipt(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchReceipt(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMinerReceipt)
 	sub,err:=BasMiner().WatchReceipt(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching miner receipt")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
@@ -315,13 +314,13 @@ func handleWithdraw(w *Contract.BasMinerWithdraw){
 	})
 }
 
-func watchWithdraw(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchWithdraw(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasMinerWithdraw)
 	sub,err:=BasMiner().WatchWithdraw(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching miner withdraw")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
