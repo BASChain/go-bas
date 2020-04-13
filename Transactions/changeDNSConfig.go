@@ -1,10 +1,10 @@
 package Transactions
 
 import (
-	"context"
-	"github.com/BASChain/go-bas/Bas_Ethereum"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/accounts/keystore"
+"context"
+"github.com/BASChain/go-bas/Bas_Ethereum"
+"github.com/ethereum/go-ethereum/accounts/abi/bind"
+"github.com/ethereum/go-ethereum/accounts/keystore"
 )
 
 type  DNSRecord struct {
@@ -38,7 +38,7 @@ func ChangeDNSInfo(key *keystore.Key,nameHash Bas_Ethereum.Hash,rcd DNSRecord) e
 		rcd.Bca,
 		rcd.OpData,
 		rcd.AliasName,
-		)
+	)
 	if err!=nil{
 		logger.Error("change DNS info, pack transaction error : ",err)
 		return err
