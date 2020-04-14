@@ -21,6 +21,7 @@ var Assets = make(map[common.Address][]Bas_Ethereum.Hash)
 var PayRecords = make(map[Bas_Ethereum.Hash]Receipt)
 var TransferRecords = make(map[Bas_Ethereum.Hash][]TransferRecord)
 
+
 type DomainRecord struct{
 	Name          []byte
 	Expire        big.Int
@@ -55,8 +56,21 @@ type TransferRecord struct{
 	To common.Address
 }
 
+func (dr *DomainRecord)Clone() *DomainRecord  {
+	var d DomainRecord
 
+	d = *dr
 
+	return &d
+}
+
+func (pay *Receipt)Clone() *Receipt  {
+	var p Receipt
+
+	p = *pay
+
+	return &p
+}
 
 func showMemory(hash Bas_Ethereum.Hash){
 	if DebugFlag{
@@ -70,6 +84,14 @@ func MemLock()  {
 
 func MemUnlock()  {
 	lock.Unlock()
+}
+
+func PayLock()()  {
+	pLock.Lock()
+}
+
+func PayUnLock()  {
+	pLock.Unlock()
 }
 
 func (dr *DomainRecord)GetIPv4() uint32  {
