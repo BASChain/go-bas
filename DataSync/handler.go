@@ -3,9 +3,9 @@ package DataSync
 import (
 	"encoding/hex"
 	Contract "github.com/BASChain/go-bas/Contracts"
+	"github.com/BASChain/go-bas/utils"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"sync"
-	"github.com/BASChain/go-bas/utils"
 )
 
 
@@ -286,6 +286,13 @@ func loopOverTransfer(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	if err==nil{
 		for it.Next() {
 			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
+			TransferRecords = append(TransferRecords, TransferRecord{
+				BlockNumber: it.Event.Raw.BlockNumber,
+				TxIndex:     it.Event.Raw.TxIndex,
+				NameHash:    it.Event.NameHash,
+				From:        it.Event.From,
+				To:          it.Event.To,
+			})
 			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
@@ -308,6 +315,13 @@ func watchTransfer(opts *bind.WatchOpts,wg *sync.WaitGroup){
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
+				TransferRecords = append(TransferRecords, TransferRecord{
+					BlockNumber: log.Raw.BlockNumber,
+					TxIndex:     log.Raw.TxIndex,
+					NameHash:    log.NameHash,
+					From:        log.From,
+					To:          log.To,
+				})
 				logger.Info("detected transfer : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
@@ -323,6 +337,13 @@ func loopOverTransferFrom(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	if err==nil{
 		for it.Next() {
 			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
+			TransferRecords = append(TransferRecords, TransferRecord{
+				BlockNumber: it.Event.Raw.BlockNumber,
+				TxIndex:     it.Event.Raw.TxIndex,
+				NameHash:    it.Event.NameHash,
+				From:        it.Event.From,
+				To:          it.Event.To,
+			})
 			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
@@ -345,6 +366,13 @@ func watchTransferFrom(opts *bind.WatchOpts,wg *sync.WaitGroup){
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
+				TransferRecords = append(TransferRecords, TransferRecord{
+					BlockNumber: log.Raw.BlockNumber,
+					TxIndex:     log.Raw.TxIndex,
+					NameHash:    log.NameHash,
+					From:        log.From,
+					To:          log.To,
+				})
 				logger.Info("detected transferFrom : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
