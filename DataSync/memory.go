@@ -53,10 +53,6 @@ func showMemory(hash Bas_Ethereum.Hash){
 	}
 }
 
-func SetLastSavingPoint(bn uint64){
-	lastSavingPoint = bn
-}
-
 func MemLock()  {
 	lock.Lock()
 }

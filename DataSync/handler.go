@@ -4,7 +4,6 @@ import (
 	"encoding/hex"
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/event"
 	"sync"
 	"github.com/BASChain/go-bas/utils"
 )
@@ -24,22 +23,21 @@ func loopOverRootChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchRootChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchRootChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasAssetRootChanged)
 	sub,err:=BasAsset().WatchRootChanged(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching root changed")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript root changed runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryRoot(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				updateByQueryRoot(log.NameHash,currentSavingPoint)
 				logger.Info("detected root changed : ",
 					string(Records[log.NameHash].Name),
 				)
@@ -63,22 +61,21 @@ func loopOverSubChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchSubChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchSubChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasAssetSubChanged)
 	sub,err:=BasAsset().WatchSubChanged(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching sub changed")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript sub changed runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQuerySub(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				updateByQuerySub(log.NameHash,currentSavingPoint)
 				logger.Info("detected sub changed : ",
 					string(Records[log.NameHash].Name),
 				)
@@ -102,22 +99,21 @@ func loopOverDNSChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchDNSChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchDNSChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasDNSDNSChanged)
 	sub,err:=BasDNS().WatchDNSChanged(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching dns changed")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript dns changed runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryDNS(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				updateByQueryDNS(log.NameHash,currentSavingPoint)
 				logger.Info("detected dns changed : ",
 					string(Records[log.NameHash].Name),
 				)
@@ -145,22 +141,21 @@ func loopOverAdd(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchAdd(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchAdd(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipAdd)
 	sub,err:=BasOwnership().WatchAdd(opts,logs)
+	defer sub.Unsubscribe()
 	defer wg.Done()
 	if err==nil{
 		logger.Info("watching add")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript add runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected add : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "owner : ", log.Owner.String())
 			}
@@ -186,22 +181,21 @@ func loopOverUpdate(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchUpdate(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchUpdate(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipUpdate)
 	sub,err:=BasOwnership().WatchUpdate(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching update")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript update runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected update : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "owner : ", log.Owner.String())
 			}
@@ -224,22 +218,21 @@ func loopOverExtend(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchExtend(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchExtend(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipExtend)
 	sub,err:=BasOwnership().WatchExtend(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching extend")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript extend runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected extend : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]))
 			}
@@ -263,22 +256,21 @@ func loopOverTakeover(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchTakeover(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchTakeover(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipTakeover)
 	sub,err:=BasOwnership().WatchTakeover(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching takeover")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript takeover runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected takeover : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
@@ -301,22 +293,21 @@ func loopOverTransfer(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchTransfer(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchTransfer(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipTransfer)
 	sub,err:=BasOwnership().WatchTransfer(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching transfer")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript transfer runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected transfer : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
@@ -339,22 +330,21 @@ func loopOverTransferFrom(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchTransferFrom(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchTransferFrom(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipTransferFrom)
 	sub,err:=BasOwnership().WatchTransferFrom(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching transferFrom")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript transferFrom runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected transferFrom : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
@@ -377,22 +367,21 @@ func loopOverRemove(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchRemove(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOwnershipRemove)
 	sub,err:=BasOwnership().WatchRemove(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching remove")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript remove runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
+				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				updateByQueryOwnership(log.NameHash,currentSavingPoint)
 				logger.Info("detected remove : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]))
 			}
@@ -421,20 +410,19 @@ func loopOverPaid(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchPaid(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchPaid(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOANNPaid)
 	sub,err:=BasOANN().WatchPaid(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching paid")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript paid runtime error", e)
 				return
 			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				updatePaid(Receipt{
 					Payer:  log.Payer,

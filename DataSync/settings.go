@@ -4,7 +4,6 @@ import (
 	"github.com/BASChain/go-bas/Bas_Ethereum"
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/event"
 	"math/big"
 	"regexp"
 	"sync"
@@ -67,20 +66,19 @@ func loopOverSettingChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	}
 }
 
-func watchSettingChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitGroup){
+func watchSettingChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 	logs := make(chan *Contract.BasOANNSettingChanged)
 	sub,err:=BasOANN().WatchSettingChanged(opts,logs)
 	defer wg.Done()
+	defer sub.Unsubscribe()
 	if err==nil{
 		logger.Info("watching setting changed")
-		*subs = append(*subs, sub)
 		for {
 			select {
 			case e :=<-sub.Err():
 				logger.Error("subscript setting changed runtime error", e)
 				return
-			case log:= <-logs:
-				SyncGapWithNoTrust(log.Raw.BlockNumber)
+			case  <-logs:
 				Settings()
 				logger.Info("setting changed")
 			}
