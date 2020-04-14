@@ -8,10 +8,10 @@ import (
 )
 
 func StartService() {
-	go DataSync.Sync()
-	go Market.Sync()
+	go DataSync.Sync.Sync()
+	go Market.Sync.Sync()
 
-	go Miner.Sync()
+	go Miner.Sync.Sync()
 
 	utils.GetBlockNum2Time().Run()
 

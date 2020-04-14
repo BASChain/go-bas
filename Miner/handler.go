@@ -5,13 +5,23 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"sync"
 	"github.com/BASChain/go-bas/utils"
+
 )
 
 const (
-	AllocationRoot uint8 = 0
-	AllocationSub uint8 = 1
-	AllocationSelfSub uint8 = 2
-	AllocationCustomedSub uint8 = 3
+	AllocationRoot uint8 = iota
+	AllocationSub
+	AllocationSelfSub
+	AllocationCustomedSub
+	AllocationMax
+)
+
+const(
+	ToAdmin int = iota
+	ToBurn
+	ToMiner
+	ToRoot
+	ToMax
 )
 
 
@@ -48,30 +58,17 @@ func handleAllocation(d interface{})  {
 	blockNumber := alc.Raw.BlockNumber
 	index := alc.Raw.TxIndex
 	rcd := getRecord(blockNumber,index)
-	switch alc.AllocateType {
-	case AllocationRoot:
-		rcd.Allocation[0] = *alc.ToAdmin
-		rcd.Allocation[1] = *alc.ToBurn
-		rcd.Allocation[2] = *alc.ToMiner
-	case AllocationSub:
-		rcd.Allocation[3] = *alc.ToAdmin
-		rcd.Allocation[4] = *alc.ToBurn
-		rcd.Allocation[5] = *alc.ToMiner
-		rcd.Allocation[6] = *alc.ToRoot
-	case AllocationSelfSub:
-		rcd.Allocation[7] = *alc.ToAdmin
-		rcd.Allocation[8] = *alc.ToBurn
-		rcd.Allocation[9] = *alc.ToMiner
-		rcd.Allocation[10] = *alc.ToRoot
-	case AllocationCustomedSub:
-		rcd.Allocation[11] = *alc.ToAdmin
-		rcd.Allocation[12] = *alc.ToBurn
-		rcd.Allocation[13] = *alc.ToMiner
-		rcd.Allocation[14] = *alc.ToRoot
-	default:
+
+	if alc.AllocateType < AllocationMax{
+		rcd.Allocation[int(alc.AllocateType)][ToAdmin] = *alc.ToAdmin
+		rcd.Allocation[int(alc.AllocateType)][ToBurn] = *alc.ToBurn
+		rcd.Allocation[int(alc.AllocateType)][ToMiner] = *alc.ToMiner
+		rcd.Allocation[int(alc.AllocateType)][ToRoot] = *alc.ToRoot
+	}else{
 		logger.Error("other allocate type :", alc.AllocateType)
 		return
 	}
+
 	logger.Info("[IMPORTANT] handle allocation change, type : ", alc.AllocateType,
 		" {", (*alc.ToAdmin).String(), (*alc.ToBurn).String(), (*alc.ToMiner).String(), (*alc.ToRoot).String(), "}" )
 	SettingRecords.Insert(blockNumber,index,rcd)

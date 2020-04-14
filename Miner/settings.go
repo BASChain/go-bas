@@ -28,7 +28,7 @@ import (
 14 CustomedSubSetting.ToRootOwner
 */
 type Setting struct {
-	Allocation [15]big.Int
+	Allocation [AllocationMax][ToMax]big.Int
 	Miners []common.Address
 }
 

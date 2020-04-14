@@ -47,6 +47,23 @@ type Receipt struct {
 	CommitBlock uint64
 }
 
+func (dr *DomainRecord)Clone() *DomainRecord  {
+	var d DomainRecord
+
+	d = *dr
+
+	return &d
+}
+
+func (pay *Receipt)Clone() *Receipt  {
+	var p Receipt
+
+	p = *pay
+
+	return &p
+}
+
+
 func showMemory(hash Bas_Ethereum.Hash){
 	if DebugFlag{
 		logger.Info(string(Records[hash].Name),"0x"+hex.EncodeToString(hash[:]))
@@ -59,6 +76,14 @@ func MemLock()  {
 
 func MemUnlock()  {
 	lock.Unlock()
+}
+
+func PayLock()()  {
+	pLock.Lock()
+}
+
+func PayUnLock()  {
+	pLock.Unlock()
 }
 
 func (dr *DomainRecord)GetIPv4() uint32  {
