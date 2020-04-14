@@ -19,7 +19,7 @@ var pLock = &sync.Mutex{}
 var Records = make(map[Bas_Ethereum.Hash]*DomainRecord)
 var Assets = make(map[common.Address][]Bas_Ethereum.Hash)
 var PayRecords = make(map[Bas_Ethereum.Hash]Receipt)
-
+var TransferRecords = []TransferRecord{}
 
 type DomainRecord struct{
 	Name          []byte
@@ -47,6 +47,14 @@ type Receipt struct {
 	CommitBlock uint64
 }
 
+type TransferRecord struct{
+	BlockNumber uint64
+	TxIndex       uint
+	NameHash Bas_Ethereum.Hash
+	From common.Address
+	To common.Address
+}
+
 func (dr *DomainRecord)Clone() *DomainRecord  {
 	var d DomainRecord
 
@@ -62,7 +70,6 @@ func (pay *Receipt)Clone() *Receipt  {
 
 	return &p
 }
-
 
 func showMemory(hash Bas_Ethereum.Hash){
 	if DebugFlag{
