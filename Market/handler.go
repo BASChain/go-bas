@@ -7,6 +7,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
 	"sync"
+	"github.com/BASChain/go-bas/utils"
 )
 
 
@@ -15,6 +16,7 @@ func loopOverSellAdded(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 	it,err:=BasMarket().FilterSellAdded(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"SellAdded",
@@ -47,6 +49,7 @@ func watchSellAdded(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				logger.Error("subscript sell added runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleSellAdded(log)
 			}
 		}
@@ -60,6 +63,7 @@ func loopOverSellChanged(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 	it,err:=BasMarket().FilterSellChanged(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"SellChanged",
@@ -90,6 +94,7 @@ func watchSellChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				logger.Error("subscript sell changed runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleSellChanged(log)
 			}
 		}
@@ -103,6 +108,7 @@ func loopOverSellRemoved(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 	it,err:=BasMarket().FilterSellRemoved(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"SellRemoved",
@@ -130,6 +136,7 @@ func watchSellRemove(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				logger.Error("subscript sell remove runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleSellRemoved(log)
 			}
 		}
@@ -143,6 +150,7 @@ func loopOverAskAdded(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 	it,err:=BasMarket().FilterAskAdded(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"AskAdded",
@@ -164,6 +172,7 @@ func watchAskAdded(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				logger.Error("subscript ask added runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleAskAdded(log)
 			}
 		}
@@ -188,6 +197,7 @@ func loopOverAskChanged(opts *bind.FilterOpts,wg *sync.WaitGroup) {
 	it,err:=BasMarket().FilterAskChanged(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"AskChanged",
@@ -219,6 +229,7 @@ func watchAskChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				logger.Error("subscript ask changed runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleAskChanged(log)
 			}
 		}
@@ -232,6 +243,7 @@ func loopOverAskRemoved(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 	it,err:=BasMarket().FilterAskRemoved(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"AskRemoved",
@@ -259,6 +271,7 @@ func watchAskRemove(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				logger.Error("subscript ask remove runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleAskRemoved(log)
 			}
 		}
@@ -272,6 +285,7 @@ func loopOverSoldBySell(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 	it,err:=BasMarket().FilterSoldBySell(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"SoldBySell",
@@ -324,6 +338,7 @@ func watchSoldBySell(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				logger.Error("subscript sold by sell runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleSoldBySell(log)
 			}
 		}
@@ -337,6 +352,7 @@ func loopOverSoldByAsk(opts *bind.FilterOpts,wg *sync.WaitGroup)  {
 	it,err:=BasMarket().FilterSoldByAsk(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"SoldByAsk",
@@ -378,6 +394,7 @@ func watchSoldByAsk(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				logger.Error("subscript sold by ask runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleSoldByAsk(log)
 			}
 		}

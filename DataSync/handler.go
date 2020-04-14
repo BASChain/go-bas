@@ -5,6 +5,7 @@ import (
 	Contract "github.com/BASChain/go-bas/Contracts"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"sync"
+	"github.com/BASChain/go-bas/utils"
 )
 
 
@@ -14,6 +15,7 @@ func loopOverRootChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasAsset().FilterRootChanged(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			insertQueue(it.Event.NameHash,queueRoot)
 		}
 	}else{
@@ -35,6 +37,7 @@ func watchRootChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				return
 			case log:= <-logs:
 				updateByQueryRoot(log.NameHash,log.Raw.BlockNumber)
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				logger.Info("detected root changed : ",
 					string(Records[log.NameHash].Name),
 				)
@@ -50,6 +53,7 @@ func loopOverSubChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasAsset().FilterSubChanged(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			insertQueue(it.Event.NameHash,queueSub)
 		}
 	}else{
@@ -71,6 +75,7 @@ func watchSubChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				return
 			case log:= <-logs:
 				updateByQuerySub(log.NameHash,log.Raw.BlockNumber)
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				logger.Info("detected sub changed : ",
 					string(Records[log.NameHash].Name),
 				)
@@ -86,6 +91,7 @@ func loopOverDNSChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasDNS().FilterDNSChanged(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			insertQueue(it.Event.NameHash,queueDns)
 		}
 	}else{
@@ -107,6 +113,7 @@ func watchDNSChanged(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				return
 			case log:= <-logs:
 				updateByQueryDNS(log.NameHash,log.Raw.BlockNumber)
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				logger.Info("detected dns changed : ",
 					string(Records[log.NameHash].Name),
 				)
@@ -122,11 +129,12 @@ func loopOverAdd(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasOwnership().FilterAdd(opts)
 	if err==nil{
 		for it.Next() {
-			insertQueue(it.Event.NameHash,queueOwnership)
 			//logger.Info("!!!add:" , "0x"+hex.EncodeToString(it.Event.NameHash[:]), it.Event.Owner.String())
 			if firstAppearInBlock[it.Event.NameHash] == 0 || firstAppearInBlock[it.Event.NameHash] > it.Event.Raw.BlockNumber{
 				firstAppearInBlock[it.Event.NameHash] = it.Event.Raw.BlockNumber
 			}
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
+			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
 		logger.Error("loop over add err :" , err)
@@ -147,6 +155,7 @@ func watchAdd(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				return
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				logger.Info("detected add : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "owner : ", log.Owner.String())
 			}
@@ -161,10 +170,11 @@ func loopOverUpdate(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasOwnership().FilterUpdate(opts)
 	if err==nil{
 		for it.Next() {
-			insertQueue(it.Event.NameHash,queueOwnership)
 			if firstAppearInBlock[it.Event.NameHash] == 0 || firstAppearInBlock[it.Event.NameHash] > it.Event.Raw.BlockNumber{
 				firstAppearInBlock[it.Event.NameHash] = it.Event.Raw.BlockNumber
 			}
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
+			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
 		logger.Error("loop over update err :" , err)
@@ -185,6 +195,7 @@ func watchUpdate(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				return
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				logger.Info("detected update : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "owner : ", log.Owner.String())
 			}
@@ -199,6 +210,7 @@ func loopOverExtend(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasOwnership().FilterExtend(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
@@ -220,6 +232,7 @@ func watchExtend(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				return
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				logger.Info("detected extend : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]))
 			}
@@ -235,6 +248,7 @@ func loopOverTakeover(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasOwnership().FilterTakeover(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
@@ -256,6 +270,7 @@ func watchTakeover(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				return
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				logger.Info("detected takeover : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
@@ -270,6 +285,7 @@ func loopOverTransfer(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasOwnership().FilterTransfer(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
@@ -291,6 +307,7 @@ func watchTransfer(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				return
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				logger.Info("detected transfer : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
@@ -305,6 +322,7 @@ func loopOverTransferFrom(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasOwnership().FilterTransferFrom(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
@@ -326,6 +344,7 @@ func watchTransferFrom(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				return
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				logger.Info("detected transferFrom : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
@@ -340,6 +359,7 @@ func loopOverRemove(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasOwnership().FilterRemove(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
@@ -361,6 +381,7 @@ func watchRemove(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				return
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				logger.Info("detected remove : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]))
 			}
@@ -375,6 +396,7 @@ func loopOverPaid(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasOANN().FilterPaid(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			updatePaid(Receipt{
 				Payer:  it.Event.Payer,
 				Name:   it.Event.Name,
@@ -401,6 +423,7 @@ func watchPaid(opts *bind.WatchOpts,wg *sync.WaitGroup){
 				logger.Error("subscript paid runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				updatePaid(Receipt{
 					Payer:  log.Payer,
 					Name:   log.Name,
