@@ -19,7 +19,7 @@ var pLock = &sync.Mutex{}
 var Records = make(map[Bas_Ethereum.Hash]*DomainRecord)
 var Assets = make(map[common.Address][]Bas_Ethereum.Hash)
 var PayRecords = make(map[Bas_Ethereum.Hash]Receipt)
-var TransferRecords = []TransferRecord{}
+var TransferRecords = make(map[Bas_Ethereum.Hash][]TransferRecord)
 
 type DomainRecord struct{
 	Name          []byte

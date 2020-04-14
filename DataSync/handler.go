@@ -286,7 +286,10 @@ func loopOverTransfer(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	if err==nil{
 		for it.Next() {
 			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
-			TransferRecords = append(TransferRecords, TransferRecord{
+			if TransferRecords[it.Event.NameHash]==nil{
+				TransferRecords[it.Event.NameHash] = []TransferRecord{}
+			}
+			TransferRecords[it.Event.NameHash] = append(TransferRecords[it.Event.NameHash], TransferRecord{
 				BlockNumber: it.Event.Raw.BlockNumber,
 				TxIndex:     it.Event.Raw.TxIndex,
 				NameHash:    it.Event.NameHash,
@@ -315,7 +318,10 @@ func watchTransfer(opts *bind.WatchOpts,wg *sync.WaitGroup){
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				TransferRecords = append(TransferRecords, TransferRecord{
+				if TransferRecords[log.NameHash]==nil{
+					TransferRecords[log.NameHash] = []TransferRecord{}
+				}
+				TransferRecords[log.NameHash] = append(TransferRecords[log.NameHash], TransferRecord{
 					BlockNumber: log.Raw.BlockNumber,
 					TxIndex:     log.Raw.TxIndex,
 					NameHash:    log.NameHash,
@@ -337,7 +343,10 @@ func loopOverTransferFrom(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	if err==nil{
 		for it.Next() {
 			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
-			TransferRecords = append(TransferRecords, TransferRecord{
+			if TransferRecords[it.Event.NameHash]==nil{
+				TransferRecords[it.Event.NameHash] = []TransferRecord{}
+			}
+			TransferRecords[it.Event.NameHash] = append(TransferRecords[it.Event.NameHash], TransferRecord{
 				BlockNumber: it.Event.Raw.BlockNumber,
 				TxIndex:     it.Event.Raw.TxIndex,
 				NameHash:    it.Event.NameHash,
@@ -366,7 +375,10 @@ func watchTransferFrom(opts *bind.WatchOpts,wg *sync.WaitGroup){
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				TransferRecords = append(TransferRecords, TransferRecord{
+				if TransferRecords[log.NameHash]==nil{
+					TransferRecords[log.NameHash] = []TransferRecord{}
+				}
+				TransferRecords[log.NameHash] = append(TransferRecords[log.NameHash], TransferRecord{
 					BlockNumber: log.Raw.BlockNumber,
 					TxIndex:     log.Raw.TxIndex,
 					NameHash:    log.NameHash,
