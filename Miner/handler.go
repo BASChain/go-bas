@@ -5,6 +5,7 @@ import (
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/event"
 	"sync"
+	"github.com/BASChain/go-bas/utils"
 )
 
 const (
@@ -20,6 +21,7 @@ func loopOverAllocationChanged(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasMiner().FilterAllocationChanged(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"AllocationChanged",
@@ -91,6 +93,7 @@ func watchAllocationChanged(opts *bind.WatchOpts,subs *[]event.Subscription,wg *
 				logger.Error("subscript allocation changed runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleAllocation(log)
 			}
 		}
@@ -104,6 +107,7 @@ func loopOverMinerAdd(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasMiner().FilterMinerAdd(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"MinerAdd",
@@ -137,6 +141,7 @@ func watchMinerAdd(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 				logger.Error("subscript miner add runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleMinerAdd(log)
 			}
 		}
@@ -150,6 +155,7 @@ func loopOverMinerRemove(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasMiner().FilterMinerRemove(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"MinerRemove",
@@ -190,6 +196,7 @@ func watchMinerRemove(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.W
 				logger.Error("subscript miner remove runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleMinerRemove(log)
 			}
 		}
@@ -203,6 +210,7 @@ func loopOverMinerReplace(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasMiner().FilterMinerReplace(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			eq.Insert(it.Event.Raw.BlockNumber,
 				it.Event.Raw.TxIndex,
 				"MinerReplace",
@@ -243,6 +251,7 @@ func watchMinerReplace(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.
 				logger.Error("subscript miner replace runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleMinerReplace(log)
 			}
 		}
@@ -256,6 +265,7 @@ func loopOverReceipt(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasMiner().FilterReceipt(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			handleReceipt(it.Event)
 		}
 	}else{
@@ -286,6 +296,7 @@ func watchReceipt(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.WaitG
 				logger.Error("subscript miner receipt runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleReceipt(log)
 			}
 		}
@@ -299,6 +310,7 @@ func loopOverWithdraw(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	it,err:=BasMiner().FilterWithdraw(opts)
 	if err==nil{
 		for it.Next() {
+			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
 			handleWithdraw(it.Event)
 		}
 	}else{
@@ -308,6 +320,8 @@ func loopOverWithdraw(opts *bind.FilterOpts,wg *sync.WaitGroup){
 
 func handleWithdraw(w *Contract.BasMinerWithdraw){
 	Withdraws = append(Withdraws, SimplifiedWithdraw{
+		BlockNumber:w.Raw.BlockNumber,
+		TxIndex:w.Raw.TxIndex,
 		Drawer: w.Drawer,
 		Amount: *w.Amout,
 	})
@@ -326,6 +340,7 @@ func watchWithdraw(opts *bind.WatchOpts,subs *[]event.Subscription,wg *sync.Wait
 				logger.Error("subscript miner withdraw runtime error", e)
 				return
 			case log:= <-logs:
+				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
 				handleWithdraw(log)
 			}
 		}

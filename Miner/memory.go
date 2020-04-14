@@ -20,6 +20,8 @@ type SimplifiedReceipt struct {
 }
 
 type SimplifiedWithdraw struct {
+	BlockNumber   uint64
+	TxIndex       uint
 	Drawer common.Address
 	Amount big.Int
 }
