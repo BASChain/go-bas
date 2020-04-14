@@ -55,7 +55,7 @@ type TransferRecord struct{
 	To common.Address
 }
 
-func (dr *DomainRecord)Clone() *DomainRecord  {
+func (dr *DomainRecord)Clone() *DomainRecord {
 	var d DomainRecord
 
 	d = *dr
