@@ -33,6 +33,7 @@ func (sync *SyncHelper) Watch(lastBlockNumber uint64){
 	sync.WatchLogic(lastBlockNumber)
 	sync.ResetConn()
 	currentBlock := sync.Connection.GetLastBlockNumber()
+	logger.Info("connection dropped by remote peer, re-watch")
 	sync.Watch(currentBlock)
 }
 
