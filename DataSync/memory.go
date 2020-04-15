@@ -9,18 +9,20 @@ import (
 	"math/big"
 	"net"
 	"sync"
+	"github.com/kprc/nbsnetwork/common/list"
 )
 
 var DebugFlag = true
 
 var lock = &sync.Mutex{}
 var pLock = &sync.Mutex{}
+var tlock = &sync.Mutex{}
 
 var Records = make(map[Bas_Ethereum.Hash]*DomainRecord)
 var Assets = make(map[common.Address][]Bas_Ethereum.Hash)
 var PayRecords = make(map[Bas_Ethereum.Hash]Receipt)
-var TransferRecords = make(map[Bas_Ethereum.Hash][]TransferRecord)
 
+var TransferRecords = make(map[Bas_Ethereum.Hash]*TransferRecordHead)
 
 type DomainRecord struct{
 	Name          []byte
@@ -54,6 +56,71 @@ type TransferRecord struct{
 	NameHash Bas_Ethereum.Hash
 	From common.Address
 	To common.Address
+}
+
+type TransferRecordHead struct {
+	l list.List
+	lock sync.Mutex
+}
+
+func TLock()  {
+	tlock.Lock()
+}
+
+func TUnLock()  {
+	tlock.Unlock()
+}
+
+func (trh *TransferRecordHead)GetList() list.List  {
+	return trh.l
+}
+
+func (trh *TransferRecordHead)Lock()  {
+	trh.lock.Lock()
+}
+
+func (trh *TransferRecordHead)UnLock()  {
+	trh.lock.Unlock()
+}
+
+func transferRecordCmd(v1,v2 interface{}) int {
+	t1,t2:=v1.(*TransferRecord),v2.(*TransferRecord)
+
+	if t1.BlockNumber == t2.BlockNumber && t1.TxIndex == t2.TxIndex{
+		return 0
+	}
+
+	return 1
+}
+
+func transferRecordSort(v1,v2 interface{}) int   {
+	t1,t2:=v1.(*TransferRecord),v2.(*TransferRecord)
+
+	if t1.BlockNumber < t2.BlockNumber{
+		return 1
+	}else if t1.BlockNumber == t2.BlockNumber{
+		if t1.TxIndex < t2.TxIndex{
+			return 1
+		}
+	}
+
+	return -1
+
+}
+
+
+func NewTransferRecordList() *TransferRecordHead {
+
+	trh:=&TransferRecordHead{}
+
+	l:=list.NewList(transferRecordCmd)
+	l.SetSortFunc(transferRecordSort)
+
+	trh.l = l
+
+
+
+	return trh
 }
 
 func (dr *DomainRecord)Clone() *DomainRecord {

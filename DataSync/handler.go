@@ -286,16 +286,29 @@ func loopOverTransfer(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	if err==nil{
 		for it.Next() {
 			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
-			if TransferRecords[it.Event.NameHash]==nil{
-				TransferRecords[it.Event.NameHash] = []TransferRecord{}
+
+			tlock.Lock()
+
+			h,ok:=TransferRecords[it.Event.NameHash]
+			if !ok{
+				h = NewTransferRecordList()
+				TransferRecords[it.Event.NameHash] = h
 			}
-			TransferRecords[it.Event.NameHash] = append(TransferRecords[it.Event.NameHash], TransferRecord{
-				BlockNumber: it.Event.Raw.BlockNumber,
-				TxIndex:     it.Event.Raw.TxIndex,
-				NameHash:    it.Event.NameHash,
-				From:        it.Event.From,
-				To:          it.Event.To,
-			})
+
+			tlock.Unlock()
+
+			tr := &TransferRecord{
+					BlockNumber: it.Event.Raw.BlockNumber,
+					TxIndex:     it.Event.Raw.TxIndex,
+					NameHash:    it.Event.NameHash,
+					From:        it.Event.From,
+					To:          it.Event.To,
+				}
+			h.lock.Lock()
+			h.l.AddValueOrder(tr)
+			h.lock.Unlock()
+
+
 			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
@@ -318,16 +331,28 @@ func watchTransfer(opts *bind.WatchOpts,wg *sync.WaitGroup){
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				if TransferRecords[log.NameHash]==nil{
-					TransferRecords[log.NameHash] = []TransferRecord{}
+
+				tlock.Lock()
+
+				h,ok:=TransferRecords[log.NameHash]
+				if !ok{
+					h = NewTransferRecordList()
+					TransferRecords[log.NameHash] = h
 				}
-				TransferRecords[log.NameHash] = append(TransferRecords[log.NameHash], TransferRecord{
+
+				tlock.Unlock()
+
+				tr := &TransferRecord{
 					BlockNumber: log.Raw.BlockNumber,
 					TxIndex:     log.Raw.TxIndex,
 					NameHash:    log.NameHash,
 					From:        log.From,
 					To:          log.To,
-				})
+				}
+				h.lock.Lock()
+				h.l.AddValueOrder(tr)
+				h.lock.Unlock()
+
 				logger.Info("detected transfer : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
@@ -343,16 +368,26 @@ func loopOverTransferFrom(opts *bind.FilterOpts,wg *sync.WaitGroup){
 	if err==nil{
 		for it.Next() {
 			utils.GetBlockNum2Time().Push(it.Event.Raw.BlockNumber)
-			if TransferRecords[it.Event.NameHash]==nil{
-				TransferRecords[it.Event.NameHash] = []TransferRecord{}
+			tlock.Lock()
+
+			h,ok:=TransferRecords[it.Event.NameHash]
+			if !ok{
+				h = NewTransferRecordList()
+				TransferRecords[it.Event.NameHash] = h
 			}
-			TransferRecords[it.Event.NameHash] = append(TransferRecords[it.Event.NameHash], TransferRecord{
+
+			tlock.Unlock()
+
+			tr := &TransferRecord{
 				BlockNumber: it.Event.Raw.BlockNumber,
 				TxIndex:     it.Event.Raw.TxIndex,
 				NameHash:    it.Event.NameHash,
 				From:        it.Event.From,
 				To:          it.Event.To,
-			})
+			}
+			h.lock.Lock()
+			h.l.AddValueOrder(tr)
+			h.lock.Unlock()
 			insertQueue(it.Event.NameHash,queueOwnership)
 		}
 	}else{
@@ -375,16 +410,27 @@ func watchTransferFrom(opts *bind.WatchOpts,wg *sync.WaitGroup){
 			case log:= <-logs:
 				updateByQueryOwnership(log.NameHash,log.Raw.BlockNumber)
 				utils.GetBlockNum2Time().Push(log.Raw.BlockNumber)
-				if TransferRecords[log.NameHash]==nil{
-					TransferRecords[log.NameHash] = []TransferRecord{}
+				tlock.Lock()
+
+				h,ok:=TransferRecords[log.NameHash]
+				if !ok{
+					h = NewTransferRecordList()
+					TransferRecords[log.NameHash] = h
 				}
-				TransferRecords[log.NameHash] = append(TransferRecords[log.NameHash], TransferRecord{
+
+				tlock.Unlock()
+
+				tr := &TransferRecord{
 					BlockNumber: log.Raw.BlockNumber,
 					TxIndex:     log.Raw.TxIndex,
 					NameHash:    log.NameHash,
 					From:        log.From,
 					To:          log.To,
-				})
+				}
+				h.lock.Lock()
+				h.l.AddValueOrder(tr)
+				h.lock.Unlock()
+
 				logger.Info("detected transferFrom : ",
 					"0x"+hex.EncodeToString(log.NameHash[:]), "from : ", log.From.String(), "to : ",log.To.String())
 			}
