@@ -62,3 +62,4 @@ func GetWatchOpts(s uint64) *bind.WatchOpts{
 	}
 	return opts
 }
+
