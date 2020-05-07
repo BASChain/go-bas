@@ -46,6 +46,8 @@ func (conn *Conn) GetClient() *ethclient.Client {
 	}
 	logger.Info("can't get access to ethereum through any points, retry in 15 seconds")
 	time.Sleep(time.Second * 15)
+	conn.Client.Close()
+	conn.Client = nil
 	return conn.GetClient()
 }
 
